@@ -42,18 +42,15 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 | Nazwa:| Użytkownik Niezalogowany <img width=1000/>                            |
 |:------|:----------------------------------------------------------------------|
-| Opis: |Użytkownik który nie zalogował sie lub nie wykreował swojego konta, <br> 
-może przeglądać dostępne projekty.                                              |
+| Opis: |Użytkownik który nie zalogował sie lub nie wykreował swojego konta, <br> może przeglądać dostępne projekty. |
 
 | Nazwa:| Użytkownik Zalogowany <img width=1000/>                               |
 |:------|:----------------------------------------------------------------------|
-| Opis: |Użytkownik który wykreował swoje konto ale także się zalogował ma pełny 
-dostęp do oferowanej treśći.                                                    |
+| Opis: |Użytkownik który wykreował swoje konto ale także się zalogował ma pełny dostęp do oferowanej treśći. |
 
 | Nazwa:| Administrator          <img width=1000/>                              |
 |:------|:----------------------------------------------------------------------|
-| Opis: |Posiada pełen dostęp do serwisu. Służy jako pomoc techniczna dla 
-użytkowników.                                                                   |
+| Opis: |Posiada pełen dostęp do serwisu. Służy jako pomoc techniczna dla użytkowników. |
 
 ### 3.Wymagania
 
@@ -85,15 +82,13 @@ użytkowników.                                                                 
 |:-----------|:---------------------------------------------------------------------------|
 | Nazwa:     |Łatwość w użyciu                                                            |
 | Priorytet: |Wysoki                                                                      |
-| Opis:      |Platforma ma być przyjazna dla użytkownika. Interfejs musi być nowoczesny i 
-przejrzysty.                                                                              |
+| Opis:      |Platforma ma być przyjazna dla użytkownika. Interfejs musi być nowoczesny i przejrzysty.                                                                              |
 
 | ID:        | 3                      <img width=1000/>                                   |
 |:-----------|:---------------------------------------------------------------------------|
 | Nazwa:     |Intergralność danych                                                        |
 | Priorytet: |Średni                                                                      |
-| Opis:      |Zabezpieczenie przed nieautoryzowaną zmianą danych przez użycie szyfrowania 
-haseł oraz implementacja szyfrowanego połączenia https.                                   |
+| Opis:      |Zabezpieczenie przed nieautoryzowaną zmianą danych przez użycie szyfrowania haseł oraz implementacja szyfrowanego połączenia https.                                   |
 
 | ID:        | 4                       <img width=1000/>                                  |
 |:-----------|:---------------------------------------------------------------------------|
