@@ -129,8 +129,6 @@ W systemie istnieją dwa rodzaje użytkowników: Administrator oraz Użytkownik.
 |Edycja danych profilu | + | + |
 |Wyszukiwanie pozycji | + | + |
 |Dodanie recenzji | + | - | 
-|Dodanie pozycji do koszyka | + | - |
-|Usuwanie pozycji z koszyka | + | - |
 |Złożenie zamówienia | + | - | 
 |Historia zamówień | + | - |
 |Kontakt z administratorem | + | - |
