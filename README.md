@@ -109,14 +109,13 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 ![image](https://user-images.githubusercontent.com/56208135/139593932-508362fd-074d-4bef-b898-e03149c3f736.png)
 
--Za frontend będzie odpowiadać Reacj.JS w którym zostanie napisany interfejs użytkownika z którym to będzie mógł wchodzić w interakcję.
+-Za frontend będzie odpowiadać w którym zostanie napisany interfejs użytkownika z którym to będzie mógł wchodzić w interakcję.
 
 -Za backend odpowiada ASP.NET w którym zostanie napisany Web API. W ASP.NET zostanie wykonana mechanika strony oraz połączenie z bazą danych. 
 
--Za przechowywanie danych będzie odpowiadać baza danych MySQL. Będą się w niej znajodwać informacje o klientach, subksrybentach oraz książkach.
+-Za przechowywanie danych będzie odpowiadać baza danych SQL. Będą się w niej znajodwać informacje o klientach, subksrybentach oraz książkach.
 
 
-![image](https://user-images.githubusercontent.com/54260979/142664020-e094f156-357d-4a81-a958-3389dd7c21a1.png)
 
 ### 5. Lista przypdków użycia
 
