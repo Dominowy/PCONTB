@@ -109,7 +109,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 ![image](https://user-images.githubusercontent.com/56208135/139593932-508362fd-074d-4bef-b898-e03149c3f736.png)
 
--Za frontend będzie odpowiadać w którym zostanie napisany interfejs użytkownika z którym to będzie mógł wchodzić w interakcję.
+-Za frontend będzie odpowiadać React.JS w którym zostanie napisany interfejs użytkownika z którym to będzie mógł wchodzić w interakcję.
 
 -Za backend odpowiada ASP.NET w którym zostanie napisany Web API. W ASP.NET zostanie wykonana mechanika strony oraz połączenie z bazą danych. 
 
