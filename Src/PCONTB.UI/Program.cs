@@ -1,4 +1,8 @@
 
+using AspNetCore.Proxy;
+using RimuTec.AspNetCore.SpaServices.WebpackDevelopmentServer;
+using RimuTec.AspNetCore.SpaServices.Extensions;
+
 namespace PCONTB.UI
 {
     public class Program
@@ -14,6 +18,11 @@ namespace PCONTB.UI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "Data";
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -27,8 +36,20 @@ namespace PCONTB.UI
 
             app.UseAuthorization();
 
-
             app.MapControllers();
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "App";
+                spa.Options.DevServerPort = 3000;
+
+                if (app.Environment.IsDevelopment())
+                {
+                    spa.Options.StartupTimeout = TimeSpan.FromSeconds(120);
+                    spa.UseProxyToSpaDevelopmentServer($"http://localhost:{spa.Options.DevServerPort}");
+                    spa.UseWebpackDevelopmentServer(npmScriptName: "start");
+                }
+            });
 
             app.Run();
         }
