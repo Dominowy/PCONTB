@@ -40,14 +40,14 @@ namespace PCONTB.UI
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "App";
+                spa.Options.SourcePath = "/App";
                 spa.Options.DevServerPort = 3000;
 
                 if (app.Environment.IsDevelopment())
                 {
                     spa.Options.StartupTimeout = TimeSpan.FromSeconds(120);
                     spa.UseProxyToSpaDevelopmentServer($"http://localhost:{spa.Options.DevServerPort}");
-                    spa.UseWebpackDevelopmentServer(npmScriptName: "start");
+                    //spa.UseWebpackDevelopmentServer(npmScriptName: "start");
                 }
             });
 
