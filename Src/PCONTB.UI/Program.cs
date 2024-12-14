@@ -2,11 +2,19 @@
 using AspNetCore.Proxy;
 using RimuTec.AspNetCore.SpaServices.WebpackDevelopmentServer;
 using RimuTec.AspNetCore.SpaServices.Extensions;
+using Microsoft.Extensions.Hosting.Internal;
 
 namespace PCONTB.UI
 {
     public class Program
     {
+        private IWebHostEnvironment HostingEnvironment { get; }
+
+        public Program(IWebHostEnvironment env)
+        {
+            HostingEnvironment = env;
+        }
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +28,10 @@ namespace PCONTB.UI
 
             builder.Services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "Data";
+                var dir = GetAppDir(HostingEnvironment);
+                // This is where files will be served from in non-Development environments
+                configuration.RootPath = Path.Combine(dir, "dist"); // In Development environments, the content of this folder will be deleted
+                Directory.CreateDirectory(configuration.RootPath);
             });
 
             var app = builder.Build();
@@ -40,18 +51,44 @@ namespace PCONTB.UI
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "/App";
+                spa.Options.SourcePath = GetAppDir(HostingEnvironment);
                 spa.Options.DevServerPort = 3000;
 
                 if (app.Environment.IsDevelopment())
                 {
                     spa.Options.StartupTimeout = TimeSpan.FromSeconds(120);
                     spa.UseProxyToSpaDevelopmentServer($"http://localhost:{spa.Options.DevServerPort}");
-                    //spa.UseWebpackDevelopmentServer(npmScriptName: "start");
+                    spa.UseWebpackDevelopmentServer(npmScriptName: "start");
                 }
             });
 
             app.Run();
+        }
+
+        private string GetAppDir(IWebHostEnvironment env)
+        {
+            // TopShelf cos psuje ze œcie¿kami - taki brzydki hack ¿eby w visualu ³adowa³o siê dobrze.
+            var appDir = Path.Combine(env.ContentRootPath, "App");
+            if (!Directory.Exists(Path.Combine(appDir, "src")) && !HostingEnvironment.IsProduction())
+            {
+                var path = Path.Combine(env.ContentRootPath, "..\\..\\..\\App");
+                var path2 = Path.Combine(env.ContentRootPath, "..\\..\\..\\..\\App");
+
+                if (Directory.Exists(Path.Combine(path)))
+                {
+                    appDir = path;
+                }
+                else if (Directory.Exists(path2))
+                {
+                    appDir = path2;
+                }
+                else
+                {
+                    appDir = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName((env.ContentRootPath)))), "App");
+                }
+            }
+
+            return Path.GetFullPath(appDir);
         }
     }
 }
