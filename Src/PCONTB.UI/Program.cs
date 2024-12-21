@@ -1,20 +1,10 @@
-
-using AspNetCore.Proxy;
-using RimuTec.AspNetCore.SpaServices.WebpackDevelopmentServer;
-using RimuTec.AspNetCore.SpaServices.Extensions;
 using Microsoft.Extensions.Hosting.Internal;
+using RimuTec.AspNetCore.SpaServices.WebpackDevelopmentServer;
 
 namespace PCONTB.UI
 {
     public class Program
     {
-        private IWebHostEnvironment HostingEnvironment { get; }
-
-        public Program(IWebHostEnvironment env)
-        {
-            HostingEnvironment = env;
-        }
-
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
@@ -28,7 +18,7 @@ namespace PCONTB.UI
 
             builder.Services.AddSpaStaticFiles(configuration =>
             {
-                var dir = GetAppDir(HostingEnvironment);
+                var dir = GetAppDir(builder);
                 // This is where files will be served from in non-Development environments
                 configuration.RootPath = Path.Combine(dir, "dist"); // In Development environments, the content of this folder will be deleted
                 Directory.CreateDirectory(configuration.RootPath);
@@ -51,7 +41,7 @@ namespace PCONTB.UI
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = GetAppDir(HostingEnvironment);
+                spa.Options.SourcePath = GetAppDir(builder);
                 spa.Options.DevServerPort = 3000;
 
                 if (app.Environment.IsDevelopment())
@@ -65,14 +55,14 @@ namespace PCONTB.UI
             app.Run();
         }
 
-        private string GetAppDir(IWebHostEnvironment env)
+        private string GetAppDir(WebApplicationBuilder builder)
         {
             // TopShelf cos psuje ze œcie¿kami - taki brzydki hack ¿eby w visualu ³adowa³o siê dobrze.
-            var appDir = Path.Combine(env.ContentRootPath, "App");
-            if (!Directory.Exists(Path.Combine(appDir, "src")) && !HostingEnvironment.IsProduction())
+            var appDir = Path.Combine(builder.Environment.ContentRootPath, "App");
+            if (!Directory.Exists(Path.Combine(appDir, "src")) && !builder.Environment.IsProduction())
             {
-                var path = Path.Combine(env.ContentRootPath, "..\\..\\..\\App");
-                var path2 = Path.Combine(env.ContentRootPath, "..\\..\\..\\..\\App");
+                var path = Path.Combine(builder.Environment.ContentRootPath, "..\\..\\..\\App");
+                var path2 = Path.Combine(builder.Environment.ContentRootPath, "..\\..\\..\\..\\App");
 
                 if (Directory.Exists(Path.Combine(path)))
                 {
@@ -84,7 +74,7 @@ namespace PCONTB.UI
                 }
                 else
                 {
-                    appDir = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName((env.ContentRootPath)))), "App");
+                    appDir = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName((builder.Environment.ContentRootPath)))), "App");
                 }
             }
 
