@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Hosting.Internal;
 using RimuTec.AspNetCore.SpaServices.WebpackDevelopmentServer;
 
 namespace PCONTB.UI
@@ -55,7 +54,7 @@ namespace PCONTB.UI
             app.Run();
         }
 
-        private string GetAppDir(WebApplicationBuilder builder)
+        private static string GetAppDir(WebApplicationBuilder builder)
         {
             // TopShelf cos psuje ze œcie¿kami - taki brzydki hack ¿eby w visualu ³adowa³o siê dobrze.
             var appDir = Path.Combine(builder.Environment.ContentRootPath, "App");
