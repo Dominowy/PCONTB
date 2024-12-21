@@ -1,0 +1,12 @@
+﻿{
+  "profiles": {
+    "PCONTB": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:7265;http://localhost:5027"
+    }
+  }
+}
