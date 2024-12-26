@@ -7,6 +7,7 @@ namespace PCONTB.UI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var configuration = builder.Configuration;
 
             // Add services to the container.
 
@@ -15,6 +16,11 @@ namespace PCONTB.UI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            var settings = new ServerSettings();
+            configuration.Bind(settings);
+            builder.Services.AddSingleton(settings);
+            settings.ProxyEndpoints = settings.ProxyEndpoints.GroupBy(m => m.Key.ToLowerInvariant()).ToDictionary(m => m.Key, v => v.First().Value);
+
             builder.Services.AddSpaStaticFiles(configuration =>
             {
                 var dir = GetAppDir(builder);
@@ -22,6 +28,20 @@ namespace PCONTB.UI
                 configuration.RootPath = Path.Combine(dir, "dist"); // In Development environments, the content of this folder will be deleted
                 Directory.CreateDirectory(configuration.RootPath);
             });
+
+            if (settings.ProxyIgnoreCertificateCheck)
+            {
+                builder.Services.AddHttpClient("proxy")
+                    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
+                    {
+                        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+                        UseDefaultCredentials = true
+                    });
+            }
+            else
+            {
+                builder.Services.AddHttpClient("proxy");
+            }
 
             var app = builder.Build();
 
