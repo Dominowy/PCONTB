@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace PCONTB.UI.Controllers
 {
     [Route("/api")]
-    public class ProxyController : Controller
+    public class ProxyController : ControllerBase
     {
         private readonly ServerSettings _settings;
 
