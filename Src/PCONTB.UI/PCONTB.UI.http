@@ -1,6 +1,0 @@
-@PCONTB.UI_HostAddress = http://localhost:5027
-
-GET {{PCONTB.UI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
