@@ -1,21 +1,18 @@
 import NavbarContainer from './Components/Common/NavbarContainer';
-import { BrowserRouter as Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Views/Home/HomeView';
 import Dashboard from './Views/Dashboard/DashboardView';
 
 function App() {
-	<>
-		<div>
-			<div>
-				<Routes>
-					<Route path="home" element={<Home />} />
-					<Route path="dashboard" element={<Dashboard />} />
-				</Routes>
-			</div>
+	return (
+		<Router>
 			<NavbarContainer />
-		</div>
-	</>;
-	return;
+			<Routes>
+				<Route path="home" element={<Home />} />
+				<Route path="dashboard" element={<Dashboard />} />
+			</Routes>
+		</Router>
+	);
 }
 
 export default App;

@@ -7,14 +7,18 @@ function NavbarContainer() {
 	return (
 		<Navbar expand="lg" bg="dark" data-bs-theme="dark">
 			<Container>
-				<Navbar.Brand>
-					<Link to="/home">React-Bootstrap</Link>
+				<Navbar.Brand as={Link} to="/home">
+					PCONTB
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="me-auto">
-						<NavLink to="/home">Home</NavLink>
-						<NavLink to="/dashboard">Link</NavLink>
+						<Nav.Link as={NavLink} to="/home">
+							Home
+						</Nav.Link>
+						<Nav.Link as={NavLink} to="/dashboard">
+							Dashboard
+						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

@@ -1,6 +1,5 @@
-function DashboardView() {
-	<>Home</>;
-	return;
+function Dashboard() {
+	return <div>Dashboard</div>;
 }
 
-export default DashboardView;
+export default Dashboard;

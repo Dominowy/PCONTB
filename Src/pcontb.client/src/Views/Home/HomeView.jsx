@@ -1,6 +1,5 @@
-function HomeView() {
-	<>Home</>;
-	return;
+function Home() {
+	return <div>Home</div>;
 }
 
-export default HomeView;
+export default Home;
