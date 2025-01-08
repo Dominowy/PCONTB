@@ -45,7 +45,7 @@ function NavbarContainer() {
 						/>
 					</Form>
 					<Nav>
-						<Nav.Link onClick={handleLoginSingUpModalOpen} className="d-flex m-2">
+						<Nav.Link onClick={handleLoginSingUpModalOpen} className="d-flex">
 							Login/Sign Up
 						</Nav.Link>
 					</Nav>
