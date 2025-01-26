@@ -1,0 +1,6 @@
+@PCONTB.Panel.Server_HostAddress = http://localhost:5020
+
+GET {{PCONTB.Panel.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
