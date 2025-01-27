@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PCONTB.Panel.Application.Common\PCONTB.Panel.Application.Common.csproj" />
+    <ProjectReference Include="..\PCONTB.Panel.Domain\PCONTB.Panel.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

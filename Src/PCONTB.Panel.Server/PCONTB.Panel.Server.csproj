@@ -17,9 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PCONTB.Panel.Application\PCONTB.Panel.Application.csproj" />
     <ProjectReference Include="..\pcontb.panel.client\PCONTB.Panel.Client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\PCONTB.Panel.Infrastructure\PCONTB.Panel.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
