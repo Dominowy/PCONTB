@@ -1,3 +1,6 @@
+using Microsoft.Extensions.Configuration;
+using PCONTB.Panel.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+var configuration = builder.Configuration;
+builder.Services.AddInfrastructure(configuration);
 
 var app = builder.Build();
 
