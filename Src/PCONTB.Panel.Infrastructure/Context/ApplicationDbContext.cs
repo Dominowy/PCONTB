@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PCONTB.Panel.Domain.Account;
+using PCONTB.Panel.Domain.Account.User;
 using System.Security.Cryptography.X509Certificates;
 
 namespace PCONTB.Panel.Infrastructure.Context

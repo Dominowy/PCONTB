@@ -31,6 +31,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "PCONTB.Panel.Client", "pcon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCONTB.Panel.Domain", "PCONTB.Panel.Domain\PCONTB.Panel.Domain.csproj", "{8028BA24-148B-4CC5-8AFB-DCFF90489F9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCONTB.Panel.Domain.Tests", "PCONTB.Panel.Domain.Tests\PCONTB.Panel.Domain.Tests.csproj", "{5A5EFEBC-18BB-45AF-961D-BBB1EF274E61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{8028BA24-148B-4CC5-8AFB-DCFF90489F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8028BA24-148B-4CC5-8AFB-DCFF90489F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8028BA24-148B-4CC5-8AFB-DCFF90489F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A5EFEBC-18BB-45AF-961D-BBB1EF274E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A5EFEBC-18BB-45AF-961D-BBB1EF274E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A5EFEBC-18BB-45AF-961D-BBB1EF274E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A5EFEBC-18BB-45AF-961D-BBB1EF274E61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +90,7 @@ Global
 		{A734FBC4-EE18-4752-AF59-360179918D12} = {F1D1F3FA-81E5-4E60-85FC-35FC5637CF30}
 		{543CB967-B7CD-46D6-9669-28848D7AFCF8} = {F1D1F3FA-81E5-4E60-85FC-35FC5637CF30}
 		{8028BA24-148B-4CC5-8AFB-DCFF90489F9C} = {F078500A-B960-4777-9FDA-726AA5E4B55E}
+		{5A5EFEBC-18BB-45AF-961D-BBB1EF274E61} = {F078500A-B960-4777-9FDA-726AA5E4B55E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CF48F42-FA14-4083-B70B-E0EF293C1CF6}

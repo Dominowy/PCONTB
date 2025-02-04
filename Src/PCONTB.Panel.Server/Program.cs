@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using PCONTB.Panel.Application;
 using PCONTB.Panel.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddOpenApi();
 
 var configuration = builder.Configuration;
 builder.Services.AddInfrastructure(configuration);
+builder.Services.AddApplication();
 
 var app = builder.Build();
 
