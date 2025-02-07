@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
+using PCONTB.Panel.Application.Contracts;
 using System.Reflection;
 
 namespace PCONTB.Panel.Application

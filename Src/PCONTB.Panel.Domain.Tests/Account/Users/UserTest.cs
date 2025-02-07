@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using PCONTB.Panel.Domain.Account.User;
+using PCONTB.Panel.Domain.Account.Users;
 
-namespace PCONTB.Panel.Domain.Tests.Account
+namespace PCONTB.Panel.Domain.Tests.Account.Users
 {
 
     public class UserTest

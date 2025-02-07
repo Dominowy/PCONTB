@@ -1,6 +1,7 @@
 ﻿using PCONTB.Panel.Domain.Common;
+using PCONTB.Panel.Domain.Projects.Projects;
 
-namespace PCONTB.Panel.Domain.Account.User
+namespace PCONTB.Panel.Domain.Account.Users
 {
     public class User : Entity
     {
@@ -23,6 +24,8 @@ namespace PCONTB.Panel.Domain.Account.User
         public string Email { get; private set; }
         public string Password { get; private set; }
 
+        public virtual List<Project> Projects { get; private set; }
+
         protected User() : base() { }
 
         public User(Guid id, string firstName, string lastName, string username, string email, string password) : base(id)
@@ -34,6 +37,13 @@ namespace PCONTB.Panel.Domain.Account.User
             Password = password;
         }
 
+        public void UpdateUser(string firstName, string lastName, string username, string email)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Username = username;
+            Email = email;
+        }
 
         public void ChangeUsername(string username)
         {
