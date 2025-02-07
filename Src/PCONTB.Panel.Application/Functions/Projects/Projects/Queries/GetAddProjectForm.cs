@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common.Models.Response;
+using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 {
@@ -7,7 +8,25 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
     {
     }
 
+    public class GetAddProjectFormHandler : IRequestHandler<GetAddProjectFormRequest, GetAddProjectFormResponse>
+    {
+        public async Task<GetAddProjectFormResponse> Handle(GetAddProjectFormRequest request, CancellationToken cancellationToken)
+        {
+            return await Task.FromResult(new GetAddProjectFormResponse()
+            {
+                FormData = new AddProjectRequest()
+            });
+        }
+    }
+
     public class GetAddProjectFormResponse : BaseResponse
     {
+        public AddProjectRequest FormData { get; set; }
+
+        public GetAddProjectFormResponse()
+        {
+            Success = true;
+            StatusCode = ResponseStatus.OK;
+        }
     }
 }

@@ -13,6 +13,12 @@ namespace PCONTB.Panel.Infrastructure
             services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
+            using (var scope = services.BuildServiceProvider().CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.Migrate();
+            }
+
             return services;
         }
     }

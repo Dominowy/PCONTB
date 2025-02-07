@@ -1,6 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Response;
+using PCONTB.Panel.Application.Common.Models.Result;
 
 namespace PCONTB.Panel.Server.Controllers.Common
 {
@@ -29,16 +32,16 @@ namespace PCONTB.Panel.Server.Controllers.Common
                 var validationResult = await validator.ValidateAsync(request, cancellationToken);
                 if (!validationResult.IsValid)
                 {
-                    return BadRequest(new
+                    return BadRequest(new ValidationResult(false, ResponseStatus.BadRequest)
                     {
-                        StatusCode = 400,
-                        Message = "Validation failed",
-                        Errors = validationResult.Errors.Select(e => new { e.PropertyName, e.ErrorMessage })
+                        Errors = validationResult.Errors.Select(e => new ValidationError { PropertyName = e.PropertyName, ErrorCode = e.ErrorCode })
                     });
                 }
             }
 
-            return Ok(request);
+            return Ok(new ValidationResult());
         }
     }
+
+
 }
