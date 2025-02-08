@@ -4,6 +4,7 @@ namespace PCONTB.Panel.Application.Common.Models.Result
 {
     public class SessionResult : BaseResponse
     {
+        public Guid UserId { get; set; }
         public SessionResult() : base()
         {
             Success = true;

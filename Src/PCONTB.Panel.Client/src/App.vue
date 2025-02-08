@@ -4,7 +4,7 @@ import Dashboard from "./components/DashboardComponenet.vue";
 
 <template>
   <header>
-    <div class="wrapper">
+    <div>
       <Dashboard />
     </div>
   </header>
@@ -29,12 +29,6 @@ header {
 
   .logo {
     margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
   }
 }
 </style>

@@ -3,10 +3,12 @@
     <div v-if="loading" class="loading">Loading...</div>
     <form @submit.prevent="handleSubmit">
       <div>
-        <label for="name">Project Name:</label>
-        <input type="text" id="name" v-model="form.name" required />
+        <label for="name">UserName:</label>
+        <input type="text" id="name" v-model="form.username" required />
+        <label for="name">Password:</label>
+        <input type="text" id="name" v-model="form.password" required />
       </div>
-      <button type="submit">{{ projectId ? "Update Project" : "Create Project" }}</button>
+      <button type="submit">Login</button>
     </form>
   </div>
 </template>
@@ -21,40 +23,24 @@ export default defineComponent({
       type: String,
       default: null,
     },
-    userId: {
-      type: String,
-      default: null,
-    },
   },
   data() {
     return {
       loading: false,
-      form: {},
+      form: {
+        username: null,
+        password: null,
+      },
     };
-  },
-  async created() {
-    console.log(this.projectId);
-    this.loading = true;
-    if (this.projectId) {
-      let response = await ApiClient.request("project/update/form", { id: this.projectId });
-      this.form = response.formData;
-    } else {
-      let response = await ApiClient.request("project/add/form", {});
-      this.form = response.formData;
-    }
-    this.loading = false;
   },
   methods: {
     async handleSubmit() {
       this.loading = true;
-      this.form.userId = this.userId;
-      if (this.projectId) {
-        await ApiClient.request("project/update", this.form);
-      } else {
-        await ApiClient.request("project/add", this.form);
-      }
+      var response = await ApiClient.request("authentication/login", this.form);
+
+      this.$emit("setUserId", response.userId);
+
       this.loading = false;
-      this.$emit("fetchData");
     },
   },
 });
@@ -77,8 +63,7 @@ label {
   display: block;
   margin-top: 10px;
 }
-input,
-textarea {
+input {
   width: 100%;
   padding: 8px;
   margin-top: 5px;

@@ -2,8 +2,9 @@
   <div class="weather-component">
     <div v-if="loading" class="loading">Loading...</div>
     <div v-if="data" class="content">
-      <button @click="showEditAdd = !showEditAdd">Add</button>
-      <table>
+      <login-component v-if="!userId" @setUserId="setUserId" />
+      <button v-if="userId" @click="showEditAdd = !showEditAdd">Add</button>
+      <table v-if="userId">
         <thead>
           <tr>
             <th>Name</th>
@@ -22,18 +23,25 @@
         </tbody>
       </table>
     </div>
-    <AddEditComponent v-if="showEditAdd" :projectId="selectedProjectId" />
+    <add-edit-component
+      v-if="showEditAdd && userId"
+      :userId="userId"
+      :projectId="selectedProjectId"
+      @fetchData="fetchData"
+    />
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import AddEditComponent from "./AddEditComponent.vue";
-import ApiClient from "../service/ApiClient";
+import ApiClient from "../services/ApiClient";
+import LoginComponent from "./LoginComponent.vue";
 
 export default defineComponent({
   components: {
     AddEditComponent,
+    LoginComponent,
   },
   data() {
     return {
@@ -41,6 +49,7 @@ export default defineComponent({
       data: null,
       selectedProjectId: null,
       showEditAdd: false,
+      userId: null,
     };
   },
   async created() {
@@ -51,6 +60,7 @@ export default defineComponent({
   },
   methods: {
     async fetchData() {
+      this.showEditAdd = false;
       this.data = null;
       this.loading = true;
 
@@ -61,6 +71,9 @@ export default defineComponent({
     setProjecId(id) {
       this.selectedProjectId = id;
       this.showEditAdd = !this.showEditAdd;
+    },
+    setUserId(id) {
+      this.userId = id;
     },
     async deleteProject(id) {
       await ApiClient.request("project/delete", { id: id });

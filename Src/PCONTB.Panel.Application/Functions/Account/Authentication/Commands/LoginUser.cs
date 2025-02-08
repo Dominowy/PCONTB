@@ -9,7 +9,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Authentication.Commands
 {
     public class LoginUserRequest : IRequest<SessionResult>
     {
-        public string UserName { get; set; }
+        public string Username { get; set; }
         public string Password { get; set; }
     }
 
@@ -25,14 +25,17 @@ namespace PCONTB.Panel.Application.Functions.Account.Authentication.Commands
         public async Task<SessionResult> Handle(LoginUserRequest request, CancellationToken cancellationToken)
         {
             var entity = await _dbContext.Set<User>()
-                .FirstOrDefaultAsync(u => u.Username == request.UserName && u.Password == request.Password, cancellationToken);
+                .FirstOrDefaultAsync(u => u.Username == request.Username && u.Password == request.Password, cancellationToken);
 
             if (entity == null) 
             {
                 return new SessionResult(false, ResponseStatus.BadRequest);
             }
 
-            return new SessionResult();
+            return new SessionResult()
+            {
+                UserId = entity.Id
+            };
         }
     }
 }
