@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Models.Response;
 using PCONTB.Panel.Application.Contracts.DbContext;
 using PCONTB.Panel.Application.Models.Dto.Account.Users;
@@ -20,9 +21,11 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
             _context = context;
         }
 
-        public async Task<GetUserResponse> Handle(GetUserRequest request, CancellationToken cancellationToken)
+        public async Task<GetUserResponse> Handle(GetUserRequest request, CancellationToken cancellationToken = default)
         {
-            var entity = await _context.Set<User>().FindAsync(request.Id, cancellationToken);
+            var entity = await _context.Set<User>()
+                .Where(u => u.Id == request.Id)
+                .FirstOrDefaultAsync(cancellationToken);
 
             if (entity == null)
             {

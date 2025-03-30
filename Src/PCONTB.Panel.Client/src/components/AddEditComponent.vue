@@ -4,7 +4,7 @@
     <form @submit.prevent="handleSubmit">
       <div>
         <label for="name">Project Name:</label>
-        <input type="text" id="name" v-model="form.name" required />
+        <input type="text" id="name" v-model="form.name" />
       </div>
       <button type="submit">{{ projectId ? "Update Project" : "Create Project" }}</button>
     </form>
