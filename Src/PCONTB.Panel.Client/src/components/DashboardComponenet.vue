@@ -32,13 +32,33 @@
   </div>
 </template>
 
+<style scoped>
+th {
+  font-weight: bold;
+}
+
+th,
+td {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.weather-component {
+  text-align: center;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
 <script>
-import { defineComponent } from "vue";
 import AddEditComponent from "./AddEditComponent.vue";
 import ApiClient from "../services/ApiClient";
 import LoginComponent from "./LoginComponent.vue";
 
-export default defineComponent({
+export default {
   components: {
     AddEditComponent,
     LoginComponent,
@@ -80,26 +100,5 @@ export default defineComponent({
       await this.fetchData();
     },
   },
-});
+};
 </script>
-
-<style scoped>
-th {
-  font-weight: bold;
-}
-
-th,
-td {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.weather-component {
-  text-align: center;
-}
-
-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>

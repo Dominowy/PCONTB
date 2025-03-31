@@ -1,11 +1,17 @@
 import { fileURLToPath, URL } from "node:url";
 
 import { defineConfig } from "vite";
-import plugin from "@vitejs/plugin-vue";
+
 import fs from "fs";
 import path from "path";
 import child_process from "child_process";
 import { env } from "process";
+
+import vue from "@vitejs/plugin-vue";
+import Components from "unplugin-vue-components/vite";
+import { BootstrapVueNextResolver } from "bootstrap-vue-next";
+import Icons from "unplugin-icons/vite";
+import IconsResolve from "unplugin-icons/resolver";
 
 const baseFolder =
   env.APPDATA !== undefined && env.APPDATA !== ""
@@ -41,7 +47,15 @@ const target = env.ASPNETCORE_HTTPS_PORT
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [plugin()],
+  plugins: [
+    vue(),
+    Components({
+      resolvers: [BootstrapVueNextResolver(), IconsResolve()],
+    }),
+    Icons({
+      autoInstall: true,
+    }),
+  ],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
