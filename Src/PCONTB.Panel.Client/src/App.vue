@@ -9,5 +9,3 @@ import NavbarComponent from "./components/Navbar/NavbarComponent.vue";
     <Dashboard />
   </div>
 </template>
-
-<style scoped></style>

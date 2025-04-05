@@ -3,7 +3,7 @@
     <div v-if="loading" class="loading">Loading...</div>
     <div v-if="data" class="content">
       <login-component v-if="!userId" @setUserId="setUserId" />
-      <button v-if="userId" @click="showEditAdd = !showEditAdd">Add</button>
+      <b-button v-if="userId" @click="showAdd">Add</b-button>
       <table v-if="userId">
         <thead>
           <tr>
@@ -17,8 +17,8 @@
           <tr v-for="project in data.projects" :key="project.id">
             <td>{{ project.name }}</td>
             <td>{{ project.user.displayName }}</td>
-            <td><button @click="setProjecId(project.id)">Edit</button></td>
-            <td><button @click="deleteProject(project.id)">Delete</button></td>
+            <td><b-button @click="setProjecId(project.id)">Edit</b-button></td>
+            <td><b-button @click="deleteProject(project.id)">Delete</b-button></td>
           </tr>
         </tbody>
       </table>
@@ -94,6 +94,10 @@ export default {
     },
     setUserId(id) {
       this.userId = id;
+    },
+    showAdd() {
+      this.selectedProjectId = null;
+      this.showEditAdd = !this.showEditAdd;
     },
     async deleteProject(id) {
       await ApiClient.request("project/delete", { id: id });
