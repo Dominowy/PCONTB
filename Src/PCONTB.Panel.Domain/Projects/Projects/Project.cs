@@ -2,6 +2,7 @@
 using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Projects.Collaborators;
 
 namespace PCONTB.Panel.Domain.Projects.Projects
 {
@@ -26,6 +27,8 @@ namespace PCONTB.Panel.Domain.Projects.Projects
 
         public Guid? AdditionalSubcategoryId { get; set; }
         public virtual Subcategory? AdditionalSubcategory { get; set; }
+
+        public virtual List<Collaborator> Collaborators { get; set; }
 
 
         protected Project() : base() { }
