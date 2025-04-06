@@ -101,9 +101,12 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 #### 4.1. Technologie
 -ASP.NET
 
--React.JS
+-VUE.JS
 
--MySQL
+-PostgreSQL
+
+![image](https://github.com/user-attachments/assets/d6a14862-fe50-425d-8d22-e14a0f15cd12)
+
 
 #### 4.2. Opis Architektury
 
