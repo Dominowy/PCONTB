@@ -11,8 +11,6 @@ namespace PCONTB.Panel.Application.Functions.Account.Authentication.Commands
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
     }
 
     public class RegisterHandler : IRequestHandler<RegisterUserRequest, CreateResult>
@@ -26,7 +24,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Authentication.Commands
 
         public async Task<CreateResult> Handle(RegisterUserRequest request, CancellationToken cancellationToken)
         {
-            var entity = new User(Guid.NewGuid(), request.FirstName, request.LastName, request.Username, request.Email, request.Password);
+            var entity = new User(Guid.NewGuid(), request.Username, request.Email, request.Password);
 
             await _dbContext.Set<User>().AddAsync(entity, cancellationToken);
 

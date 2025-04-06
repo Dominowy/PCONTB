@@ -3,6 +3,7 @@ using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.ProjectImages;
 
 namespace PCONTB.Panel.Domain.Projects.Projects
 {
@@ -16,20 +17,15 @@ namespace PCONTB.Panel.Domain.Projects.Projects
         public Guid CountryId { get; set; }
         public virtual Country Country { get; set; }
 
-        public Guid PrimaryCategoryId { get; set; }
-        public virtual Category PrimaryCategory { get; set; }
+        public Guid CategoryId { get; set; }
+        public virtual Category Category { get; set; }
 
-        public Guid? PrimarySubcategoryId { get; set; }
-        public virtual Subcategory? PrimarySubcategory { get; set; }
-
-        public Guid AdditionalCategoryId { get; set; }
-        public virtual Category AdditionalCategory { get; set; }
-
-        public Guid? AdditionalSubcategoryId { get; set; }
-        public virtual Subcategory? AdditionalSubcategory { get; set; }
+        public Guid? SubcategoryId { get; set; }
+        public virtual Subcategory? Subcategory { get; set; }
 
         public virtual List<Collaborator> Collaborators { get; set; }
 
+        public virtual List<Image> Images { get; set; }
 
         protected Project() : base() { }
 

@@ -5,7 +5,7 @@ using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
 using PCONTB.Panel.Application.Functions.Projects.Projects.Queries;
 using PCONTB.Panel.Server.Controllers.Common;
 
-namespace PCONTB.Panel.Server.Controllers.Project
+namespace PCONTB.Panel.Server.Controllers.Projects.Projects
 {
     [Route("project")]
     public class ProjectController : BaseController

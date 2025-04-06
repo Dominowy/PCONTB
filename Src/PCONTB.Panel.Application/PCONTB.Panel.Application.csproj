@@ -10,4 +10,15 @@
     <ProjectReference Include="..\PCONTB.Panel.Application.Contracts\PCONTB.Panel.Application.Contracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Functions\Location\Countries\Commands\" />
+    <Folder Include="Functions\Location\Countries\Queries\" />
+    <Folder Include="Functions\Projects\Categories\Commands\" />
+    <Folder Include="Functions\Projects\Categories\Queries\" />
+    <Folder Include="Functions\Projects\Collaborators\Commands\" />
+    <Folder Include="Functions\Projects\Collaborators\Queries\" />
+    <Folder Include="Functions\Projects\Images\Commands\" />
+    <Folder Include="Functions\Projects\Images\Queries\" />
+  </ItemGroup>
+
 </Project>

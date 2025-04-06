@@ -12,8 +12,6 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
     }
 
     public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, UpdateResult>
@@ -33,7 +31,8 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
                 return new UpdateResult(false, ResponseStatus.BadRequest);
             }
 
-            entity.UpdateUser(request.FirstName, request.LastName, request.Email, request.Email);
+            entity.ChangeEmail(request.Email);
+            entity.ChangeUsername(request.Username);
 
             return new UpdateResult();
         }
