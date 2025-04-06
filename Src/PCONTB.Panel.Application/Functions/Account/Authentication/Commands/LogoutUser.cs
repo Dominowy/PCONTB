@@ -1,16 +1,17 @@
 ﻿using MediatR;
+using PCONTB.Panel.Application.Common.Models.Result;
 
 namespace PCONTB.Panel.Application.Functions.Account.Authentication.Commands
 {
-    public class LogoutUserRequest : IRequest
+    public class LogoutUserRequest : IRequest<SessionResult>
     {
     }
 
-    public class LogoutUserHandler : IRequestHandler<LogoutUserRequest>
+    public class LogoutUserHandler : IRequestHandler<LogoutUserRequest, SessionResult>
     {
-        public async Task Handle(LogoutUserRequest request, CancellationToken cancellationToken)
+        public async Task<SessionResult> Handle(LogoutUserRequest request, CancellationToken cancellationToken)
         {
-            await Task.CompletedTask;
+            return new SessionResult();
         }
     }
 }

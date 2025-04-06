@@ -6,7 +6,7 @@ using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Account.Authentication
 {
-    [Route("authentication")]
+    [Route("account/authentication")]
     public class AuthenticationController : BaseController
     {
         public AuthenticationController(IMediator mediator) : base(mediator)
@@ -15,37 +15,19 @@ namespace PCONTB.Panel.Server.Controllers.Account.Authentication
 
         [HttpPost("register")]
         [ProducesResponseType(typeof(CreateResult), StatusCodes.Status200OK)]
-        public async Task<IActionResult> Register([FromBody] RegisterUserRequest registerRequest, CancellationToken cancellationToken)
-        {
-            var result = await _mediator.Send(registerRequest, cancellationToken);
-
-            return Ok(result);
-        }
-
+        public async Task<IActionResult> Register([FromBody] RegisterUserRequest registerRequest, CancellationToken cancellationToken) => await Send(registerRequest, cancellationToken);
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginUserRequest loginRequest, CancellationToken cancellationToken)
-        {
-            var result = await _mediator.Send(loginRequest, cancellationToken);
-
-            return Ok(result);
-        }
-
+        [ProducesResponseType(typeof(SessionResult), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Login([FromBody] LoginUserRequest loginRequest, CancellationToken cancellationToken) => await Send(loginRequest, cancellationToken);
 
         [HttpPost("logout")]
-        public async Task<IActionResult> Logout([FromBody] LogoutUserRequest logoutRequest, CancellationToken cancellationToken)
-        {
-            await _mediator.Send(logoutRequest, cancellationToken);
-
-            return Ok();
-        }
+        [ProducesResponseType(typeof(SessionResult), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Logout([FromBody] LogoutUserRequest logoutRequest, CancellationToken cancellationToken) => await Send(logoutRequest, cancellationToken);
 
         [HttpPost("reset-password")]
-        public async Task<IActionResult> Reset([FromBody] ResetPasswordRequest logoutRequest, CancellationToken cancellationToken)
-        {
-            var result = await _mediator.Send(logoutRequest, cancellationToken);
+        [ProducesResponseType(typeof(UpdateResult), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Reset([FromBody] ResetUserPasswordRequest resetPasswordRequest, CancellationToken cancellationToken) => await Send(resetPasswordRequest, cancellationToken);
 
-            return Ok(result);
-        }
     }
 }

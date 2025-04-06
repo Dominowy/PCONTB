@@ -1,6 +1,14 @@
-﻿namespace PCONTB.Panel.Server.Controllers.Projects.Categories
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using PCONTB.Panel.Server.Controllers.Common;
+
+namespace PCONTB.Panel.Server.Controllers.Projects.Categories
 {
-    public class CategoriesController
+    [Route("projects/categories")]
+    public class CategoriesController : BaseController
     {
+        public CategoriesController(IMediator mediator) : base(mediator)
+        {
+        }
     }
 }
