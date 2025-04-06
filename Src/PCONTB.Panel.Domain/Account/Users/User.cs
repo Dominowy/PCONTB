@@ -1,4 +1,5 @@
-﻿using PCONTB.Panel.Domain.Common;
+﻿using PCONTB.Panel.Domain.Account.Sessions;
+using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Projects;
 
@@ -13,6 +14,7 @@ namespace PCONTB.Panel.Domain.Account.Users
 
         public virtual List<Project> Projects { get; private set; }
         public virtual List<Collaborator> Collaborators { get; private set; }
+        public virtual List<Session> Sessions { get; private set; }
 
         protected User() : base() { }
 

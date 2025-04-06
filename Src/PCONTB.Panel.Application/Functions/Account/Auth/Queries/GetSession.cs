@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common.Models.Response;
 
-namespace PCONTB.Panel.Application.Functions.Account.Authentication.Queries
+namespace PCONTB.Panel.Application.Functions.Account.Auth.Queries
 {
     public class GetSessionRequest : IRequest<GetSessionResponse>
     {

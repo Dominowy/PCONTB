@@ -5,7 +5,7 @@ using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.DbContext;
 using PCONTB.Panel.Domain.Account.Users;
 
-namespace PCONTB.Panel.Application.Functions.Account.Authentication.Commands
+namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 {
     public class LoginUserRequest : IRequest<SessionResult>
     {

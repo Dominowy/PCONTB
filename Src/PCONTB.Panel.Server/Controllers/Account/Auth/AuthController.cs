@@ -1,15 +1,15 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
-using PCONTB.Panel.Application.Functions.Account.Authentication.Commands;
+using PCONTB.Panel.Application.Functions.Account.Auth.Commands;
 using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Account.Authentication
 {
     [Route("account/authentication")]
-    public class AuthenticationController : BaseController
+    public class AuthController : BaseController
     {
-        public AuthenticationController(IMediator mediator) : base(mediator)
+        public AuthController(IMediator mediator) : base(mediator)
         {
         }
 
