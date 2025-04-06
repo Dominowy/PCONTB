@@ -24,15 +24,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 #### 2.1 Obiekty Binesowe
 
-| Nazwa:|  <img width=1000/>|         
-|:------|:----------------------------------------------------------------------|
-| Opis: | |
-
-| Nazwa:|  <img width=1000/>|         
-|:------|:----------------------------------------------------------------------|
-| Opis: | |
-
-| Nazwa:| <img width=1000/>|         
+| Nazwa:| Projekt <img width=1000/>|         
 |:------|:----------------------------------------------------------------------|
 | Opis: | |
 
