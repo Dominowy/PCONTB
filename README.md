@@ -128,7 +128,9 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |Utworzenie projektu | + | - | 
 |Edycja projektu | + | - | 
 |Usuwanie projektu | + | - |
-|Wsparce projektu | + | - |
+|Wsparcie projektu | + | - |
+|Wypłata środków | + | - |
+|Usuwanie konta | + | - |
 
 
 ### 6. Przypadki użycia
