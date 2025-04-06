@@ -10,8 +10,6 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 -Użytkownik – osoba, która korzysta z programu/strony.
 
--System – program, który ma za zadanie ułatwić pracę firmy.
-
 -Baza danych – program, który gromadzi dane i ułatwia dostęp do nich. Dzięki temu możliwa jest centralizacja danych.
 
 -Serwer (host) – główny komputer, na którym rezydują programy i który udostępnia komputerom-klientom swoją funkcjonalność poprzez przeglądarkę internetową.
@@ -20,9 +18,9 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 -Klient – rozumiany w dwójnasób – jako osoba zlecająca firmie stworzenie projektu oraz jako komputer, który korzysta z usług innego komputera (serwera).
 
--Architektura klient – serwer – forma komunikacji upraszczających model wzorcowy ISO OSI z siedmiu do 3 warstw: fizycznej, łącza danych oraz sesji realizowanej za pomocą protokołu zamówienie – odpowiedź.  Centralizuje usługi, dzięki czemu firma korzysta zawsze z tej samej wersji oprogramowania. W naszym przypadku usługą tą jest udostępnianie stron html.
+-Architektura klient <-> serwer – forma komunikacji upraszczających model wzorcowy ISO OSI z siedmiu do 3 warstw: fizycznej, łącza danych oraz sesji realizowanej za pomocą protokołu zamówienie – odpowiedź.  Centralizuje usługi, dzięki czemu firma korzysta zawsze z tej samej wersji oprogramowania. W naszym przypadku usługą tą jest udostępnianie stron html.
 
--architektura – schemat ogólny budowy systemu komputerowego lub jego części, określający jego elementy, układy ich łączące i zasady współpracy między nimi.
+-Architektura – schemat ogólny budowy systemu komputerowego lub jego części, określający jego elementy, układy ich łączące i zasady współpracy między nimi.
 
 #### 2.1 Obiekty Binesowe
 
@@ -105,24 +103,20 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 -PostgreSQL
 
-![image](https://github.com/user-attachments/assets/d6a14862-fe50-425d-8d22-e14a0f15cd12)
-
-
 #### 4.2. Opis Architektury
 
 ![image](https://user-images.githubusercontent.com/56208135/139593932-508362fd-074d-4bef-b898-e03149c3f736.png)
 
--Za frontend będzie odpowiadać React.JS w którym zostanie napisany interfejs użytkownika z którym to będzie mógł wchodzić w interakcję.
+-Za frontend będzie odpowiadać VUE.JS w którym zostanie napisany interfejs użytkownika z którym to będzie mógł wchodzić w interakcję.
 
 -Za backend odpowiada ASP.NET w którym zostanie napisany Web API. W ASP.NET zostanie wykonana mechanika strony oraz połączenie z bazą danych. 
 
--Za przechowywanie danych będzie odpowiadać baza danych SQL. Będą się w niej znajodwać informacje o klientach, subksrybentach oraz książkach.
+-Za przechowywanie danych będzie odpowiadać baza danych PostgreSQL. Będą się w niej znajodwać informacje o klientach, subksrybentach oraz książkach.
 
+![image](https://github.com/user-attachments/assets/d6a14862-fe50-425d-8d22-e14a0f15cd12)
 
 
 ### 5. Lista przypdków użycia
-
-W systemie istnieją dwa rodzaje użytkowników: Administrator oraz Użytkownik. Poniższa tabela przedstawia funkcjonalności poszczególnych ról.
 
 |Funkcjonalność | Użytkownik | Administrator|
 |:-------------:|:----------:|:------------:|
@@ -130,17 +124,12 @@ W systemie istnieją dwa rodzaje użytkowników: Administrator oraz Użytkownik.
 |Logowanie | + | + |
 |Wylogowanie  | + | + |
 |Edycja danych profilu | + | + |
-|Wyszukiwanie pozycji | + | + |
-|Dodanie recenzji | + | - | 
-|Złożenie zamówienia | + | - | 
-|Historia zamówień | + | - |
-|Kontakt z administratorem | + | - |
-|Dodawanie pozycji do systemu | - | + | 
-|Modyfikowanie pozycji z systemu | - | + |
-|Usuwanie pozycji z sytemu | - | + |
-|Przeglądanie użytkowników | - | + | 
-|Usuwanie użytkownika | - | + |
-|Przyjmowanie zgłoszeń | - | + |
+|Wyszukiwanie projektów | + | + |
+|Utworzenie projektu | + | - | 
+|Edycja projektu | + | - | 
+|Usuwanie projektu | + | - |
+|Wsparce projektu | + | - |
+
 
 ### 6. Przypadki użycia
 
