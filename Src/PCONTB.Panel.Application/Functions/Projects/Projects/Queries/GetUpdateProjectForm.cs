@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common.Models.Response;
-using PCONTB.Panel.Application.Contracts.DbContext;
+using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
 using PCONTB.Panel.Domain.Projects.Projects;
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
 using PCONTB.Panel.Application.Functions.Projects.Projects.Queries;
+using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Projects.Projects
@@ -23,7 +24,7 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Projects
         #endregion Get by id
 
         #region Get all
-
+        [AuthorizeToken]
         [HttpPost("get-all")]
         [ProducesResponseType(typeof(GetAllProjectsResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllProjects([FromBody] GetAllProjectsRequest request, CancellationToken cancellation) => await Send(request, cancellation);

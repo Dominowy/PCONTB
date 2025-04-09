@@ -25,6 +25,7 @@
     <ProjectReference Include="..\pcontb.panel.client\PCONTB.Panel.Client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\PCONTB.Panel.Infrastructure.Security\PCONTB.Panel.Infrastructure.Security.csproj" />
     <ProjectReference Include="..\PCONTB.Panel.Infrastructure\PCONTB.Panel.Infrastructure.csproj" />
   </ItemGroup>
 

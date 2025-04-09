@@ -16,7 +16,10 @@ namespace PCONTB.Panel.Domain.Account.Users
         public virtual List<Collaborator> Collaborators { get; private set; }
         public virtual List<Session> Sessions { get; private set; }
 
-        protected User() : base() { }
+        protected User() : base() 
+        {
+            
+        }
 
         public User(Guid id, string username, string email, string password) : base(id)
         {

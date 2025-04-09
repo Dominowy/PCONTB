@@ -69,6 +69,33 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Session",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Started = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    Ended = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    LastActivity = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
+                    Device = table.Column<string>(type: "text", nullable: true),
+                    IpAddress = table.Column<string>(type: "text", nullable: true),
+                    Location = table.Column<string>(type: "text", nullable: true),
+                    OperatingSystem = table.Column<string>(type: "text", nullable: true),
+                    Browser = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Session", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Session_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Project",
                 columns: table => new
                 {
@@ -189,6 +216,11 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Session_UserId",
+                table: "Session",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Subcategory_CategoryId",
                 table: "Subcategory",
                 column: "CategoryId");
@@ -202,6 +234,9 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Image");
+
+            migrationBuilder.DropTable(
+                name: "Session");
 
             migrationBuilder.DropTable(
                 name: "Project");

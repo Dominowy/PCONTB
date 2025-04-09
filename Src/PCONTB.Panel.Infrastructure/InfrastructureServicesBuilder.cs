@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PCONTB.Panel.Application.Contracts.DbContext;
+using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Infrastructure.Context;
 
 namespace PCONTB.Panel.Infrastructure

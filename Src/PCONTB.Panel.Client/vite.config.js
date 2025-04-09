@@ -63,11 +63,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "^/project": {
+      "^/projects": {
         target,
         secure: false,
       },
-      "^/authentication": {
+      "^/account": {
         target,
         secure: false,
       },

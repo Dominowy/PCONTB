@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common.Models.Response;
 using PCONTB.Panel.Application.Common.Models.Result;
-using PCONTB.Panel.Application.Contracts.DbContext;
+using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Account.Users;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Commands

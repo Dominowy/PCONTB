@@ -22,6 +22,49 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("PCONTB.Panel.Domain.Account.Sessions.Session", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Browser")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Device")
+                        .HasColumnType("text");
+
+                    b.Property<DateTimeOffset>("Ended")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("IpAddress")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset>("LastActivity")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("text");
+
+                    b.Property<string>("OperatingSystem")
+                        .HasColumnType("text");
+
+                    b.Property<DateTimeOffset>("Started")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Session");
+                });
+
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -178,6 +221,17 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.ToTable("Project");
                 });
 
+            modelBuilder.Entity("PCONTB.Panel.Domain.Account.Sessions.Session", b =>
+                {
+                    b.HasOne("PCONTB.Panel.Domain.Account.Users.User", "User")
+                        .WithMany("Sessions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Categories.Subcategory", b =>
                 {
                     b.HasOne("PCONTB.Panel.Domain.Projects.Categories.Category", "Category")
@@ -257,6 +311,8 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.Navigation("Collaborators");
 
                     b.Navigation("Projects");
+
+                    b.Navigation("Sessions");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Location.Countries.Country", b =>

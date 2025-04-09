@@ -1,6 +1,7 @@
-using Microsoft.Extensions.Configuration;
 using PCONTB.Panel.Application;
 using PCONTB.Panel.Infrastructure;
+using PCONTB.Panel.Infrastructure.Security;
+using PCONTB.Panel.Infrastructure.Security.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,10 +12,16 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var configuration = builder.Configuration;
+
 builder.Services.AddInfrastructure(configuration);
+builder.Services.AddInfrastructureSecurity(configuration);
 builder.Services.AddApplication();
 
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
+
+app.UseMiddleware<SessionMiddleware>();
 
 app.UseDefaultFiles();
 app.MapStaticAssets();

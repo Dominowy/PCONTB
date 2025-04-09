@@ -6,7 +6,7 @@ using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Account.Authentication
 {
-    [Route("account/authentication")]
+    [Route("account/auth")]
     public class AuthController : BaseController
     {
         public AuthController(IMediator mediator) : base(mediator)

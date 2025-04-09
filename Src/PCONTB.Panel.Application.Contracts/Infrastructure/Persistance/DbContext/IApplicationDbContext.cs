@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Collections.Generic;
 
-namespace PCONTB.Panel.Application.Contracts.DbContext
+namespace PCONTB.Panel.Application.Contracts.Infrastructure.DbContext
 {
     public interface IApplicationDbContext
     {
