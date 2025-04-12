@@ -2,6 +2,9 @@
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Account.Sessions;
+using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Common;
+using System.Threading;
 
 namespace PCONTB.Panel.Application.Services.Auth
 {
@@ -13,10 +16,21 @@ namespace PCONTB.Panel.Application.Services.Auth
         {
             _dbContext = dbContext;
         }
-        public async Task<Session?> GetByIdAsync(Guid sessionId)
+
+        public async Task<Session?> GetByIdAsync(Guid? sessionId, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<Session>()
-                .FirstOrDefaultAsync(s => s.Id == sessionId);
+                .Include(m => m.User)
+                .FirstOrDefaultAsync(s => s.Id == sessionId, cancellationToken);
+        }
+
+        public async Task<Guid> CreateSession(Guid userId, CancellationToken cancellationToken)
+        {
+            var session = new Session(Guid.NewGuid(), userId);
+
+            await _dbContext.Set<Session>().AddAsync(session, cancellationToken);
+
+            return session.Id;
         }
     }
 }

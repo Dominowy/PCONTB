@@ -1,7 +1,6 @@
 <template>
   <div>
-    <Navbar />
-
+    <default-navbar-layout />
     <b-container class="mt-4">
       <router-view />
     </b-container>
@@ -10,9 +9,9 @@
 
 <script>
 import { defineComponent } from "vue";
-import Navbar from "./NavbarLayout.vue";
+import DefaultNavbarLayout from "./DefaultNavbarLayout.vue";
 
 export default defineComponent({
-  components: { Navbar },
+  components: { DefaultNavbarLayout },
 });
 </script>

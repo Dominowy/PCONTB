@@ -7,13 +7,13 @@ using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 {
-    public class AddProjectRequest : IRequest<CreateResult>
+    public class AddProjectRequest : IRequest<CommandResult>
     {
         public string Name { get; set; }
         public Guid UserId { get; set; }
     }
 
-    public class AddProjectHandler : IRequestHandler<AddProjectRequest, CreateResult>
+    public class AddProjectHandler : IRequestHandler<AddProjectRequest, CommandResult>
     {
         private readonly IApplicationDbContext _context;
 
@@ -22,7 +22,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
             _context = context;
         }
 
-        public async Task<CreateResult> Handle(AddProjectRequest request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(AddProjectRequest request, CancellationToken cancellationToken)
         {
             var entity = new Project(Guid.NewGuid(), request.Name, request.UserId);
 
@@ -30,7 +30,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return new CreateResult();
+            return new CommandResult(entity.Id);
         }
     }
 

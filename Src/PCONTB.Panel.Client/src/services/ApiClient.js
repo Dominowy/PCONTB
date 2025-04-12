@@ -1,26 +1,41 @@
-class ApiClient {
-  static async request(endpoint, body = {}) {
+import Axios from "axios";
+
+export class ApiClient {
+  constructor() {
+    this.$http = Axios.create();
+  }
+
+  async request(url, data, config) {
     try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(body),
-      });
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status} ${response.statusText}`);
-      }
-
-      return await response.json();
+      var response = await this.$http.post(url, data, config);
+      return response.data;
     } catch (error) {
-      console.error("API request failed:", error);
-      throw error;
+      throw this.handleError(error);
     }
+  }
+
+  async validate(url, onlyValidate, data, config) {
+    var isValidating = onlyValidate === true;
+
+    var suffix = isValidating ? "/validation" : "";
+    url = url + suffix;
+
+    try {
+      var response = await this.$http.post(url, data, config);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  handleError(error) {
+    var response = error.response;
+
+    return {
+      code: response.status,
+      message: response.data,
+    };
   }
 }
 
-export default ApiClient;
+export default new ApiClient();

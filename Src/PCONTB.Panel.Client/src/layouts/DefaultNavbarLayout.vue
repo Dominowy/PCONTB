@@ -5,25 +5,29 @@
     <b-collapse id="navbar-toggle-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item to="/">Home</b-nav-item>
-        <b-nav-item to="/dashboard">Dashboard</b-nav-item>
+        <b-nav-item to="/projects">Projects</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ms-auto mb-2 mb-lg-0">
-        <b-nav-item to="/auth/login">Login</b-nav-item>
+        <b-nav-item to="/login">Login</b-nav-item>
         <b-nav-item-dropdown right>
           <template #button-content>
             <em>User</em>
           </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+          <b-dropdown-item to="/profile">Profile</b-dropdown-item>
+          <b-dropdown-item to="/logout">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
-      <b-nav-form class="d-flex">
-        <b-form-input class="me-2" placeholder="Search" />
-        <b-button type="submit" variant="outline-success">Search</b-button>
-      </b-nav-form>
     </b-collapse>
   </b-navbar>
 </template>
+
+<style scoped>
+.b-navbar-nav .b-nav-item:hover,
+.b-navbar-nav .b-nav-item:focus {
+  background-color: #6c757d !important;
+  color: white !important;
+}
+</style>
 
 <script>
 export default {

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Common.Models.Response;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {
@@ -15,7 +14,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
         }
     }
 
-    public class GetUpdatePasswordFormResponse : BaseResponse
+    public class GetUpdatePasswordFormResponse
     {
     }
 }

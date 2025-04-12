@@ -1,12 +1,12 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Common.Models.Response;
+using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Account.Users;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 {
-    public class UpdateUserRequest : IRequest<UpdateResult>
+    public class UpdateUserRequest : IRequest<CommandResult>
     {
         public Guid Id { get; set; }
         public string Username { get; set; }
@@ -14,7 +14,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         public string Password { get; set; }
     }
 
-    public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, UpdateResult>
+    public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, CommandResult>
     {
         private readonly IApplicationDbContext _context;
 
@@ -22,19 +22,16 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         {
             _context = context;
         }
-        public async Task<UpdateResult> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
         {
             var entity = await _context.Set<User>().FindAsync(request.Id, cancellationToken);
 
-            if (entity == null)
-            {
-                return new UpdateResult(false, ResponseStatus.BadRequest);
-            }
+            if (entity == null) throw new NotFoundException("User not found");
 
             entity.ChangeEmail(request.Email);
             entity.ChangeUsername(request.Username);
 
-            return new UpdateResult();
+            return new CommandResult(entity.Id);
         }
     }
 }

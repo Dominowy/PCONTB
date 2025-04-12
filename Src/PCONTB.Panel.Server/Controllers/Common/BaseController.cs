@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Codes;
-using PCONTB.Panel.Application.Common.Models.Response;
 using PCONTB.Panel.Application.Common.Models.Result;
 
 namespace PCONTB.Panel.Server.Controllers.Common
@@ -32,7 +31,7 @@ namespace PCONTB.Panel.Server.Controllers.Common
                 var validationResult = await validator.ValidateAsync(request, cancellationToken);
                 if (!validationResult.IsValid)
                 {
-                    return BadRequest(new ValidationResult(false, ResponseStatus.BadRequest)
+                    return BadRequest(new ValidationResult
                     {
                         Errors = validationResult.Errors.Select(e => new ValidationError { PropertyName = e.PropertyName, ErrorCode = e.ErrorCode })
                     });

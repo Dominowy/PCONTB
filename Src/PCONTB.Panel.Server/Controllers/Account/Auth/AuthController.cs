@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Functions.Account.Auth.Commands;
+using PCONTB.Panel.Application.Functions.Account.Auth.Queries;
+using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Account.Authentication
@@ -13,21 +15,37 @@ namespace PCONTB.Panel.Server.Controllers.Account.Authentication
         {
         }
 
+        [AllowAnonymousToken]
         [HttpPost("register")]
-        [ProducesResponseType(typeof(CreateResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromBody] RegisterUserRequest registerRequest, CancellationToken cancellationToken) => await Send(registerRequest, cancellationToken);
 
+        [AllowAnonymousToken]
+        [HttpPost("register/validation")]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> RegisterValidate([FromBody] RegisterUserRequest registerRequest, CancellationToken cancellationToken) => await Validate(registerRequest, cancellationToken);
+
+        [AllowAnonymousToken]
         [HttpPost("login")]
-        [ProducesResponseType(typeof(SessionResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Login([FromBody] LoginUserRequest loginRequest, CancellationToken cancellationToken) => await Send(loginRequest, cancellationToken);
 
+        [AuthorizeToken]
         [HttpPost("logout")]
-        [ProducesResponseType(typeof(SessionResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Logout([FromBody] LogoutUserRequest logoutRequest, CancellationToken cancellationToken) => await Send(logoutRequest, cancellationToken);
 
+        [AllowAnonymousToken]
         [HttpPost("reset-password")]
-        [ProducesResponseType(typeof(UpdateResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> Reset([FromBody] ResetUserPasswordRequest resetPasswordRequest, CancellationToken cancellationToken) => await Send(resetPasswordRequest, cancellationToken);
+
+        [AuthorizeToken]
+        [HttpPost("get-session")]
+        [ProducesResponseType(typeof(GetSessionResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetSession([FromBody] GetSessionRequest getSessionRequest, CancellationToken cancellationToken) => await Send(getSessionRequest, cancellationToken);
 
     }
 }

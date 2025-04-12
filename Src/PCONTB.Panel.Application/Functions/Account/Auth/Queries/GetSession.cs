@@ -1,5 +1,6 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Common.Models.Response;
+using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
+using PCONTB.Panel.Application.Models.Dto.Account.Users;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Queries
 {
@@ -9,16 +10,26 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Queries
 
     public class GetSessionHandler : IRequestHandler<GetSessionRequest, GetSessionResponse>
     {
-        public Task<GetSessionResponse> Handle(GetSessionRequest request, CancellationToken cancellationToken)
+        private readonly ISessionAccesor _sessionAccesor;
+
+        public GetSessionHandler(ISessionAccesor sessionAccesor)
         {
-            throw new NotImplementedException();
+            _sessionAccesor = sessionAccesor;
+        }
+
+        public async Task<GetSessionResponse> Handle(GetSessionRequest request, CancellationToken cancellationToken)
+        {
+            var user = _sessionAccesor.Session.User;
+
+            return new GetSessionResponse
+            {
+                User = UserDto.Map(user),
+            };
         }
     }
 
-    public class GetSessionResponse : BaseResponse
+    public class GetSessionResponse
     {
-        public GetSessionResponse(bool success, ResponseStatus statusCode) : base(success, statusCode)
-        {
-        }
+        public UserDto User { get; set; }
     }
 }

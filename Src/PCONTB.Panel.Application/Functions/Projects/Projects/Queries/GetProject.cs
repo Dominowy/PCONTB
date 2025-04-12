@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using PCONTB.Panel.Application.Common.Models.Response;
+using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Models.Dto.Projects.Projects;
 using PCONTB.Panel.Domain.Projects.Projects;
@@ -27,10 +27,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
                 .Include(p => p.User)
                 .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
 
-            if (entity == null)
-            {
-                return new GetProjectResponse(false, ResponseStatus.NotFound);
-            }
+            if (entity == null) throw new NotFoundException("Project not found");
 
             return new GetProjectResponse()
             {
@@ -39,19 +36,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
         }
     }
 
-    public class GetProjectResponse : BaseResponse
+    public class GetProjectResponse
     {
         public ProjectDto Project { get; set; }
-
-        public GetProjectResponse(bool success, ResponseStatus statusCode) : base(success, statusCode)
-        {
-
-        }
-
-        public GetProjectResponse() : base()
-        {
-            Success = true;
-            StatusCode = ResponseStatus.OK;
-        }
     }
 }

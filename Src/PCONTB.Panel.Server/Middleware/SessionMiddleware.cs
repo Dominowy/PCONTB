@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
+﻿using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth;
 
-namespace PCONTB.Panel.Infrastructure.Security.Middleware
+namespace PCONTB.Panel.Server.Middleware
 {
     public class SessionMiddleware
     {
@@ -16,11 +15,13 @@ namespace PCONTB.Panel.Infrastructure.Security.Middleware
         }
 
         public async Task InvokeAsync(
-            HttpContext context, 
-            IJwtService jwtService, 
+            HttpContext context,
+            IJwtService jwtService,
             ISessionService sessionService,
-            ICookieService cookieService)
+            ICookieService cookieService,
+            ISessionAccesor accesor)
         {
+            CancellationToken cancellationToken = context.RequestAborted;
             var token = cookieService.Get(_cookieName);
 
             if (string.IsNullOrEmpty(token))
@@ -38,7 +39,7 @@ namespace PCONTB.Panel.Infrastructure.Security.Middleware
                 return;
             }
 
-            var session = await sessionService.GetByIdAsync(sessionId.Value);
+            var session = await sessionService.GetByIdAsync(sessionId.Value, cancellationToken);
             if (session is null || !session.IsActive)
             {
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
@@ -49,6 +50,11 @@ namespace PCONTB.Panel.Infrastructure.Security.Middleware
             {
                 var newToken = jwtService.GenerateToken(session.Id);
                 cookieService.Set(_cookieName, newToken);
+            }
+
+            if (session != null)
+            {
+                accesor.SetSession(session);
             }
 
             await _next(context);

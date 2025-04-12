@@ -4,6 +4,7 @@ namespace PCONTB.Panel.Application.Contracts.Application.Services.Auth
 {
     public interface ISessionService
     {
-        Task<Session?> GetByIdAsync(Guid sessionId);
+        Task<Session?> GetByIdAsync(Guid? sessionId, CancellationToken cancellationToken);
+        Task<Guid> CreateSession(Guid sessionId, CancellationToken cancellationToken);
     }
 }

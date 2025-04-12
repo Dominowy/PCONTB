@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Common.Models.Response;
+using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
 using PCONTB.Panel.Domain.Projects.Projects;
@@ -24,10 +24,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
         {
             var entity = await _context.Set<Project>().FindAsync(request.Id, cancellationToken);
 
-            if (entity == null)
-            {
-                return new GetUpdateProjectFormResponse(false, ResponseStatus.NotFound);
-            }
+            if (entity == null) throw new NotFoundException("Project not found");
 
             return new GetUpdateProjectFormResponse()
             {
@@ -41,20 +38,9 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
         }
     }
 
-    public class GetUpdateProjectFormResponse : BaseResponse
+    public class GetUpdateProjectFormResponse
     {
         public UpdateProjectRequest FormData { get; set; }
-
-        public GetUpdateProjectFormResponse(bool success, ResponseStatus statusCode) : base(success, statusCode)
-        {
-
-        }
-
-        public GetUpdateProjectFormResponse() : base()
-        {
-            Success = true;
-            StatusCode = ResponseStatus.OK;
-        }
     }
 
 }

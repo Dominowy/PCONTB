@@ -24,7 +24,8 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Projects
         #endregion Get by id
 
         #region Get all
-        [AuthorizeToken]
+
+        [AllowAnonymousToken]
         [HttpPost("get-all")]
         [ProducesResponseType(typeof(GetAllProjectsResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllProjects([FromBody] GetAllProjectsRequest request, CancellationToken cancellation) => await Send(request, cancellation);
@@ -33,44 +34,52 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Projects
 
         #region Add
 
+        [AuthorizeToken]
         [HttpPost("add/form")]
         [ProducesResponseType(typeof(GetAddProjectFormResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> AddProject([FromBody] GetAddProjectFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
+        [AuthorizeToken]
         [HttpPost("add/validate")]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> ValidateAddProject([FromBody] AddProjectRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
+        [AuthorizeToken]
         [HttpPost("add")]
-        [ProducesResponseType(typeof(CreateResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> AddProject([FromBody] AddProjectRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Add
 
         #region Update
 
+        [AuthorizeToken]
         [HttpPost("update/form")]
         [ProducesResponseType(typeof(GetUpdateProjectFormResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateProject([FromBody] GetUpdateProjectFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
+        [AuthorizeToken]
         [HttpPost("update/validate")]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> ValidateUpdateProject([FromBody] UpdateProjectRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
+        [AuthorizeToken]
         [HttpPost("update")]
-        [ProducesResponseType(typeof(UpdateResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateProject([FromBody] UpdateProjectRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Update
 
         #region Delete
 
+        [AuthorizeToken]
         [HttpPost("delete/validate")]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> ValidateDeleteProject([FromBody] DeleteProjectRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
+        [AuthorizeToken]
         [HttpPost("delete")]
-        [ProducesResponseType(typeof(DeleteResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteProject([FromBody] DeleteProjectRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Delete

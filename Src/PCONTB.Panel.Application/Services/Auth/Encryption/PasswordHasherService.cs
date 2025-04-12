@@ -1,6 +1,4 @@
-﻿using MediatR;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth.Encryption;
-using PCONTB.Panel.Domain.Account.Users;
+﻿using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth.Encryption;
 
 namespace PCONTB.Panel.Infrastructure.Security.Auth.Encryption
 {

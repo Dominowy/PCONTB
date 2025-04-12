@@ -1,17 +1,17 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Common.Models.Response;
+using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 {
-    public class DeleteProjectRequest : IRequest<DeleteResult>
+    public class DeleteProjectRequest : IRequest<CommandResult>
     {
         public Guid Id { get; set; }
     }
 
-    public class DeleteProjectHandler : IRequestHandler<DeleteProjectRequest, DeleteResult>
+    public class DeleteProjectHandler : IRequestHandler<DeleteProjectRequest, CommandResult>
     {
         private readonly IApplicationDbContext _context;
 
@@ -20,20 +20,20 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
             _context = context;
         }
 
-        public async Task<DeleteResult> Handle(DeleteProjectRequest request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(DeleteProjectRequest request, CancellationToken cancellationToken)
         {
             var entity = await _context.Set<Project>().FindAsync(request.Id, cancellationToken);
 
             if (entity == null) 
             {
-                return new DeleteResult(false, ResponseStatus.NotFound);
+                throw new NotFoundException("Project not found");
             }
 
             _context.Set<Project>().Remove(entity);
 
             await _context.SaveChangesAsync();
 
-            return new DeleteResult();
+            return new CommandResult(entity.Id);
         }
     }
 }

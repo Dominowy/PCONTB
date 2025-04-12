@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth;
+﻿using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth;
 
-namespace PCONTB.Panel.Infrastructure.Security.Auth
+namespace PCONTB.Panel.Server.Services
 {
     public class CookieService : ICookieService
     {

@@ -1,10 +1,11 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using PCONTB.Panel.Application.Contracts.Auth;
+using PCONTB.Panel.Infrastructure.Security.Auth;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace PCONTB.Panel.Infrastructure.Security.Auth
+namespace PCONTB.Panel.Application.Services.Auth
 {
     public class JwtService : IJwtService
     {
