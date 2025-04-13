@@ -19,7 +19,19 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  isTouched: {
+    type: Boolean,
+    default: false,
+  },
+  isAllTouched: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const hasErrors = computed(() => props.errors != null && props.errors.length > 0);
+const hasErrors = computed(() => {
+  if (props.isAllTouched) return true;
+  if (!props.isTouched) return false;
+  return props.errors != null && props.errors.length > 0;
+});
 </script>

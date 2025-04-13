@@ -13,13 +13,14 @@ const props = defineProps({
     default: null,
     required: true,
   },
+  validate: Function,
 });
 
 const emit = defineEmits(["validate"]);
 
 const debouncedValidate = debounce(async () => {
   emit("validate");
-}, 500);
+}, 1000);
 
 watch(() => props.formData, debouncedValidate, { deep: true });
 </script>

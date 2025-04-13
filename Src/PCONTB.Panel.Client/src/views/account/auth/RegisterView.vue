@@ -7,20 +7,23 @@
           v-model="form.username"
           label="Username"
           placeholder="Enter username"
-          :errors="getFieldErrors('Username')"
+          :errors="errors"
+          :isAllTouched="isAllTouched"
         />
         <base-form-input
           v-model="form.email"
           label="Email"
           placeholder="Enter email"
-          :errors="getFieldErrors('Email')"
+          :errors="errors"
+          :isAllTouched="isAllTouched"
         />
         <base-form-input
           v-model="form.password"
           label="Password"
           type="password"
           placeholder="Enter password"
-          :errors="getFieldErrors('Password')"
+          :errors="errors"
+          :isAllTouched="isAllTouched"
         />
         <div class="d-flex w-100">
           <b-button
@@ -51,16 +54,8 @@
 
 <script setup>
 import { useAddEditPage } from "@/composables/useAddEditPage";
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
 import ApiClient from "@/services/ApiClient";
-
-const errors = ref([]);
-
-const touchedFields = ref({
-  Email: false,
-  Username: false,
-  Password: false,
-});
 
 const form = reactive({
   username: null,
@@ -68,48 +63,17 @@ const form = reactive({
   password: null,
 });
 
-const submitInternal = async (onlyValidate = false) => {
-  isLoading.value = true;
-
-  try {
-    await ApiClient.validate("account/auth/register", onlyValidate, form);
-    if (!onlyValidate) {
-      redirectToHome();
-    }
-    errors.value = [];
-  } catch (error) {
-    errors.value = error.message.errors;
-    if (!onlyValidate) {
-      setAllFieldsTouched();
-    }
-  } finally {
-    isLoading.value = false;
-  }
+const submitInternal = async (onlyValidate) => {
+  return await ApiClient.validate("account/auth/register", onlyValidate, form);
 };
 
-const setAllFieldsTouched = () => {
-  Object.keys(touchedFields.value).forEach((field) => {
-    touchedFields.value[field] = true;
-  });
-};
-
-const setFieldTouched = (field) => {
-  touchedFields.value[field] = true;
-};
-
-const isFieldTouched = (field) => {
-  return touchedFields.value[field];
-};
-
-const getFieldErrors = (propertyName) => {
-  if (!errors.value) return [];
-
-  return errors.value.filter((m) => m.propertyName === propertyName).map((m) => m.message);
-};
-
-const redirectToHome = () => {
+const redirectAfterSucces = () => {
   router.push({ name: "Home" });
 };
 
-const { router, isLoading, submit, validate } = useAddEditPage("Register", submitInternal);
+const { router, isLoading, submit, validate, errors, isAllTouched } = useAddEditPage(
+  "Register",
+  submitInternal,
+  redirectAfterSucces
+);
 </script>
