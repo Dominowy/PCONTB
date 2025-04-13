@@ -7,7 +7,7 @@ export class ApiClient {
 
   async request(url, data, config) {
     try {
-      var response = await this.$http.post(url, data, config);
+      let response = await this.$http.post(url, data, config);
       return response.data;
     } catch (error) {
       throw this.handleError(error);
@@ -15,13 +15,14 @@ export class ApiClient {
   }
 
   async validate(url, onlyValidate, data, config) {
-    var isValidating = onlyValidate === true;
+    let isValidating = onlyValidate === true;
 
-    var suffix = isValidating ? "/validation" : "";
-    url = url + suffix;
+    let suffix = isValidating ? "/validation" : "";
+    let validationUrl = url + suffix;
 
     try {
-      var response = await this.$http.post(url, data, config);
+      let response = await this.$http.post(validationUrl, data, config);
+
       return response.data;
     } catch (error) {
       throw this.handleError(error);

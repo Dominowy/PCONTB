@@ -8,13 +8,13 @@
         <b-nav-item to="/projects">Projects</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ms-auto mb-2 mb-lg-0">
-        <b-nav-item to="/login">Login</b-nav-item>
-        <b-nav-item-dropdown right>
+        <b-nav-item v-if="!session.isAuthenticated" to="/login">Login</b-nav-item>
+        <b-nav-item-dropdown v-if="session.isAuthenticated" right>
           <template #button-content>
-            <em>User</em>
+            <em>{{ session.user.username }}</em>
           </template>
           <b-dropdown-item to="/profile">Profile</b-dropdown-item>
-          <b-dropdown-item to="/logout">Sign Out</b-dropdown-item>
+          <b-dropdown-item @click="session.logout">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -29,17 +29,8 @@
 }
 </style>
 
-<script>
-export default {
-  data() {
-    return {
-      isExpanded: false,
-    };
-  },
-  methods: {
-    toggleExpanded() {
-      this.isExpanded = !this.isExpanded;
-    },
-  },
-};
+<script setup>
+import { useSessionStore } from "@/store/index";
+
+const session = useSessionStore();
 </script>

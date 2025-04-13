@@ -15,9 +15,22 @@ namespace PCONTB.Panel.Server.Controllers.Common
             _mediator = mediator;
         }
 
-        protected async Task<IActionResult> Send<TResponse>(IRequest<TResponse> query, CancellationToken cancellationToken = default)
+        protected async Task<IActionResult> Send<TRequest>(TRequest request, CancellationToken cancellationToken = default)
         {
-            var response = await _mediator.Send(query, cancellationToken);
+            var validator = HttpContext.RequestServices.GetService<IValidator<TRequest>>();
+            if (validator != null)
+            {
+                var validationResult = await validator.ValidateAsync(request, cancellationToken);
+                if (!validationResult.IsValid)
+                {
+                    return BadRequest(new ValidationResult
+                    {
+                        Errors = validationResult.Errors.Select(e => new ValidationError { PropertyName = e.PropertyName, ErrorCode = e.ErrorCode, Message = e.ErrorMessage })
+                    });
+                }
+            }
+
+            var response = await _mediator.Send(request, cancellationToken);
 
             return Ok(response);
         }
@@ -33,7 +46,7 @@ namespace PCONTB.Panel.Server.Controllers.Common
                 {
                     return BadRequest(new ValidationResult
                     {
-                        Errors = validationResult.Errors.Select(e => new ValidationError { PropertyName = e.PropertyName, ErrorCode = e.ErrorCode })
+                        Errors = validationResult.Errors.Select(e => new ValidationError { PropertyName = e.PropertyName, ErrorCode = e.ErrorCode, Message = e.ErrorMessage })
                     });
                 }
             }

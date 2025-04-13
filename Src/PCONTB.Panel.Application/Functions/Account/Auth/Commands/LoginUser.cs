@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
+using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Auth;
@@ -43,10 +44,10 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
             var entity = await _dbContext.Set<User>()
                 .FirstOrDefaultAsync(u => u.Email == request.Login || u.Username == request.Login, cancellationToken);
 
-            if (entity == null) throw new BadRequestException("Wrong username or password");
+            if (entity == null) throw new BadRequestException(ErrorCodes.User.LoginWrongCredential.Message);
 
             if (!_passwordHasherService.Verify(request.Password, entity.Password)) 
-                throw new BadRequestException("Wrong username or password");
+                throw new BadRequestException(ErrorCodes.User.LoginWrongCredential.Message);
 
             var sessionId = await _sessionService.CreateSession(entity.Id, cancellationToken);
 

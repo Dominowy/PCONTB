@@ -39,7 +39,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
         public AddProjectRequestValidator()
         {
             RuleFor(p => p.Name)
-                .NotEmpty().WithErrorCode(ErrorCodes.Project.ProjectNameEmpty.Code);
+                .NotEmpty().WithMessage(ErrorCodes.Project.ProjectNameEmpty.Message);
         }
     }
 }

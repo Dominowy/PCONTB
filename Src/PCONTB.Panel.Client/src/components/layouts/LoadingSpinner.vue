@@ -1,3 +1,12 @@
 <template>
-  <b-spinner label="Loading..." class="mt-2 d-block mx-auto mb-4" />
+  <b-spinner label="Loading..." :class="spinnerClass" />
 </template>
+
+<script setup>
+defineProps({
+  spinnerClass: {
+    type: String,
+    default: null,
+  },
+});
+</script>

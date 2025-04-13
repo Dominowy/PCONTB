@@ -1,22 +1,21 @@
 <template>
   <div class="d-flex align-items-center justify-content-center vh-100">
     <b-card class="container">
-      <auth-form-header :isLoading="loading" />
+      <auth-form-header :isLoading="isLoading" />
       <b-form @submit.prevent="handleSubmit">
         <b-form-group class="mt-2" label="UserName:" label-for="username">
-          <b-form-input id="username" v-model="form.login" required placeholder="Enter username" />
+          <b-form-input id="username" v-model="form.login" placeholder="Enter username" />
         </b-form-group>
         <b-form-group class="mt-2" label="Password:" label-for="password">
           <b-form-input
             id="password"
             v-model="form.password"
-            required
             type="password"
             placeholder="Enter password"
           />
         </b-form-group>
         <div class="d-flex w-100">
-          <b-button class="mt-4 w-100" :disabled="loading" type="submit" variant="secondary" block
+          <b-button class="mt-4 w-100" :disabled="isLoading" type="submit" variant="secondary" block
             >Login</b-button
           >
         </div>
@@ -45,11 +44,10 @@
 <script setup>
 import { ref, reactive } from "vue";
 import ApiClient from "@/services/ApiClient";
-import { useRouter } from "vue-router";
+import { useAddEditPage } from "@/composables/useAddEditPage";
 
-const router = useRouter();
+const { router, isLoading } = useAddEditPage("Login");
 
-const loading = ref(false);
 const errorMessage = ref("");
 const form = reactive({
   login: null,
@@ -57,7 +55,7 @@ const form = reactive({
 });
 
 const handleSubmit = async () => {
-  loading.value = true;
+  isLoading.value = true;
   errorMessage.value = null;
 
   try {
@@ -66,7 +64,7 @@ const handleSubmit = async () => {
   } catch (error) {
     errorMessage.value = error.message;
   } finally {
-    loading.value = false;
+    isLoading.value = false;
   }
 };
 

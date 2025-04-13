@@ -1,13 +1,13 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth.Encryption;
 using PCONTB.Panel.Application.Services.Auth;
-using PCONTB.Panel.Infrastructure.Security.Auth.Encryption;
 using PCONTB.Panel.Infrastructure.Security.Auth;
+using PCONTB.Panel.Infrastructure.Security.Auth.Encryption;
 using System.Reflection;
-using Microsoft.Extensions.Configuration;
 
 namespace PCONTB.Panel.Application
 {

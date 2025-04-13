@@ -2,9 +2,6 @@
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Account.Sessions;
-using PCONTB.Panel.Domain.Account.Users;
-using PCONTB.Panel.Domain.Common;
-using System.Threading;
 
 namespace PCONTB.Panel.Application.Services.Auth
 {
@@ -29,6 +26,8 @@ namespace PCONTB.Panel.Application.Services.Auth
             var session = new Session(Guid.NewGuid(), userId);
 
             await _dbContext.Set<Session>().AddAsync(session, cancellationToken);
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
             return session.Id;
         }
