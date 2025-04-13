@@ -1,6 +1,6 @@
 <template>
   <fieldset class="form-group">
-    <label class="form-label d-block"> {{ label }}: </label>
+    <label :for="id" class="form-label d-block"> {{ label }}: </label>
     <slot></slot>
     <ul class="list-unstyled text-danger form-message my-0" v-if="hasErrors">
       <li v-for="error in errors" :key="error">
@@ -14,6 +14,7 @@
 import { computed } from "vue";
 
 const props = defineProps({
+  id: String,
   label: null,
   errors: {
     type: Array,

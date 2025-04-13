@@ -4,6 +4,7 @@
       <auth-form-header :isLoading="isLoading" />
       <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
         <base-form-input
+          id="username"
           v-model="form.username"
           label="Username"
           placeholder="Enter username"
@@ -11,6 +12,7 @@
           :isAllTouched="isAllTouched"
         />
         <base-form-input
+          id="email"
           v-model="form.email"
           label="Email"
           placeholder="Enter email"
@@ -18,6 +20,7 @@
           :isAllTouched="isAllTouched"
         />
         <base-form-input
+          id="password"
           v-model="form.password"
           label="Password"
           type="password"

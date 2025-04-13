@@ -1,11 +1,13 @@
 <template>
   <base-form-field
+    :id="id"
     :label="label"
     :errors="getFieldErrors(label)"
     :isTouched="isTouched"
     :isAllTouched="isAllTouched"
   >
     <input
+      :id="id"
       class="form-control"
       :type="type"
       :value="modelValue"
@@ -20,6 +22,7 @@
 <script setup>
 import { ref } from "vue";
 const props = defineProps({
+  id: String,
   label: String,
   placeholder: String,
   type: {
