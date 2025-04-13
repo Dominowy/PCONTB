@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center justify-content-center vh-100">
     <b-card class="container">
       <auth-form-header :isLoading="isLoading" />
-      <b-form @submit.prevent="handleSubmit(false)">
+      <form @submit.prevent="handleSubmit(false)">
         <b-form-group class="mt-2" label="Username:" label-for="username">
           <b-form-input
             id="Username"
@@ -49,7 +49,7 @@
             Register
           </b-button>
         </div>
-      </b-form>
+      </form>
     </b-card>
   </div>
 </template>
