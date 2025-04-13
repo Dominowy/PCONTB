@@ -49,7 +49,7 @@ namespace PCONTB.Panel.Server.Middleware
             if (isExpired)
             {
                 var newToken = jwtService.GenerateToken(session.Id);
-                cookieService.Set(_cookieName, newToken);
+                cookieService.Set(newToken, _cookieName);
             }
 
             if (session != null)

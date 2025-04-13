@@ -27,6 +27,13 @@ namespace PCONTB.Panel.Server.Middleware
                 context.Response.StatusCode = 400;
                 await context.Response.WriteAsync(badHttpRequestException.Message);
             }
+            catch (UnauthorizedException anauthorizedException)
+            {
+                _logger.LogError(anauthorizedException, anauthorizedException.Message);
+
+                context.Response.StatusCode = 401;
+                await context.Response.WriteAsync(anauthorizedException.Message);
+            }
             catch (ForbiddenException forbiddenException)
             {
                 _logger.LogError(forbiddenException, forbiddenException.Message);

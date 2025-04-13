@@ -66,18 +66,15 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
             _dbContext = dbContext;
 
             RuleFor(p => p.Username)
-                .NotNull().WithMessage(ErrorCodes.User.UsernameEmpty.Message)
                 .NotEmpty().WithMessage(ErrorCodes.User.UsernameEmpty.Message)
                 .MustAsync(CheckUsernameIsUnique).WithMessage(ErrorCodes.User.UsernameExist.Message); ;
 
             RuleFor(p => p.Email)
                 .NotEmpty().WithMessage(ErrorCodes.User.EmailEmpty.Message)
-                .NotEmpty().WithMessage(ErrorCodes.User.EmailEmpty.Message)
                 .EmailAddress().WithMessage(ErrorCodes.User.EmailBadFormat.Message)
                 .MustAsync(CheckEmailIsUnique).WithMessage(ErrorCodes.User.EmailExist.Message);
 
             RuleFor(p => p.Password)
-                .NotEmpty().WithMessage(ErrorCodes.User.PasswordEmpty.Message)
                 .NotEmpty().WithMessage(ErrorCodes.User.PasswordEmpty.Message)
                 .MinimumLength(8).WithMessage(ErrorCodes.User.PasswordMinimalLength.Message)
                 .Matches(new Regex(@"(?=[A-Za-z0-9@#$%^&+-_!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+-_!=]).*$"))

@@ -37,13 +37,16 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
             var token = _cookieService.Get(cookieName);
 
             if (string.IsNullOrWhiteSpace(token) || _jwtService.IsTokenExpired(token))
-                throw new ForbiddenException("Token expired or not exist");
+            {
+                _cookieService.Clear(cookieName);
+                throw new UnauthorizedException("Token expired or not exist");
+            }
 
             var sessionId = _jwtService.GetSessionIdFromToken(token);
             if (sessionId is null)
             {
                 _cookieService.Clear(cookieName);
-                throw new ForbiddenException("Session not exist");
+                throw new UnauthorizedException("Session not exist");
             }
 
             var session = await _sessionService.GetByIdAsync(sessionId, cancellationToken);
@@ -51,7 +54,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
             if (session is null || !session.IsActive)
             {
                 _cookieService.Clear(cookieName);
-                throw new ForbiddenException("Session not exist");
+                throw new UnauthorizedException("Session not exist");
             }
 
             session.EndSession();

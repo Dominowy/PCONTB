@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { useSessionStore } from "@/store/index";
+import { useStore } from "@/store/index";
 
 import DefaultLayout from "../layouts/DefaultLayout.vue";
 import AuthLayout from "../layouts/AuthLayout.vue";
@@ -56,13 +56,13 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const session = useSessionStore();
+  const store = useStore();
 
-  if (!session.user && !session.loading) {
-    await session.fetchSession();
+  if (!store.user && !store.loading) {
+    await store.fetchSession();
   }
 
-  if (to.meta.requiresAuth && !session.user) {
+  if (to.meta.requiresAuth && !store.user) {
     return next("/");
   }
 

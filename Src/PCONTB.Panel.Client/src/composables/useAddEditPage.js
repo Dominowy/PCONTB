@@ -1,7 +1,7 @@
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
-export function useAddEditPage(title) {
+export function useAddEditPage(title, submitInternal) {
   const router = useRouter();
 
   const isLoading = ref(false);
@@ -9,5 +9,12 @@ export function useAddEditPage(title) {
   onMounted(() => {
     document.title = title;
   });
-  return { router, isLoading };
+
+  const submit = async () => {
+    submitInternal(false);
+  };
+  const validate = async () => {
+    submitInternal(true);
+  };
+  return { router, isLoading, submit, validate };
 }

@@ -8,13 +8,13 @@
         <b-nav-item to="/projects">Projects</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ms-auto mb-2 mb-lg-0">
-        <b-nav-item v-if="!session.isAuthenticated" to="/login">Login</b-nav-item>
-        <b-nav-item-dropdown v-if="session.isAuthenticated" right>
+        <b-nav-item v-if="!store.isAuthenticated" to="/login">Login</b-nav-item>
+        <b-nav-item-dropdown v-if="store.isAuthenticated" right>
           <template #button-content>
-            <em>{{ session.user.username }}</em>
+            <em>{{ store.user.username }}</em>
           </template>
           <b-dropdown-item to="/profile">Profile</b-dropdown-item>
-          <b-dropdown-item @click="session.logout">Sign Out</b-dropdown-item>
+          <b-dropdown-item @click="store.logout">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -30,7 +30,7 @@
 </style>
 
 <script setup>
-import { useSessionStore } from "@/store/index";
+import { useStore } from "@/store/index";
 
-const session = useSessionStore();
+const store = useStore();
 </script>

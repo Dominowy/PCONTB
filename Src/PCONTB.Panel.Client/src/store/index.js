@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import ApiClient from "@/services/ApiClient";
 
-export const useSessionStore = defineStore("session", {
+export const useStore = defineStore("store", {
   state: () => ({
     user: null,
     loading: false,

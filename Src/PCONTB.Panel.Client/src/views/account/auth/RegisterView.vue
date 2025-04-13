@@ -2,42 +2,26 @@
   <div class="d-flex align-items-center justify-content-center vh-100">
     <b-card class="container">
       <auth-form-header :isLoading="isLoading" />
-      <form @submit.prevent="handleSubmit(false)">
-        <b-form-group class="mt-2" label="Username:" label-for="username">
-          <b-form-input
-            id="Username"
-            v-model="form.username"
-            placeholder="Enter username"
-            @blur="setFieldTouched('Username')"
-          />
-          <div v-if="isFieldTouched('Username') && getFieldErrors('Username')" class="text-danger">
-            {{ getFieldErrors("Username") }}
-          </div>
-        </b-form-group>
-        <b-form-group class="mt-2" label="Email:" label-for="username">
-          <b-form-input
-            id="Email"
-            v-model="form.email"
-            placeholder="Enter email"
-            @blur="setFieldTouched('Email')"
-          />
-          <div v-if="isFieldTouched('Email') && getFieldErrors('Email')" class="text-danger">
-            {{ getFieldErrors("Email") }}
-          </div>
-        </b-form-group>
-        <b-form-group class="mt-2" label="Password:" label-for="password">
-          <b-form-input
-            id="Password"
-            v-model="form.password"
-            type="password"
-            placeholder="Enter password"
-            @blur="setFieldTouched('Password')"
-          />
-
-          <div v-if="isFieldTouched('Password') && getFieldErrors('Password')" class="text-danger">
-            {{ getFieldErrors("Password") }}
-          </div>
-        </b-form-group>
+      <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
+        <base-form-input
+          v-model="form.username"
+          label="Username"
+          placeholder="Enter username"
+          :errors="getFieldErrors('Username')"
+        />
+        <base-form-input
+          v-model="form.email"
+          label="Email"
+          placeholder="Enter email"
+          :errors="getFieldErrors('Email')"
+        />
+        <base-form-input
+          v-model="form.password"
+          label="Password"
+          type="password"
+          placeholder="Enter password"
+          :errors="getFieldErrors('Password')"
+        />
         <div class="d-flex w-100">
           <b-button
             class="mt-4 w-100"
@@ -45,11 +29,12 @@
             type="submit"
             variant="secondary"
             block
+            v-on:click.prevent="submit"
           >
             Register
           </b-button>
         </div>
-      </form>
+      </base-form>
     </b-card>
   </div>
 </template>
@@ -66,11 +51,8 @@
 
 <script setup>
 import { useAddEditPage } from "@/composables/useAddEditPage";
-import { ref, reactive, watch } from "vue";
+import { ref, reactive } from "vue";
 import ApiClient from "@/services/ApiClient";
-import { debounce } from "lodash";
-
-const { router, isLoading } = useAddEditPage("Register");
 
 const errors = ref([]);
 
@@ -86,13 +68,7 @@ const form = reactive({
   password: null,
 });
 
-const debouncedValidate = debounce(async () => {
-  await handleSubmit(true);
-}, 500);
-
-watch(() => form, debouncedValidate, { deep: true });
-
-const handleSubmit = async (onlyValidate = false) => {
+const submitInternal = async (onlyValidate = false) => {
   isLoading.value = true;
 
   try {
@@ -126,12 +102,14 @@ const isFieldTouched = (field) => {
 };
 
 const getFieldErrors = (propertyName) => {
-  if (!errors.value) return null;
-  const error = errors.value.find((m) => m.propertyName == propertyName);
-  return error ? error.message : null;
+  if (!errors.value) return [];
+
+  return errors.value.filter((m) => m.propertyName === propertyName).map((m) => m.message);
 };
 
 const redirectToHome = () => {
   router.push({ name: "Home" });
 };
+
+const { router, isLoading, submit, validate } = useAddEditPage("Register", submitInternal);
 </script>
