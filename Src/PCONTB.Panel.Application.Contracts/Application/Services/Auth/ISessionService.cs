@@ -6,5 +6,6 @@ namespace PCONTB.Panel.Application.Contracts.Application.Services.Auth
     {
         Task<Session?> GetByIdAsync(Guid? sessionId, CancellationToken cancellationToken);
         Task<Guid> CreateSession(Guid sessionId, CancellationToken cancellationToken);
+        Task<bool> CheckSessionActiveState(Session session, CancellationToken cancellationToken);
     }
 }

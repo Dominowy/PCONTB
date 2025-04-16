@@ -46,6 +46,12 @@ namespace PCONTB.Panel.Server.Middleware
                 return;
             }
 
+            if (await sessionService.CheckSessionActiveState(session, cancellationToken))
+            {
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                return;
+            }
+
             if (isExpired)
             {
                 var newToken = jwtService.GenerateToken(session.Id);

@@ -4,6 +4,12 @@
     {
         public static class Project
         {
+            public static readonly ErrorCode NotFound = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(NotFound),
+                Message = "Project not found"
+            };
+
             public static readonly ErrorCode ProjectNameEmpty = new ErrorCode
             {
                 Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(ProjectNameEmpty),
@@ -13,6 +19,18 @@
 
         public static class User
         {
+            public static readonly ErrorCode AccesDenied = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(AccesDenied),
+                Message = "User have no access"
+            };
+
+            public static readonly ErrorCode NotFound = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(NotFound),
+                Message = "User not found"
+            };
+
             public static readonly ErrorCode UsernameEmpty = new ErrorCode
             {
                 Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(UsernameEmpty),

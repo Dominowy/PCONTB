@@ -31,5 +31,17 @@ namespace PCONTB.Panel.Application.Services.Auth
 
             return session.Id;
         }
+
+        public async Task<bool> CheckSessionActiveState(Session session, CancellationToken cancellationToken)
+        {
+            if (session.Ended < DateTimeOffset.UtcNow)
+            {
+                session.EndSession();
+                await _dbContext.SaveChangesAsync(cancellationToken);
+                return true;
+            }
+
+            return false;
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace PCONTB.Panel.Application.Contracts.Application.Services.Auth
     public interface ISessionAccesor
     {
         Session Session { get; }
-
         public void SetSession(Session session);
+        public void Verify(Guid id);
     }
 }

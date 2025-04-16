@@ -90,6 +90,5 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
         {
             return !await _dbContext.Set<User>().AnyAsync(m => m.Email == email, cancellationToken);
         }
-
     }
 }

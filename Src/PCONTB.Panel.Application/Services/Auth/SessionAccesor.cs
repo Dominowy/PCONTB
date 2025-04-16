@@ -1,4 +1,6 @@
-﻿using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
+﻿using PCONTB.Panel.Application.Common.Exceptions;
+using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Domain.Account.Sessions;
 
 namespace PCONTB.Panel.Application.Services.Auth
@@ -10,6 +12,12 @@ namespace PCONTB.Panel.Application.Services.Auth
         public void SetSession(Session session)
         {
             Session = session;
+        }
+
+        public void Verify(Guid id)
+        {
+            if (Session.User.Id != id) 
+                throw new UnauthorizedException(ErrorCodes.User.AccesDenied.Message);
         }
     }
 }

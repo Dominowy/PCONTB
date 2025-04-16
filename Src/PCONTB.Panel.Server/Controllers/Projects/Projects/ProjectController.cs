@@ -56,7 +56,7 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Projects
         [AuthorizeToken]
         [HttpPost("update/form")]
         [ProducesResponseType(typeof(GetUpdateProjectFormResponse), StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdateProject([FromBody] GetUpdateProjectFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+        public async Task<IActionResult> UpdateProjectForm([FromBody] GetUpdateProjectFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [AuthorizeToken]
         [HttpPost("update/validate")]
