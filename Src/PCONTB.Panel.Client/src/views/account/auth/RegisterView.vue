@@ -57,14 +57,20 @@
 
 <script setup>
 import { useAddEditPage } from "@/composables/useAddEditPage";
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import ApiClient from "@/services/ApiClient";
 
-const form = reactive({
-  username: null,
-  email: null,
-  password: null,
+const form = reactive({});
+
+onMounted(async () => {
+  const response = await getForm();
+
+  Object.assign(form, response.form);
 });
+
+const getForm = async () => {
+  return await ApiClient.request("account/auth/register/form", {});
+};
 
 const submitInternal = async (onlyValidate) => {
   return await ApiClient.validate("account/auth/register", onlyValidate, form);

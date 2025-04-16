@@ -21,10 +21,10 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Queries
         {
             var user = _sessionAccesor.Session.User;
 
-            return new GetSessionResponse
+            return await Task.FromResult(new GetSessionResponse
             {
                 User = UserDto.Map(user),
-            };
+            });
         }
     }
 

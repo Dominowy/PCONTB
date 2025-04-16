@@ -15,6 +15,13 @@ namespace PCONTB.Panel.Server.Controllers.Account.Authentication
         {
         }
 
+        #region Register
+
+        [AllowAnonymousToken]
+        [HttpPost("register/form")]
+        [ProducesResponseType(typeof(GetRegisterUserFormResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Register([FromBody] GetRegisterUserFormRequest registerRequest, CancellationToken cancellationToken) => await Send(registerRequest, cancellationToken);
+
         [AllowAnonymousToken]
         [HttpPost("register")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
@@ -26,6 +33,8 @@ namespace PCONTB.Panel.Server.Controllers.Account.Authentication
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RegisterValidate([FromBody] RegisterUserRequest registerRequest, CancellationToken cancellationToken) => await Validate(registerRequest, cancellationToken);
+
+        #endregion Register
 
         [AllowAnonymousToken]
         [HttpPost("login")]
