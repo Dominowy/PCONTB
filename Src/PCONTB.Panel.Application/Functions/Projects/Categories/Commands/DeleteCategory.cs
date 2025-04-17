@@ -1,15 +1,16 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Projects.Categories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 {
-    public class DeleteCategoryRequest : IRequest<CommandResult>
+    public class DeleteCategoryRequest : BaseCommand, IRequest<CommandResult>
     {
-        public Guid Id { get; set; }
+        
     }
 
     public class DeleteCategoryHandler : IRequestHandler<DeleteCategoryRequest, CommandResult>

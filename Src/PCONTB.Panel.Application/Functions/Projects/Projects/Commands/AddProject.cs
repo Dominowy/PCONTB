@@ -1,18 +1,18 @@
 ﻿using FluentValidation;
 using MediatR;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 {
-    public class AddProjectRequest : IRequest<CommandResult>
+    public class AddProjectRequest : BaseCommand, IRequest<CommandResult>
     {
-        public string Name { get; set; }
         public Guid UserId { get; set; }
         public Guid CategoryId { get; set; }
-        public Guid? SubCategoryId { get; set; }
+        public Guid SubCategoryId { get; set; }
         public Guid CountryId { get; set; }
     }
 
@@ -28,6 +28,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
         public async Task<CommandResult> Handle(AddProjectRequest request, CancellationToken cancellationToken)
         {
             var entity = new Project(Guid.NewGuid(), request.Name, request.UserId);
+
+            entity.SetSubcategory(request.SubCategoryId);
 
             await _context.Set<Project>().AddAsync(entity, cancellationToken);
 

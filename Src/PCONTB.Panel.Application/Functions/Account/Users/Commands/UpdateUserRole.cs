@@ -2,16 +2,15 @@
 using MediatR;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Account.Users;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 {
-    public class UpdateUserRoleRequest : IRequest<CommandResult>
+    public class UpdateUserRoleRequest : BaseCommand, IRequest<CommandResult>
     {
-        public Guid Id { get; set; }
-
         public Role Role { get; set; }
     }
 
@@ -30,7 +29,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 
-            entity.UpdateRole(request.Role);
+            entity.SetRole(request.Role);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 

@@ -2,15 +2,16 @@
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Models.Dto.Categories;
 using PCONTB.Panel.Domain.Projects.Categories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 {
-    public class GetCategoryRequest : IRequest<GetCategoryResponse>
+    public class GetCategoryRequest : BaseQuery, IRequest<GetCategoryResponse>
     {
-        public Guid Id { get; set; }
+
     }
 
     public class GetCategoryHandler : IRequestHandler<GetCategoryRequest, GetCategoryResponse>

@@ -1,14 +1,15 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common.Exceptions;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 {
-    public class DeleteProjectRequest : IRequest<CommandResult>
+    public class DeleteProjectRequest : BaseCommand, IRequest<CommandResult>
     {
-        public Guid Id { get; set; }
+
     }
 
     public class DeleteProjectHandler : IRequestHandler<DeleteProjectRequest, CommandResult>

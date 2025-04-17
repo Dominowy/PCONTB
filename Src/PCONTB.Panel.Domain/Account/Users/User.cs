@@ -37,7 +37,7 @@ namespace PCONTB.Panel.Domain.Account.Users
             Role = role;
         }
 
-        public void ChangeUsername(string username)
+        public void SetUsername(string username)
         {
             var anyChange = Username != username;
             if (!anyChange) return;
@@ -45,7 +45,7 @@ namespace PCONTB.Panel.Domain.Account.Users
             Username = username;
         }
 
-        public void ChangeEmail(string email)
+        public void SetEmail(string email)
         {
             var anyChange = Email != email;
             if (!anyChange) return;
@@ -53,7 +53,7 @@ namespace PCONTB.Panel.Domain.Account.Users
             Email = email;
         }
 
-        public void ChangePassword(string password)
+        public void SetPassword(string password)
         {
             var anyChange = Password != password;
             if (!anyChange) return;
@@ -61,7 +61,7 @@ namespace PCONTB.Panel.Domain.Account.Users
             Password = password;
         }
 
-        public void UpdateRole(Role role)
+        public void SetRole(Role role)
         {
             var anyChange = Role != role;
             if (!anyChange) return;

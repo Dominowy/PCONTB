@@ -4,6 +4,7 @@ using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.ProjectImages;
+using System.Xml.Linq;
 
 namespace PCONTB.Panel.Domain.Projects.Projects
 {
@@ -37,20 +38,53 @@ namespace PCONTB.Panel.Domain.Projects.Projects
             UserId = userId;
         }
 
-        public void UpdateProject(string name, Guid userId)
+        public Project(Guid id, string name, Guid userId, Guid countryId, Guid categoryId, Guid subcategoryId) : base(id)
         {
-            SetName(name);
-            SetUser(userId);
+            Name = name;
+            UserId = userId;
+            CountryId = countryId;
+            CategoryId = categoryId;
+            SubcategoryId = subcategoryId;
         }
 
         public void SetName(string name)
         {
+            var anyChange = Name != name;
+            if (!anyChange) return;
+
             Name = name;
         }
 
         public void SetUser(Guid userId)
         {
+            var anyChange = UserId != userId;
+            if (!anyChange) return;
+
             UserId = userId;
+        }
+
+        public void SetCountry(Guid countryId)
+        {
+            var anyChange = CountryId != countryId;
+            if (!anyChange) return;
+
+            CountryId = countryId;
+        }
+
+        public void SetCategory(Guid categoryId)
+        {
+            var anyChange = CategoryId != categoryId;
+            if (!anyChange) return;
+
+            CategoryId = categoryId;
+        }
+
+        public void SetSubcategory(Guid subcategoryId)
+        {
+            var anyChange = SubcategoryId != subcategoryId;
+            if (!anyChange) return;
+
+            SubcategoryId = subcategoryId;
         }
     }
 }

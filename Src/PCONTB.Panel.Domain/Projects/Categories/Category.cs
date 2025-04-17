@@ -15,7 +15,7 @@ namespace PCONTB.Panel.Domain.Projects.Categories
             Name = name;
         }
 
-        public void ChangeName(string name)
+        public void SetName(string name)
         {
             var anyChange = Name != name;
             if (!anyChange) return;

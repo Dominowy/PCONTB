@@ -11,6 +11,7 @@ namespace PCONTB.Panel.Application.Models.Dto.Locations.Countries
         {
             return new CountryDto
             {
+                Id = item.Id,
                 Name = item.Name
             };
         }

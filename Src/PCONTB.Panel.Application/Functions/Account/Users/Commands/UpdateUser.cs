@@ -3,17 +3,16 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
-using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
 using PCONTB.Panel.Domain.Account.Users;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 {
-    public class UpdateUserRequest : IRequest<CommandResult>
+    public class UpdateUserRequest : BaseCommand, IRequest<CommandResult>
     {
-        public Guid Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
     }
@@ -37,8 +36,8 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             _sessionAccesor.Verify(entity.Id);
 
-            entity.ChangeEmail(request.Email);
-            entity.ChangeUsername(request.Username);
+            entity.SetEmail(request.Email);
+            entity.SetUsername(request.Username);
 
             await _context.SaveChangesAsync(cancellationToken);
 

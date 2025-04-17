@@ -2,15 +2,15 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Location.Countries;
 
 namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 {
-    public class AddCountryRequest : IRequest<CommandResult>
+    public class AddCountryRequest : BaseCommand, IRequest<CommandResult>
     {
-        public string Name { get; set; }
     }
 
     public class AddCountryHandler : IRequestHandler<AddCountryRequest, CommandResult>

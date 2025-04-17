@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Models.Dto.Categories;
@@ -9,9 +10,8 @@ using PCONTB.Panel.Domain.Projects.Categories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 {
-    public class AddCategoryRequest : IRequest<CommandResult>
+    public class AddCategoryRequest : BaseCommand, IRequest<CommandResult>
     {
-        public string Name { get; set; }
         public List<SubcategoryDto> Subcategories { get; set; }
     }
 

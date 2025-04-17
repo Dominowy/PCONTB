@@ -2,17 +2,19 @@
 using MediatR;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 {
-    public class UpdateProjectRequest : IRequest<CommandResult>
+    public class UpdateProjectRequest : BaseCommand, IRequest<CommandResult>
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
         public Guid UserId { get; set; }
+        public Guid CategoryId { get; set; }
+        public Guid SubCategoryId { get; set; }
+        public Guid CountryId { get; set; }
     }
 
     public class UpdateProjectHandler : IRequestHandler<UpdateProjectRequest, CommandResult> 
@@ -29,8 +31,12 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
             var entity = await _context.Set<Project>().FindAsync(request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException("Project not found");
-      
-            entity.UpdateProject(request.Name, request.UserId);
+
+            entity.SetName(request.Name);
+            entity.SetUser(request.UserId);
+            entity.SetCountry(request.CountryId);
+            entity.SetCategory(request.CategoryId);
+            entity.SetSubcategory(request.SubCategoryId);
 
             await _context.SaveChangesAsync(cancellationToken);
 

@@ -2,6 +2,7 @@
 using MediatR;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
@@ -11,9 +12,8 @@ using System.Text.RegularExpressions;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 {
-    public class UpdatePasswordRequest : IRequest<CommandResult>
+    public class UpdatePasswordRequest : BaseCommand, IRequest<CommandResult>
     {
-        public Guid Id { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
     }
@@ -41,7 +41,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             _sessionAccesor.Verify(entity.Id);
 
-            entity.ChangePassword(hashedPassword);
+            entity.SetPassword(hashedPassword);
 
             await _context.SaveChangesAsync(cancellationToken);
 

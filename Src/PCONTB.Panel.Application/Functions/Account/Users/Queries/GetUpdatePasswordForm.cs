@@ -1,11 +1,12 @@
 ﻿using MediatR;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Functions.Account.Users.Commands;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {
-    public class GetUpdatePasswordFormRequest : IRequest<GetUpdatePasswordFormResponse>
+    public class GetUpdatePasswordFormRequest : BaseQuery, IRequest<GetUpdatePasswordFormResponse>
     {
-        public Guid Id { get; set; }
+
     }
 
     public class GetUpdatePasswordFormHandler : IRequestHandler<GetUpdatePasswordFormRequest, GetUpdatePasswordFormResponse>

@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Models.Dto.Categories;
@@ -10,10 +11,8 @@ using PCONTB.Panel.Domain.Projects.Categories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 {
-    public class UpdateCategoryRequest : IRequest<CommandResult>
+    public class UpdateCategoryRequest : BaseCommand, IRequest<CommandResult>
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
         public List<SubcategoryDto> Subcategories { get; set; }
     }
 
@@ -34,7 +33,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 
             if (entity is null) throw new NotFoundException(ErrorCodes.Category.NotFound.Message);
 
-            entity.ChangeName(request.Name);
+            entity.SetName(request.Name);
 
             var toRemove = entity.Subcategories
                 .Where(existing => !request.Subcategories.Any(x => x.Id == existing.Id))

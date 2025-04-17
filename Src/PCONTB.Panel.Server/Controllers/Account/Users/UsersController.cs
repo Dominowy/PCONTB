@@ -31,7 +31,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
 
         #endregion Get all
 
-        #region Update
+        #region Add
 
         [AuthorizeToken(Role.Admin)]
         [HttpPost("add/form")]
@@ -53,7 +53,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
-        #endregion Update
+        #endregion Add
 
         #region Update
 
@@ -79,7 +79,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
 
         #endregion Update
 
-        #region Update
+        #region Update role
 
         [AuthorizeToken(Role.Admin)]
         [HttpPost("update-role/form")]
@@ -102,7 +102,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
-        #endregion Update
+        #endregion role
 
         #region Lock/Unlock
 

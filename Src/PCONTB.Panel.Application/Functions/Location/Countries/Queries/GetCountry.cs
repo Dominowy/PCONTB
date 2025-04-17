@@ -1,15 +1,16 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Models.Dto.Locations.Countries;
 using PCONTB.Panel.Domain.Location.Countries;
 
 namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 {
-    public class GetCountryRequest : IRequest<GetCountryResponse>
+    public class GetCountryRequest : BaseQuery, IRequest<GetCountryResponse>
     {
-        public Guid Id { get; set; }
+
     }
 
     public class GetCountryHandler : IRequestHandler<GetCountryRequest, GetCountryResponse>

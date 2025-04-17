@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Functions.Account.Users.Commands;
@@ -9,9 +10,9 @@ using PCONTB.Panel.Domain.Account.Users;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {
-    public class GetUpdateUserFormRequest : IRequest<GetUpdateUserFormResponse>
+    public class GetUpdateUserFormRequest : BaseQuery, IRequest<GetUpdateUserFormResponse>
     {
-        public Guid Id { get; set; }
+
     }
 
     public class GetUpdateUserFormHandler : IRequestHandler<GetUpdateUserFormRequest, GetUpdateUserFormResponse>

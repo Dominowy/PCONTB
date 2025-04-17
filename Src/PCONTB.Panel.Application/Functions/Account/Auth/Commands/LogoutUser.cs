@@ -1,14 +1,10 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth;
-using PCONTB.Panel.Application.Services.Auth;
-using PCONTB.Panel.Domain.Account.Sessions;
-using System.Security.Claims;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 {

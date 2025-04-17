@@ -1,15 +1,16 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Models.Dto.Projects.Projects;
 using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 {
-    public class GetProjectRequest : IRequest<GetProjectResponse>
+    public class GetProjectRequest : BaseQuery, IRequest<GetProjectResponse>
     {
-        public Guid Id { get; set; }
+
     }
 
     public class GetProjectHandler : IRequestHandler<GetProjectRequest, GetProjectResponse>

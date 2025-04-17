@@ -4,9 +4,9 @@ POST {{PCONTB.Panel.Server_HostAddress}}/account/auth/register
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-    "username": "test2",
+    "username": "test",
     "email": "test@example.com",
-    "password": "test"
+    "password": "Test1234!"
 }
 
 ###
@@ -14,8 +14,19 @@ POST {{PCONTB.Panel.Server_HostAddress}}/account/auth/login
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-    "login": "test2",
-    "password": "test"
+    "login": "test",
+    "password": "Test1234!"
+}
+
+###
+POST {{PCONTB.Panel.Server_HostAddress}}/account/users/add
+Content-Type: application/json
+Accept-Language: en-US,en;q=0.5
+{
+    "username": "test122331",
+    "email": "test12311@example.com",
+    "password": "Test1234!",
+    "role": 1
 }
 
 ###
@@ -63,8 +74,8 @@ POST {{PCONTB.Panel.Server_HostAddress}}/account/users/update-role
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "id": "ad8c3930-f4c9-4505-8971-134c193fb461",
-  "role": 2
+  "id": "df49a7b3-05b5-474e-915e-55cb9317277f",
+  "role": 1
 }
 
 ###
@@ -165,6 +176,7 @@ POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/get-by-id
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
+  "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153"
 }
 
 ###
@@ -172,6 +184,46 @@ POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/get-all
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
+}
+
+###
+POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/add/form
+Content-Type: application/json
+Accept-Language: en-US,en;q=0.5
+{
+}
+
+###
+POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/add
+Content-Type: application/json
+Accept-Language: en-US,en;q=0.5
+{
+  "name": "Poland"
+}
+
+###
+POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/update/form
+Content-Type: application/json
+Accept-Language: en-US,en;q=0.5
+{
+  "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153"
+}
+
+###
+POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/update
+Content-Type: application/json
+Accept-Language: en-US,en;q=0.5
+{
+  "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153",
+  "name": "Poland"
+}
+
+###
+POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/delete
+Content-Type: application/json
+Accept-Language: en-US,en;q=0.5
+{
+  "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153"
 }
 
 ###
@@ -187,7 +239,7 @@ POST {{PCONTB.Panel.Server_HostAddress}}/projects/categories/add
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "name": "test",
+  "name": "IT",
   "subcategories": [
     {
       "name": "Frontend"
@@ -215,7 +267,7 @@ Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
   "id": "6784f868-ad74-4c8e-9263-58883975288b",
-    "name": "test",
+    "name": "IT",
     "subcategories": [
       {
         "id": "49e259f0-e6d2-45e7-abd5-d7d466758944",
@@ -247,5 +299,5 @@ POST {{PCONTB.Panel.Server_HostAddress}}/projects/categories/delete
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-    "id": "6784f868-ad74-4c8e-9263-58883975288b"
+    "id": "80f03eac-03b8-462a-9d48-7b8266f49238"
 }

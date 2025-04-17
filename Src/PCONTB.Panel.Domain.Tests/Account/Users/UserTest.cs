@@ -25,21 +25,21 @@ namespace PCONTB.Panel.Domain.Tests.Account.Users
         [Fact]
         public void ShouldChangeUsername()
         {
-            _user.ChangeUsername(_newUsername);
+            _user.SetUsername(_newUsername);
             _user.Username.Should().Be(_newUsername);
         }
 
         [Fact]
         public void ShouldChangeEmail()
         {
-            _user.ChangeEmail(_newEmail);
+            _user.SetEmail(_newEmail);
             _user.Email.Should().Be(_newEmail);
         }
 
         [Fact]
         public void ShouldChangePassword()
         {
-            _user.ChangePassword(_newPassword);
+            _user.SetPassword(_newPassword);
             _user.Password.Should().Be(_newPassword);
         }
     }

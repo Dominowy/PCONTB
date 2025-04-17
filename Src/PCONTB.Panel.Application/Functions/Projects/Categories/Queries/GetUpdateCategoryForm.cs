@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Commands;
 using PCONTB.Panel.Application.Models.Dto.Categories;
@@ -9,9 +10,9 @@ using PCONTB.Panel.Domain.Projects.Categories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 {
-    public class GetUpdateCategoryFormRequest : IRequest<GetUpdateCategoryFormResponse>
+    public class GetUpdateCategoryFormRequest : BaseQuery, IRequest<GetUpdateCategoryFormResponse>
     {
-        public Guid Id { get; set; }
+
     }
 
     public class GetUpdateCategoryFormHandler : IRequestHandler<GetUpdateCategoryFormRequest, GetUpdateCategoryFormResponse>
