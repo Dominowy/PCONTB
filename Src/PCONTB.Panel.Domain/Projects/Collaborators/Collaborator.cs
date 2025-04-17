@@ -11,5 +11,9 @@ namespace PCONTB.Panel.Domain.Projects.Collaborators
 
         public Guid UserId { get; set; }
         public virtual User User { get; set; }
+
+        public bool ManageProjectPermission { get; set; }
+        public bool ManageCommunityPermission { get; set; }
+        public bool ManageFulfillmentPermission { get; set; }
     }
 }

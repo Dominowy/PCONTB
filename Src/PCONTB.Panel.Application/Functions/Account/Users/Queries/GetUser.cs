@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
+using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Models.Dto.Account.Users;
+using PCONTB.Panel.Application.Services.Auth;
 using PCONTB.Panel.Domain.Account.Users;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
@@ -15,24 +17,26 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
     public class GetUserHandler : IRequestHandler<GetUserRequest, GetUserResponse>
     {
         private readonly IApplicationDbContext _context;
+        private readonly ISessionAccesor _sessionAccesor;
 
-        public GetUserHandler(IApplicationDbContext context)
+        public GetUserHandler(IApplicationDbContext context, ISessionAccesor sessionAccesor)
         {
             _context = context;
+            _sessionAccesor = sessionAccesor;
         }
 
         public async Task<GetUserResponse> Handle(GetUserRequest request, CancellationToken cancellationToken = default)
         {
-            var entity = await _context.Set<User>()
-                .Where(u => u.Id == request.Id)
-                .FirstOrDefaultAsync(cancellationToken);
+            var entity = await _context.Set<User>().FindAsync(request.Id, cancellationToken);
 
-            return entity == null
-                ? throw new NotFoundException("User not found")
-                : new GetUserResponse()
-                {
-                    User = UserDto.Map(entity),
-                };
+            if (entity == null) throw new NotFoundException("User not found");
+
+            _sessionAccesor.Verify(entity.Id);
+
+            return new GetUserResponse()
+            {
+                User = UserDto.Map(entity),
+            };
         }
     }
 

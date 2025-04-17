@@ -60,12 +60,14 @@ namespace PCONTB.Panel.Infrastructure.Context
             builder.Entity<Project>()
                 .HasOne(m => m.Country)
                 .WithMany(m => m.Projects)
-                .HasForeignKey(m => m.CountryId);
+                .HasForeignKey(m => m.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Project>()
                 .HasOne(m => m.Category)
                 .WithMany(m => m.Projects)
-                .HasForeignKey(m => m.CategoryId);
+                .HasForeignKey(m => m.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Project>()
                 .HasOne(m => m.Subcategory)

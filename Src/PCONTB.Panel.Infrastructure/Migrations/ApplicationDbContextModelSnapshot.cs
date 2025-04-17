@@ -17,7 +17,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.1")
+                .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -28,29 +28,14 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Browser")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Device")
-                        .HasColumnType("text");
-
                     b.Property<DateTimeOffset>("Ended")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("IpAddress")
-                        .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset>("LastActivity")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("text");
-
-                    b.Property<string>("OperatingSystem")
-                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("Started")
                         .HasColumnType("timestamp with time zone");
@@ -78,6 +63,9 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -143,6 +131,15 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<bool>("ManageCommunityPermission")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("ManageFulfillmentPermission")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("ManageProjectPermission")
+                        .HasColumnType("boolean");
 
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid");
@@ -278,13 +275,13 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.HasOne("PCONTB.Panel.Domain.Projects.Categories.Category", "Category")
                         .WithMany("Projects")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("PCONTB.Panel.Domain.Location.Countries.Country", "Country")
                         .WithMany("Projects")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("PCONTB.Panel.Domain.Projects.Categories.Subcategory", "Subcategory")

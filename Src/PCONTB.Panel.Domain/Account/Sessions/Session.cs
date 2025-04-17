@@ -14,12 +14,6 @@ namespace PCONTB.Panel.Domain.Account.Sessions
 
         public bool IsActive { get; private set; }
 
-        public string? Device { get; private set; }
-        public string? IpAddress { get; private set; }
-        public string? Location { get; private set; }
-        public string? OperatingSystem { get; private set; }
-        public string? Browser { get; private set; }
-
         protected Session() : base() 
         {
             

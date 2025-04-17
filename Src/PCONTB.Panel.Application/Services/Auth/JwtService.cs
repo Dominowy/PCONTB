@@ -15,6 +15,7 @@ namespace PCONTB.Panel.Application.Services.Auth
         {
             _settings = settings;
         }
+
         public string GenerateToken(Guid sessionId)
         {
             var claims = new[]
@@ -71,7 +72,6 @@ namespace PCONTB.Panel.Application.Services.Auth
                 var jwtToken = handler.ReadJwtToken(token);
                 var tokenTime = jwtToken.ValidTo;
                 var now = DateTime.UtcNow;
-
 
                 return jwtToken.ValidTo < DateTime.UtcNow;
             }

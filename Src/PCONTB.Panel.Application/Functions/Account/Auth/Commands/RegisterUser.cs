@@ -67,7 +67,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
             RuleFor(p => p.Username)
                 .NotEmpty().WithMessage(ErrorCodes.User.UsernameEmpty.Message)
-                .MustAsync(CheckUsernameIsUnique).WithMessage(ErrorCodes.User.UsernameExist.Message); ;
+                .MustAsync(CheckUsernameIsUnique).WithMessage(ErrorCodes.User.UsernameExist.Message);
 
             RuleFor(p => p.Email)
                 .NotEmpty().WithMessage(ErrorCodes.User.EmailEmpty.Message)

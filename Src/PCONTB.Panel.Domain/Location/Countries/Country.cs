@@ -8,5 +8,18 @@ namespace PCONTB.Panel.Domain.Location.Countries
         public string Name { get; set; }
 
         public virtual List<Project> Projects { get; set; }
+
+        public Country(string name) : base(Guid.NewGuid())
+        {
+            Name = name;
+        }
+
+        public void ChangeName(string name)
+        {
+            var anyChange = Name != name;
+            if (!anyChange) return;
+
+            Name = name;
+        }
     }
 }

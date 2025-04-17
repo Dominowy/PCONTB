@@ -11,5 +11,18 @@ namespace PCONTB.Panel.Domain.Projects.Categories
         public virtual Category Category { get; set; }
         public virtual List<Project> Projects { get; set; }
 
+        public Subcategory(string name, Guid categoryId) : base(Guid.NewGuid())
+        {
+            Name = name;
+            CategoryId = categoryId;
+        }
+
+        public void ChangeName(string name)
+        {
+            var anyChange = Name != name;
+            if (!anyChange) return;
+
+            Name = name;
+        }
     }
 }

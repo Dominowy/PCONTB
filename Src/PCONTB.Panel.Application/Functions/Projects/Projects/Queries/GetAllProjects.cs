@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Models.Dto.Projects.Projects;
 using PCONTB.Panel.Domain.Projects.Projects;
@@ -28,7 +27,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 
             return new GetAllProjectsResponse()
             {
-                Projects = entity.Select(ProjectDto.Map).ToList(),
+                Projects = [.. entity.Select(ProjectDto.Map)],
             };
         }
     }

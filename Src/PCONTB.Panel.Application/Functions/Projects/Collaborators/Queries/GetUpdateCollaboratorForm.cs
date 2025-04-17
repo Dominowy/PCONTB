@@ -1,6 +1,12 @@
-﻿namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Queries
+﻿using MediatR;
+
+namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Queries
 {
-    public class GetUpdateCollaboratorForm
+    public class GetUpdateCollaboratorFormRequest : IRequest<GetUpdateCollaboratorFormResponse>
+    {
+    }
+
+    public class GetUpdateCollaboratorFormResponse
     {
     }
 }

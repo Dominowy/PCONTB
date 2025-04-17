@@ -3,18 +3,15 @@ using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Functions.Account.Auth.Commands;
 using PCONTB.Panel.Application.Functions.Account.Auth.Queries;
+using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
 
-namespace PCONTB.Panel.Server.Controllers.Account.Authentication
+namespace PCONTB.Panel.Server.Controllers.Account.Auth
 {
     [Route("account/auth")]
-    public class AuthController : BaseController
+    public class AuthController(IMediator mediator) : BaseController(mediator)
     {
-        public AuthController(IMediator mediator) : base(mediator)
-        {
-        }
-
         #region Register
 
         [AllowAnonymousToken]
@@ -43,7 +40,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Authentication
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Login([FromBody] LoginUserRequest loginRequest, CancellationToken cancellationToken) => await Send(loginRequest, cancellationToken);
 
-        [AuthorizeToken]
+        [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
         [HttpPost("logout")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -57,7 +54,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Authentication
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Reset([FromBody] ResetUserPasswordRequest resetPasswordRequest, CancellationToken cancellationToken) => await Send(resetPasswordRequest, cancellationToken);
 
-        [AuthorizeToken]
+        [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
         [HttpPost("get-session")]
         [ProducesResponseType(typeof(GetSessionResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -40,6 +40,8 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
             entity.ChangeEmail(request.Email);
             entity.ChangeUsername(request.Username);
 
+            await _context.SaveChangesAsync(cancellationToken);
+
             return new CommandResult(entity.Id);
         }
     }

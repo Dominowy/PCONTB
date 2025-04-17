@@ -1,6 +1,12 @@
-﻿namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
+﻿using MediatR;
+
+namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 {
-    public class AddCollborator
+    public class AddCollaboratorRequest : IRequest<AddCollaboratorResponse>
+    {
+    }
+
+    public class AddCollaboratorResponse
     {
     }
 }

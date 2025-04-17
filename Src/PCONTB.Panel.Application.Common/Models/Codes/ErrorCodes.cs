@@ -22,13 +22,19 @@
             public static readonly ErrorCode AccesDenied = new ErrorCode
             {
                 Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(AccesDenied),
-                Message = "User have no access"
+                Message = "User have no access."
+            };
+
+            public static readonly ErrorCode AccountLock = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(AccountLock),
+                Message = "User is locked."
             };
 
             public static readonly ErrorCode NotFound = new ErrorCode
             {
                 Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(NotFound),
-                Message = "User not found"
+                Message = "User not found."
             };
 
             public static readonly ErrorCode UsernameEmpty = new ErrorCode
@@ -85,6 +91,59 @@
                 Message = "Wrong username or password."
             };
 
+            public static readonly ErrorCode PasswordsNotEqual = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(PasswordsNotEqual),
+                Message = "Passwords must be equal."
+            };
+
+            public static readonly ErrorCode RoleEmpty = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(RoleEmpty),
+                Message = "Role cannot be empty."
+            };
+        }
+
+        public static class Country
+        {
+            public static readonly ErrorCode NotFound = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Country) + "." + nameof(NotFound),
+                Message = "Country not found."
+            };
+
+            public static readonly ErrorCode NameEmpty = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Country) + "." + nameof(NameEmpty),
+                Message = "Name cannot be empty."
+            };
+
+            public static readonly ErrorCode NameExist = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Country) + "." + nameof(NameExist),
+                Message = "A country with the provided name already exists."
+            };
+        }
+
+        public static class Category
+        {
+            public static readonly ErrorCode NotFound = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Category) + "." + nameof(NotFound),
+                Message = "Category not found."
+            };
+
+            public static readonly ErrorCode NameEmpty = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Category) + "." + nameof(NameEmpty),
+                Message = "Name cannot be empty."
+            };
+
+            public static readonly ErrorCode NameExist = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Category) + "." + nameof(NameExist),
+                Message = "A category with the provided name already exists."
+            };
         }
     }
 }

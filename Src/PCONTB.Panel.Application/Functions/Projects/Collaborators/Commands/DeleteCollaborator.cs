@@ -1,6 +1,12 @@
-﻿namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
+﻿using MediatR;
+
+namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 {
-    public class DeleteCollaborator
+    public class DeleteCollaboratorRequest : IRequest<DeleteCollaboratorResponse>
+    {
+    }
+
+    public class DeleteCollaboratorResponse
     {
     }
 }

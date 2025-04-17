@@ -27,7 +27,9 @@ namespace PCONTB.Panel.Domain.Projects.Projects
 
         public virtual List<Image> Images { get; set; }
 
-        protected Project() : base() { }
+        protected Project() : base()
+        {
+        }
 
         public Project(Guid id, string name, Guid userId) : base(id)
         {
@@ -46,8 +48,8 @@ namespace PCONTB.Panel.Domain.Projects.Projects
             Name = name;
         }
 
-        public void SetUser(Guid userId) 
-        { 
+        public void SetUser(Guid userId)
+        {
             UserId = userId;
         }
     }

@@ -28,4 +28,8 @@
     <ProjectReference Include="..\PCONTB.Panel.Infrastructure\PCONTB.Panel.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Projects\Categories\" />
+  </ItemGroup>
+
 </Project>

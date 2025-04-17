@@ -25,6 +25,10 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
         {
             var entity = await _dbContext.Set<Project>()
                 .Include(p => p.User)
+                .Include(p => p.Collaborators)
+                .Include(p => p.Category)
+                .Include(p => p.Subcategory)
+                .Include(p => p.Images)
                 .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException("Project not found");

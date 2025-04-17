@@ -26,8 +26,8 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
         private readonly ICookieService _cookieService;
         private readonly ISessionService _sessionService;
 
-        public LoginUserHandler(IApplicationDbContext dbContext, 
-            IPasswordHasherService passwordHasherService, 
+        public LoginUserHandler(IApplicationDbContext dbContext,
+            IPasswordHasherService passwordHasherService,
             IJwtService jwtService,
             ICookieService cookieService,
             ISessionService sessionService)
@@ -46,7 +46,9 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
             if (entity == null) throw new BadRequestException(ErrorCodes.User.LoginWrongCredential.Message);
 
-            if (!_passwordHasherService.Verify(request.Password, entity.Password)) 
+            if (entity.Role == Role.Block) throw new BadRequestException(ErrorCodes.User.AccountLock.Message);
+
+            if (!_passwordHasherService.Verify(request.Password, entity.Password))
                 throw new BadRequestException(ErrorCodes.User.LoginWrongCredential.Message);
 
             var sessionId = await _sessionService.CreateSession(entity.Id, cancellationToken);

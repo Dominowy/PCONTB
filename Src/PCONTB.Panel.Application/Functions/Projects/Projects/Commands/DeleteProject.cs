@@ -31,7 +31,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 
             _context.Set<Project>().Remove(entity);
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
 
             return new CommandResult(entity.Id);
         }
