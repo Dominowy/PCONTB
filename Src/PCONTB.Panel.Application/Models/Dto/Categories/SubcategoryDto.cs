@@ -10,6 +10,8 @@ namespace PCONTB.Panel.Application.Models.Dto.Categories
 
         public static SubcategoryDto Map(Subcategory item)
         {
+            if (item is null) return null;
+
             return new SubcategoryDto
             {
                 Id = item.Id,

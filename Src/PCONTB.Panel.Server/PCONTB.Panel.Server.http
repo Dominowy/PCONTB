@@ -19,12 +19,22 @@ Accept-Language: en-US,en;q=0.5
 }
 
 ###
+POST {{PCONTB.Panel.Server_HostAddress}}/account/auth/login
+Content-Type: application/json
+Accept-Language: en-US,en;q=0.5
+{
+    "login": "test2",
+    "password": "Test1234!"
+}
+
+
+###
 POST {{PCONTB.Panel.Server_HostAddress}}/account/users/add
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-    "username": "test122331",
-    "email": "test12311@example.com",
+    "username": "test2",
+    "email": "test2@example.com",
     "password": "Test1234!",
     "role": 1
 }
@@ -109,6 +119,16 @@ Accept-Language: en-US,en;q=0.5
 }
 
 ###
+POST {{PCONTB.Panel.Server_HostAddress}}/projects/projects/add
+Content-Type: application/json
+Accept-Language: en-US,en;q=0.5
+{
+    "categoryId": "7bc31256-4f02-414e-8c1c-ba0a3c601dcf",
+    "countryId": "569b9920-4a38-4aed-ba27-5ae3a55207b7",
+    "name": "Test2"
+}
+
+###
 POST {{PCONTB.Panel.Server_HostAddress}}/projects/projects/add/validate
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
@@ -130,7 +150,7 @@ POST {{PCONTB.Panel.Server_HostAddress}}/projects/projects/update/form
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "id": "0c360b8f-35fd-440c-8254-006a09c0b8bd"
+    "id": "0c360b8f-35fd-440c-8254-006a09c0b8bd"
 }
 
 ###
@@ -176,7 +196,7 @@ POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/get-by-id
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153"
+    "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153"
 }
 
 ###
@@ -198,7 +218,7 @@ POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/add
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "name": "Poland"
+    "name": "Poland"
 }
 
 ###
@@ -206,7 +226,7 @@ POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/update/form
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153"
+    "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153"
 }
 
 ###
@@ -214,8 +234,8 @@ POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/update
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153",
-  "name": "Poland"
+    "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153",
+    "name": "Poland"
 }
 
 ###
@@ -223,7 +243,7 @@ POST {{PCONTB.Panel.Server_HostAddress}}/locations/countries/delete
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153"
+    "id": "06202cd8-c7e1-49b3-9f27-3ca4ddbef153"
 }
 
 ###
@@ -239,18 +259,18 @@ POST {{PCONTB.Panel.Server_HostAddress}}/projects/categories/add
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "name": "IT",
-  "subcategories": [
-    {
-      "name": "Frontend"
-    },
-    {
-      "name": "Backend"
-    },
-    {
-      "name": "DevOps"
-    }
-  ]
+    "name": "IT",
+    "subcategories": [
+        {
+          "name": "Frontend"
+        },
+        {
+          "name": "Backend"
+        },
+        {
+          "name": "DevOps"
+        }
+    ]
 }
 
 ###
@@ -258,7 +278,7 @@ POST {{PCONTB.Panel.Server_HostAddress}}/projects/categories/update/form
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "id": "6784f868-ad74-4c8e-9263-58883975288b"
+    "id": "6784f868-ad74-4c8e-9263-58883975288b"
 }
 
 ###
@@ -266,24 +286,24 @@ POST {{PCONTB.Panel.Server_HostAddress}}/projects/categories/update
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "id": "6784f868-ad74-4c8e-9263-58883975288b",
+    "id": "6784f868-ad74-4c8e-9263-58883975288b",
     "name": "IT",
     "subcategories": [
-      {
-        "id": "49e259f0-e6d2-45e7-abd5-d7d466758944",
-        "name": "Backend",
-        "categoryId": "6784f868-ad74-4c8e-9263-58883975288b"
-      },
-      {
-        "id": "7819ca96-c80a-4a61-bb7d-7b515a32906c",
-        "name": "Frontend",
-        "categoryId": "6784f868-ad74-4c8e-9263-58883975288b"
-      },
-      {
-        "id": "2e29e664-06b9-4d4c-a17d-238d79f27761",
-        "name": "Dev Ops",
-        "categoryId": "6784f868-ad74-4c8e-9263-58883975288b"
-      }
+        {
+          "id": "49e259f0-e6d2-45e7-abd5-d7d466758944",
+          "name": "Backend",
+          "categoryId": "6784f868-ad74-4c8e-9263-58883975288b"
+        },
+        {
+          "id": "7819ca96-c80a-4a61-bb7d-7b515a32906c",
+          "name": "Frontend",
+          "categoryId": "6784f868-ad74-4c8e-9263-58883975288b"
+        },
+        {
+          "id": "2e29e664-06b9-4d4c-a17d-238d79f27761",
+          "name": "Dev Ops",
+          "categoryId": "6784f868-ad74-4c8e-9263-58883975288b"
+        }
     ]
 }
 

@@ -23,6 +23,11 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
         {
             var entity = await _dbContext.Set<Project>()
                 .Include(p => p.User)
+                .Include(p => p.Collaborators)
+                .Include(p => p.Country)
+                .Include(p => p.Category)
+                .Include(p => p.Subcategory)
+                .Include(p => p.Images)
                 .ToListAsync(cancellationToken);
 
             return new GetAllProjectsResponse()

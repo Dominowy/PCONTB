@@ -102,7 +102,32 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
-        #endregion role
+        #endregion Update role
+
+        #region Update password
+
+        [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
+        [HttpPost("update-password/form")]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdateUserPasswordForm([FromBody] GetUpdatePasswordFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+        [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
+        [HttpPost("update-password/validate")]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> ValidateUpdatePassword([FromBody] UpdatePasswordRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+        [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
+        [HttpPost("update-password")]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+        #endregion Update role
 
         #region Lock/Unlock
 

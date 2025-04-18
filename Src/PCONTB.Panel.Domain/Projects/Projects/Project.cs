@@ -38,7 +38,7 @@ namespace PCONTB.Panel.Domain.Projects.Projects
             UserId = userId;
         }
 
-        public Project(Guid id, string name, Guid userId, Guid countryId, Guid categoryId, Guid subcategoryId) : base(id)
+        public Project(Guid id, string name, Guid userId, Guid countryId, Guid categoryId, Guid? subcategoryId) : base(id)
         {
             Name = name;
             UserId = userId;
@@ -79,7 +79,7 @@ namespace PCONTB.Panel.Domain.Projects.Projects
             CategoryId = categoryId;
         }
 
-        public void SetSubcategory(Guid subcategoryId)
+        public void SetSubcategory(Guid? subcategoryId)
         {
             var anyChange = SubcategoryId != subcategoryId;
             if (!anyChange) return;
