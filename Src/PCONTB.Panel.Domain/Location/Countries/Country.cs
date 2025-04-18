@@ -3,10 +3,8 @@ using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Domain.Location.Countries
 {
-    public class Country : Entity
+    public class Country : EntityName
     {
-        public string Name { get; set; }
-
         public virtual List<Project> Projects { get; set; }
 
         public Country(string name) : base(Guid.NewGuid())

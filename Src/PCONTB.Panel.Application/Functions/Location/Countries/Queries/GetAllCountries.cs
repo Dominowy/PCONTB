@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
-using PCONTB.Panel.Application.Models.Dto.Locations.Countries;
+using PCONTB.Panel.Application.Models.Locations.Countries;
 using PCONTB.Panel.Domain.Location.Countries;
 
 namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries

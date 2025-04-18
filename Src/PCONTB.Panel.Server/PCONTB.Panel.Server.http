@@ -104,11 +104,11 @@ Accept-Language: en-US,en;q=0.5
 }
 
 ###
-POST {{PCONTB.Panel.Server_HostAddress}}/projects/projects/projects/get-by-id
+POST {{PCONTB.Panel.Server_HostAddress}}/projects/projects/get-by-id
 Content-Type: application/json
 Accept-Language: en-US,en;q=0.5
 {
-  "id": "0c360b8f-35fd-440c-8254-006a09c0b8bd"
+  "id": "8b4d94df-f628-45bf-8904-25cf1489feec"
 }
 
 ###

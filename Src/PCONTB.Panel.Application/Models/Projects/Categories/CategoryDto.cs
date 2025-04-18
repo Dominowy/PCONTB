@@ -1,11 +1,13 @@
 ﻿using PCONTB.Panel.Application.Common.Models.Dto;
 using PCONTB.Panel.Domain.Projects.Categories;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Projects.Models
+namespace PCONTB.Panel.Application.Models.Projects.Categories
 {
     public class CategoryDto : EntityDto
     {
         public string Name { get; set; }
+
+        public List<SubcategoryDto> SubCategories { get; set; }
 
         public static CategoryDto Map(Category item)
         {
@@ -13,6 +15,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Models
             {
                 Id = item.Id,
                 Name = item.Name,
+                SubCategories = [.. item.Subcategories.Select(SubcategoryDto.Map)],
             };
         }
     }

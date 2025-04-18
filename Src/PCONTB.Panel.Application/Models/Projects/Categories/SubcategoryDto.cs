@@ -1,6 +1,6 @@
 ﻿using PCONTB.Panel.Domain.Projects.Categories;
 
-namespace PCONTB.Panel.Application.Models.Dto.Categories
+namespace PCONTB.Panel.Application.Models.Projects.Categories
 {
     public class SubcategoryDto
     {

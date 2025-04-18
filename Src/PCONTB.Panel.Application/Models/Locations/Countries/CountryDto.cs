@@ -1,7 +1,7 @@
 ﻿using PCONTB.Panel.Application.Common.Models.Dto;
 using PCONTB.Panel.Domain.Location.Countries;
 
-namespace PCONTB.Panel.Application.Models.Dto.Locations.Countries
+namespace PCONTB.Panel.Application.Models.Locations.Countries
 {
     public class CountryDto : EntityDto
     {

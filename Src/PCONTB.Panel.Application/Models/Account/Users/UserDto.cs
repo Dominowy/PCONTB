@@ -1,7 +1,7 @@
 ﻿using PCONTB.Panel.Application.Common.Models.Dto;
 using PCONTB.Panel.Domain.Account.Users;
 
-namespace PCONTB.Panel.Application.Models.Dto.Account.Users
+namespace PCONTB.Panel.Application.Models.Account.Users
 {
     public class UserDto : EntityDto
     {

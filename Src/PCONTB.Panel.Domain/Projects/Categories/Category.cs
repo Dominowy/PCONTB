@@ -3,9 +3,8 @@ using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Domain.Projects.Categories
 {
-    public class Category : Entity
+    public class Category : EntityName
     {
-        public string Name { get; set; }
         public virtual List<Subcategory> Subcategories { get; set; }
 
         public virtual List<Project> Projects { get; set; }
