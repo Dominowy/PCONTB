@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="handleSubmit">
     <slot></slot>
   </form>
 </template>
@@ -13,14 +13,17 @@ const props = defineProps({
     default: null,
     required: true,
   },
-  validate: Function,
 });
 
-const emit = defineEmits(["validate"]);
+const emit = defineEmits(["submit", "validate"]);
 
 const debouncedValidate = debounce(async () => {
   emit("validate");
 }, 1000);
 
 watch(() => props.formData, debouncedValidate, { deep: true });
+
+const handleSubmit = async () => {
+  emit("submit");
+};
 </script>

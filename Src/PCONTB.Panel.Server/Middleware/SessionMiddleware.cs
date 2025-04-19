@@ -42,6 +42,7 @@ namespace PCONTB.Panel.Server.Middleware
             var session = await sessionService.GetByIdAsync(sessionId.Value, cancellationToken);
             if (session is null || !session.IsActive)
             {
+                cookieService.Clear(_cookieName);
                 context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 return;
             }

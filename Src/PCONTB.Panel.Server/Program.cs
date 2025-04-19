@@ -1,14 +1,20 @@
 using PCONTB.Panel.Application;
+using PCONTB.Panel.Application.Common.EnumHelpers;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth;
 using PCONTB.Panel.Infrastructure;
 using PCONTB.Panel.Server.Middleware;
 using PCONTB.Panel.Server.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new LowercaseEnumConverter());
+    });
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 

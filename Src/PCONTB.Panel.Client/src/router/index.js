@@ -7,8 +7,12 @@ import AuthLayout from "../layouts/AuthLayout.vue";
 import Home from "../views/home/HomeView.vue";
 import Login from "../views/account/auth/LoginView.vue";
 import Register from "../views/account/auth/RegisterView.vue";
-import Projects from "../views/projects/ProjectsView.vue";
-import UserProfile from "@/views/account/users/UserProfileView.vue";
+import Discover from "@/views/discover/DiscoverView.vue";
+import Projects from "@/views/projects/ProjectsView.vue";
+import Profile from "@/views/account/users/ProfileView.vue";
+import ModerationPanel from "@/views/panel/ModerationPanelView.vue";
+import AdminPanel from "@/views/panel/AdminPanelView.vue";
+import LoadingLayout from "@/layouts/LoadingLayout.vue";
 
 const routes = [
   {
@@ -16,19 +20,37 @@ const routes = [
     component: DefaultLayout,
     children: [
       {
-        path: "",
-        name: "Home",
+        path: "home",
+        name: "home",
         component: Home,
       },
       {
+        path: "discover",
+        name: "discover",
+        component: Discover,
+      },
+      {
         path: "projects",
-        name: "Projects",
+        name: "projects",
         component: Projects,
       },
       {
         path: "profile",
-        name: "UserProfile",
-        component: UserProfile,
+        name: "profile",
+        component: Profile,
+        meta: { requiresAuth: true },
+      },
+      {
+        path: "moderation",
+        name: "ModerationPanel",
+        component: ModerationPanel,
+        meta: { requiresAuth: true, roles: ["moderator", "admin"] },
+      },
+      {
+        path: "admin",
+        name: "AdminPanel",
+        component: AdminPanel,
+        meta: { requiresAuth: true, roles: ["admin"] },
       },
     ],
   },
@@ -48,6 +70,10 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/loading",
+    component: LoadingLayout,
+  },
 ];
 
 const router = createRouter({
@@ -57,16 +83,27 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const store = useStore();
+  store.startLoading();
 
-  if (!store.user && !store.loading) {
-    await store.fetchSession();
-  }
+  await store.fetchSession();
 
   if (to.meta.requiresAuth && !store.user) {
-    return next("/");
+    return next("/home");
+  }
+
+  if (to.meta.roles && !to.meta.roles.includes(store.user?.role)) {
+    return next("/home");
   }
 
   next();
+});
+
+router.afterEach(() => {
+  const store = useStore();
+
+  setTimeout(() => {
+    store.stopLoading();
+  }, 300);
 });
 
 export default router;

@@ -5,6 +5,7 @@
       <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
         <base-form-input
           id="username"
+          class="mt-2"
           v-model="form.username"
           label="Username"
           placeholder="Enter username"
@@ -13,6 +14,7 @@
         />
         <base-form-input
           id="email"
+          class="mt-2"
           v-model="form.email"
           label="Email"
           placeholder="Enter email"
@@ -21,6 +23,7 @@
         />
         <base-form-input
           id="password"
+          class="mt-2"
           v-model="form.password"
           label="Password"
           type="password"
@@ -29,16 +32,7 @@
           :isAllTouched="isAllTouched"
         />
         <div class="d-flex w-100">
-          <b-button
-            class="mt-4 w-100"
-            :disabled="isLoading"
-            type="submit"
-            variant="secondary"
-            block
-            v-on:click.prevent="submit"
-          >
-            Register
-          </b-button>
+          <base-form-submit-button label="Register" class="mt-4 w-100" />
         </div>
       </base-form>
     </b-card>
@@ -63,8 +57,11 @@ import ApiClient from "@/services/ApiClient";
 const form = reactive({});
 
 onMounted(async () => {
-  const response = await getForm();
+  if (store.isAuthenticated) {
+    router.push({ name: "home" });
+  }
 
+  const response = await getForm();
   Object.assign(form, response.form);
 });
 
@@ -77,10 +74,10 @@ const submitInternal = async (onlyValidate) => {
 };
 
 const redirectAfterSucces = () => {
-  router.push({ name: "Home" });
+  router.push({ name: "home" });
 };
 
-const { router, isLoading, submit, validate, errors, isAllTouched } = useAddEditPage(
+const { router, isLoading, submit, validate, errors, isAllTouched, store } = useAddEditPage(
   "Register",
   submitInternal,
   redirectAfterSucces

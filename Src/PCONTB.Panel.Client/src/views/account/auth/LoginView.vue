@@ -2,31 +2,33 @@
   <div class="d-flex align-items-center justify-content-center vh-100">
     <b-card class="container">
       <auth-form-header :isLoading="isLoading" />
-      <b-form @submit.prevent="handleSubmit">
-        <b-form-group class="mt-2" label="UserName:" label-for="username">
-          <b-form-input id="username" v-model="form.login" placeholder="Enter username" />
-        </b-form-group>
-        <b-form-group class="mt-2" label="Password:" label-for="password">
-          <b-form-input
-            id="password"
-            v-model="form.password"
-            type="password"
-            placeholder="Enter password"
-          />
-        </b-form-group>
-        <div class="d-flex w-100">
-          <b-button class="mt-4 w-100" :disabled="isLoading" type="submit" variant="secondary" block
-            >Login</b-button
-          >
-        </div>
+      <base-form v-if="form" :formData="form" @submit="submit">
+        <base-form-input
+          id="login"
+          class="mt-2"
+          v-model="form.login"
+          label="Login"
+          placeholder="Enter login"
+        />
+        <base-form-input
+          id="password"
+          class="mt-2"
+          v-model="form.password"
+          label="Password"
+          type="password"
+          placeholder="Enter password"
+        />
         <div class="text-danger text-center" variant="danger">{{ errorMessage }}</div>
-        <div class="text-center mt-3">
-          <small>
-            Don't have an account?
-            <router-link to="/register" class="text-primary">Register</router-link>
-          </small>
+        <div class="d-flex w-100">
+          <base-form-submit-button label="Login" class="mt-4 w-100" />
         </div>
-      </b-form>
+      </base-form>
+      <div class="text-center mt-3">
+        <small>
+          Don't have an account?
+          <router-link to="/register" class="text-primary">Register</router-link>
+        </small>
+      </div>
     </b-card>
   </div>
 </template>
@@ -42,33 +44,32 @@
 </style>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import ApiClient from "@/services/ApiClient";
 import { useAddEditPage } from "@/composables/useAddEditPage";
 
-const { router, isLoading } = useAddEditPage("Login");
+onMounted(async () => {
+  if (store.isAuthenticated) {
+    router.push({ name: "home" });
+  }
+});
 
-const errorMessage = ref("");
 const form = reactive({
   login: null,
   password: null,
 });
 
-const handleSubmit = async () => {
-  isLoading.value = true;
-  errorMessage.value = null;
-
-  try {
-    await ApiClient.request("account/auth/login", form);
-    redirectToHome();
-  } catch (error) {
-    errorMessage.value = error.message;
-  } finally {
-    isLoading.value = false;
-  }
+const submitInternal = async () => {
+  return await ApiClient.request("account/auth/login", form);
 };
 
-const redirectToHome = () => {
-  router.push({ name: "Home" });
+const redirectAfterSucces = () => {
+  router.push({ name: "home" });
 };
+
+const { router, submit, isLoading, errorMessage, store } = useAddEditPage(
+  "Login",
+  submitInternal,
+  redirectAfterSucces
+);
 </script>

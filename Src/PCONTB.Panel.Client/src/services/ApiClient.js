@@ -1,8 +1,24 @@
 import Axios from "axios";
+import router from "@/router";
+import { useStore } from "@/store/index";
 
 export class ApiClient {
   constructor() {
-    this.$http = Axios.create();
+    this.$http = Axios.create({ withCredentials: true });
+
+    this.$http.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        const store = useStore();
+        const status = error?.response?.status;
+
+        if (store.user && !store.loading && status === 401) {
+          router.push("/home");
+        }
+
+        return Promise.reject(error);
+      }
+    );
   }
 
   async request(url, data, config) {
