@@ -23,11 +23,13 @@ export const useStore = defineStore("store", {
       this.loading = true;
       this.user = null;
 
-      await ApiClient.request("account/auth/logout", {});
-
-      setTimeout(() => {
-        this.loading = false;
-      }, 300);
+      try {
+        await ApiClient.request("account/auth/logout", {});
+      } finally {
+        setTimeout(() => {
+          this.loading = false;
+        }, 300);
+      }
     },
     startTransition() {
       this.transition = true;
