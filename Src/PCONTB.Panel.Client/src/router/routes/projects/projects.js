@@ -1,6 +1,7 @@
 import ListProjectsView from "@/views/projects/ListProjectsView.vue";
 import DisplayProjectView from "@/views/projects/DisplayProjectView.vue";
-import AddUpdateProjectView from "@/views/projects/AddUpdateProjectView.vue";
+import AddProjectView from "@/views/projects/AddProjectView.vue";
+import UpdateProjectView from "@/views/projects/UpdateProjectView.vue";
 
 let routes = [];
 
@@ -18,12 +19,12 @@ routes.push(
   {
     path: "add",
     name: "projects:add",
-    component: AddUpdateProjectView,
+    component: AddProjectView,
   },
   {
     path: ":id/update",
     name: "projects:update",
-    component: AddUpdateProjectView,
+    component: UpdateProjectView,
   }
 );
 

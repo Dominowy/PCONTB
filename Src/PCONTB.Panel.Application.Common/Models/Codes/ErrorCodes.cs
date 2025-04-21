@@ -15,6 +15,36 @@
                 Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(ProjectNameEmpty),
                 Message = "Project name cannot be empty."
             };
+
+            public static readonly ErrorCode CategoryEmpty = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(CategoryEmpty),
+                Message = "Category cannot be empty."
+            };
+
+            public static readonly ErrorCode CategoryExist = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(CategoryExist),
+                Message = "Category not exist."
+            };
+
+            public static readonly ErrorCode SubcategoryExist = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(SubcategoryExist),
+                Message = "Subcategory not exist."
+            };
+
+            public static readonly ErrorCode CountryExist = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(CountryExist),
+                Message = "Country not exist."
+            };
+
+            public static readonly ErrorCode CountryEmpty = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(CountryEmpty),
+                Message = "Country cannot be empty."
+            };
         }
 
         public static class User

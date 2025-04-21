@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
+using PCONTB.Panel.Application.Common.Models.Select;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Commands;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Queries;
 using PCONTB.Panel.Domain.Account.Users;
@@ -89,6 +90,20 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Categories
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteCategory([FromBody] DeleteCategoryRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+        #endregion Delete
+
+        #region Select
+
+        [AuthorizeToken(Role.User)]
+        [HttpPost("select-categories")]
+        [ProducesResponseType(typeof(SelectResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> SelectCategories([FromBody] SelectCategoriesRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+        [AuthorizeToken(Role.User)]
+        [HttpPost("select-subcategories")]
+        [ProducesResponseType(typeof(SelectResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> SelectSubCategories([FromBody] SelectSubCategoriesRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Delete
     }

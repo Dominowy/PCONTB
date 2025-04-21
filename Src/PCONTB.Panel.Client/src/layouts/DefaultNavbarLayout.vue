@@ -35,7 +35,7 @@ const store = useStore();
 const router = useRouter();
 
 const handleLogout = async () => {
-  store.logout();
+  await store.logout();
 
   router.push({ name: "home" });
 };

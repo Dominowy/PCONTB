@@ -56,7 +56,9 @@ onMounted(async () => {
 });
 
 const onBlur = () => {
-  isTouched.value = true;
+  setTimeout(() => {
+    isTouched.value = true;
+  }, 1000);
 };
 
 const getFieldErrors = (propertyName) => {

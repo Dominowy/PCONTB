@@ -1,10 +1,12 @@
 import { onMounted, ref } from "vue";
 
-export function useAddEditPage(title, submitInternal, redirectAfterSuccess) {
+export function useAddUpdatePage(title, submitInternal, redirectAfterSuccess) {
   const isLoading = ref(false);
   const isAllTouched = ref(false);
   const errors = ref([]);
   const errorMessage = ref("");
+
+  const redirectId = ref("");
 
   onMounted(() => {
     document.title = title;
@@ -13,9 +15,9 @@ export function useAddEditPage(title, submitInternal, redirectAfterSuccess) {
   const submit = async () => {
     isLoading.value = true;
     try {
-      await submitInternal(false);
+      var response = await submitInternal(false);
       errors.value = [];
-      redirectAfterSuccess();
+      redirectAfterSuccess(response.id);
     } catch (error) {
       errors.value = error.message.errors;
       errorMessage.value = error.message;
@@ -34,5 +36,5 @@ export function useAddEditPage(title, submitInternal, redirectAfterSuccess) {
       isLoading.value = false;
     }
   };
-  return { isLoading, submit, validate, errors, isAllTouched, errorMessage };
+  return { isLoading, submit, validate, errors, isAllTouched, errorMessage, redirectId };
 }

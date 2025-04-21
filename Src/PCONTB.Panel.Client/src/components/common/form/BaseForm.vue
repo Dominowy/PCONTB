@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { watch } from "vue";
+import { watch, ref } from "vue";
 import { debounce } from "lodash";
 
 const props = defineProps({
@@ -17,11 +17,25 @@ const props = defineProps({
 
 const emit = defineEmits(["submit", "validate"]);
 
-const debouncedValidate = debounce(async () => {
-  emit("validate");
-}, 1000);
+const isFirstRender = ref(true);
 
-watch(() => props.formData, debouncedValidate, { deep: true });
+const debouncedValidate = debounce(async () => {
+  if (!isFirstRender.value) {
+    emit("validate");
+  }
+}, 500);
+
+watch(
+  () => props.formData,
+  () => {
+    if (isFirstRender.value) {
+      isFirstRender.value = false;
+    } else {
+      debouncedValidate();
+    }
+  },
+  { deep: true }
+);
 
 const handleSubmit = async () => {
   emit("submit");

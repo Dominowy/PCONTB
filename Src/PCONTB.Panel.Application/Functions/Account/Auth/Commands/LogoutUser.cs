@@ -5,6 +5,7 @@ using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth;
+using PCONTB.Panel.Application.Services.Auth;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 {
@@ -18,14 +19,16 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
         private readonly ICookieService _cookieService;
         private readonly IJwtService _jwtService;
         private readonly IApplicationDbContext _dbContext;
+        private readonly ISessionAccesor _sessionAccesor;
         private readonly ISessionService _sessionService;
 
-        public LogoutUserHandler(ICookieService cookieService, IJwtService jwtService, ISessionService sessionService, IApplicationDbContext dbContext)
+        public LogoutUserHandler(ICookieService cookieService, IJwtService jwtService, ISessionService sessionService, IApplicationDbContext dbContext, ISessionAccesor sessionAccesor)
         {
             _cookieService = cookieService;
             _jwtService = jwtService;
             _sessionService = sessionService;
             _dbContext = dbContext;
+            _sessionAccesor = sessionAccesor;
         }
 
         public async Task<CommandResult> Handle(LogoutUserRequest request, CancellationToken cancellationToken)
@@ -57,6 +60,8 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             _cookieService.Clear(cookieName);
+
+            _sessionAccesor.ClearSession();
 
             return new CommandResult(session.Id);
         }

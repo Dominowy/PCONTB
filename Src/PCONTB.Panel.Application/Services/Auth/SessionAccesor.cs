@@ -14,6 +14,11 @@ namespace PCONTB.Panel.Application.Services.Auth
             Session = session;
         }
 
+        public void ClearSession()
+        {
+            Session = null;
+        }
+
         public void Verify(Guid id)
         {
             if (Session.User.Id != id) 

@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
+using PCONTB.Panel.Application.Common.Models.Select;
 using PCONTB.Panel.Application.Functions.Location.Countries.Commands;
 using PCONTB.Panel.Application.Functions.Location.Countries.Queries;
+using PCONTB.Panel.Application.Functions.Projects.Categories.Queries;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
@@ -80,6 +82,15 @@ namespace PCONTB.Panel.Server.Controllers.Locations.Countries
         [HttpPost("delete")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteCountry([FromBody] DeleteCountryRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+        #endregion Delete
+
+        #region Select
+
+        [AuthorizeToken(Role.User)]
+        [HttpPost("select-countries")]
+        [ProducesResponseType(typeof(SelectResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> SelectCountries([FromBody] SelectCountriesRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Delete
     }

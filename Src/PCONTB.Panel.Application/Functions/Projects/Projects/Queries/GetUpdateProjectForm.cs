@@ -39,6 +39,9 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
                 {
                     Id = entity.Id,
                     Name = entity.Name,
+                    CategoryId = entity.CategoryId,
+                    SubcategoryId = entity.SubcategoryId,
+                    CountryId = entity.CountryId,
                 }
             };
         }
