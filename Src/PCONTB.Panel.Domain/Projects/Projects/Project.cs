@@ -3,30 +3,29 @@ using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Collaborators;
-using PCONTB.Panel.Domain.Projects.ProjectImages;
-using System.Xml.Linq;
+using PCONTB.Panel.Domain.Projects.Images;
 
 namespace PCONTB.Panel.Domain.Projects.Projects
 {
     public class Project : Entity
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public Guid UserId { get; set; }
-        public virtual User User { get; set; }
+        public Guid UserId { get; private set; }
+        public virtual User User { get; private set; }
 
-        public Guid CountryId { get; set; }
-        public virtual Country Country { get; set; }
+        public Guid CountryId { get; private set; }
+        public virtual Country Country { get; private set; }
 
-        public Guid CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        public Guid CategoryId { get; private set; }
+        public virtual Category Category { get; private set; }
 
-        public Guid? SubcategoryId { get; set; }
-        public virtual Subcategory? Subcategory { get; set; }
+        public Guid? SubcategoryId { get; private set; }
+        public virtual Subcategory? Subcategory { get; private set; }
 
-        public virtual List<Collaborator> Collaborators { get; set; }
+        public virtual List<Collaborator> Collaborators { get; private set; }
 
-        public virtual List<Image> Images { get; set; }
+        public virtual List<Image> Images { get; private set; }
 
         protected Project() : base()
         {

@@ -2,7 +2,7 @@
   <base-form-field
     :id="id"
     :label="label"
-    :errors="getFieldErrors(label)"
+    :errors="getFieldErrors(propertyName)"
     :isTouched="isTouched"
     :isAllTouched="isAllTouched"
   >
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 const props = defineProps({
   id: String,
   label: String,
@@ -37,12 +37,23 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  property: { type: String, default: null },
   modelValue: [String, Number],
 });
+
+const propertyName = ref(null);
 
 const isTouched = ref(false);
 
 const emit = defineEmits(["update:modelValue"]);
+
+onMounted(async () => {
+  propertyName.value = props.property;
+
+  if (propertyName.value == null) {
+    propertyName.value = props.label;
+  }
+});
 
 const onBlur = () => {
   isTouched.value = true;

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
@@ -25,7 +26,10 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
         public async Task<GetUserResponse> Handle(GetUserRequest request, CancellationToken cancellationToken = default)
         {
-            var entity = await _context.Set<User>().FindAsync(request.Id, cancellationToken);
+            var entity = await _context.Set<User>()
+                .Include(m => m.UserRoles)
+                .Include(m => m.Projects)
+                .FirstOrDefaultAsync(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException("User not found");
 

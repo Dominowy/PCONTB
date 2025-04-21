@@ -63,11 +63,7 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "^/projects": {
-        target,
-        secure: false,
-      },
-      "^/account": {
+      "^/api": {
         target,
         secure: false,
       },

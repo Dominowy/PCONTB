@@ -4,7 +4,7 @@
       <IBiArrowLeft style="font-size: 1.2rem" />
     </button>
     <div v-if="isLoading">
-      <loading-spinner />
+      <base-loading-spinner />
     </div>
   </div>
   <div class="text-center mb-4">

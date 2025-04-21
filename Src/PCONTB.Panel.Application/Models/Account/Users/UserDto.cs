@@ -7,7 +7,7 @@ namespace PCONTB.Panel.Application.Models.Account.Users
     {
         public string Username { get; set; }
         public string Email { get; set; }
-        public Role Role { get; set; }
+        public List<UserProjectsDto> Projects { get; set; }
 
         public static UserDto Map(User user)
         {
@@ -16,7 +16,6 @@ namespace PCONTB.Panel.Application.Models.Account.Users
                 Id = user.Id,
                 Username = user.Username,
                 Email = user.Email,
-                Role = user.Role
             };
         }
     }

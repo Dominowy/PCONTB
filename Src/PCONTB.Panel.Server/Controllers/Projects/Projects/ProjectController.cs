@@ -9,7 +9,7 @@ using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Projects.Projects
 {
-    [Route("projects/projects")]
+    [Route("api/projects/projects")]
     public class ProjectController(IMediator mediator) : BaseController(mediator)
     {
         #region Get by id
@@ -28,6 +28,12 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Projects
         [HttpPost("get-all")]
         [ProducesResponseType(typeof(GetAllProjectsResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllProjects([FromBody] GetAllProjectsRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+        [AllowAnonymousToken]
+        [HttpPost("get-all-by-user-id")]
+        [ProducesResponseType(typeof(GetAllProjectsResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAllByUserIdProjects([FromBody] GetAllByUserIdProjectsRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
 
         #endregion Get all
 

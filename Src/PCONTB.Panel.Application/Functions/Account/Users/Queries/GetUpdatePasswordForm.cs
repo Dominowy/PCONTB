@@ -26,6 +26,9 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
             return await Task.FromResult(new GetUpdatePasswordFormResponse
             {
                 Form = new UpdatePasswordRequest()
+                {
+                    Id = request.Id
+                }
             });
         }
     }

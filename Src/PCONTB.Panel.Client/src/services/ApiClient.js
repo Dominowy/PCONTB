@@ -3,8 +3,8 @@ import router from "@/router";
 import { useStore } from "@/store/index";
 
 export class ApiClient {
-  constructor() {
-    this.$http = Axios.create({ withCredentials: true });
+  constructor(baseUrl) {
+    this.$http = Axios.create({ baseURL: baseUrl, withCredentials: true });
 
     this.$http.interceptors.response.use(
       (response) => response,
@@ -13,7 +13,7 @@ export class ApiClient {
         const status = error?.response?.status;
 
         if (store.user && !store.loading && status === 401) {
-          router.push("/home");
+          router.push("/");
         }
 
         return Promise.reject(error);
@@ -33,7 +33,7 @@ export class ApiClient {
   async validate(url, onlyValidate, data, config) {
     let isValidating = onlyValidate === true;
 
-    let suffix = isValidating ? "/validation" : "";
+    let suffix = isValidating ? "/validate" : "";
     let validationUrl = url + suffix;
 
     try {
@@ -55,4 +55,4 @@ export class ApiClient {
   }
 }
 
-export default new ApiClient();
+export default new ApiClient("/api");

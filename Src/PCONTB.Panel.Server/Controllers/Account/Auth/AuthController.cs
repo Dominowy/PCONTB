@@ -9,7 +9,7 @@ using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Account.Auth
 {
-    [Route("account/auth")]
+    [Route("api/account/auth")]
     public class AuthController(IMediator mediator) : BaseController(mediator)
     {
         #region Register
@@ -26,7 +26,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Auth
         public async Task<IActionResult> Register([FromBody] RegisterUserRequest registerRequest, CancellationToken cancellationToken) => await Send(registerRequest, cancellationToken);
 
         [AllowAnonymousToken]
-        [HttpPost("register/validation")]
+        [HttpPost("register/validate")]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RegisterValidate([FromBody] RegisterUserRequest registerRequest, CancellationToken cancellationToken) => await Validate(registerRequest, cancellationToken);

@@ -17,7 +17,7 @@ namespace PCONTB.Panel.Application.Services.Auth
         public async Task<Session?> GetByIdAsync(Guid? sessionId, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Set<Session>()
-                .Include(m => m.User)
+                .Include(m => m.User).ThenInclude(m => m.UserRoles)
                 .FirstOrDefaultAsync(s => s.Id == sessionId, cancellationToken);
         }
 

@@ -36,7 +36,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
                 Form = new UpdateUserRoleRequest
                 {
                     Id = entity.Id,
-                    Role = entity.Role,
+                    Roles = entity.UserRoles.Select(m => m.Role).ToList(),
                 },
                 Roles = EnumHelper.EnumToList<Role>()
             };

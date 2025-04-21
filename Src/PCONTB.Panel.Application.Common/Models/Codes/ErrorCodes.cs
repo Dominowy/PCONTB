@@ -102,6 +102,18 @@
                 Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(RoleEmpty),
                 Message = "Role cannot be empty."
             };
+
+            public static readonly ErrorCode RoleDuplicate = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(RoleDuplicate),
+                Message = "Role cannot be duplicate."
+            };
+
+            public static readonly ErrorCode RoleValid = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(RoleValid),
+                Message = "Role is not valid."
+            };
         }
 
         public static class Country

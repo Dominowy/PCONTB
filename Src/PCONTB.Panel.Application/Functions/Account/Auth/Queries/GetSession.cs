@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
+using PCONTB.Panel.Application.Models.Account.Auth;
 using PCONTB.Panel.Application.Models.Account.Users;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Queries
@@ -23,13 +24,13 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Queries
 
             return await Task.FromResult(new GetSessionResponse
             {
-                User = UserDto.Map(user),
+                User = SessionUserDto.Map(user),
             });
         }
     }
 
     public class GetSessionResponse
     {
-        public UserDto User { get; set; }
+        public SessionUserDto User { get; set; }
     }
 }

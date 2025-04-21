@@ -15,7 +15,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public Role Role { get; set; }
+        public List<Role> Roles { get; set; }
     }
 
     public class AddUserHandler : IRequestHandler<AddUserRequest, CommandResult>
@@ -33,9 +33,13 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         {
             var hashedPassword = _passwordHasherService.Generate(request.Password);
 
-            var entity = new User(Guid.NewGuid(), request.Username, request.Email, hashedPassword, request.Role);
+            var entity = new User(Guid.NewGuid(), request.Username, request.Email, hashedPassword);
 
             await _dbContext.Set<User>().AddAsync(entity, cancellationToken);
+
+            var roles = request.Roles.Select(m => new UserRole(m, entity.Id)).ToList();
+
+            _dbContext.Set<UserRole>().AddRange(roles);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
@@ -66,8 +70,10 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
                 .Matches(new Regex(@"(?=[A-Za-z0-9@#$%^&+-_!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+-_!=]).*$"))
                 .WithMessage(ErrorCodes.User.PasswordMatchRules.Message);
 
-            RuleFor(p => p.Role)
-                .NotEmpty().WithMessage(ErrorCodes.User.RoleEmpty.Message);
+            RuleFor(p => p.Roles)
+                .NotEmpty().WithMessage(ErrorCodes.User.RoleEmpty.Message)
+                .Must(NoDuplicates).WithMessage(ErrorCodes.User.RoleDuplicate.Message)
+                .Must(AllRolesValid).WithMessage(ErrorCodes.User.RoleValid.Message);
         }
 
         private async Task<bool> CheckUsernameIsUnique(string username, CancellationToken cancellationToken)
@@ -78,6 +84,17 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         private async Task<bool> CheckEmailIsUnique(string email, CancellationToken cancellationToken)
         {
             return !await _dbContext.Set<User>().AnyAsync(m => m.Email == email, cancellationToken);
+        }
+
+        private bool NoDuplicates(List<Role> roles)
+        {
+            return roles.Distinct().Count() == roles.Count;
+        }
+
+        private bool AllRolesValid(List<Role> roles)
+        {
+            var validValues = Enum.GetValues(typeof(Role)).Cast<Role>();
+            return roles.All(r => validValues.Contains(r));
         }
     }
 }

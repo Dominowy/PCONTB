@@ -5,8 +5,15 @@
 	font-weight: normal;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.dropdown-item:hover {
 	background-color: #6c757d !important;
 	color: white;
 	border-radius: 4px;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+	background-color: #6c757d !important;
+	color: white !important;
 }

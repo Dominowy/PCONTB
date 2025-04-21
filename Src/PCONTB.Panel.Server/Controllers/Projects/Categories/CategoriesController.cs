@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
-using PCONTB.Panel.Application.Functions.Location.Countries.Commands;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Commands;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Queries;
 using PCONTB.Panel.Domain.Account.Users;
@@ -10,7 +9,7 @@ using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Projects.Categories
 {
-    [Route("projects/categories")]
+    [Route("api/projects/categories")]
     public class CategoriesController(IMediator mediator) : BaseController(mediator)
     {
         #region Get by id

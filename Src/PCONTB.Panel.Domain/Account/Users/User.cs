@@ -15,7 +15,7 @@ namespace PCONTB.Panel.Domain.Account.Users
         public virtual List<Project> Projects { get; private set; }
         public virtual List<Collaborator> Collaborators { get; private set; }
         public virtual List<Session> Sessions { get; private set; }
-        public virtual Role Role { get; private set; }
+        public virtual List<UserRole> UserRoles { get; private set; }
 
         protected User() : base()
         {
@@ -26,15 +26,6 @@ namespace PCONTB.Panel.Domain.Account.Users
             Username = username;
             Email = email;
             Password = password;
-            Role = Role.User;
-        }
-
-        public User(Guid id, string username, string email, string password, Role role) : base(id)
-        {
-            Username = username;
-            Email = email;
-            Password = password;
-            Role = role;
         }
 
         public void SetUsername(string username)
@@ -59,14 +50,6 @@ namespace PCONTB.Panel.Domain.Account.Users
             if (!anyChange) return;
 
             Password = password;
-        }
-
-        public void SetRole(Role role)
-        {
-            var anyChange = Role != role;
-            if (!anyChange) return;
-
-            Role = role;
         }
     }
 }

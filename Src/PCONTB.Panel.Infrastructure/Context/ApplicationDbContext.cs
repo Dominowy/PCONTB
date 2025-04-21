@@ -5,7 +5,7 @@ using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Collaborators;
-using PCONTB.Panel.Domain.Projects.ProjectImages;
+using PCONTB.Panel.Domain.Projects.Images;
 using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Infrastructure.Context

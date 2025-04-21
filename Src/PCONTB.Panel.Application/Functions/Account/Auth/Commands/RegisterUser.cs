@@ -45,6 +45,10 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
             await _dbContext.Set<User>().AddAsync(entity, cancellationToken);
 
+            var role = new UserRole(Role.User, entity.Id);
+
+            await _dbContext.Set<UserRole>().AddAsync(role, cancellationToken);
+
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             var sessionId = await _sessionService.CreateSession(entity.Id, cancellationToken);

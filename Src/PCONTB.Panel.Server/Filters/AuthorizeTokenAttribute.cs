@@ -44,7 +44,9 @@ namespace PCONTB.Panel.Infrastructure.Security.Filters
 
             if (session != null)
             {
-                if (!_allowedRoles.Contains(session.User.Role))
+                var userRoles = session.User.UserRoles.Select(r => r.Role);
+
+                if (!userRoles.Any(r => _allowedRoles.Contains(r)))
                 {
                     context.Result = new UnauthorizedResult();
                     return;

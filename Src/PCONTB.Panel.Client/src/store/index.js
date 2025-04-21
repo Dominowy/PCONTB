@@ -5,6 +5,7 @@ export const useStore = defineStore("store", {
   state: () => ({
     user: null,
     loading: false,
+    transition: false,
     error: null,
   }),
   actions: {
@@ -18,15 +19,21 @@ export const useStore = defineStore("store", {
         this.error = err;
       }
     },
-
     async logout() {
       this.loading = true;
       this.user = null;
 
       await ApiClient.request("account/auth/logout", {});
+
       setTimeout(() => {
         this.loading = false;
       }, 300);
+    },
+    startTransition() {
+      this.transition = true;
+    },
+    stopTransition() {
+      this.transition = false;
     },
     startLoading() {
       this.loading = true;
@@ -34,11 +41,11 @@ export const useStore = defineStore("store", {
     stopLoading() {
       this.loading = false;
     },
+    hasRole(role) {
+      return this.user.roles.includes(role);
+    },
   },
   getters: {
     isAuthenticated: (state) => !!state.user,
-    isPrivilaged: (state) => state.user.role === "moderator" || state.user.role === "admin",
-    isAdmin: (state) => state.user.role === "admin",
-    isUser: (state) => state.user.role === "user",
   },
 });

@@ -21,7 +21,9 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
         public async Task<GetAllUsersResponse> Handle(GetAllUsersRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<User>().ToListAsync(cancellationToken);
+            var entity = await _dbContext.Set<User>()
+                .Include(m => m.UserRoles)
+                .ToListAsync(cancellationToken);
 
             return new GetAllUsersResponse
             {

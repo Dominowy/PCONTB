@@ -53,6 +53,11 @@
 import { useAddEditPage } from "@/composables/useAddEditPage";
 import { reactive, onMounted } from "vue";
 import ApiClient from "@/services/ApiClient";
+import { useStore } from "@/store/index";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const store = useStore();
 
 const form = reactive({});
 
@@ -77,7 +82,7 @@ const redirectAfterSucces = () => {
   router.push({ name: "home" });
 };
 
-const { router, isLoading, submit, validate, errors, isAllTouched, store } = useAddEditPage(
+const { isLoading, submit, validate, errors, isAllTouched } = useAddEditPage(
   "Register",
   submitInternal,
   redirectAfterSucces

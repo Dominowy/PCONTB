@@ -35,7 +35,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 
             return new GetUpdateProjectFormResponse()
             {
-                FormData = new UpdateProjectRequest
+                Form = new UpdateProjectRequest
                 {
                     Id = entity.Id,
                     Name = entity.Name,
@@ -46,7 +46,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 
     public class GetUpdateProjectFormResponse
     {
-        public UpdateProjectRequest FormData { get; set; }
+        public UpdateProjectRequest Form{ get; set; }
     }
 
 }

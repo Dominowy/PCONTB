@@ -1,11 +1,6 @@
 import { onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
-import { useStore } from "@/store/index";
 
 export function useAddEditPage(title, submitInternal, redirectAfterSuccess) {
-  const router = useRouter();
-  const store = useStore();
-
   const isLoading = ref(false);
   const isAllTouched = ref(false);
   const errors = ref([]);
@@ -39,5 +34,5 @@ export function useAddEditPage(title, submitInternal, redirectAfterSuccess) {
       isLoading.value = false;
     }
   };
-  return { router, isLoading, submit, validate, errors, isAllTouched, errorMessage, store };
+  return { isLoading, submit, validate, errors, isAllTouched, errorMessage };
 }

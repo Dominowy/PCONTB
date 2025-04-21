@@ -1,7 +1,7 @@
 ﻿using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Projects.Projects;
 
-namespace PCONTB.Panel.Domain.Projects.ProjectImages
+namespace PCONTB.Panel.Domain.Projects.Images
 {
     public class Image : Entity
     {

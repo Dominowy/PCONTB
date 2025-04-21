@@ -47,7 +47,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Session", (string)null);
+                    b.ToTable("Session");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.User", b =>
@@ -64,16 +64,32 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.UserRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Location.Countries.Country", b =>
@@ -88,7 +104,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Country", (string)null);
+                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Categories.Category", b =>
@@ -103,7 +119,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category", (string)null);
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Categories.Subcategory", b =>
@@ -123,7 +139,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Subcategory", (string)null);
+                    b.ToTable("Subcategory");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Collaborators.Collaborator", b =>
@@ -153,7 +169,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Collaborator", (string)null);
+                    b.ToTable("Collaborator");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.ProjectImages.Image", b =>
@@ -180,7 +196,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Image", (string)null);
+                    b.ToTable("Image");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Projects.Project", b =>
@@ -215,13 +231,24 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Project", (string)null);
+                    b.ToTable("Project");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Sessions.Session", b =>
                 {
                     b.HasOne("PCONTB.Panel.Domain.Account.Users.User", "User")
                         .WithMany("Sessions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.UserRole", b =>
+                {
+                    b.HasOne("PCONTB.Panel.Domain.Account.Users.User", "User")
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -310,6 +337,8 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.Navigation("Projects");
 
                     b.Navigation("Sessions");
+
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Location.Countries.Country", b =>

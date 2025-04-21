@@ -13,13 +13,13 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
         {
             return await Task.FromResult(new GetAddProjectFormResponse()
             {
-                FormData = new AddProjectRequest()
+                Form = new AddProjectRequest()
             });
         }
     }
 
     public class GetAddProjectFormResponse
     {
-        public AddProjectRequest FormData { get; set; }
+        public AddProjectRequest Form { get; set; }
     }
 }

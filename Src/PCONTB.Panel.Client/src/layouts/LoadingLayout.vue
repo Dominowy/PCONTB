@@ -1,6 +1,6 @@
 <template>
   <div class="loading-overlay">
-    <loading-spinner />
+    <base-loading-spinner />
   </div>
 </template>
 
@@ -16,9 +16,5 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
-}
-.spinner {
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 </style>

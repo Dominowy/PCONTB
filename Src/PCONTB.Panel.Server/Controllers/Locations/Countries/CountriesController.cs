@@ -9,7 +9,7 @@ using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Locations.Countries
 {
-    [Route("locations/countries")]
+    [Route("api/locations/countries")]
     public class CountriesController(IMediator mediator) : BaseController(mediator)
     {
         #region Get by id

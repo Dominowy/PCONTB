@@ -42,11 +42,12 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
         public async Task<CommandResult> Handle(LoginUserRequest request, CancellationToken cancellationToken)
         {
             var entity = await _dbContext.Set<User>()
+                .Include(m => m.UserRoles)
                 .FirstOrDefaultAsync(u => u.Email == request.Login || u.Username == request.Login, cancellationToken);
 
             if (entity == null) throw new BadRequestException(ErrorCodes.User.LoginWrongCredential.Message);
 
-            if (entity.Role == Role.Block) throw new BadRequestException(ErrorCodes.User.AccountLock.Message);
+            if (entity.UserRoles.Any(r => r.Role == Role.Block)) throw new BadRequestException(ErrorCodes.User.AccountLock.Message);
 
             if (!_passwordHasherService.Verify(request.Password, entity.Password))
                 throw new BadRequestException(ErrorCodes.User.LoginWrongCredential.Message);

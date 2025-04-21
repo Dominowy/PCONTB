@@ -9,7 +9,7 @@ using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Account.Users
 {
-    [Route("account/users")]
+    [Route("api/account/users")]
     public class UsersController(IMediator mediator) : BaseController(mediator)
     {
         #region Get by id
