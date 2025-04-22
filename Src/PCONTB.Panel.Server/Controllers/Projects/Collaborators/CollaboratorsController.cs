@@ -28,10 +28,12 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Collaborators
 
         [HttpPost("add/validate")]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ValidateAddCollaborator([FromBody] AddCollaboratorRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
         [HttpPost("add")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddCollaborator([FromBody] AddCollaboratorRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Add
@@ -40,14 +42,18 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Collaborators
 
         [HttpPost("update/form")]
         [ProducesResponseType(typeof(GetUpdateCollaboratorFormResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateCollaboratorForm([FromBody] GetUpdateCollaboratorFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [HttpPost("update/validate")]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ValidateUpdateCollaborator([FromBody] UpdateCollaboratorRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
         [HttpPost("update")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateCollaborator([FromBody] UpdateCollaboratorRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Update
@@ -56,10 +62,13 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Collaborators
 
         [HttpPost("delete/validate")]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ValidateDeleteCollaborator([FromBody] DeleteCollaboratorRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
         [HttpPost("delete")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteCollaborator([FromBody] DeleteCollaboratorRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Delete

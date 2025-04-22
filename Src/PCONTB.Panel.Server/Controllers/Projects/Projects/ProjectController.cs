@@ -63,7 +63,7 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Projects
         [AuthorizeToken(Role.User)]
         [HttpPost("update/form")]
         [ProducesResponseType(typeof(GetUpdateProjectFormResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateProjectForm([FromBody] GetUpdateProjectFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [AuthorizeToken(Role.User)]
@@ -76,7 +76,7 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Projects
         [HttpPost("update")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateProject([FromBody] UpdateProjectRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Update
@@ -93,7 +93,7 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Projects
         [HttpPost("delete")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteProject([FromBody] DeleteProjectRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Delete

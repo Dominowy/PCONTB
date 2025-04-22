@@ -26,7 +26,6 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [AuthorizeToken(Role.Admin)]
         [HttpPost("get-all")]
         [ProducesResponseType(typeof(GetAllUsersResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAllUsers([FromBody] GetAllUsersRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Get all
@@ -37,7 +36,6 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [HttpPost("add/form")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddUserForm([FromBody] GetAddUserFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [AuthorizeToken(Role.Admin)]
@@ -50,7 +48,6 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [HttpPost("add")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddUser([FromBody] AddUserRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Add
@@ -61,7 +58,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [HttpPost("update/form")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateUserForm([FromBody] GetUpdateUserFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
@@ -74,7 +71,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [HttpPost("update")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Update
@@ -84,22 +81,20 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [AuthorizeToken(Role.Admin)]
         [HttpPost("update-role/form")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateUserRoleForm([FromBody] GetUpdateUserRoleFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [AuthorizeToken(Role.Admin)]
         [HttpPost("update-role/validate")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ValidateUpdateUserRole([FromBody] UpdateUserRoleRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [AuthorizeToken(Role.Admin)]
         [HttpPost("update-role")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Update role
@@ -109,22 +104,20 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
         [HttpPost("update-password/form")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateUserPasswordForm([FromBody] GetUpdatePasswordFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
         [HttpPost("update-password/validate")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ValidateUpdatePassword([FromBody] UpdatePasswordRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
         [HttpPost("update-password")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Update role

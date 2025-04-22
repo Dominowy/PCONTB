@@ -58,7 +58,7 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Categories
         [AuthorizeToken(Role.Admin)]
         [HttpPost("update/form")]
         [ProducesResponseType(typeof(GetUpdateCategoryFormResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateCategoryForm([FromBody] GetUpdateCategoryFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [AuthorizeToken(Role.Admin)]
@@ -71,7 +71,7 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Categories
         [HttpPost("update")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateCategory([FromBody] UpdateCategoryRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Update
@@ -88,7 +88,7 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Categories
         [HttpPost("delete")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteCategory([FromBody] DeleteCategoryRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Delete
