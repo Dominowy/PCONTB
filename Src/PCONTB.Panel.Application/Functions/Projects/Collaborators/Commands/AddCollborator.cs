@@ -1,19 +1,20 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Domain.Account.Users;
-using PCONTB.Panel.Domain.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 {
-    public class AddCollaboratorRequest : IRequest<CommandResult>
+    public class AddCollaboratorRequest : BaseCommand, IRequest<CommandResult>
     {
-        public Guid UserId { get; set; }
+        public string Email { get; set; }
         public Guid ProjectId { get; set; }
 
         public bool ManageProjectPermission { get; set; } = false;
@@ -32,10 +33,14 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 
         public async Task<CommandResult> Handle(AddCollaboratorRequest request, CancellationToken cancellationToken)
         {
-            var entity = new Collaborator(request.UserId, request.ProjectId);
+            var user = await _dbContext.Set<User>().FirstOrDefaultAsync(m => m.Email == request.Email, cancellationToken);
+
+            if (user is null) throw new NotFoundException(ErrorCodes.Collaborator.UserExist.Message);
+
+            var entity = new Collaborator(user.Id, request.ProjectId);
 
             entity.SetManageProjectPermission(request.ManageProjectPermission);
-            entity.SetCommunityPermission(request.ManageCommunityPermission);
+            entity.SetManageCommunityPermission(request.ManageCommunityPermission);
             entity.SetManageFulfillmentPermission(request.ManageFulfillmentPermission);
 
             await _dbContext.Set<Collaborator>().AddAsync(entity, cancellationToken);
@@ -53,18 +58,18 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
         {
             _context = context;
 
-            RuleFor(p => p.UserId)
+            RuleFor(p => p.Email)
                 .NotEmpty().WithMessage(ErrorCodes.Collaborator.UserEmpty.Message)
                 .MustAsync(UserExist).WithMessage(ErrorCodes.Collaborator.UserExist.Message);
 
-            RuleFor(p => p.UserId)
+            RuleFor(p => p.ProjectId)
                 .NotEmpty().WithMessage(ErrorCodes.Collaborator.ProjectEmpty.Message)
                 .MustAsync(ProjectExist).WithMessage(ErrorCodes.Collaborator.ProjectExist.Message);
         }
 
-        private async Task<bool> UserExist(Guid id, CancellationToken cancellationToken)
+        private async Task<bool> UserExist(string email, CancellationToken cancellationToken)
         {
-            return await _context.Set<User>().AnyAsync(m => m.Id == id, cancellationToken);
+            return await _context.Set<User>().AnyAsync(m => m.Email == email, cancellationToken);
         }
 
         private async Task<bool> ProjectExist(Guid id, CancellationToken cancellationToken)

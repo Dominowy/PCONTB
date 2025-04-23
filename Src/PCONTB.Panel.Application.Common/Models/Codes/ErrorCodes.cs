@@ -80,6 +80,21 @@
             };
         }
 
+        public static class Image
+        {
+            public static readonly ErrorCode NotFound = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Image) + "." + nameof(NotFound),
+                Message = "Image not found"
+            };
+
+            public static readonly ErrorCode ImageNotSelect = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Image) + "." + nameof(ImageNotSelect),
+                Message = "Image not select"
+            };
+        }
+
         public static class User
         {
             public static readonly ErrorCode AccesDenied = new ErrorCode

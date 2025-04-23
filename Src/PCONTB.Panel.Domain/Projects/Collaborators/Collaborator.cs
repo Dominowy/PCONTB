@@ -27,7 +27,7 @@ namespace PCONTB.Panel.Domain.Projects.Collaborators
             ManageProjectPermission = permission;
         }
 
-        public void SetCommunityPermission(bool permission)
+        public void SetManageCommunityPermission(bool permission)
         {
             ManageCommunityPermission = permission;
         }

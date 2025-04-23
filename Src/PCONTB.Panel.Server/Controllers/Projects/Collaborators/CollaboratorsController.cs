@@ -34,6 +34,7 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Collaborators
         [HttpPost("add")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddCollaborator([FromBody] AddCollaboratorRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Add
