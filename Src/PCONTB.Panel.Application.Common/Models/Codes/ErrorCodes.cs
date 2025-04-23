@@ -47,6 +47,39 @@
             };
         }
 
+        public static class Collaborator
+        {
+            public static readonly ErrorCode NotFound = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Collaborator) + "." + nameof(NotFound),
+                Message = "Collaborator not found"
+            };
+
+            public static readonly ErrorCode UserEmpty = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Collaborator) + "." + nameof(UserEmpty),
+                Message = "User cannot be empty."
+            };
+
+            public static readonly ErrorCode UserExist = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Collaborator) + "." + nameof(UserExist),
+                Message = "User not exist."
+            };
+
+            public static readonly ErrorCode ProjectEmpty = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Collaborator) + "." + nameof(ProjectEmpty),
+                Message = "Project cannot be empty."
+            };
+
+            public static readonly ErrorCode ProjectExist = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Collaborator) + "." + nameof(ProjectExist),
+                Message = "Project not exist."
+            };
+        }
+
         public static class User
         {
             public static readonly ErrorCode AccesDenied = new ErrorCode
