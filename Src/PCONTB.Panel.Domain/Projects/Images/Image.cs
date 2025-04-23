@@ -14,12 +14,33 @@ namespace PCONTB.Panel.Domain.Projects.Images
         public Project Project { get; private set; }
 
 
-        public Image(byte[] imageData, string imageName, int displayOrder, Guid projectId) : base(Guid.NewGuid()) 
+        public Image(Guid projectId) : base(Guid.NewGuid()) 
         { 
-            ImageData = imageData;
-            ImageName = imageName;
-            DisplayOrder = displayOrder;
             ProjectId = projectId;
+        }
+
+        public void SetDispalyOrder(int displayOrder)
+        {
+            var anyChange = DisplayOrder != displayOrder;
+            if (!anyChange) return;
+
+            DisplayOrder = displayOrder;
+        }
+
+        public void SetImageName(string imageName)
+        {
+            var anyChange = ImageName != imageName;
+            if (!anyChange) return;
+
+            ImageName = imageName;
+        }
+
+        public void SetImageData (byte[] imageData)
+        {
+            var anyChange = ImageData != imageData;
+            if (!anyChange) return;
+
+            ImageData = imageData;
         }
     }
 }

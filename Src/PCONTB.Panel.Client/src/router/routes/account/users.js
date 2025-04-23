@@ -5,14 +5,16 @@ let routes = [];
 
 routes.push(
   {
-    path: "profile",
-    name: "users:profile",
+    path: "user/profile",
+    name: "account:users:profile",
     component: UserProfileView,
+    meta: { requiresAuth: true },
   },
   {
-    path: "settings",
-    name: "users:settings",
+    path: "user/settings",
+    name: "account:users:settings",
     component: UserSettingsView,
+    meta: { requiresAuth: true },
   }
 );
 

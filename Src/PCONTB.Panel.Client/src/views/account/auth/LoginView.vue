@@ -26,7 +26,7 @@
       <div class="text-center mt-3">
         <small>
           Don't have an account?
-          <router-link to="/register" class="text-primary">Register</router-link>
+          <router-link to="/auth/register" class="text-primary">Register</router-link>
         </small>
       </div>
     </b-card>

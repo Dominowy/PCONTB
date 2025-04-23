@@ -5,7 +5,7 @@ import RegisterView from "@/views/account/auth/RegisterView.vue";
 let routes = [];
 
 routes.push({
-  path: "/",
+  path: "/auth",
   component: AuthLayout,
   children: [
     {

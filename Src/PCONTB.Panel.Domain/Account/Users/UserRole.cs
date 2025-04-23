@@ -4,10 +4,10 @@ namespace PCONTB.Panel.Domain.Account.Users
 {
     public class UserRole : Entity
     {
-        public Role Role { get; set; }
+        public Role Role { get; private set; }
 
-        public Guid UserId { get; set; }
-        public User User { get; set; }
+        public Guid UserId { get; private set; }
+        public User User { get; private set; }
 
         public UserRole(Role role, Guid userId) : base(Guid.NewGuid())
         {

@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Functions.Projects.Images.Commands;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Images.Queries
 {
-    public class GetAddImageFormRequest : IRequest<GetAddImageFormResponse>
+    public class GetAddImageFormRequest : BaseQuery, IRequest<GetAddImageFormResponse>
     {
 
     }

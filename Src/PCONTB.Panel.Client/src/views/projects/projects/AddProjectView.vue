@@ -85,7 +85,7 @@ const submitInternal = async (onlyValidate) => {
 };
 
 const redirectAfterSucces = (id) => {
-  router.push({ name: "projects:update", params: { id: id } });
+  router.push({ name: "projects:project:update", params: { id: id } });
 };
 
 const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdatePage(

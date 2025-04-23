@@ -6,10 +6,9 @@ let routes = [];
 routes.push(...Auth);
 
 routes.push({
-  path: "/users",
+  path: "/account",
   component: DefaultLayout,
   children: [...Users],
-  meta: { requiresAuth: true },
 });
 
 export default routes;

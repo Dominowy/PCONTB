@@ -32,11 +32,15 @@ namespace PCONTB.Panel.Application.Functions.Projects.Images.Commands
             using var memoryStream = new MemoryStream();
             await request.Image.CopyToAsync(memoryStream);
 
-            var entity = new Image(memoryStream.ToArray(), request.Image.FileName, request.DisplayOrder, request.ProjectId);
+            var entity = new Image(request.ProjectId);
+
+            entity.SetDispalyOrder(request.DisplayOrder);
+            entity.SetImageName(request.Image.Name);
+            entity.SetImageData(memoryStream.ToArray());
 
             await _dbContext.Set<Image>().AddAsync(entity);
 
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

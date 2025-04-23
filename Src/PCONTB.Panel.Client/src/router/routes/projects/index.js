@@ -7,14 +7,8 @@ let routes = [];
 routes.push({
   path: "/projects",
   component: DefaultLayout,
-  children: [...Projects],
-  meta: { requiresAuth: true },
-});
-
-routes.push({
-  path: "/discover",
-  component: DefaultLayout,
-  children: [...Discover],
+  children: [...Projects, ...Discover],
+  
 });
 
 export default routes;

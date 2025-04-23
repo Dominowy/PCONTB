@@ -1,14 +1,17 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Application.Functions.Projects.Images.Commands;
 using PCONTB.Panel.Domain.Projects.Images;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Images.Queries
 {
     public class GetUpdateImageFormRequest : BaseQuery, IRequest<GetUpdateImageFormResponse>
     {
+
     }
 
     public class GetUpdateImageFormHandler : IRequestHandler<GetUpdateImageFormRequest, GetUpdateImageFormResponse>
@@ -26,10 +29,21 @@ namespace PCONTB.Panel.Application.Functions.Projects.Images.Queries
 
             if (entity is null) throw new NotFoundException(ErrorCodes.Image.NotFound.Message);
 
+            return new GetUpdateImageFormResponse
+            {
+                Form = new UpdateImageRequest
+                {
+                    ImageName = entity.ImageName,
+                    ImageData = entity.ImageData,
+                    DisplayOrder = entity.DisplayOrder,
+                    ProjectId = entity.ProjectId,
+                }
+            };
         }
     }
 
     public class GetUpdateImageFormResponse
     {
+        public UpdateImageRequest Form { get; set; }
     }
 }

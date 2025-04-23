@@ -4,7 +4,7 @@ let routes = [];
 
 routes.push({
   path: "admin",
-  name: "admin",
+  name: "panel:admin",
   component: AdminPanelView,
   meta: { requiresAuth: true, role: "admin" },
 });

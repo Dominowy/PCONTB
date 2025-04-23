@@ -5,7 +5,7 @@ import Admin from "./admin";
 let routes = [];
 
 routes.push({
-  path: "/",
+  path: "/panel",
   component: DefaultLayout,
   children: [...Moderation, ...Admin],
 });

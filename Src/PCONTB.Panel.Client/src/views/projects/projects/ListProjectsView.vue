@@ -40,7 +40,7 @@ onMounted(() => {
 });
 
 const goToAdd = async () => {
-  router.push({ name: "projects:add" });
+  router.push({ name: "projects:project:add" });
 };
 
 const onDataLoaded = async () => {
@@ -48,7 +48,7 @@ const onDataLoaded = async () => {
 };
 
 const goToSetting = (id) => {
-  router.push({ name: "projects:update", params: { id: id } });
+  router.push({ name: "projects:project:update", params: { id: id } });
 };
 
 const { content, loadData } = useDisplayPage(`Projects - ${store.user.username}`);
