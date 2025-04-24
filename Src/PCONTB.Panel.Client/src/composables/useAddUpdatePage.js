@@ -1,16 +1,12 @@
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
-export function useAddUpdatePage(title, submitInternal, redirectAfterSuccess) {
+export function useAddUpdatePage(submitInternal, redirectAfterSuccess) {
   const isLoading = ref(false);
   const isAllTouched = ref(false);
   const errors = ref([]);
   const errorMessage = ref("");
 
   const redirectId = ref("");
-
-  onMounted(() => {
-    document.title = title;
-  });
 
   const submit = async () => {
     isLoading.value = true;

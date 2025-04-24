@@ -47,6 +47,7 @@
 import { reactive, onMounted } from "vue";
 import ApiClient from "@/services/ApiClient";
 import { useAddUpdatePage } from "@/composables/useAddUpdatePage";
+import { useView } from "@/composables/useView";
 import { useStore } from "@/store/index";
 import { useRouter } from "vue-router";
 
@@ -72,9 +73,6 @@ const redirectAfterSucces = () => {
   router.push({ name: "home" });
 };
 
-const { submit, isLoading, errorMessage } = useAddUpdatePage(
-  "Login",
-  submitInternal,
-  redirectAfterSucces
-);
+const { submit, isLoading, errorMessage } = useAddUpdatePage(submitInternal, redirectAfterSucces);
+useView("Login");
 </script>

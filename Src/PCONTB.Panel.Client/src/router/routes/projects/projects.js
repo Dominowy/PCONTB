@@ -1,6 +1,6 @@
-import ListProjectsView from "@/views/projects/projects/ListProjectsView.vue";
-import AddProjectView from "@/views/projects/projects/AddProjectView.vue";
-import UpdateProjectView from "@/views/projects/projects/UpdateProjectView.vue";
+import ProjectsListView from "@/views/projects/projects/ProjectsListView.vue";
+import ProjectAddView from "@/views/projects/projects/ProjectAddView.vue";
+import ProjectSettingsView from "@/views/projects/projects/ProjectSettingsView.vue";
 
 let routes = [];
 
@@ -8,19 +8,19 @@ routes.push(
   {
     path: "",
     name: "projects:projects",
-    component: ListProjectsView,
+    component: ProjectsListView,
     meta: { requiresAuth: true },
   },
   {
     path: "project/add",
     name: "projects:project:add",
-    component: AddProjectView,
+    component: ProjectAddView,
     meta: { requiresAuth: true },
   },
   {
-    path: ":id/update",
-    name: "projects:project:update",
-    component: UpdateProjectView,
+    path: ":id/settings",
+    name: "projects:project:settings",
+    component: ProjectSettingsView,
     meta: { requiresAuth: true },
   }
 );

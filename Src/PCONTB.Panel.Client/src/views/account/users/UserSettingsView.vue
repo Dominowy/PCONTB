@@ -11,3 +11,9 @@
     </b-tabs>
   </div>
 </template>
+
+<script setup>
+import { useView } from "@/composables/useView";
+
+useView("Settings");
+</script>

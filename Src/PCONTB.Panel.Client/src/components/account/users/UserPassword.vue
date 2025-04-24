@@ -62,7 +62,6 @@ const redirectAfterSucces = () => {
 };
 
 const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdatePage(
-  "Settings",
   submitInternal,
   redirectAfterSucces
 );

@@ -48,8 +48,8 @@ const onDataLoaded = async () => {
 };
 
 const goToSetting = (id) => {
-  router.push({ name: "projects:project:update", params: { id: id } });
+  router.push({ name: "projects:project:settings", params: { id: id } });
 };
 
-const { content, loadData } = useDisplayPage(`Projects - ${store.user.username}`);
+const { content, loadData } = useDisplayPage("Projects");
 </script>

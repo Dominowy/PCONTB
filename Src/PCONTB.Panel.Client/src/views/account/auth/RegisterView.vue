@@ -51,6 +51,7 @@
 
 <script setup>
 import { useAddUpdatePage } from "@/composables/useAddUpdatePage";
+import { useView } from "@/composables/useView";
 import { reactive, onMounted } from "vue";
 import ApiClient from "@/services/ApiClient";
 import { useStore } from "@/store/index";
@@ -83,8 +84,8 @@ const redirectAfterSucces = () => {
 };
 
 const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdatePage(
-  "Register",
   submitInternal,
   redirectAfterSucces
 );
+useView("Register");
 </script>
