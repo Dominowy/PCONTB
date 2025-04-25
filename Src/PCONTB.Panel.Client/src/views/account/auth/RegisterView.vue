@@ -50,7 +50,7 @@
 </style>
 
 <script setup>
-import { useAddUpdatePage } from "@/composables/useAddUpdatePage";
+import { useAddUpdate } from "@/composables/useAddUpdate";
 import { useView } from "@/composables/useView";
 import { reactive, onMounted } from "vue";
 import ApiClient from "@/services/ApiClient";
@@ -83,7 +83,7 @@ const redirectAfterSucces = () => {
   router.push({ name: "home" });
 };
 
-const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdatePage(
+const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdate(
   submitInternal,
   redirectAfterSucces
 );

@@ -58,7 +58,7 @@
 </template>
 
 <script setup>
-import { useAddUpdatePage } from "@/composables/useAddUpdatePage";
+import { useAddUpdate } from "@/composables/useAddUpdate";
 import { reactive, onMounted } from "vue";
 import ApiClient from "@/services/ApiClient";
 import { useRouter, useRoute } from "vue-router";
@@ -92,7 +92,7 @@ const redirectAfterSucces = (id) => {
   router.push({ name: "projects:project:settings", params: { id: id } });
 };
 
-const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdatePage(
+const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdate(
   submitInternal,
   redirectAfterSucces
 );

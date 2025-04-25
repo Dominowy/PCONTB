@@ -1,7 +1,7 @@
 import { onMounted, ref } from "vue";
 import { useStore } from "@/store/index";
 
-export function useDisplayPage(title) {
+export function useDisplay(title) {
   const store = useStore();
 
   const errorMessage = ref("");

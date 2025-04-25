@@ -5,8 +5,9 @@
       <b-tab title="Update" class="border">
         <project-add-update />
       </b-tab>
-      <b-tab title="Collaborators" class="border"> </b-tab>
-      <collaborators-list />
+      <b-tab title="Collaborators" class="border">
+        <collaborators-list />
+      </b-tab>
     </b-tabs>
   </div>
 </template>

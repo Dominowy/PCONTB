@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { useAddUpdatePage } from "@/composables/useAddUpdatePage";
+import { useAddUpdate } from "@/composables/useAddUpdate";
 import { reactive, onMounted } from "vue";
 import ApiClient from "@/services/ApiClient";
 import { useStore } from "@/store/index";
@@ -61,7 +61,7 @@ const redirectAfterSucces = () => {
   router.go(0);
 };
 
-const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdatePage(
+const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdate(
   submitInternal,
   redirectAfterSucces
 );

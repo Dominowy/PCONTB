@@ -1,22 +1,39 @@
 <template>
-  <base-form-field
-    :id="id"
-    :label="label"
-    :errors="getFieldErrors(propertyName)"
-    :isTouched="isTouched"
-    :isAllTouched="isAllTouched"
-  >
-    <input
+  <template v-if="type == 'checkbox'">
+    <div class="form-check form-switch mt-2">
+      <label class="form-check-label" :for="id">
+        {{ label }}
+      </label>
+      <input
+        :id="id"
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        :checked="modelValue === true || modelValue === 'true'"
+        @change="onInput($event.target.checked)"
+      />
+    </div>
+  </template>
+  <template v-else>
+    <base-form-field
       :id="id"
-      class="form-control"
-      :type="type"
-      :value="modelValue"
-      :placeholder="placeholder"
-      @input="onInput"
-      @blur="onBlur"
-      @change="onBlur"
-    />
-  </base-form-field>
+      :label="label"
+      :errors="getFieldErrors(propertyName)"
+      :isTouched="isTouched"
+      :isAllTouched="isAllTouched"
+    >
+      <input
+        :id="id"
+        class="form-control"
+        :type="type"
+        :value="modelValue"
+        :placeholder="placeholder"
+        @input="onInput($event.target.value)"
+        @blur="onBlur"
+        @change="onBlur"
+      />
+    </base-form-field>
+  </template>
 </template>
 
 <script setup>
@@ -38,7 +55,7 @@ const props = defineProps({
     default: false,
   },
   property: { type: String, default: null },
-  modelValue: [String, Number],
+  modelValue: [String, Number, Boolean],
 });
 
 const propertyName = ref(null);
@@ -68,6 +85,6 @@ const getFieldErrors = (propertyName) => {
 };
 
 const onInput = (event) => {
-  emit("update:modelValue", event.target.value);
+  emit("update:modelValue", event);
 };
 </script>

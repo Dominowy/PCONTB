@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-export function useAddUpdatePage(submitInternal, redirectAfterSuccess) {
+export function useAddUpdate(submitInternal, redirectAfterSuccess) {
   const isLoading = ref(false);
   const isAllTouched = ref(false);
   const errors = ref([]);

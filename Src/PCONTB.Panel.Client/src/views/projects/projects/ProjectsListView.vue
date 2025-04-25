@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { useDisplayPage } from "@/composables/useDisplayPage";
+import { useDisplay } from "@/composables/useDisplay";
 import { useStore } from "@/store/index";
 import ApiClient from "@/services/ApiClient";
 import { onMounted } from "vue";
@@ -51,5 +51,5 @@ const goToSetting = (id) => {
   router.push({ name: "projects:project:settings", params: { id: id } });
 };
 
-const { content, loadData } = useDisplayPage("Projects");
+const { content, loadData } = useDisplay("Projects");
 </script>

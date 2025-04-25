@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { useDisplayPage } from "@/composables/useDisplayPage";
+import { useDisplay } from "@/composables/useDisplay";
 import { useStore } from "@/store/index";
 import ApiClient from "@/services/ApiClient";
 import { onMounted } from "vue";
@@ -39,5 +39,5 @@ const onDataLoaded = async () => {
   return await ApiClient.request("projects/projects/get-all-by-user-id", { id: store.user.id });
 };
 
-const { content, loadData } = useDisplayPage(`Projects - ${store.user.username}`);
+const { content, loadData } = useDisplay(`Projects - ${store.user.username}`);
 </script>
