@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Function;
@@ -23,7 +24,9 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Queries
 
         public async Task<GetUpdateCollaboratorFormResponse> Handle(GetUpdateCollaboratorFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Collaborator>().FindAsync(request.Id, cancellationToken);
+            var entity = await _dbContext.Set<Collaborator>()
+                .Include(m => m.User)
+                .FirstOrDefaultAsync(m => m.Id == request.Id, cancellationToken);
 
             if (entity is null) throw new NotFoundException(ErrorCodes.Collaborator.NotFound.Message);
 

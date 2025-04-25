@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <b-card class="border-0">
-      <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
+  <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
+    <base-modal :title="title" :isLoading="isLoading" @close="handleCloseModal">
+      <template #body>
         <base-form-input
           id="email"
           class="mt-2"
@@ -39,46 +39,66 @@
           :errors="errors"
           :isAllTouched="isAllTouched"
         />
-        <div class="d-flex w-100">
-          <base-form-submit-button label="Save" class="mt-4" />
-          <base-loading-spinner v-if="isLoading" />
-        </div>
-      </base-form>
-    </b-card>
-  </div>
+      </template>
+      <template #footer>
+        <button type="button" class="btn btn-secondary" @click="handleCloseModal">Close</button>
+        <base-form-submit-button label="Save" />
+      </template>
+    </base-modal>
+  </base-form>
 </template>
 
 <script setup>
 import { useAddUpdate } from "@/composables/useAddUpdate";
-import { reactive, onMounted } from "vue";
+import { reactive, onMounted, ref } from "vue";
 import ApiClient from "@/services/ApiClient";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 
-const router = useRouter();
+const props = defineProps({
+  collaboratorId: String,
+});
+
+const emit = defineEmits(["close"]);
+
 const route = useRoute();
+
+const title = ref("Add collaborator");
 
 const form = reactive({});
 
 onMounted(async () => {
+  if (props.collaboratorId) {
+    title.value = "Update collaborator";
+  }
+
   let response = await getForm();
 
   response.form.projectId = route.params.id;
   Object.assign(form, response.form);
+
+  isLoading.value = false;
 });
 
 const getForm = async () => {
-  if (route.params.id) {
-    return await ApiClient.request("projects/collaborators/add/form", {});
+  isLoading.value = true;
+  if (props.collaboratorId) {
+    return await ApiClient.request("projects/collaborators/update/form", {
+      id: props.collaboratorId,
+    });
   }
   return await ApiClient.request("projects/collaborators/add/form", {});
 };
 
 const submitInternal = async (onlyValidate) => {
-  if (route.params.id) {
-    return await ApiClient.validate("projects/collaborators/add", onlyValidate, form);
+  if (props.collaboratorId) {
+    return await ApiClient.validate("projects/collaborators/update", onlyValidate, form);
   }
 
   return await ApiClient.validate("projects/collaborators/add", onlyValidate, form);
+};
+
+const handleCloseModal = () => {
+  emit("close");
 };
 
 const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdate(submitInternal);
