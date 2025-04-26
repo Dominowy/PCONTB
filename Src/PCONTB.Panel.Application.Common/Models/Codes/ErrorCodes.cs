@@ -67,6 +67,12 @@
                 Message = "User not exist."
             };
 
+            public static readonly ErrorCode UserExistInProject = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(Collaborator) + "." + nameof(UserExistInProject),
+                Message = "User is already add."
+            };
+
             public static readonly ErrorCode ProjectEmpty = new ErrorCode
             {
                 Code = nameof(ErrorCode) + "." + nameof(Collaborator) + "." + nameof(ProjectEmpty),
@@ -191,6 +197,12 @@
             {
                 Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(RoleValid),
                 Message = "Role is not valid."
+            }; 
+
+            public static readonly ErrorCode UserIsNotBlock = new ErrorCode
+            {
+                Code = nameof(ErrorCode) + "." + nameof(User) + "." + nameof(UserIsNotBlock),
+                Message = "User is not block."
             };
         }
 

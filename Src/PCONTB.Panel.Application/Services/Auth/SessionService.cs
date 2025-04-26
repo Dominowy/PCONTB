@@ -43,5 +43,16 @@ namespace PCONTB.Panel.Application.Services.Auth
 
             return false;
         }
+
+        public async Task EndAllSession(Guid userId, CancellationToken cancellationToken)
+        {
+            var sessions = await _dbContext.Set<Session>()
+                .Where(m => m.UserId == userId && m.IsActive)
+                .ToListAsync();
+
+            sessions.ForEach(session => session.EndSession());
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
     }
 }

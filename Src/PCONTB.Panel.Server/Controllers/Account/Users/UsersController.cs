@@ -124,7 +124,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
 
         #region Lock/Unlock
 
-        [AuthorizeToken(Role.Moderator, Role.Admin)]
+        [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
         [HttpPost("lock")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status404NotFound)]

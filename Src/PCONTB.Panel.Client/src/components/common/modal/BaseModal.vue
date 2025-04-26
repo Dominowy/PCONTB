@@ -6,7 +6,6 @@
           <h5 class="modal-title">{{ title }}</h5>
           <button type="button" class="btn-close" @click="handleCloseModal" aria-label="Close" />
         </div>
-
         <div class="modal-body">
           <template v-if="isLoading">
             <div class="d-flex justify-content-center align-items-center">

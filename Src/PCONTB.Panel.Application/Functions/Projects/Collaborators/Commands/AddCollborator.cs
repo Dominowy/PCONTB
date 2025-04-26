@@ -60,7 +60,9 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 
             RuleFor(p => p.Email)
                 .NotEmpty().WithMessage(ErrorCodes.Collaborator.UserEmpty.Message)
-                .MustAsync(UserExist).WithMessage(ErrorCodes.Collaborator.UserExist.Message);
+                .MustAsync(UserExist).WithMessage(ErrorCodes.Collaborator.UserExist.Message)
+                .MustAsync(async (s, u, ct) => await UserExistInProject(s.ProjectId, u, ct))
+                .WithMessage(ErrorCodes.Collaborator.UserExistInProject.Message);
 
             RuleFor(p => p.ProjectId)
                 .NotEmpty().WithMessage(ErrorCodes.Collaborator.ProjectEmpty.Message)
@@ -70,6 +72,12 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
         private async Task<bool> UserExist(string email, CancellationToken cancellationToken)
         {
             return await _context.Set<User>().AnyAsync(m => m.Email == email, cancellationToken);
+        }
+
+        private async Task<bool> UserExistInProject(Guid projectId, string email, CancellationToken cancellationToken)
+        {
+            return !await _context.Set<Collaborator>()
+                .AnyAsync(m => m.User.Email == email && m.ProjectId == projectId, cancellationToken);
         }
 
         private async Task<bool> ProjectExist(Guid id, CancellationToken cancellationToken)

@@ -1,10 +1,14 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Domain.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 {
@@ -40,6 +44,41 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return new CommandResult(entity.Id);
+        }
+    }
+
+    public class UpdateCollaboratorRequestValidator : AbstractValidator<UpdateCollaboratorRequest>
+    {
+        private readonly IApplicationDbContext _context;
+        public UpdateCollaboratorRequestValidator(IApplicationDbContext context)
+        {
+            _context = context;
+
+            RuleFor(p => p.Email)
+                .NotEmpty().WithMessage(ErrorCodes.Collaborator.UserEmpty.Message)
+                .MustAsync(UserExist).WithMessage(ErrorCodes.Collaborator.UserExist.Message)
+                .MustAsync(async (s, u, ct) => await UserExistInProject(s.Id, s.ProjectId, u, ct))
+                .WithMessage(ErrorCodes.Collaborator.UserExistInProject.Message);
+
+            RuleFor(p => p.ProjectId)
+                .NotEmpty().WithMessage(ErrorCodes.Collaborator.ProjectEmpty.Message)
+                .MustAsync(ProjectExist).WithMessage(ErrorCodes.Collaborator.ProjectExist.Message);
+        }
+
+        private async Task<bool> UserExist(string email, CancellationToken cancellationToken)
+        {
+            return await _context.Set<User>().AnyAsync(m => m.Email == email, cancellationToken);
+        }
+
+        private async Task<bool> UserExistInProject(Guid id, Guid projectId, string email, CancellationToken cancellationToken)
+        {
+            return !await _context.Set<Collaborator>()
+                .AnyAsync(m => m.User.Email == email && m.ProjectId == projectId && m.Id != id, cancellationToken);
+        }
+
+        private async Task<bool> ProjectExist(Guid id, CancellationToken cancellationToken)
+        {
+            return await _context.Set<Project>().AnyAsync(m => m.Id == id, cancellationToken);
         }
     }
 }

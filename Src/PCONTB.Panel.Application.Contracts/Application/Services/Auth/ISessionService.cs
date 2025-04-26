@@ -9,5 +9,7 @@ namespace PCONTB.Panel.Application.Contracts.Application.Services.Auth
         Task<Guid> CreateSession(Guid sessionId, CancellationToken cancellationToken);
 
         Task<bool> CheckSessionActiveState(Session session, CancellationToken cancellationToken);
+        Task EndAllSession(Guid userId, CancellationToken cancellationToken);
+
     }
 }

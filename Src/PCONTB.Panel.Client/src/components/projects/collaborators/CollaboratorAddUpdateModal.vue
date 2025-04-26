@@ -10,6 +10,7 @@
           placeholder="Enter email"
           :errors="errors"
           :isAllTouched="isAllTouched"
+          :disabled="props.collaboratorId != null"
         />
         <base-form-input
           id="manageProjectPermission"
@@ -58,7 +59,7 @@ const props = defineProps({
   collaboratorId: String,
 });
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "refresh"]);
 
 const route = useRoute();
 
@@ -101,5 +102,13 @@ const handleCloseModal = () => {
   emit("close");
 };
 
-const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdate(submitInternal);
+const redirectAfterSucces = () => {
+  emit("refresh");
+  emit("close");
+};
+
+const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdate(
+  submitInternal,
+  redirectAfterSucces
+);
 </script>
