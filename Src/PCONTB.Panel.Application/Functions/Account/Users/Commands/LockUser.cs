@@ -36,7 +36,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 
-            _sessionAccesor.VerifyWithRole(entity.Id);
+            _sessionAccesor.VerifyWithRole(entity.Id, Role.Admin);
 
             var blockRole = new UserRole(Role.Block, entity.Id);
 

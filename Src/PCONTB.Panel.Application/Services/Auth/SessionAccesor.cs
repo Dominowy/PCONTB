@@ -26,9 +26,9 @@ namespace PCONTB.Panel.Application.Services.Auth
                 throw new UnauthorizedException(ErrorCodes.User.AccesDenied.Message);
         }
 
-        public void VerifyWithRole(Guid id)
+        public void VerifyWithRole(Guid id, Role role)
         {
-            if (Session.User.UserRoles.Any(r => r.Role == Role.Admin)) return;
+            if (Session.User.UserRoles.Any(r => r.Role == role)) return;
 
             if (Session.User.Id != id)
                 throw new UnauthorizedException(ErrorCodes.User.AccesDenied.Message);
