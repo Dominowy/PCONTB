@@ -1,5 +1,5 @@
 <template>
-  <button type="submit" class="btn btn-md" :class="variantClass">
+  <button type="submit" class="btn" :class="variantClass">
     <slot>{{ label }}</slot>
   </button>
 </template>
@@ -14,7 +14,7 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: "secondary",
+    default: "primary",
   },
 });
 

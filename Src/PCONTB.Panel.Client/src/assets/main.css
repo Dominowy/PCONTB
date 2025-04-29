@@ -7,18 +7,27 @@
 
 .nav-link:hover,
 .dropdown-item:hover {
-	background-color: #6c757d !important;
-	color: white;
+	background-color: #085ed7 !important;
+	color: white !important;
 	border-radius: 4px;
 }
 
 .dropdown-item.active,
 .dropdown-item:active {
-	background-color: #6c757d !important;
+	background-color: #085ed7 !important;
 	color: white !important;
 }
 
 .card {
 	border: 1px solid #dee2e6;
 	border-radius: 0 !important;
+}
+
+.tabs .nav-link {
+	color: black !important;
+}
+
+.tabs .nav-link:hover {
+	background-color: #085ed7 !important;
+	color: white !important;
 }

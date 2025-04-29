@@ -43,7 +43,7 @@
       </template>
       <template #footer>
         <button type="button" class="btn btn-secondary" @click="handleCloseModal">Close</button>
-        <base-form-submit-button label="Save" />
+        <base-form-submit-button variant="danger" label="Save" />
       </template>
     </base-modal>
   </base-form>

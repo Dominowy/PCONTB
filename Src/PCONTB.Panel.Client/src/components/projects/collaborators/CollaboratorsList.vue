@@ -26,8 +26,10 @@
           </b-list-group-item>
         </template>
       </template>
-      <b-list-group-item class="d-flex justify-content-center">
-        <b-button @click="handleShowAddModal"> Add collaborator </b-button>
+      <b-list-group-item class="d-flex justify-content-end">
+        <button class="btn btn-link text-secondary p-0" @click="handleShowAddModal">
+          <i-material-symbols-person-add style="font-size: 1.5rem" />
+        </button>
       </b-list-group-item>
     </b-list-group>
   </div>

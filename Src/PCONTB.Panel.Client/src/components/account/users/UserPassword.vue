@@ -1,32 +1,29 @@
 <template>
   <div>
-      <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
-        <base-form-input
-          id="password"
-          class="mt-2"
-          v-model="form.password"
-          label="Password"
-          type="password"
-          placeholder="Enter password"
-          :errors="errors"
-          :isAllTouched="isAllTouched"
-        />
-        <base-form-input
-          id="confirm"
-          class="mt-2"
-          v-model="form.confirmPassword"
-          label="Confirm Password"
-          property="ConfirmPassword"
-          type="password"
-          placeholder="Enter password"
-          :errors="errors"
-          :isAllTouched="isAllTouched"
-        />
-        <div class="d-flex w-100">
-          <base-form-submit-button label="Save" class="mt-4" />
-          <base-loading-spinner v-if="isLoading" />
-        </div>
-      </base-form>
+    <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
+      <base-form-input
+        id="password"
+        class="mt-2"
+        v-model="form.password"
+        label="Password"
+        type="password"
+        placeholder="Enter password"
+        :errors="errors"
+        :isAllTouched="isAllTouched"
+      />
+      <base-form-input
+        id="confirm"
+        class="mt-2"
+        v-model="form.confirmPassword"
+        label="Confirm Password"
+        property="ConfirmPassword"
+        type="password"
+        placeholder="Enter password"
+        :errors="errors"
+        :isAllTouched="isAllTouched"
+      />
+      <base-form-submit-panel :isLoading="isLoading" />
+    </base-form>
   </div>
 </template>
 

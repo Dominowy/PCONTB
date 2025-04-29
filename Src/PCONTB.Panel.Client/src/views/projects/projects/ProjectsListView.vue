@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex justify-content-between">
       <h2>Projects</h2>
-      <b-button @click="goToAdd">Add</b-button>
+      <b-button variant="primary" @click="goToAdd">Add</b-button>
     </div>
     <b-row v-if="content">
       <b-col v-for="project in content.projects" :key="project.id" md="4" class="mt-2">

@@ -19,10 +19,7 @@
         :errors="errors"
         :isAllTouched="isAllTouched"
       />
-      <div class="d-flex w-100">
-        <base-form-submit-button label="Save" class="mt-4" />
-        <base-loading-spinner v-if="isLoading" />
-      </div>
+      <base-form-submit-panel :isLoading="isLoading" />
     </base-form>
   </div>
 </template>

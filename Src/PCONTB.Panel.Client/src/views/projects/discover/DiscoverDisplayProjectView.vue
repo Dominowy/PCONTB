@@ -2,7 +2,6 @@
   <div>
     <div>
       <h2>Projects</h2>
-      <b-button @click="goToAdd">Add</b-button>
     </div>
 
     <b-row>
