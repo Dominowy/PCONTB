@@ -1,6 +1,5 @@
 <template>
   <div>
-    <b-card class="border-0">
       <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
         <base-form-input
           id="password"
@@ -28,7 +27,6 @@
           <base-loading-spinner v-if="isLoading" />
         </div>
       </base-form>
-    </b-card>
   </div>
 </template>
 

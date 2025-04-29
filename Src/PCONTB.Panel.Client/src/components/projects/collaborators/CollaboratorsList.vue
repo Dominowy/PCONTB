@@ -1,37 +1,35 @@
 <template>
   <div>
-    <b-card class="border-0">
-      <b-list-group vertical="md">
-        <template v-if="content">
-          <template v-for="collaborator in content.collaborators" :key="collaborator.id">
-            <b-list-group-item>
-              <div class="d-flex justify-content-between">
-                <div class="d-flex align-items-center">
-                  {{ collaborator.user.email }}
-                </div>
-                <div>
-                  <button
-                    class="btn btn-link text-secondary p-0"
-                    @click="handleShowUpdateModal(collaborator.id)"
-                  >
-                    <i-material-symbols-settings-rounded style="font-size: 1.5rem" />
-                  </button>
-                  <button
-                    class="btn btn-link text-secondary p-0"
-                    @click="handleShowDeleteModal(collaborator.id)"
-                  >
-                    <i-material-symbols-person-remove style="font-size: 1.5rem" />
-                  </button>
-                </div>
+    <b-list-group vertical="md">
+      <template v-if="content">
+        <template v-for="collaborator in content.collaborators" :key="collaborator.id">
+          <b-list-group-item>
+            <div class="d-flex justify-content-between">
+              <div class="d-flex align-items-center">
+                {{ collaborator.user.email }}
               </div>
-            </b-list-group-item>
-          </template>
+              <div>
+                <button
+                  class="btn btn-link text-secondary p-0"
+                  @click="handleShowUpdateModal(collaborator.id)"
+                >
+                  <i-material-symbols-settings-rounded style="font-size: 1.5rem" />
+                </button>
+                <button
+                  class="btn btn-link text-secondary p-0"
+                  @click="handleShowDeleteModal(collaborator.id)"
+                >
+                  <i-material-symbols-person-remove style="font-size: 1.5rem" />
+                </button>
+              </div>
+            </div>
+          </b-list-group-item>
         </template>
-        <b-list-group-item class="d-flex justify-content-center">
-          <b-button @click="handleShowAddModal"> Add collaborator </b-button>
-        </b-list-group-item>
-      </b-list-group>
-    </b-card>
+      </template>
+      <b-list-group-item class="d-flex justify-content-center">
+        <b-button @click="handleShowAddModal"> Add collaborator </b-button>
+      </b-list-group-item>
+    </b-list-group>
   </div>
   <collaborator-add-update-modal
     v-if="showModal"

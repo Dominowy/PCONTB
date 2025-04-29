@@ -2,7 +2,9 @@
   <div>
     <base-header :title="title" />
     <b-row>
-      <project-add-update />
+      <b-card>
+        <project-add-update />
+      </b-card>
     </b-row>
   </div>
 </template>

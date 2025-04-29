@@ -3,7 +3,7 @@
     <template #body> Are you sure you want to delete collaborator? </template>
     <template #footer>
       <button type="button" class="btn btn-secondary" @click="handleCloseModal">Close</button>
-      <b-button @click="handleDelete">Delete</b-button>
+      <b-button variant="danger" @click="handleDelete">Delete</b-button>
     </template>
   </base-modal>
 </template>

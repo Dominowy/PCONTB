@@ -1,31 +1,29 @@
 <template>
   <div>
-    <b-card class="border-0">
-      <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
-        <base-form-input
-          id="username"
-          class="mt-2"
-          v-model="form.username"
-          label="Username"
-          placeholder="Enter username"
-          :errors="errors"
-          :isAllTouched="isAllTouched"
-        />
-        <base-form-input
-          id="email"
-          class="mt-2"
-          v-model="form.email"
-          label="Email"
-          placeholder="Enter email"
-          :errors="errors"
-          :isAllTouched="isAllTouched"
-        />
-        <div class="d-flex w-100">
-          <base-form-submit-button label="Save" class="mt-4" />
-          <base-loading-spinner v-if="isLoading" />
-        </div>
-      </base-form>
-    </b-card>
+    <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
+      <base-form-input
+        id="username"
+        class="mt-2"
+        v-model="form.username"
+        label="Username"
+        placeholder="Enter username"
+        :errors="errors"
+        :isAllTouched="isAllTouched"
+      />
+      <base-form-input
+        id="email"
+        class="mt-2"
+        v-model="form.email"
+        label="Email"
+        placeholder="Enter email"
+        :errors="errors"
+        :isAllTouched="isAllTouched"
+      />
+      <div class="d-flex w-100">
+        <base-form-submit-button label="Save" class="mt-4" />
+        <base-loading-spinner v-if="isLoading" />
+      </div>
+    </base-form>
   </div>
 </template>
 
