@@ -1,18 +1,19 @@
 <template>
-  <div>
-    <div>
-      <h2>Projects</h2>
-    </div>
+  <div v-if="content">
+    <base-header :title="content.project.name" />
+    <b-card>
 
-    <b-row>
-      <b-col md="12" class="mb-2">
-        <b-card class="text-center">
-          <b-card-title>
-            <IClarityAvatarLine class="mb-2 fs-1" />
-          </b-card-title>
-        </b-card>
-      </b-col>
-    </b-row>
+    </b-card>
+    <b-card no-body>
+      <b-tabs card>
+        <b-tab title="Campaign">
+          
+        </b-tab>
+        <b-tab title="Creator">
+          
+        </b-tab>
+      </b-tabs>
+    </b-card>
   </div>
 </template>
 
@@ -21,21 +22,18 @@ import { useDisplay } from "@/composables/useDisplay";
 import { useStore } from "@/store/index";
 import ApiClient from "@/services/ApiClient";
 import { onMounted } from "vue";
-import { useRouter } from "vue-router";
+import {useRoute } from "vue-router";
 
 const store = useStore();
-const router = useRouter();
+const route = useRoute();
 
 onMounted(() => {
   loadData(onDataLoaded);
 });
 
-const goToAdd = async () => {
-  router.push({ name: "projects:add" });
-};
 
 const onDataLoaded = async () => {
-  return await ApiClient.request("projects/projects/get-all-by-user-id", { id: store.user.id });
+  return await ApiClient.request("projects/projects/get-by-id", { id: route.params.id });
 };
 
 const { content, loadData } = useDisplay(`Projects - ${store.user.username}`);

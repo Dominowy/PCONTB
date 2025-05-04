@@ -11,6 +11,8 @@ namespace PCONTB.Panel.Application.Models.Account.Users
 
         public static UserDto Map(User user)
         {
+            if (user == null) return null;
+
             return new UserDto
             {
                 Id = user.Id,

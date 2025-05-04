@@ -5,12 +5,12 @@ let routes = [];
 
 routes.push({
   path: "discover",
-  name: "discover",
+  name: "projects:discover",
   component: DiscoverProjectsView,
 },
 {
   path: "discover/:id/display",
-  name: "projects:display",
+  name: "projects:discover:display",
   component: DiscoverDisplayProjectView,
 },);
 

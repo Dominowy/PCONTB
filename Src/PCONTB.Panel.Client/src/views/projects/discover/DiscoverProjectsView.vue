@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="d-flex justify-content-between">
-      <h2>Discover</h2>
-    </div>
+    <base-header title="Discover" />
     <b-row v-if="content">
       <b-col v-for="project in content.projects" :key="project.id" md="4" class="mt-2">
         <b-card>
@@ -41,7 +39,7 @@ const onDataLoaded = async () => {
 };
 
 const goToProject = (id) => {
-  router.push({ name: "discover:display", params: { id: id } });
+  router.push({ name: "projects:discover:display", params: { id: id } });
 };
 
 const { content, loadData } = useDisplay("Discover");
