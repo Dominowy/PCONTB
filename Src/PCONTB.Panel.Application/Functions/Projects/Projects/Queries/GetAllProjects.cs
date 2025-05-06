@@ -62,7 +62,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
                 .Include(p => p.Category)
                 .Include(p => p.Subcategory)
                 .Include(p => p.Images)
-                .Where(p => p.UserId == request.Id)
+                .Where(p => p.UserId == request.Id || p.Collaborators.Any(m => m.UserId == request.Id))
                 .ToListAsync(cancellationToken);
 
             return new GetAllProjectsResponse()
