@@ -21,6 +21,12 @@
                 >
                   <i-material-symbols-person-remove style="font-size: 1.5rem" />
                 </button>
+                <button
+                  class="btn btn-link text-secondary p-0"
+                  @click="goToProfile(collaborator.user.id, collaborator.user.username)"
+                >
+                  <i-material-symbols-article-person style="font-size: 1.5rem" />
+                </button>
               </div>
             </div>
           </b-list-group-item>
@@ -51,11 +57,12 @@
 import { useDisplay } from "@/composables/useDisplay";
 import ApiClient from "@/services/ApiClient";
 import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const showModal = ref(false);
 const showDeleteModal = ref(false);
 const collaboratorId = ref(null);
+const router = useRouter();
 const route = useRoute();
 
 onMounted(() => {
@@ -89,6 +96,14 @@ const handleCloseModal = async () => {
   collaboratorId.value = null;
   showModal.value = false;
   showDeleteModal.value = false;
+};
+
+const goToProfile = async (id, username) => {
+  router.push({
+    name: "account:users:profile",
+    params: { id },
+    query: { username },
+  });
 };
 
 const { content, loadData } = useDisplay();

@@ -8,7 +8,7 @@
             <div class="d-flex justify-content-between align-items-center">
               <div>{{ project.name }}</div>
               <button class="btn btn-link text-secondary p-0" @click="goToProject(project.id)">
-                <IBiArrowRight style="font-size: 1.5rem" />
+                <i-bi-arrow-right style="font-size: 1.5rem" />
               </button>
             </div>
           </b-card-title>

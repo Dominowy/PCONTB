@@ -1,6 +1,6 @@
 <template>
   <div v-if="content">
-    <h2>Profile</h2>
+    <base-header :title="`Profile-${content.user.username}`" />
     <b-row>
       <b-col md="12" class="mb-2">
         <b-card class="text-center">
@@ -24,19 +24,19 @@
 
 <script setup>
 import { useDisplay } from "@/composables/useDisplay";
-import { useStore } from "@/store/index";
+import { useRoute } from "vue-router";
 import ApiClient from "@/services/ApiClient";
 import { onMounted } from "vue";
 
-const store = useStore();
+const route = useRoute();
 
 onMounted(() => {
   loadData(onDataLoaded);
 });
 
 const onDataLoaded = async () => {
-  return await ApiClient.request("account/users/get-by-id", { id: store.user.id });
+  return await ApiClient.request("account/users/get-by-id", { id: route.params.id });
 };
 
-const { content, loadData } = useDisplay(`Profile - ${store.user.username}`);
+const { content, loadData } = useDisplay(`Profile - ${route.query.username}`);
 </script>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PCONTB.Panel.Infrastructure.Context;
@@ -11,9 +12,11 @@ using PCONTB.Panel.Infrastructure.Context;
 namespace PCONTB.Panel.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250506233125_ChangeImageToProjectImage")]
+    partial class ChangeImageToProjectImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,7 +175,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.ToTable("Collaborator");
                 });
 
-            modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Images.Image", b =>
+            modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Images.ProjectImage", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -196,7 +199,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("Image");
+                    b.ToTable("ProjectImage");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Projects.Project", b =>
@@ -286,7 +289,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Images.Image", b =>
+            modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Images.ProjectImage", b =>
                 {
                     b.HasOne("PCONTB.Panel.Domain.Projects.Projects.Project", "Project")
                         .WithMany("Images")

@@ -26,7 +26,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
         {
             var entity = await _dbContext.Set<Project>()
                 .Include(p => p.User)
-                .Include(p => p.Collaborators)
+                .Include(p => p.Collaborators).ThenInclude(p => p.User)
                 .Include(p => p.Category)
                 .Include(p => p.Subcategory)
                 .Include(p => p.Images)

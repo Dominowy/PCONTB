@@ -9,6 +9,9 @@
         <b-tab title="Collaborators">
           <collaborators-list />
         </b-tab>
+        <b-tab title="Images">
+          <project-upload-image />
+        </b-tab>
       </b-tabs>
     </b-card>
   </div>

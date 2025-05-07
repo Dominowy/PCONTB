@@ -34,8 +34,6 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 
-            _sessionAccesor.Verify(entity.Id);
-
             return new GetUserResponse()
             {
                 User = UserDto.Map(entity),

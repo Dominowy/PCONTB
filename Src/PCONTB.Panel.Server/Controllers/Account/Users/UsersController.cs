@@ -14,7 +14,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
     {
         #region Get by id
 
-        [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
+        [AllowAnonymousToken]
         [HttpPost("get-by-id")]
         [ProducesResponseType(typeof(GetUserResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
