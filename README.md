@@ -259,8 +259,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   <img src="https://user-images.githubusercontent.com/56208135/165714270-a657857e-57c7-4bc1-9fb2-f04f71dafa3b.png" />
 </p>
         
-- - - 
-
+---
 ### Logowanie
 
 * **Cel**: 
@@ -291,8 +290,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   <img src="https://user-images.githubusercontent.com/56208135/165717473-0ae1b1a6-0fd9-4f63-aae7-2277e8e0637c.png" />
 </p>
 
-- - - 
-
+---
 ### Wylogowanie
 
 * **Cel**: 
@@ -316,7 +314,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   <img src="https://user-images.githubusercontent.com/56208135/165771164-1de77e13-8ec6-43b5-8e27-7a90679790b2.png" />
 </p>
 
-- - -
+---
 ### Aktualizacja danych konta
 
 * **Cel**: 
@@ -349,7 +347,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   <img src="https://user-images.githubusercontent.com/56208135/165722805-7997efdf-9c1e-46c6-b46d-e8fef952a646.png" />
 </p>
 
-Zmiana hasła konta
+---
+###Zmiana hasła konta
 
 * **Cel**:  
   Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
@@ -369,4 +368,88 @@ Zmiana hasła konta
   - Krok 4.2: Zbyt słabe hasło – system prosi o mocniejsze.
 
 * **Przykład**:
+  
 ---
+### Zamknięcie konta
+
+* **Cel**:  
+  Umożliwienie użytkownikowi trwałego zamknięcia konta.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik przechodzi do ustawień konta.
+  - Krok 2: Wybiera opcję zamknięcia konta.
+  - Krok 3: Potwierdza decyzję.
+  - Krok 4: System usuwa lub dezaktywuje konto.
+  - Krok 5: Komunikat o poprawnej operacji.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Użytkownik anuluje proces – konto pozostaje aktywne.
+  - Krok 4.1: Konto powiązane z aktywnymi kampaniami – informacja o konieczności ich zamknięcia.
+    
+* **Przykład**:
+  
+---
+### Wyświetlanie użytkownika
+
+* **Cel**:  
+  Umożliwienie przeglądania publicznego profilu innego użytkownika.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik otwiera kampanię lub projekt.
+  - Krok 2: Kliknięcie na nazwę użytkownika przekierowuje do jego profilu.
+  - Krok 3: System wyświetla dane publiczne profilu.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Konto ukryte lub zablokowane – informacja o braku dostępu.
+    
+* **Przykład**:
+  
+---
+###  Zarządzanie sesjami
+
+* **Cel**:  
+  Umożliwienie zarządzania aktywnymi sesjami logowania.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik przechodzi do ustawień bezpieczeństwa.
+  - Krok 2: Przegląda listę aktywnych sesji.
+  - Krok 3: Wybiera zakończenie jednej lub wszystkich sesji.
+  - Krok 4: System wylogowuje wskazane sesje.
+  - Krok 5: Komunikat o poprawnej operacji.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Błąd połączenia z serwerem – informacja o błędzie.
+  - Krok 4.1: Część sesji już wygasła – system informuje użytkownika.
+
+* **Przykład**:
+  
+---
+###  Wyszukiwanie projektów
+
+* **Cel**:  
+  Umożliwienie użytkownikowi przeszukiwania bazy projektów.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik przechodzi do sekcji Discover.
+  - Krok 2: Wprowadza frazę lub ustawia filtry.
+  - Krok 3: System wyświetla wyniki wyszukiwania.
+  - Krok 4: Użytkownik przegląda szczegóły projektów.
+  - Krok 5: Może przejść do wsparcia lub kontaktu z twórcą.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Brak wyników – wyświetlany komunikat.
+  - Krok 2.1: Wprowadzono niedozwolone znaki – błąd walidacji.
+ 
+* **Przykład**:
