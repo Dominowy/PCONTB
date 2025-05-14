@@ -24,9 +24,25 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 #### 2.1 Obiekty Binesowe
 
-| Nazwa:| Projekt <img width=1000/>|         
+| Nazwa:| Discover <img width=1000/>|         
 |:------|:----------------------------------------------------------------------|
-| Opis: | |
+| Opis: | Miejsce, w którym użytkownik może przeglądać dostępne projekty oraz ich kampanie, sprawdzać cele, postępy oraz użytkowników odpowiedzialnych za projekt. |
+
+| Nazwa:| Project managment <img width=1000/>|         
+|:------|:----------------------------------------------------------------------|
+| Opis: | Miejsce, w którym użytkownik może tworzyć nowe projekty lub zarządzać istniejącymi (edycja, usuwanie, aktualizacja statusów itp.). |
+
+| Nazwa:| User settings <img width=1000/>|         
+|:------|:----------------------------------------------------------------------|
+| Opis: | Miejsce, w którym użytkownik może edytować ustawienia swojego konta, zarządzać profilem oraz preferencjami. |
+
+| Nazwa:| Admin/Moderator Panel <img width=1000/>|         
+|:------|:----------------------------------------------------------------------|
+| Opis: | Panel administracyjny dla moderatorów i administratorów, umożliwiający zarządzanie użytkownikami i zgłoszeniami. |
+
+| Nazwa:| Ledger(portfel) <img width=1000/>|         
+|:------|:----------------------------------------------------------------------|
+| Opis: | Moduł odpowiedzialny za zarządzanie finansami: przegląd salda, historia transakcji, wpłaty, wypłaty oraz integrację z systemem płatności. |
 
 #### 2.2 Aktorzy Biznesowi
 
@@ -38,9 +54,13 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |:------|:----------------------------------------------------------------------|
 | Opis: |Użytkownik który wykreował swoje konto ale także się zalogował ma pełny dostęp do oferowanej treśći. |
 
-| Nazwa:| Administrator          <img width=1000/>                              |
+| Nazwa:| Moderator          <img width=1000/>                                  |
 |:------|:----------------------------------------------------------------------|
-| Opis: |Posiada pełen dostęp do serwisu. Służy jako pomoc techniczna dla użytkowników. |
+| Opis: | Użytkownik z uprawnieniami administracyjnymi w ograniczonym zakresie. Może wspierać użytkowników, moderować treści i zgłoszenia, ale nie zarządza całym systemem. |
+
+| Nazwa:| Administrator          <img width=1000/>                    |
+|:------|:----------------------------------------------------------------------|
+| Opis: | Użytkownik z najwyższym poziomem uprawnień. Ma dostęp do wszystkich funkcji systemu, zarządza użytkownikami oraz konfiguracją systemu. |
 
 ### 3.Wymagania
 
