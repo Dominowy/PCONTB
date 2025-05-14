@@ -113,17 +113,25 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 -VUE.JS
 
+-VITE.JS
+
 -PostgreSQL
+
+-Solana
 
 #### 4.2. Opis Architektury
 
-![image](https://user-images.githubusercontent.com/56208135/139593932-508362fd-074d-4bef-b898-e03149c3f736.png)
+System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
--Za frontend będzie odpowiadać VUE.JS w którym zostanie napisany interfejs użytkownika z którym to będzie mógł wchodzić w interakcję.
+1. Panel - jest to część z którą to użytkownik będzie wchodził w interakcję podzielona jest na backend oraz frontend.
+        1.1 Backend - ASP.NET - napisane zostanie w nim WEB.API mechanika strony, połączenie z bazą danych oraz połączenie z Ledgerem. Backend zostanie podzielony na warstwy zgodnie z czystą architekturą.
+        1.2 Frontend - VUE.JS - zostanie w nim stworzony interfejs użytkownika w komunikacji z backendem będzie pośredniczył VITE.JS w którym zostanie skonfigurowane proxy.
+        1.3 Baza danych - PostgreSQL - odpowiedzialny z przechowywanie danych o projektach oraz użytkownikach
+2. Ledger - w nim znajdą się informację o płatnościach oraz transakcjach backend będzie wymieniał z nim dane na temat transakcji.
 
--Za backend odpowiada ASP.NET w którym zostanie napisany Web API. W ASP.NET zostanie wykonana mechanika strony oraz połączenie z bazą danych. 
+Wygląd systemu:
+![image](https://github.com/user-attachments/assets/0e996372-d122-495d-b421-495c441211e9)
 
--Za przechowywanie danych będzie odpowiadać baza danych PostgreSQL. Będą się w niej znajodwać informacje o klientach, subksrybentach oraz książkach.
 
 ![image](https://github.com/user-attachments/assets/d6a14862-fe50-425d-8d22-e14a0f15cd12)
 
