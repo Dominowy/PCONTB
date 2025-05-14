@@ -197,7 +197,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 |Rejestracja | + | - | - |
 |Logowanie | + | + | + |
 |Wylogowanie sesji| + | + | + |
-|Edycja danych konta | + | + | + |
+|Aktualizacja danych konta | + | + | + |
 |Zmiana hasła konta | + | + | + |
 |Zamknięcie konta | + | + | + |
 |Wyświetlanie użytkownika | + | + | + |
@@ -225,10 +225,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 ### 6. Przypadki użycia
 
-### Tworzenie Konta Użytkownika
+### Rejestracja
 
 * **Cel**: 
-        Celem tej funkcjonalności jest stworzenie konta dla nowego użytkownika w celu możliwości zalogowania się do systemu.
+        Celem tej funkcjonalności jest rejestracja konta dla nowego użytkownika w celu możliwości zalogowania.
         
 * **Aktorzy**:
         Administrator
@@ -264,10 +264,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Logowanie
 
 * **Cel**: 
-       Celem tej funkcjonalności jest umożliwienie użytkownikowi/administratorowi uzyskania dostępu do systemu.
+       Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowy/administratorowi uzyskania dostępu.
         
 * **Aktorzy**:
-        Administrator/Użytkownik   
+        Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
       
@@ -296,10 +296,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Wylogowanie
 
 * **Cel**: 
-        Celem tej funkcjonalności jest umożliwienie użytkownikowi/administratorowi wylogowanie się z systemu tym samym zakończenie sesji korzystania z sytemu i zabezpieczenie swojego konta.
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi wylogowanie się z systemu tym samym zakończenie sesji korzystania z sytemu i zabezpieczenie swojego konta.
      
 * **Aktorzy**:
-        Administrator/Użytkownik
+        Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
 
@@ -317,10 +317,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 </p>
 
 - - -
-### Aktualizacja danych użytkownika
+### Aktualizacja danych konta
 
 * **Cel**: 
-        Celem tej funkcjonalności jest umożliwienie administratorowi zmiany danych(e-mail, hasło, operator) użytkownika.
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi zmiany danych(e-mail, nazwa) użytkownika.
      
 * **Główny Aktor**:
         Administrator
@@ -349,4 +349,24 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   <img src="https://user-images.githubusercontent.com/56208135/165722805-7997efdf-9c1e-46c6-b46d-e8fef952a646.png" />
 </p>
 
+Zmiana hasła konta
+
+* **Cel**:  
+  Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
+  - Krok 2: Wprowadza stare i nowe hasło.
+  - Krok 3: Zapisuje.
+  - Krok 4: Sprawdzana jest poprawność starego hasła i siła nowego.
+  - Krok 5: Komunikat o poprawnej operacji.
+
+* **Rozszerzenia**:
+  - Krok 4.1: Niepoprawne stare hasło – informacja o błędzie.
+  - Krok 4.2: Zbyt słabe hasło – system prosi o mocniejsze.
+
+* **Przykład**:
 ---
