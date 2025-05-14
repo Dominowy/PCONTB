@@ -776,7 +776,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Umożliwienie użytkownikowi wsparcia finansowego dla wybranego projektu.
 
-* **Główny Aktor**:  
+* **Główny Aktor**: 
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -849,12 +849,12 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 ---
-### Dodawanie użytkowników (Admin)
+### Dodawanie użytkowników
 
 * **Cel**:
         Administrator może ręcznie dodać nowego użytkownika do systemu.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Administrator
 
 * **Główny Scenariusz**:
@@ -878,7 +878,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Zablokowanie konta użytkownika w przypadku naruszenia regulaminu.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Moderator, Administrator
 
 * **Główny Scenariusz**:
@@ -904,7 +904,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Przywrócenie dostępu do zablokowanego konta.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Moderator, Administrator
 
 * **Główny Scenariusz**:
@@ -929,7 +929,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**:
         Administrator może zmienić poziom dostępu danego użytkownika (np. nadać rolę moderatora).
 
-* **Główny Aktor**: 
+* **Główny Aktor**:
         Administrator
 
 * **Główny Scenariusz**:
