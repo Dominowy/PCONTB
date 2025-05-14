@@ -230,7 +230,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Celem tej funkcjonalności jest rejestracja konta dla nowego użytkownika w celu możliwości zalogowania.
         
-* **Główny Aktor**: Użytkownik/Moderator/Administrator
+* **Główny Aktor**:
+        Użytkownik/Moderator/Administrator
                         
 * **Główny Scenariusz**:
   
@@ -262,7 +263,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowy/administratorowi uzyskania dostępu.
         
-* **Główny Aktor**: Użytkownik/Moderator/Administrator
+* **Główny Aktor**:
+        Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
 ```
@@ -291,7 +293,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi wylogowanie się z systemu tym samym zakończenie sesji korzystania z sytemu i zabezpieczenie swojego konta.
      
-* **Główny Aktor**: Użytkownik/Moderator/Administrator
+* **Główny Aktor**:
+        Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
 
@@ -313,7 +316,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi zmiany danych(e-mail, nazwa) użytkownika.
      
-* **Główny Aktor**: Administrator
+* **Główny Aktor**:
+        Administrator
                 
 * **Główny Scenariusz**:
   
@@ -342,9 +346,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Zmiana hasła konta
 
 * **Cel**:  
-  Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
 
-* **Główny Aktor**: Użytkownik
+* **Główny Aktor**:
+        Użytkownik
 
 * **Główny Scenariusz**:
   
@@ -369,10 +374,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Zamknięcie konta
 
 * **Cel**:  
-  Umożliwienie użytkownikowi trwałego zamknięcia konta.
+        Umożliwienie użytkownikowi trwałego zamknięcia konta.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -397,10 +402,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Wyświetlanie użytkownika
 
 * **Cel**:  
-  Umożliwienie przeglądania publicznego profilu innego użytkownika.
+        Umożliwienie przeglądania publicznego profilu innego użytkownika.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -422,10 +427,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Zarządzanie sesjami
 
 * **Cel**:  
-  Umożliwienie zarządzania aktywnymi sesjami logowania.
+        Umożliwienie zarządzania aktywnymi sesjami logowania.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -450,10 +455,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Wyszukiwanie projektów
 
 * **Cel**:  
-  Umożliwienie użytkownikowi przeszukiwania bazy projektów.
+        Umożliwienie użytkownikowi przeszukiwania bazy projektów.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -478,10 +483,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Utworzenie projektów
 
 * **Cel**:  
-  Umożliwienie użytkownikowi utworzenia nowego projektu.
+        Umożliwienie użytkownikowi utworzenia nowego projektu.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
   
@@ -509,7 +514,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Umożliwienie użytkownikowi aktualizacji danych istniejącego projektu.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -535,10 +540,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Usuwanie projektów
 
 * **Cel**:  
-  Umożliwienie użytkownikowi usunięcia projektu.
+        Umożliwienie użytkownikowi usunięcia projektu.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -564,10 +569,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Dodawanie kollaboratorów
 
 * **Cel**:  
-  Umożliwienie dodania współpracownika do projektu.
+        Umożliwienie dodania współpracownika do projektu.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -592,10 +597,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Zarządzanie kollaboratorami
 
 * **Cel**:  
-  Umożliwienie edycji uprawnień kollaboratorów.
+        Umożliwienie edycji uprawnień kollaboratorów.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -620,10 +625,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Usuwanie kollaboratorów
 
 * **Cel**:  
-  Umożliwienie usunięcia użytkownika z listy kollaboratorów projektu.
+        Umożliwienie usunięcia użytkownika z listy kollaboratorów projektu.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -644,10 +649,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Dodawanie zdjęć projektów
 
 * **Cel**:  
-  Umożliwienie użytkownikowi dodania grafiki do projektu.
+        Umożliwienie użytkownikowi dodania grafiki do projektu.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -670,10 +675,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Edycja zdjęć projektów
 
 * **Cel**:  
-  Umożliwienie edycji opisów lub nazw zdjęć.
+        Umożliwienie edycji opisów lub nazw zdjęć.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -695,10 +700,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Usuwanie zdjęć projektów
 
 * **Cel**:  
-  Umożliwienie usunięcia zdjęcia z projektu.
+        Umożliwienie usunięcia zdjęcia z projektu.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -721,10 +726,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Tworzenie opisu projektów
 
 * **Cel**:  
-  Umożliwienie stworzenia szczegółowego opisu projektu.
+        Umożliwienie stworzenia szczegółowego opisu projektu.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -746,10 +751,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Edycja opisu projektów
 
 * **Cel**:  
-  Umożliwienie edycji istniejącego opisu projektu.
+        Umożliwienie edycji istniejącego opisu projektu.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -769,10 +774,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Wsparcie projektów
 
 * **Cel**:  
-  Umożliwienie użytkownikowi wsparcia finansowego dla wybranego projektu.
+        Umożliwienie użytkownikowi wsparcia finansowego dla wybranego projektu.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -797,10 +802,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Wypłata środków z kampanii
 
 * **Cel**:  
-  Pozwala twórcy projektu wypłacić zgromadzone środki z kampanii.
+        Pozwala twórcy projektu wypłacić zgromadzone środki z kampanii.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
   
@@ -825,10 +830,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Przegląd portfela z kampanii
 
 * **Cel**:  
-  Umożliwienie użytkownikowi wglądu w aktualne saldo oraz historię transakcji projektowych.
+        Umożliwienie użytkownikowi wglądu w aktualne saldo oraz historię transakcji projektowych.
 
 * **Główny Aktor**:  
-  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
 
@@ -847,10 +852,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Dodawanie użytkowników (Admin)
 
 * **Cel**:  
-  Administrator może ręcznie dodać nowego użytkownika do systemu.
+        Administrator może ręcznie dodać nowego użytkownika do systemu.
 
 * **Główny Aktor**:  
-  Administrator
+        Administrator
 
 * **Główny Scenariusz**:
 
@@ -871,10 +876,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Blokada użytkowników
 
 * **Cel**:  
-  Zablokowanie konta użytkownika w przypadku naruszenia regulaminu.
+        Zablokowanie konta użytkownika w przypadku naruszenia regulaminu.
 
 * **Główny Aktor**:  
-  Moderator, Administrator
+        Moderator, Administrator
 
 * **Główny Scenariusz**:
 
@@ -897,10 +902,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Odblokowanie użytkowników
 
 * **Cel**:  
-  Przywrócenie dostępu do zablokowanego konta.
+        Przywrócenie dostępu do zablokowanego konta.
 
 * **Główny Aktor**:  
-  Moderator, Administrator
+        Moderator, Administrator
 
 * **Główny Scenariusz**:
   
@@ -922,10 +927,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Zmiana uprawnień użytkownika
 
 * **Cel**:  
-  Administrator może zmienić poziom dostępu danego użytkownika (np. nadać rolę moderatora).
+        Administrator może zmienić poziom dostępu danego użytkownika (np. nadać rolę moderatora).
 
 * **Główny Aktor**:  
-  Administrator
+        Administrator
 
 * **Główny Scenariusz**:
   
