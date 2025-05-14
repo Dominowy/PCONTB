@@ -70,7 +70,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |:-----------|:----------------------------------------------------------------------|
 | Nazwa:     |Tworzenie konta                                                        |
 | Priorytet: |Wysoki                                                                 |
-| Rola:      |Wszyscy                                                                |
+| Rola:      |Użytkownik                                                             |
 | Opis:      |Aplikcja oferuje tworzenie konta poprzez podane przez użytkownika dane.|
 
 | ID:        | 2                   <img width=1000/>                                                                       | 
@@ -79,6 +79,62 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 | Priorytet: |Wysoki                                                                                                       |
 | Rola:      |Wszyscy                                                                                                      |
 | Opis:      |Za pomocą podanych przy logowaniu danych uwierzytelniającyh, użytkownik uzyskuje dostęp do swojego konta.    |
+
+| ID:        | 3                 <img width=1000/>                                                                         | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Zarządzanie kontem                                                                                           |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Wszyscy                                                                                                      |
+| Opis:      |Użytkownik może aktualizować swoje dane osobowe, hasło oraz ustawienia profilu.                              |
+
+| ID:        | 4                <img width=1000/>                                                                          | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Wyszukiwane/Przeglądanie kampani                                                                             |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Wszyscy                                                                                                      |
+| Opis:      |Użytkownik może wyszukiwać i przeglądać dostępne kampanie oraz szczegóły projektów.                          |
+
+| ID:        | 5               <img width=1000/>                                                                           | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Dodawanie projektów                                                                                          |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Użytkownik                                                                                                   |
+| Opis:      |Użytkownik może tworzyć nowe projekty.                                                                       |
+
+| ID:        | 6               <img width=1000/>                                                                           | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Wspieranie projektów                                                                                         |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Użytkownik                                                                                                   |
+| Opis:      |	Użytkownik może finansowo wspierać projekty poprzez system płatności.                                      |
+
+| ID:        | 7               <img width=1000/>                                                                           | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Zarządzanie projektami                                                                                       |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Użytkownik                                                                                                   |
+| Opis:      |Użytkownik może edytować, aktualizować i usuwać własne projekty.                                             |
+
+| ID:        | 8              <img width=1000/>                                                                            | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Moderowanie aplikacji                                                                                        |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Moderator                                                                                                    |
+| Opis:      |Moderator może przeglądać zgłoszenia, zarządzać treściami i wspierać użytkowników.                           |
+
+| ID:        | 9             <img width=1000/>                                                                             | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Administrowanie aplikacji                                                                                    |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Administrator                                                                                                |
+| Opis:      |Administrator zarządza użytkownikami oraz konfiguracją systemu.                                              |
+
+| ID:        | 10             <img width=1000/>                                                                            | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Przegląd portfela (Ledger)                                                                                   |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Użytkownik                                                                                                   |
+| Opis:      |Użytkownik może przeglądać saldo, historię transakcji i dokonywać operacji finansowych.                      |
 
 #### 3.2 Wymagania Niefunkcjonalne
 
@@ -92,13 +148,13 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |:-----------|:---------------------------------------------------------------------------|
 | Nazwa:     |Łatwość w użyciu                                                            |
 | Priorytet: |Wysoki                                                                      |
-| Opis:      |Platforma ma być przyjazna dla użytkownika. Interfejs musi być nowoczesny i przejrzysty.                                                                              |
+| Opis:      |Platforma ma być przyjazna dla użytkownika. Interfejs musi być nowoczesny i przejrzysty. |
 
 | ID:        | 3                      <img width=1000/>                                   |
 |:-----------|:---------------------------------------------------------------------------|
 | Nazwa:     |Intergralność danych                                                        |
 | Priorytet: |Średni                                                                      |
-| Opis:      |Zabezpieczenie przed nieautoryzowaną zmianą danych przez użycie szyfrowania haseł oraz implementacja szyfrowanego połączenia https.                                   |
+| Opis:      |Zabezpieczenie przed nieautoryzowaną zmianą danych przez użycie szyfrowania haseł oraz implementacja szyfrowanego połączenia https. |
 
 | ID:        | 4                       <img width=1000/>                                  |
 |:-----------|:---------------------------------------------------------------------------|
