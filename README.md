@@ -194,11 +194,11 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 |Funkcjonalność | Użytkownik | Moderator | Administrator|
 |:-------------:|:----------:|:------------:|:------------:|
-|Rejestracja użytkownika | + | - | - |
-|Logowanie użytkownika| + | + | + |
-|Wylogowanie użytkownika| + | + | + |
-|Edycja danych użytkownika | + | + | + |
-|Zmiana hasła użytkownika | + | + | + |
+|Rejestracja | + | - | - |
+|Logowanie | + | + | + |
+|Wylogowanie sesji| + | + | + |
+|Edycja danych konta | + | + | + |
+|Zmiana hasła konta | + | + | + |
 |Zamknięcie konta | + | + | + |
 |Wyświetlanie użytkownika | + | + | + |
 |Zarządzanie sesjami | + | + | + |
