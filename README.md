@@ -187,8 +187,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 ![image](https://github.com/user-attachments/assets/0e996372-d122-495d-b421-495c441211e9)
 
-![image](https://github.com/user-attachments/assets/d6a14862-fe50-425d-8d22-e14a0f15cd12)
-
+![image](https://github.com/user-attachments/assets/875a6a96-e8b3-423f-8737-0e67a434b3c9)
 
 ### 5. Lista przypdków użycia
 
