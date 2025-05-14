@@ -404,7 +404,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Umożliwienie przeglądania publicznego profilu innego użytkownika.
 
-* **Główny Aktor**:  
+* **Główny Aktor**: 
         Użytkownik
 
 * **Główny Scenariusz**:
