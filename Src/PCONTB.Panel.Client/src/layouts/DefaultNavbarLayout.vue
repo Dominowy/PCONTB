@@ -4,7 +4,6 @@
     <b-navbar-toggle v-b-toggle.navbar-toggle-collapse />
     <b-collapse id="navbar-toggle-collapse" is-nav>
       <b-navbar-nav>
-        <router-link to="/" class="nav-link" active-class="active">Home</router-link>
         <router-link to="/projects/discover" class="nav-link" active-class="active">
           Discover
         </router-link>

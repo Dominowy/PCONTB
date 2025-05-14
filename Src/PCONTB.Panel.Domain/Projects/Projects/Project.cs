@@ -27,6 +27,8 @@ namespace PCONTB.Panel.Domain.Projects.Projects
 
         public virtual List<Image> Images { get; private set; }
 
+        public string Description { get; private set; }
+
         protected Project() : base()
         {
         }
