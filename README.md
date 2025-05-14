@@ -230,28 +230,25 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Celem tej funkcjonalności jest rejestracja konta dla nowego użytkownika w celu możliwości zalogowania.
         
-* **Aktorzy**:
-        Administrator
+* **Główny Aktor**: Użytkownik/Moderator/Administrator
                         
 * **Główny Scenariusz**:
-      
-        - Krok 1: Użytkownik przechodzi do logowanie.
-
-        - Krok 2: Klika przycisk link Rejestruj
-        
-        - Krok 3: Użytkownik wypełnia wymagane dane w formularzu.
-        
-        - Krok 4: Użytkownik klika przycisk "Rejestruj".
-        
-        - Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
-        
-        - Krok 6: Otrzymuje informację o pozytywnym wykreowaniu konta.
+  
+```
+- Krok 1: Użytkownik przechodzi do logowanie.
+- Krok 2: Klika przycisk link Rejestruj
+- Krok 3: Użytkownik wypełnia wymagane dane w formularzu.
+- Krok 4: Użytkownik klika przycisk "Rejestruj".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Otrzymuje informację o pozytywnym wykreowaniu konta.
+```
 
 * **Rozszerzenia**:
-        
-        - Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
-
-        - Krok 5.2: System prosi o ponowne wprowadzenie danych.
+  
+```
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
+```
         
 * **Przykład**:
 
@@ -265,24 +262,22 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowy/administratorowi uzyskania dostępu.
         
-* **Aktorzy**:
-        Użytkownik/Moderator/Administrator
+* **Główny Aktor**: Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
+```
       
-        - Krok 1: Użytkownik/Moderator/Administrator wyświetla się ekran z możliwością zarejestrowania lub zalogowania.
-        
-        - Krok 2: Użytkownik/Moderator/Administrator wypełnia dane w formularzu logowania.
-        
-        - Krok 3: Sprawdzana jest poprawność wprowadzonych danych.
-        
-        - Krok 4: Użytkownik/Moderator/Administrator zostaje pomyślnie zalogowany.
+- Krok 1: Użytkownik/Moderator/Administrator wyświetla się ekran z możliwością zarejestrowania lub zalogowania.
+- Krok 2: Użytkownik/Moderator/Administrator wypełnia dane w formularzu logowania.
+- Krok 3: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 4: Użytkownik/Moderator/Administrator zostaje pomyślnie zalogowany.
+```
 
 * **Rozszerzenia**:
-        
-        - Krok 3.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
-
-        - Krok 3.2: System prosi o ponowne wprowadzenie danych.
+```
+- Krok 3.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
+- Krok 3.2: System prosi o ponowne wprowadzenie danych.
+```
 
 * **Przykład**:
 
@@ -296,18 +291,16 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi wylogowanie się z systemu tym samym zakończenie sesji korzystania z sytemu i zabezpieczenie swojego konta.
      
-* **Aktorzy**:
-        Użytkownik/Moderator/Administrator
+* **Główny Aktor**: Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
 
-        - Krok 1: Użytkownik/Moderator/Administrator klika przycisk wyloguj.
+```
+- Krok 1: Użytkownik/Moderator/Administrator klika przycisk wyloguj.
+- Krok 2: Zamykana jest sesja określonego Użytkownik/Moderator/Administrator.
+- Krok 3: Komunikat o poprawynm wylogowaniu.
+```
 
-        - Krok 2: Zamykana jest sesja określonego Użytkownik/Moderator/Administrator.
-
-        - Krok 3: Komunikat o poprawynm wylogowaniu.
-        
-       
 * **Przykład**:
 
 <p align="center">
@@ -320,26 +313,24 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi zmiany danych(e-mail, nazwa) użytkownika.
      
-* **Główny Aktor**:
-        Administrator
+* **Główny Aktor**: Administrator
                 
 * **Główny Scenariusz**:
-
-        - Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
-
-        - Krok 2: Wprowadza nowe dane.
-       
-        - Krok 3: Użytkownik/Moderator/Administrator zapisuje.
-        
-        - Krok 4: Sprawdzana jest poprawność wprowadzonych danych.
-        
-        - Krok 5: Komunikat o poprawnej operacji.
+  
+```
+- Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
+- Krok 2: Wprowadza nowe dane.
+- Krok 3: Użytkownik/Moderator/Administrator zapisuje.
+- Krok 4: Sprawdzana jest poprawność wprowadzonych danych.     
+- Krok 5: Komunikat o poprawnej operacji.
+```
 
 * **Rozszerzenia**:
-        
-        - Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
-
-        - Krok 5.2: System prosi o ponowne wprowadzenie danych.
+  
+```
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
+```
        
 * **Przykład**:
 
@@ -353,32 +344,24 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**:  
   Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
 
-* **Główny Aktor**:  
-  Użytkownik
+* **Główny Aktor**: Użytkownik
 
 * **Główny Scenariusz**:
   
-  ```
-  - Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
-  
-  - Krok 2: Wprowadza stare i nowe hasło.
-  
-  - Krok 3: Zapisuje.
-  
-  - Krok 4: Sprawdzana jest poprawność starego hasła i siła nowego.
-  
-  - Krok 5: Komunikat o poprawnej operacji.
-  
-  ```
+```
+- Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
+- Krok 2: Wprowadza stare i nowe hasło.
+- Krok 3: Zapisuje.
+- Krok 4: Sprawdzana jest poprawność starego hasła i siła nowego.
+- Krok 5: Komunikat o poprawnej operacji.
+```
 
 * **Rozszerzenia**:
   
-  ```
-  - Krok 4.1: Niepoprawne stare hasło – informacja o błędzie.
-  
-  - Krok 4.2: Zbyt słabe hasło – system prosi o mocniejsze.
-
-  ```
+```
+- Krok 4.1: Niepoprawne stare hasło – informacja o błędzie. 
+- Krok 4.2: Zbyt słabe hasło – system prosi o mocniejsze.
+```
 
 * **Przykład**:
   
@@ -392,16 +375,22 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik przechodzi do ustawień konta.
-  - Krok 2: Wybiera opcję zamknięcia konta.
-  - Krok 3: Potwierdza decyzję.
-  - Krok 4: System usuwa lub dezaktywuje konto.
-  - Krok 5: Komunikat o poprawnej operacji.
+
+```
+- Krok 1: Użytkownik przechodzi do ustawień konta.
+- Krok 2: Wybiera opcję zamknięcia konta.
+- Krok 3: Potwierdza decyzję.
+- Krok 4: System usuwa lub dezaktywuje konto.
+- Krok 5: Komunikat o poprawnej operacji.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Użytkownik anuluje proces – konto pozostaje aktywne.
-  - Krok 4.1: Konto powiązane z aktywnymi kampaniami – informacja o konieczności ich zamknięcia.
-    
+
+```
+- Krok 3.1: Użytkownik anuluje proces – konto pozostaje aktywne.
+- Krok 4.1: Konto powiązane z aktywnymi kampaniami – informacja o konieczności ich zamknięcia.
+```
+
 * **Przykład**:
   
 ---
@@ -414,13 +403,19 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik otwiera kampanię lub projekt.
-  - Krok 2: Kliknięcie na nazwę użytkownika przekierowuje do jego profilu.
-  - Krok 3: System wyświetla dane publiczne profilu.
+
+```
+- Krok 1: Użytkownik otwiera kampanię lub projekt.
+- Krok 2: Kliknięcie na nazwę użytkownika przekierowuje do jego profilu.
+- Krok 3: System wyświetla dane publiczne profilu.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Konto ukryte lub zablokowane – informacja o braku dostępu.
-    
+
+```
+- Krok 3.1: Konto ukryte lub zablokowane – informacja o braku dostępu.
+```
+
 * **Przykład**:
   
 ---
@@ -433,15 +428,21 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik przechodzi do ustawień bezpieczeństwa.
-  - Krok 2: Przegląda listę aktywnych sesji.
-  - Krok 3: Wybiera zakończenie jednej lub wszystkich sesji.
-  - Krok 4: System wylogowuje wskazane sesje.
-  - Krok 5: Komunikat o poprawnej operacji.
+
+```
+- Krok 1: Użytkownik przechodzi do ustawień bezpieczeństwa.
+- Krok 2: Przegląda listę aktywnych sesji.
+- Krok 3: Wybiera zakończenie jednej lub wszystkich sesji.
+- Krok 4: System wylogowuje wskazane sesje.
+- Krok 5: Komunikat o poprawnej operacji.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Błąd połączenia z serwerem – informacja o błędzie.
-  - Krok 4.1: Część sesji już wygasła – system informuje użytkownika.
+
+```
+- Krok 3.1: Błąd połączenia z serwerem – informacja o błędzie.
+- Krok 4.1: Część sesji już wygasła – system informuje użytkownika.
+```
 
 * **Przykład**:
   
@@ -455,16 +456,22 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik przechodzi do sekcji Discover.
-  - Krok 2: Wprowadza frazę lub ustawia filtry.
-  - Krok 3: System wyświetla wyniki wyszukiwania.
-  - Krok 4: Użytkownik przegląda szczegóły projektów.
-  - Krok 5: Może przejść do wsparcia lub kontaktu z twórcą.
+
+```
+- Krok 1: Użytkownik przechodzi do sekcji Discover.
+- Krok 2: Wprowadza frazę lub ustawia filtry.
+- Krok 3: System wyświetla wyniki wyszukiwania.
+- Krok 4: Użytkownik przegląda szczegóły projektów.
+- Krok 5: Może przejść do wsparcia lub kontaktu z twórcą.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Brak wyników – wyświetlany komunikat.
-  - Krok 2.1: Wprowadzono niedozwolone znaki – błąd walidacji.
- 
+  
+```
+- Krok 3.1: Brak wyników – wyświetlany komunikat.
+- Krok 2.1: Wprowadzono niedozwolone znaki – błąd walidacji.
+```
+
 * **Przykład**:
 
 ---
@@ -477,15 +484,21 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik przechodzi do sekcji "Zarządzanie projektami".
-  - Krok 2: Wybiera opcję „Utwórz nowy projekt”.
-  - Krok 3: Wprowadza wymagane dane (nazwa, opis, kategorie, itp.).
-  - Krok 4: Zapisuje projekt.
-  - Krok 5: Projekt jest widoczny w systemie.
+  
+```
+- Krok 1: Użytkownik przechodzi do sekcji "Zarządzanie projektami".
+- Krok 2: Wybiera opcję „Utwórz nowy projekt”.
+- Krok 3: Wprowadza wymagane dane (nazwa, opis, kategorie, itp.).
+- Krok 4: Zapisuje projekt.
+- Krok 5: Projekt jest widoczny w systemie.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Niepełne dane – komunikat o błędzie.
-  - Krok 4.1: Błąd serwera – projekt nie został zapisany.
+
+```
+- Krok 3.1: Niepełne dane – komunikat o błędzie.
+- Krok 4.1: Błąd serwera – projekt nie został zapisany.
+```
 
 * **Przykład**:
 
@@ -499,15 +512,21 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik otwiera swój projekt.
-  - Krok 2: Wybiera opcję „Edytuj”.
-  - Krok 3: Wprowadza zmiany w danych.
-  - Krok 4: Zapisuje zmiany.
-  - Krok 5: Projekt zostaje zaktualizowany.
+
+```
+- Krok 1: Użytkownik otwiera swój projekt.
+- Krok 2: Wybiera opcję „Edytuj”.
+- Krok 3: Wprowadza zmiany w danych.
+- Krok 4: Zapisuje zmiany.
+- Krok 5: Projekt zostaje zaktualizowany.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Niepoprawne dane – system zgłasza błąd.
-  - Krok 4.1: Brak połączenia z serwerem – zmiany niezapisane.
+  
+```
+ - Krok 3.1: Niepoprawne dane – system zgłasza błąd.
+- Krok 4.1: Brak połączenia z serwerem – zmiany niezapisane.
+```
 
 * **Przykład**:
 
@@ -522,15 +541,21 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik otwiera swój projekt.
-  - Krok 2: Wybiera opcję „Usuń projekt”.
-  - Krok 3: Potwierdza decyzję.
-  - Krok 4: System usuwa projekt.
-  - Krok 5: Wyświetlany jest komunikat o powodzeniu.
+
+```
+- Krok 1: Użytkownik otwiera swój projekt.
+- Krok 2: Wybiera opcję „Usuń projekt”.
+- Krok 3: Potwierdza decyzję.
+- Krok 4: System usuwa projekt.
+- Krok 5: Wyświetlany jest komunikat o powodzeniu.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Użytkownik anuluje usuwanie.
-  - Krok 4.1: Projekt powiązany z aktywną kampanią – usunięcie zablokowane.
+  
+```
+- Krok 3.1: Użytkownik anuluje usuwanie.
+- Krok 4.1: Projekt powiązany z aktywną kampanią – usunięcie zablokowane.
+```
 
 * **Przykład**:
 
@@ -545,37 +570,49 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik otwiera projekt.
-  - Krok 2: Przechodzi do zakładki „Kollaboratorzy”.
-  - Krok 3: Wprowadza dane użytkownika (np. email).
-  - Krok 4: Zatwierdza dodanie.
-  - Krok 5: Kollaborator pojawia się na liście.
+
+```
+- Krok 1: Użytkownik otwiera projekt.
+- Krok 2: Przechodzi do zakładki „Kollaboratorzy”.
+- Krok 3: Wprowadza dane użytkownika (np. email).
+- Krok 4: Zatwierdza dodanie.
+- Krok 5: Kollaborator pojawia się na liście.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Nieistniejący użytkownik – informacja o błędzie.
-  - Krok 4.1: Kollaborator już istnieje – komunikat o duplikacie.
-  - 
+  
+```
+- Krok 3.1: Nieistniejący użytkownik – informacja o błędzie.
+- Krok 4.1: Kollaborator już istnieje – komunikat o duplikacie.
+```
+
 * **Przykład**:
 
 ---
 ### Zarządzanie kollaboratorami
 
 * **Cel**:  
-  Umożliwienie edycji uprawnień i ról kollaboratorów.
+  Umożliwienie edycji uprawnień kollaboratorów.
 
 * **Główny Aktor**:  
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik otwiera listę kollaboratorów.
-  - Krok 2: Wybiera osobę do edycji.
-  - Krok 3: Zmienia rolę/uprawnienia.
-  - Krok 4: Zapisuje zmiany.
-  - Krok 5: System aktualizuje dostęp.
+
+```
+- Krok 1: Użytkownik otwiera listę kollaboratorów.
+- Krok 2: Wybiera osobę do edycji.
+- Krok 3: Zmienia rolę/uprawnienia.
+- Krok 4: Zapisuje zmiany.
+- Krok 5: System aktualizuje dostęp.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Brak dostępu – użytkownik nie jest właścicielem.
-  - Krok 4.1: Błąd zapisu – zmiany cofnięte.
+  
+```
+- Krok 3.1: Brak dostępu – użytkownik nie jest właścicielem.
+- Krok 4.1: Błąd zapisu – zmiany cofnięte.
+```
 
 * **Przykład**:
 
@@ -589,14 +626,18 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Otwiera listę kollaboratorów.
-  - Krok 2: Wybiera osobę i klika „Usuń”.
-  - Krok 3: Potwierdza decyzję.
-  - Krok 4: Kollaborator zostaje usunięty.
 
+```
+- Krok 1: Otwiera listę kollaboratorów.
+- Krok 2: Wybiera osobę i klika „Usuń”.
+- Krok 3: Potwierdza decyzję.
+- Krok 4: Kollaborator zostaje usunięty.
+```
 * **Rozszerzenia**:
-  - Krok 2.1: Próba usunięcia właściciela projektu – operacja zablokowana.
-
+  
+```
+- Krok 2.1: Próba usunięcia właściciela projektu – operacja zablokowana.
+```
 * **Przykład**:
 
 ---
@@ -609,14 +650,19 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Otwiera projekt i przechodzi do sekcji zdjęć.
-  - Krok 2: Wybiera plik graficzny.
-  - Krok 3: Dodaje zdjęcie.
-  - Krok 4: System przetwarza i zapisuje grafikę.
 
+```
+- Krok 1: Otwiera projekt i przechodzi do sekcji zdjęć.
+- Krok 2: Wybiera plik graficzny.
+- Krok 3: Dodaje zdjęcie.
+- Krok 4: System przetwarza i zapisuje grafikę.
+```
 * **Rozszerzenia**:
-  - Krok 2.1: Niepoprawny format – informacja o błędzie.
-  - Krok 3.1: Przekroczony limit zdjęć – dodanie zablokowane.
+  
+```
+- Krok 2.1: Niepoprawny format – informacja o błędzie.
+- Krok 3.1: Przekroczony limit zdjęć – dodanie zablokowane.
+```
 
 * **Przykład**:
 
@@ -630,13 +676,18 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik wybiera zdjęcie w projekcie.
-  - Krok 2: Edytuje opis lub tytuł.
-  - Krok 3: Zapisuje zmiany.
+
+```
+- Krok 1: Użytkownik wybiera zdjęcie w projekcie.
+- Krok 2: Edytuje opis lub tytuł.
+- Krok 3: Zapisuje zmiany.
+```
 
 * **Rozszerzenia**:
-  - Krok 2.1: Pole puste – walidacja błędu.
-
+  
+```
+- Krok 2.1: Pole puste – walidacja błędu.
+```
 * **Przykład**:
 
 ---
@@ -650,13 +701,19 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik otwiera listę zdjęć.
-  - Krok 2: Wybiera zdjęcie do usunięcia.
-  - Krok 3: Potwierdza usunięcie.
-  - Krok 4: System usuwa grafikę.
+
+```
+- Krok 1: Użytkownik otwiera listę zdjęć.
+- Krok 2: Wybiera zdjęcie do usunięcia.
+- Krok 3: Potwierdza usunięcie.
+- Krok 4: System usuwa grafikę.
+```
 
 * **Rozszerzenia**:
-  - Krok 2.1: Próba usunięcia głównego zdjęcia – wymagane wcześniejsze przypisanie innego.
+
+```
+- Krok 2.1: Próba usunięcia głównego zdjęcia – wymagane wcześniejsze przypisanie innego.
+```
 
 * **Przykład**:
 
@@ -670,13 +727,18 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik tworzy nowy projekt.
-  - Krok 2: Wprowadza treść opisu.
-  - Krok 3: Zapisuje projekt.
+
+```
+- Krok 1: Użytkownik tworzy nowy projekt.
+- Krok 2: Wprowadza treść opisu.
+- Krok 3: Zapisuje projekt.
+```
 
 * **Rozszerzenia**:
-  - Krok 2.1: Opis za krótki – system informuje o wymaganej długości.
-
+  
+```
+- Krok 2.1: Opis za krótki – system informuje o wymaganej długości.
+```
 * **Przykład**:
 
 ---
@@ -690,13 +752,17 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik edytuje projekt.
-  - Krok 2: Wprowadza zmiany w opisie.
-  - Krok 3: Zapisuje zmiany.
+
+```
+- Krok 1: Użytkownik edytuje projekt.
+- Krok 2: Wprowadza zmiany w opisie.
+- Krok 3: Zapisuje zmiany.
+```
 
 * **Rozszerzenia**:
-  - Krok 2.1: Opis zawiera niedozwolone znaki – system blokuje zapis.
-
+```
+- Krok 2.1: Opis zawiera niedozwolone znaki – system blokuje zapis.
+```
 * **Przykład**:
 
 ---
@@ -709,15 +775,21 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik wybiera projekt.
-  - Krok 2: Wybiera kwotę wsparcia.
-  - Krok 3: Wybiera metodę płatności.
-  - Krok 4: Potwierdza operację.
-  - Krok 5: System przetwarza transakcję i informuje o sukcesie.
+
+```
+- Krok 1: Użytkownik wybiera projekt.
+- Krok 2: Wybiera kwotę wsparcia.
+- Krok 3: Wybiera metodę płatności.
+- Krok 4: Potwierdza operację.
+- Krok 5: System przetwarza transakcję i informuje o sukcesie.
+```
 
 * **Rozszerzenia**:
+
+```
   - Krok 3.1: Niepoprawna metoda płatności – komunikat o błędzie.
   - Krok 5.1: Brak środków – transakcja anulowana.
+```
 
 * **Przykład**:
 
@@ -731,15 +803,21 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik przechodzi do sekcji finansów projektu.
-  - Krok 2: Wybiera opcję „Wypłać środki”.
-  - Krok 3: Wprowadza dane konta.
-  - Krok 4: Potwierdza wypłatę.
-  - Krok 5: System realizuje przelew i wyświetla potwierdzenie.
+  
+```
+- Krok 1: Użytkownik przechodzi do sekcji finansów projektu.
+- Krok 2: Wybiera opcję „Wypłać środki”.
+- Krok 3: Wprowadza dane konta.
+- Krok 4: Potwierdza wypłatę.
+- Krok 5: System realizuje przelew i wyświetla potwierdzenie.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Nieprawidłowe dane bankowe – wypłata zablokowana.
-  - Krok 4.1: Kampania jeszcze trwa – brak możliwości wypłaty.
+  
+```
+- Krok 3.1: Nieprawidłowe dane bankowe – wypłata zablokowana.
+- Krok 4.1: Kampania jeszcze trwa – brak możliwości wypłaty.
+```
 
 * **Przykład**:
 
@@ -753,12 +831,16 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
-  - Krok 1: Użytkownik otwiera sekcję „Portfel”.
-  - Krok 2: System wyświetla saldo oraz listę transakcji.
 
+```
+- Krok 1: Użytkownik otwiera sekcję „Portfel”.
+- Krok 2: System wyświetla saldo oraz listę transakcji.
+```
 * **Rozszerzenia**:
-  - Krok 2.1: Błąd API – brak dostępu do danych portfela.
 
+```
+- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+```
 * **Przykład**:
 
 ---
@@ -771,14 +853,18 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Administrator
 
 * **Główny Scenariusz**:
-  - Krok 1: Administrator otwiera panel zarządzania użytkownikami.
-  - Krok 2: Wprowadza dane nowego użytkownika.
-  - Krok 3: Zatwierdza dodanie.
-  - Krok 4: Użytkownik pojawia się w systemie.
+
+```
+- Krok 1: Administrator otwiera panel zarządzania użytkownikami.
+- Krok 2: Wprowadza dane nowego użytkownika.
+- Krok 3: Zatwierdza dodanie.
+- Krok 4: Użytkownik pojawia się w systemie.
+```
 
 * **Rozszerzenia**:
-  - Krok 2.1: Użytkownik o tym adresie e-mail już istnieje.
-
+```
+- Krok 2.1: Użytkownik o tym adresie e-mail już istnieje.
+```
 * **Przykład**:
 
 ---
@@ -791,13 +877,19 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Moderator, Administrator
 
 * **Główny Scenariusz**:
-  - Krok 1: Otwiera profil użytkownika.
-  - Krok 2: Wybiera opcję „Zablokuj konto”.
-  - Krok 3: Potwierdza decyzję.
-  - Krok 4: Użytkownik traci dostęp do konta.
+
+```
+- Krok 1: Otwiera profil użytkownika.
+- Krok 2: Wybiera opcję „Zablokuj konto”.
+- Krok 3: Potwierdza decyzję.
+- Krok 4: Użytkownik traci dostęp do konta.
+```
 
 * **Rozszerzenia**:
-  - Krok 3.1: Próba zablokowania administratora – operacja niedozwolona.
+  
+```
+- Krok 3.1: Próba zablokowania administratora – operacja niedozwolona.
+```
 
 * **Przykład**:
 
@@ -811,14 +903,21 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Moderator, Administrator
 
 * **Główny Scenariusz**:
+  
+```
   - Krok 1: Otwiera profil zablokowanego użytkownika.
   - Krok 2: Wybiera opcję „Odblokuj”.
   - Krok 3: Potwierdza.
   - Krok 4: Konto zostaje aktywowane.
+```
 
 * **Rozszerzenia**:
-  - Krok 2.1: Konto nie jest zablokowane – operacja niepotrzebna.
+```
+- Krok 2.1: Konto nie jest zablokowane – operacja niepotrzebna.
+```
 
+* **Przykład**:
+  
 ---
 ### Zmiana uprawnień użytkownika
 
@@ -829,13 +928,18 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Administrator
 
 * **Główny Scenariusz**:
-  - Krok 1: Administrator otwiera profil użytkownika.
-  - Krok 2: Wybiera nowy poziom uprawnień.
-  - Krok 3: Zatwierdza zmianę.
-  - Krok 4: Uprawnienia zostają zaktualizowane.
-
+  
+ ```
+ - Krok 1: Administrator otwiera profil użytkownika.
+ - Krok 2: Wybiera nowy poziom uprawnień.
+ - Krok 3: Zatwierdza zmianę.
+ - Krok 4: Uprawnienia zostają zaktualizowane.
+```
 * **Rozszerzenia**:
-  - Krok 2.1: Próba nadania wyższych uprawnień niż własne – operacja odrzucona.
+  
+```
+- Krok 2.1: Próba nadania wyższych uprawnień niż własne – operacja odrzucona.
+```
 
 * **Przykład**:
 
