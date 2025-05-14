@@ -684,3 +684,146 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Rozszerzenia**:
   - Krok 2.1: Opis zawiera niedozwolone znaki – system blokuje zapis.
 
+* **Przykład**:
+
+---
+### Wsparcie projektów
+
+* **Cel**:  
+  Umożliwienie użytkownikowi wsparcia finansowego dla wybranego projektu.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik wybiera projekt.
+  - Krok 2: Wybiera kwotę wsparcia.
+  - Krok 3: Wybiera metodę płatności.
+  - Krok 4: Potwierdza operację.
+  - Krok 5: System przetwarza transakcję i informuje o sukcesie.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Niepoprawna metoda płatności – komunikat o błędzie.
+  - Krok 5.1: Brak środków – transakcja anulowana.
+
+* **Przykład**:
+
+---
+### Wypłata środków z kampanii
+
+* **Cel**:  
+  Pozwala twórcy projektu wypłacić zgromadzone środki z kampanii.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik przechodzi do sekcji finansów projektu.
+  - Krok 2: Wybiera opcję „Wypłać środki”.
+  - Krok 3: Wprowadza dane konta.
+  - Krok 4: Potwierdza wypłatę.
+  - Krok 5: System realizuje przelew i wyświetla potwierdzenie.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Nieprawidłowe dane bankowe – wypłata zablokowana.
+  - Krok 4.1: Kampania jeszcze trwa – brak możliwości wypłaty.
+
+* **Przykład**:
+
+---
+### Przegląd portfela z kampanii
+
+* **Cel**:  
+  Umożliwienie użytkownikowi wglądu w aktualne saldo oraz historię transakcji projektowych.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik otwiera sekcję „Portfel”.
+  - Krok 2: System wyświetla saldo oraz listę transakcji.
+
+* **Rozszerzenia**:
+  - Krok 2.1: Błąd API – brak dostępu do danych portfela.
+
+* **Przykład**:
+
+---
+### Dodawanie użytkowników (Admin)
+
+* **Cel**:  
+  Administrator może ręcznie dodać nowego użytkownika do systemu.
+
+* **Główny Aktor**:  
+  Administrator
+
+* **Główny Scenariusz**:
+  - Krok 1: Administrator otwiera panel zarządzania użytkownikami.
+  - Krok 2: Wprowadza dane nowego użytkownika.
+  - Krok 3: Zatwierdza dodanie.
+  - Krok 4: Użytkownik pojawia się w systemie.
+
+* **Rozszerzenia**:
+  - Krok 2.1: Użytkownik o tym adresie e-mail już istnieje.
+
+* **Przykład**:
+
+---
+### Blokada użytkowników
+
+* **Cel**:  
+  Zablokowanie konta użytkownika w przypadku naruszenia regulaminu.
+
+* **Główny Aktor**:  
+  Moderator, Administrator
+
+* **Główny Scenariusz**:
+  - Krok 1: Otwiera profil użytkownika.
+  - Krok 2: Wybiera opcję „Zablokuj konto”.
+  - Krok 3: Potwierdza decyzję.
+  - Krok 4: Użytkownik traci dostęp do konta.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Próba zablokowania administratora – operacja niedozwolona.
+
+* **Przykład**:
+
+---
+### Odblokowanie użytkowników
+
+* **Cel**:  
+  Przywrócenie dostępu do zablokowanego konta.
+
+* **Główny Aktor**:  
+  Moderator, Administrator
+
+* **Główny Scenariusz**:
+  - Krok 1: Otwiera profil zablokowanego użytkownika.
+  - Krok 2: Wybiera opcję „Odblokuj”.
+  - Krok 3: Potwierdza.
+  - Krok 4: Konto zostaje aktywowane.
+
+* **Rozszerzenia**:
+  - Krok 2.1: Konto nie jest zablokowane – operacja niepotrzebna.
+
+---
+### Zmiana uprawnień użytkownika
+
+* **Cel**:  
+  Administrator może zmienić poziom dostępu danego użytkownika (np. nadać rolę moderatora).
+
+* **Główny Aktor**:  
+  Administrator
+
+* **Główny Scenariusz**:
+  - Krok 1: Administrator otwiera profil użytkownika.
+  - Krok 2: Wybiera nowy poziom uprawnień.
+  - Krok 3: Zatwierdza zmianę.
+  - Krok 4: Uprawnienia zostają zaktualizowane.
+
+* **Rozszerzenia**:
+  - Krok 2.1: Próba nadania wyższych uprawnień niż własne – operacja odrzucona.
+
+* **Przykład**:
+
+---
