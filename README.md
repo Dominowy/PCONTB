@@ -357,11 +357,13 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   Użytkownik
 
 * **Główny Scenariusz**:
+  ```
   - Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
   - Krok 2: Wprowadza stare i nowe hasło.
   - Krok 3: Zapisuje.
   - Krok 4: Sprawdzana jest poprawność starego hasła i siła nowego.
   - Krok 5: Komunikat o poprawnej operacji.
+  ```
 
 * **Rozszerzenia**:
   - Krok 4.1: Niepoprawne stare hasło – informacja o błędzie.
