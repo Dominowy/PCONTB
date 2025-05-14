@@ -192,19 +192,22 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 ### 5. Lista przypdków użycia
 
-|Funkcjonalność | Użytkownik | Administrator|
+|Funkcjonalność | Użytkownik | Moderator | Administrator|
 |:-------------:|:----------:|:------------:|
-|Rejestracja użytkownika | + | - |
-|Logowanie | + | + |
-|Wylogowanie  | + | + |
-|Edycja danych profilu | + | + |
-|Wyszukiwanie projektów | + | + |
-|Utworzenie projektu | + | - | 
-|Edycja projektu | + | - | 
-|Usuwanie projektu | + | - |
-|Wsparcie projektu | + | - |
-|Wypłata środków | + | - |
-|Usuwanie konta | + | - |
+|Rejestracja użytkownika | + | - | - |
+|Logowanie | + | + | + |
+|Wylogowanie  | + | + | + |
+|Edycja danych profilu | + | + | + |
+|Wyszukiwanie projektów | + | + | + |
+|Utworzenie projektu | + | - | - |
+|Edycja projektu | + | - | - |
+|Usuwanie projektu | + | - | - |
+|Wsparcie projektu | + | - | - |
+|Wypłata środków | + | - | - |
+|Dodawanie użytkownika | + | - | + |
+|Blokada użytkownika | + | + | + |
+|Odblokowanie użytkownika | - | + | + |
+|Zmiana uprawnień użytkownika | + | - | + |
 
 
 ### 6. Przypadki użycia
