@@ -24,9 +24,25 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 #### 2.1 Obiekty Binesowe
 
-| Nazwa:| Projekt <img width=1000/>|         
+| Nazwa:| Discover <img width=1000/>|         
 |:------|:----------------------------------------------------------------------|
-| Opis: | |
+| Opis: | Miejsce, w którym użytkownik może przeglądać dostępne projekty oraz ich kampanie, sprawdzać cele, postępy oraz użytkowników odpowiedzialnych za projekt. |
+
+| Nazwa:| Project managment <img width=1000/>|         
+|:------|:----------------------------------------------------------------------|
+| Opis: | Miejsce, w którym użytkownik może tworzyć nowe projekty lub zarządzać istniejącymi (edycja, usuwanie, aktualizacja statusów itp.). |
+
+| Nazwa:| User settings <img width=1000/>|         
+|:------|:----------------------------------------------------------------------|
+| Opis: | Miejsce, w którym użytkownik może edytować ustawienia swojego konta, zarządzać profilem oraz preferencjami. |
+
+| Nazwa:| Admin/Moderator Panel <img width=1000/>|         
+|:------|:----------------------------------------------------------------------|
+| Opis: | Panel administracyjny dla moderatorów i administratorów, umożliwiający zarządzanie użytkownikami i zgłoszeniami. |
+
+| Nazwa:| Ledger(portfel) <img width=1000/>|         
+|:------|:----------------------------------------------------------------------|
+| Opis: | Moduł odpowiedzialny za zarządzanie finansami: przegląd salda, historia transakcji, wpłaty, wypłaty oraz integrację z systemem płatności. |
 
 #### 2.2 Aktorzy Biznesowi
 
@@ -38,9 +54,13 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |:------|:----------------------------------------------------------------------|
 | Opis: |Użytkownik który wykreował swoje konto ale także się zalogował ma pełny dostęp do oferowanej treśći. |
 
-| Nazwa:| Administrator          <img width=1000/>                              |
+| Nazwa:| Moderator          <img width=1000/>                                  |
 |:------|:----------------------------------------------------------------------|
-| Opis: |Posiada pełen dostęp do serwisu. Służy jako pomoc techniczna dla użytkowników. |
+| Opis: | Użytkownik z uprawnieniami administracyjnymi w ograniczonym zakresie. Może wspierać użytkowników, moderować treści i zgłoszenia, ale nie zarządza całym systemem. |
+
+| Nazwa:| Administrator          <img width=1000/>                    |
+|:------|:----------------------------------------------------------------------|
+| Opis: | Użytkownik z najwyższym poziomem uprawnień. Ma dostęp do wszystkich funkcji systemu, zarządza użytkownikami oraz konfiguracją systemu. |
 
 ### 3.Wymagania
 
@@ -50,7 +70,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |:-----------|:----------------------------------------------------------------------|
 | Nazwa:     |Tworzenie konta                                                        |
 | Priorytet: |Wysoki                                                                 |
-| Rola:      |Wszyscy                                                                |
+| Rola:      |Użytkownik                                                             |
 | Opis:      |Aplikcja oferuje tworzenie konta poprzez podane przez użytkownika dane.|
 
 | ID:        | 2                   <img width=1000/>                                                                       | 
@@ -59,6 +79,62 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 | Priorytet: |Wysoki                                                                                                       |
 | Rola:      |Wszyscy                                                                                                      |
 | Opis:      |Za pomocą podanych przy logowaniu danych uwierzytelniającyh, użytkownik uzyskuje dostęp do swojego konta.    |
+
+| ID:        | 3                 <img width=1000/>                                                                         | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Zarządzanie kontem                                                                                           |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Wszyscy                                                                                                      |
+| Opis:      |Użytkownik może aktualizować swoje dane osobowe, hasło oraz ustawienia profilu.                              |
+
+| ID:        | 4                <img width=1000/>                                                                          | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Wyszukiwane/Przeglądanie kampani                                                                             |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Wszyscy                                                                                                      |
+| Opis:      |Użytkownik może wyszukiwać i przeglądać dostępne kampanie oraz szczegóły projektów.                          |
+
+| ID:        | 5               <img width=1000/>                                                                           | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Dodawanie projektów                                                                                          |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Użytkownik                                                                                                   |
+| Opis:      |Użytkownik może tworzyć nowe projekty.                                                                       |
+
+| ID:        | 6               <img width=1000/>                                                                           | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Wspieranie projektów                                                                                         |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Użytkownik                                                                                                   |
+| Opis:      |Użytkownik może finansowo wspierać projekty poprzez system płatności.                                        |
+
+| ID:        | 7               <img width=1000/>                                                                           | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Zarządzanie projektami                                                                                       |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Użytkownik                                                                                                   |
+| Opis:      |Użytkownik może edytować, aktualizować i usuwać własne projekty. Dodawać kollaboratorów, zdjęcia oraz opisy. |
+
+| ID:        | 8              <img width=1000/>                                                                            | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Moderowanie aplikacji                                                                                        |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Moderator                                                                                                    |
+| Opis:      |Moderator może przeglądać zgłoszenia, zarządzać treściami i wspierać użytkowników.                           |
+
+| ID:        | 9             <img width=1000/>                                                                             | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Administrowanie aplikacji                                                                                    |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Administrator                                                                                                |
+| Opis:      |Administrator zarządza użytkownikami oraz konfiguracją systemu.                                              |
+
+| ID:        | 10             <img width=1000/>                                                                            | 
+|:-----------|:------------------------------------------------------------------------------------------------------------|
+| Nazwa:     |Przegląd portfela (Ledger)                                                                                   |
+| Priorytet: |Wysoki                                                                                                       |
+| Rola:      |Użytkownik                                                                                                   |
+| Opis:      |Użytkownik może przeglądać saldo, historię transakcji i dokonywać operacji finansowych.                      |
 
 #### 3.2 Wymagania Niefunkcjonalne
 
@@ -72,13 +148,13 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |:-----------|:---------------------------------------------------------------------------|
 | Nazwa:     |Łatwość w użyciu                                                            |
 | Priorytet: |Wysoki                                                                      |
-| Opis:      |Platforma ma być przyjazna dla użytkownika. Interfejs musi być nowoczesny i przejrzysty.                                                                              |
+| Opis:      |Platforma ma być przyjazna dla użytkownika. Interfejs musi być nowoczesny i przejrzysty. |
 
 | ID:        | 3                      <img width=1000/>                                   |
 |:-----------|:---------------------------------------------------------------------------|
 | Nazwa:     |Intergralność danych                                                        |
 | Priorytet: |Średni                                                                      |
-| Opis:      |Zabezpieczenie przed nieautoryzowaną zmianą danych przez użycie szyfrowania haseł oraz implementacja szyfrowanego połączenia https.                                   |
+| Opis:      |Zabezpieczenie przed nieautoryzowaną zmianą danych przez użycie szyfrowania haseł oraz implementacja szyfrowanego połączenia https. |
 
 | ID:        | 4                       <img width=1000/>                                  |
 |:-----------|:---------------------------------------------------------------------------|
@@ -93,67 +169,86 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 -VUE.JS
 
+-VITE.JS
+
 -PostgreSQL
+
+-Solana
 
 #### 4.2. Opis Architektury
 
-![image](https://user-images.githubusercontent.com/56208135/139593932-508362fd-074d-4bef-b898-e03149c3f736.png)
+System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
--Za frontend będzie odpowiadać VUE.JS w którym zostanie napisany interfejs użytkownika z którym to będzie mógł wchodzić w interakcję.
+1. Panel - jest to część z którą to użytkownik będzie wchodził w interakcję podzielona jest na backend oraz frontend.
+- Backend - ASP.NET - napisane zostanie w nim WEB.API mechanika strony, połączenie z bazą danych oraz połączenie z Ledgerem. Backend zostanie podzielony na warstwy zgodnie z czystą architekturą.
+- Frontend - VUE.JS - zostanie w nim stworzony interfejs użytkownika w komunikacji z backendem będzie pośredniczył VITE.JS w którym zostanie skonfigurowane proxy.
+- Baza danych - PostgreSQL - odpowiedzialny z przechowywanie danych o projektach oraz użytkownikach
+2. Ledger - w nim znajdą się informację o płatnościach oraz transakcjach backend będzie wymieniał z nim dane na temat transakcji.
 
--Za backend odpowiada ASP.NET w którym zostanie napisany Web API. W ASP.NET zostanie wykonana mechanika strony oraz połączenie z bazą danych. 
+![image](https://github.com/user-attachments/assets/0e996372-d122-495d-b421-495c441211e9)
 
--Za przechowywanie danych będzie odpowiadać baza danych PostgreSQL. Będą się w niej znajodwać informacje o klientach, subksrybentach oraz książkach.
-
-![image](https://github.com/user-attachments/assets/d6a14862-fe50-425d-8d22-e14a0f15cd12)
-
+![image](https://github.com/user-attachments/assets/875a6a96-e8b3-423f-8737-0e67a434b3c9)
 
 ### 5. Lista przypdków użycia
 
-|Funkcjonalność | Użytkownik | Administrator|
-|:-------------:|:----------:|:------------:|
-|Rejestracja użytkownika | + | - |
-|Logowanie | + | + |
-|Wylogowanie  | + | + |
-|Edycja danych profilu | + | + |
-|Wyszukiwanie projektów | + | + |
-|Utworzenie projektu | + | - | 
-|Edycja projektu | + | - | 
-|Usuwanie projektu | + | - |
-|Wsparcie projektu | + | - |
-|Wypłata środków | + | - |
-|Usuwanie konta | + | - |
+|Funkcjonalność | Użytkownik | Moderator | Administrator|
+|:-------------:|:----------:|:------------:|:------------:|
+|Rejestracja | + | - | - |
+|Logowanie | + | + | + |
+|Wylogowanie sesji| + | + | + |
+|Aktualizacja danych konta | + | + | + |
+|Zmiana hasła konta | + | + | + |
+|Zamknięcie konta | + | + | + |
+|Wyświetlanie użytkownika | + | + | + |
+|Zarządzanie sesjami | + | + | + |
+|Wyszukiwanie projektów | + | + | + |
+|Utworzenie projektów | + | - | - |
+|Edycja projektów | + | - | - |
+|Usuwanie projektów | + | - | - |
+|Dodawanie kollaboratów | + | - | - |
+|Zarządzanie kollaboratorami | + | - | - |
+|Usuwanie kollaboratorów | + | - | - |
+|Dodawanie zdjęć projektów | + | - | - |
+|Edycja zdjęć projektów | + | - | - |
+|Usuwanie zdjęć projektów | + | - | - |
+|Tworzenie opisu projektów | + | - | - |
+|Edycja opisu projektów | + | - | - |
+|Wsparcie projektów | + | - | - |
+|Wypłata środków z kampanii | + | - | - |
+|Przegląd portfela z kampanii | + | - | - |
+|Dodawanie użytkowników | - | - | + |
+|Blokada użytkowników | + | + | + |
+|Odblokowanie użytkowników | - | + | + |
+|Zmiana uprawnień użytkownika | - | - | + |
 
 
 ### 6. Przypadki użycia
 
-### Tworzenie Konta Użytkownika
+### Rejestracja
 
 * **Cel**: 
-        Celem tej funkcjonalności jest stworzenie konta dla nowego użytkownika w celu możliwości zalogowania się do systemu.
+        Celem tej funkcjonalności jest rejestracja konta dla nowego użytkownika w celu możliwości zalogowania.
         
-* **Aktorzy**:
-        Administrator
+* **Główny Aktor**:
+        Użytkownik/Moderator/Administrator
                         
 * **Główny Scenariusz**:
-      
-        - Krok 1: Administrator przechodzi do panelu administracyjnego.
-
-        - Krok 2: Administrator klika przycisk "Dodaj Użytkownika"
-        
-        - Krok 3: Administrator wypełnia wymagane dane w formularzu.
-        
-        - Krok 4: Administrator klika przycisk "Zatwierdź".
-        
-        - Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
-        
-        - Krok 6: Otrzymuje informację o pozytywnym wykreowaniu konta.
+  
+```
+- Krok 1: Użytkownik przechodzi do logowanie.
+- Krok 2: Klika przycisk link Rejestruj
+- Krok 3: Użytkownik wypełnia wymagane dane w formularzu.
+- Krok 4: Użytkownik klika przycisk "Rejestruj".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Otrzymuje informację o pozytywnym wykreowaniu konta.
+```
 
 * **Rozszerzenia**:
-        
-        - Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
-
-        - Krok 5.2: System prosi o ponowne wprowadzenie danych.
+  
+```
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
+```
         
 * **Przykład**:
 
@@ -161,31 +256,29 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
   <img src="https://user-images.githubusercontent.com/56208135/165714270-a657857e-57c7-4bc1-9fb2-f04f71dafa3b.png" />
 </p>
         
-- - - 
-
+---
 ### Logowanie
 
-* **Cel**: 
-       Celem tej funkcjonalności jest umożliwienie użytkownikowi/administratorowi uzyskania dostępu do systemu.
+* **Cel**:
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowy/administratorowi uzyskania dostępu.
         
-* **Aktorzy**:
-        Administrator/Użytkownik   
+* **Główny Aktor**:
+        Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
+```
       
-        - Krok 1: Użytkownikowi/Administratorowi wyświetla się ekran z możliwością zarejestrowania lub zalogowania.
-        
-        - Krok 2: Użytkownik/Administrator wypełnia dane w formularzu logowania.
-        
-        - Krok 3: Sprawdzana jest poprawność wprowadzonych danych.
-        
-        - Krok 4: Użytkownik/Administrator zostaje pomyślnie zalogowany.
+- Krok 1: Użytkownik/Moderator/Administrator wyświetla się ekran z możliwością zarejestrowania lub zalogowania.
+- Krok 2: Użytkownik/Moderator/Administrator wypełnia dane w formularzu logowania.
+- Krok 3: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 4: Użytkownik/Moderator/Administrator zostaje pomyślnie zalogowany.
+```
 
 * **Rozszerzenia**:
-        
-        - Krok 3.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
-
-        - Krok 3.2: System prosi o ponowne wprowadzenie danych.
+```
+- Krok 3.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
+- Krok 3.2: System prosi o ponowne wprowadzenie danych.
+```
 
 * **Przykład**:
 
@@ -193,64 +286,665 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
   <img src="https://user-images.githubusercontent.com/56208135/165717473-0ae1b1a6-0fd9-4f63-aae7-2277e8e0637c.png" />
 </p>
 
-- - - 
-
+---
 ### Wylogowanie
 
-* **Cel**: 
-        Celem tej funkcjonalności jest umożliwienie użytkownikowi/administratorowi wylogowanie się z systemu tym samym zakończenie sesji korzystania z sytemu i zabezpieczenie swojego konta.
+* **Cel**:
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi wylogowanie się z systemu tym samym zakończenie sesji korzystania z sytemu i zabezpieczenie swojego konta.
      
-* **Aktorzy**:
-        Administrator/Użytkownik
+* **Główny Aktor**:
+        Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
 
-        - Krok 1: Użytkownik/Administrator klika przycisk wyloguj.
+```
+- Krok 1: Użytkownik/Moderator/Administrator klika przycisk wyloguj.
+- Krok 2: Zamykana jest sesja określonego Użytkownik/Moderator/Administrator.
+- Krok 3: Komunikat o poprawynm wylogowaniu.
+```
 
-        - Krok 2: Zamykana jest sesja określonego użytkownika/administratora.
-
-        - Krok 3: Komunikat o poprawynm wylogowaniu.
-        
-       
 * **Przykład**:
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/56208135/165771164-1de77e13-8ec6-43b5-8e27-7a90679790b2.png" />
 </p>
 
-- - -
-### Aktualizacja danych użytkownika
+---
+### Aktualizacja danych konta
 
-* **Cel**: 
-        Celem tej funkcjonalności jest umożliwienie administratorowi zmiany danych(e-mail, hasło, operator) użytkownika.
+* **Cel**:
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi zmiany danych(e-mail, nazwa) użytkownika.
      
 * **Główny Aktor**:
         Administrator
                 
 * **Główny Scenariusz**:
-
-        - Krok 1: Administrator przechodzi do panelu administracyjnego.
-
-        - Krok 2: Wybiera użytkownika któremu chce zmienić dane.
-
-        - Krok 3: Wprowadza nowe dane. 
-       
-        - Krok 4: Administrator zatwierdza.
-        
-        - Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
-        
-        - Krok 6: Komunikat o poprawnej operacji.
+  
+```
+- Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
+- Krok 2: Wprowadza nowe dane.
+- Krok 3: Użytkownik/Moderator/Administrator zapisuje.
+- Krok 4: Sprawdzana jest poprawność wprowadzonych danych.     
+- Krok 5: Komunikat o poprawnej operacji.
+```
 
 * **Rozszerzenia**:
-        
-        - Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
-
-        - Krok 5.2: System prosi o ponowne wprowadzenie danych.
+  
+```
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
+```
        
 * **Przykład**:
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/56208135/165722805-7997efdf-9c1e-46c6-b46d-e8fef952a646.png" />
 </p>
+
+---
+### Zmiana hasła konta
+
+* **Cel**:
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+  
+```
+- Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
+- Krok 2: Wprowadza stare i nowe hasło.
+- Krok 3: Zapisuje.
+- Krok 4: Sprawdzana jest poprawność starego hasła i siła nowego.
+- Krok 5: Komunikat o poprawnej operacji.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 4.1: Niepoprawne stare hasło – informacja o błędzie. 
+- Krok 4.2: Zbyt słabe hasło – system prosi o mocniejsze.
+```
+
+* **Przykład**:
+  
+---
+### Zamknięcie konta
+
+* **Cel**:
+        Umożliwienie użytkownikowi trwałego zamknięcia konta.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik przechodzi do ustawień konta.
+- Krok 2: Wybiera opcję zamknięcia konta.
+- Krok 3: Potwierdza decyzję.
+- Krok 4: System usuwa lub dezaktywuje konto.
+- Krok 5: Komunikat o poprawnej operacji.
+```
+
+* **Rozszerzenia**:
+
+```
+- Krok 3.1: Użytkownik anuluje proces – konto pozostaje aktywne.
+- Krok 4.1: Konto powiązane z aktywnymi kampaniami – informacja o konieczności ich zamknięcia.
+```
+
+* **Przykład**:
+  
+---
+### Wyświetlanie użytkownika
+
+* **Cel**:
+        Umożliwienie przeglądania publicznego profilu innego użytkownika.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik otwiera kampanię lub projekt.
+- Krok 2: Kliknięcie na nazwę użytkownika przekierowuje do jego profilu.
+- Krok 3: System wyświetla dane publiczne profilu.
+```
+
+* **Rozszerzenia**:
+
+```
+- Krok 3.1: Konto ukryte lub zablokowane – informacja o braku dostępu.
+```
+
+* **Przykład**:
+  
+---
+### Zarządzanie sesjami
+
+* **Cel**:
+        Umożliwienie zarządzania aktywnymi sesjami logowania.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik przechodzi do ustawień bezpieczeństwa.
+- Krok 2: Przegląda listę aktywnych sesji.
+- Krok 3: Wybiera zakończenie jednej lub wszystkich sesji.
+- Krok 4: System wylogowuje wskazane sesje.
+- Krok 5: Komunikat o poprawnej operacji.
+```
+
+* **Rozszerzenia**:
+
+```
+- Krok 3.1: Błąd połączenia z serwerem – informacja o błędzie.
+- Krok 4.1: Część sesji już wygasła – system informuje użytkownika.
+```
+
+* **Przykład**:
+  
+---
+### Wyszukiwanie projektów
+
+* **Cel**:
+        Umożliwienie użytkownikowi przeszukiwania bazy projektów.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik przechodzi do sekcji Discover.
+- Krok 2: Wprowadza frazę lub ustawia filtry.
+- Krok 3: System wyświetla wyniki wyszukiwania.
+- Krok 4: Użytkownik przegląda szczegóły projektów.
+- Krok 5: Może przejść do wsparcia lub kontaktu z twórcą.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 3.1: Brak wyników – wyświetlany komunikat.
+- Krok 2.1: Wprowadzono niedozwolone znaki – błąd walidacji.
+```
+
+* **Przykład**:
+
+---
+### Utworzenie projektów
+
+* **Cel**:
+        Umożliwienie użytkownikowi utworzenia nowego projektu.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+  
+```
+- Krok 1: Użytkownik przechodzi do sekcji "Zarządzanie projektami".
+- Krok 2: Wybiera opcję „Utwórz nowy projekt”.
+- Krok 3: Wprowadza wymagane dane (nazwa, opis, kategorie, itp.).
+- Krok 4: Zapisuje projekt.
+- Krok 5: Projekt jest widoczny w systemie.
+```
+
+* **Rozszerzenia**:
+
+```
+- Krok 3.1: Niepełne dane – komunikat o błędzie.
+- Krok 4.1: Błąd serwera – projekt nie został zapisany.
+```
+
+* **Przykład**:
+
+---
+### Edycja projektów
+
+* **Cel**:
+  Umożliwienie użytkownikowi aktualizacji danych istniejącego projektu.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik otwiera swój projekt.
+- Krok 2: Wybiera opcję „Edytuj”.
+- Krok 3: Wprowadza zmiany w danych.
+- Krok 4: Zapisuje zmiany.
+- Krok 5: Projekt zostaje zaktualizowany.
+```
+
+* **Rozszerzenia**:
+  
+```
+ - Krok 3.1: Niepoprawne dane – system zgłasza błąd.
+- Krok 4.1: Brak połączenia z serwerem – zmiany niezapisane.
+```
+
+* **Przykład**:
+
+---
+
+### Usuwanie projektów
+
+* **Cel**:
+        Umożliwienie użytkownikowi usunięcia projektu.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik otwiera swój projekt.
+- Krok 2: Wybiera opcję „Usuń projekt”.
+- Krok 3: Potwierdza decyzję.
+- Krok 4: System usuwa projekt.
+- Krok 5: Wyświetlany jest komunikat o powodzeniu.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 3.1: Użytkownik anuluje usuwanie.
+- Krok 4.1: Projekt powiązany z aktywną kampanią – usunięcie zablokowane.
+```
+
+* **Przykład**:
+
+---
+
+### Dodawanie kollaboratorów
+
+* **Cel**:
+        Umożliwienie dodania współpracownika do projektu.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik otwiera projekt.
+- Krok 2: Przechodzi do zakładki „Kollaboratorzy”.
+- Krok 3: Wprowadza dane użytkownika (np. email).
+- Krok 4: Zatwierdza dodanie.
+- Krok 5: Kollaborator pojawia się na liście.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 3.1: Nieistniejący użytkownik – informacja o błędzie.
+- Krok 4.1: Kollaborator już istnieje – komunikat o duplikacie.
+```
+
+* **Przykład**:
+
+---
+### Zarządzanie kollaboratorami
+
+* **Cel**:
+        Umożliwienie edycji uprawnień kollaboratorów.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik otwiera listę kollaboratorów.
+- Krok 2: Wybiera osobę do edycji.
+- Krok 3: Zmienia rolę/uprawnienia.
+- Krok 4: Zapisuje zmiany.
+- Krok 5: System aktualizuje dostęp.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 3.1: Brak dostępu – użytkownik nie jest właścicielem.
+- Krok 4.1: Błąd zapisu – zmiany cofnięte.
+```
+
+* **Przykład**:
+
+---
+### Usuwanie kollaboratorów
+
+* **Cel**:
+        Umożliwienie usunięcia użytkownika z listy kollaboratorów projektu.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Otwiera listę kollaboratorów.
+- Krok 2: Wybiera osobę i klika „Usuń”.
+- Krok 3: Potwierdza decyzję.
+- Krok 4: Kollaborator zostaje usunięty.
+```
+* **Rozszerzenia**:
+  
+```
+- Krok 2.1: Próba usunięcia właściciela projektu – operacja zablokowana.
+```
+* **Przykład**:
+
+---
+### Dodawanie zdjęć projektów
+
+* **Cel**:
+        Umożliwienie użytkownikowi dodania grafiki do projektu.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Otwiera projekt i przechodzi do sekcji zdjęć.
+- Krok 2: Wybiera plik graficzny.
+- Krok 3: Dodaje zdjęcie.
+- Krok 4: System przetwarza i zapisuje grafikę.
+```
+* **Rozszerzenia**:
+  
+```
+- Krok 2.1: Niepoprawny format – informacja o błędzie.
+- Krok 3.1: Przekroczony limit zdjęć – dodanie zablokowane.
+```
+
+* **Przykład**:
+
+---
+### Edycja zdjęć projektów
+
+* **Cel**:
+        Umożliwienie edycji opisów lub nazw zdjęć.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik wybiera zdjęcie w projekcie.
+- Krok 2: Edytuje opis lub tytuł.
+- Krok 3: Zapisuje zmiany.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 2.1: Pole puste – walidacja błędu.
+```
+* **Przykład**:
+
+---
+
+### Usuwanie zdjęć projektów
+
+* **Cel**:
+        Umożliwienie usunięcia zdjęcia z projektu.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik otwiera listę zdjęć.
+- Krok 2: Wybiera zdjęcie do usunięcia.
+- Krok 3: Potwierdza usunięcie.
+- Krok 4: System usuwa grafikę.
+```
+
+* **Rozszerzenia**:
+
+```
+- Krok 2.1: Próba usunięcia głównego zdjęcia – wymagane wcześniejsze przypisanie innego.
+```
+
+* **Przykład**:
+
+---
+### Tworzenie opisu projektów
+
+* **Cel**:
+        Umożliwienie stworzenia szczegółowego opisu projektu.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik tworzy nowy projekt.
+- Krok 2: Wprowadza treść opisu.
+- Krok 3: Zapisuje projekt.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 2.1: Opis za krótki – system informuje o wymaganej długości.
+```
+* **Przykład**:
+
+---
+
+### Edycja opisu projektów
+
+* **Cel**:
+        Umożliwienie edycji istniejącego opisu projektu.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik edytuje projekt.
+- Krok 2: Wprowadza zmiany w opisie.
+- Krok 3: Zapisuje zmiany.
+```
+
+* **Rozszerzenia**:
+```
+- Krok 2.1: Opis zawiera niedozwolone znaki – system blokuje zapis.
+```
+* **Przykład**:
+
+---
+### Wsparcie projektów
+
+* **Cel**:
+        Umożliwienie użytkownikowi wsparcia finansowego dla wybranego projektu.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik wybiera projekt.
+- Krok 2: Wybiera kwotę wsparcia.
+- Krok 3: Wybiera metodę płatności.
+- Krok 4: Potwierdza operację.
+- Krok 5: System przetwarza transakcję i informuje o sukcesie.
+```
+
+* **Rozszerzenia**:
+
+```
+  - Krok 3.1: Niepoprawna metoda płatności – komunikat o błędzie.
+  - Krok 5.1: Brak środków – transakcja anulowana.
+```
+
+* **Przykład**:
+
+---
+### Wypłata środków z kampanii
+
+* **Cel**:
+        Pozwala twórcy projektu wypłacić zgromadzone środki z kampanii.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+  
+```
+- Krok 1: Użytkownik przechodzi do sekcji finansów projektu.
+- Krok 2: Wybiera opcję „Wypłać środki”.
+- Krok 3: Wprowadza dane konta.
+- Krok 4: Potwierdza wypłatę.
+- Krok 5: System realizuje przelew i wyświetla potwierdzenie.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 3.1: Nieprawidłowe dane bankowe – wypłata zablokowana.
+- Krok 4.1: Kampania jeszcze trwa – brak możliwości wypłaty.
+```
+
+* **Przykład**:
+
+---
+### Przegląd portfela z kampanii
+
+* **Cel**:
+        Umożliwienie użytkownikowi wglądu w aktualne saldo oraz historię transakcji projektowych.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik otwiera sekcję „Portfel”.
+- Krok 2: System wyświetla saldo oraz listę transakcji.
+```
+* **Rozszerzenia**:
+
+```
+- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+```
+* **Przykład**:
+
+---
+### Dodawanie użytkowników
+
+* **Cel**:
+        Administrator może ręcznie dodać nowego użytkownika do systemu.
+
+* **Główny Aktor**:
+        Administrator
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Administrator otwiera panel zarządzania użytkownikami.
+- Krok 2: Wprowadza dane nowego użytkownika.
+- Krok 3: Zatwierdza dodanie.
+- Krok 4: Użytkownik pojawia się w systemie.
+```
+
+* **Rozszerzenia**:
+```
+- Krok 2.1: Użytkownik o tym adresie e-mail już istnieje.
+```
+* **Przykład**:
+
+---
+### Blokada użytkowników
+
+* **Cel**:
+        Zablokowanie konta użytkownika w przypadku naruszenia regulaminu.
+
+* **Główny Aktor**:
+        Moderator, Administrator
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Otwiera profil użytkownika.
+- Krok 2: Wybiera opcję „Zablokuj konto”.
+- Krok 3: Potwierdza decyzję.
+- Krok 4: Użytkownik traci dostęp do konta.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 3.1: Próba zablokowania administratora – operacja niedozwolona.
+```
+
+* **Przykład**:
+
+---
+### Odblokowanie użytkowników
+
+* **Cel**:
+        Przywrócenie dostępu do zablokowanego konta.
+
+* **Główny Aktor**:
+        Moderator, Administrator
+
+* **Główny Scenariusz**:
+  
+```
+  - Krok 1: Otwiera profil zablokowanego użytkownika.
+  - Krok 2: Wybiera opcję „Odblokuj”.
+  - Krok 3: Potwierdza.
+  - Krok 4: Konto zostaje aktywowane.
+```
+
+* **Rozszerzenia**:
+```
+- Krok 2.1: Konto nie jest zablokowane – operacja niepotrzebna.
+```
+
+* **Przykład**:
+  
+---
+### Zmiana uprawnień użytkownika
+
+* **Cel**:
+        Administrator może zmienić poziom dostępu danego użytkownika (np. nadać rolę moderatora).
+
+* **Główny Aktor**:
+        Administrator
+
+* **Główny Scenariusz**:
+  
+ ```
+ - Krok 1: Administrator otwiera profil użytkownika.
+ - Krok 2: Wybiera nowy poziom uprawnień.
+ - Krok 3: Zatwierdza zmianę.
+ - Krok 4: Uprawnienia zostają zaktualizowane.
+```
+* **Rozszerzenia**:
+  
+```
+- Krok 2.1: Próba nadania wyższych uprawnień niż własne – operacja odrzucona.
+```
+
+* **Przykład**:
 
 ---
