@@ -193,7 +193,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### 5. Lista przypdków użycia
 
 |Funkcjonalność | Użytkownik | Moderator | Administrator|
-|:-------------:|:----------:|:------------:|
+|:-------------:|:----------:|:------------:|:------------:|
 |Rejestracja użytkownika | + | - | - |
 |Logowanie | + | + | + |
 |Wylogowanie  | + | + | + |
