@@ -40,7 +40,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |:------|:----------------------------------------------------------------------|
 | Opis: | Panel administracyjny dla moderatorów i administratorów, umożliwiający zarządzanie użytkownikami i zgłoszeniami. |
 
-| Nazwa:| Ledger(portfel) <img width=1000/>|         
+| Nazwa:| Ledger <img width=1000/>|         
 |:------|:----------------------------------------------------------------------|
 | Opis: | Moduł odpowiedzialny za zarządzanie finansami: przegląd salda, historia transakcji, wpłaty, wypłaty oraz integrację z systemem płatności. |
 
