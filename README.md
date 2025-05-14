@@ -106,14 +106,14 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 | Nazwa:     |Wspieranie projektów                                                                                         |
 | Priorytet: |Wysoki                                                                                                       |
 | Rola:      |Użytkownik                                                                                                   |
-| Opis:      |	Użytkownik może finansowo wspierać projekty poprzez system płatności.                                      |
+| Opis:      |Użytkownik może finansowo wspierać projekty poprzez system płatności.                                        |
 
 | ID:        | 7               <img width=1000/>                                                                           | 
 |:-----------|:------------------------------------------------------------------------------------------------------------|
 | Nazwa:     |Zarządzanie projektami                                                                                       |
 | Priorytet: |Wysoki                                                                                                       |
 | Rola:      |Użytkownik                                                                                                   |
-| Opis:      |Użytkownik może edytować, aktualizować i usuwać własne projekty.                                             |
+| Opis:      |Użytkownik może edytować, aktualizować i usuwać własne projekty. Dodawać kollaboratorów, zdjęcia oraz opisy. |
 
 | ID:        | 8              <img width=1000/>                                                                            | 
 |:-----------|:------------------------------------------------------------------------------------------------------------|
@@ -198,8 +198,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 |Logowanie użytkownika| + | + | + |
 |Wylogowanie użytkownika| + | + | + |
 |Edycja danych użytkownika | + | + | + |
-|Wyświetlanie użytkownika | + | + | + |
 |Zmiana hasła użytkownika | + | + | + |
+|Zamknięcie konta | + | + | + |
+|Wyświetlanie użytkownika | + | + | + |
 |Zarządzanie sesjami | + | + | + |
 |Wyszukiwanie projektów | + | + | + |
 |Utworzenie projektów | + | - | - |
@@ -208,9 +209,14 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 |Dodawanie kollaboratów | + | - | - |
 |Zarządzanie kollaboratorami | + | - | - |
 |Usuwanie kollaboratorów | + | - | - |
+|Dodawanie zdjęć projektów | + | - | - |
+|Edycja zdjęć projektów | + | - | - |
+|Usuwanie zdjęć projektów | + | - | - |
+|Tworzenie opisu projektów | + | - | - |
+|Edycja opisu projektów | + | - | - |
 |Wsparcie projektów | + | - | - |
-|Wypłata środków kampanii | + | - | - |
-|Przegląd portfela kampanii | + | - | - |
+|Wypłata środków z kampanii | + | - | - |
+|Przegląd portfela z kampanii | + | - | - |
 |Dodawanie użytkowników | - | - | + |
 |Blokada użytkowników | + | + | + |
 |Odblokowanie użytkowników | - | + | + |
@@ -229,13 +235,13 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
                         
 * **Główny Scenariusz**:
       
-        - Krok 1: Administrator przechodzi do panelu administracyjnego.
+        - Krok 1: Użytkownik przechodzi do logowanie.
 
-        - Krok 2: Administrator klika przycisk "Dodaj Użytkownika"
+        - Krok 2: Klika przycisk link Rejestruj
         
-        - Krok 3: Administrator wypełnia wymagane dane w formularzu.
+        - Krok 3: Użytkownik wypełnia wymagane dane w formularzu.
         
-        - Krok 4: Administrator klika przycisk "Zatwierdź".
+        - Krok 4: Użytkownik klika przycisk "Rejestruj".
         
         - Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
         
@@ -265,13 +271,13 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
                 
 * **Główny Scenariusz**:
       
-        - Krok 1: Użytkownikowi/Administratorowi wyświetla się ekran z możliwością zarejestrowania lub zalogowania.
+        - Krok 1: Użytkownik/Moderator/Administrator wyświetla się ekran z możliwością zarejestrowania lub zalogowania.
         
-        - Krok 2: Użytkownik/Administrator wypełnia dane w formularzu logowania.
+        - Krok 2: Użytkownik/Moderator/Administrator wypełnia dane w formularzu logowania.
         
         - Krok 3: Sprawdzana jest poprawność wprowadzonych danych.
         
-        - Krok 4: Użytkownik/Administrator zostaje pomyślnie zalogowany.
+        - Krok 4: Użytkownik/Moderator/Administrator zostaje pomyślnie zalogowany.
 
 * **Rozszerzenia**:
         
@@ -297,9 +303,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
                 
 * **Główny Scenariusz**:
 
-        - Krok 1: Użytkownik/Administrator klika przycisk wyloguj.
+        - Krok 1: Użytkownik/Moderator/Administrator klika przycisk wyloguj.
 
-        - Krok 2: Zamykana jest sesja określonego użytkownika/administratora.
+        - Krok 2: Zamykana jest sesja określonego Użytkownik/Moderator/Administrator.
 
         - Krok 3: Komunikat o poprawynm wylogowaniu.
         
@@ -321,17 +327,15 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
                 
 * **Główny Scenariusz**:
 
-        - Krok 1: Administrator przechodzi do panelu administracyjnego.
+        - Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
 
-        - Krok 2: Wybiera użytkownika któremu chce zmienić dane.
-
-        - Krok 3: Wprowadza nowe dane. 
+        - Krok 2: Wprowadza nowe dane.
        
-        - Krok 4: Administrator zatwierdza.
+        - Krok 3: Użytkownik/Moderator/Administrator zapisuje.
         
-        - Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+        - Krok 4: Sprawdzana jest poprawność wprowadzonych danych.
         
-        - Krok 6: Komunikat o poprawnej operacji.
+        - Krok 5: Komunikat o poprawnej operacji.
 
 * **Rozszerzenia**:
         
