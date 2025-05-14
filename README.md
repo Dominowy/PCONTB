@@ -195,19 +195,26 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 |Funkcjonalność | Użytkownik | Moderator | Administrator|
 |:-------------:|:----------:|:------------:|:------------:|
 |Rejestracja użytkownika | + | - | - |
-|Logowanie | + | + | + |
-|Wylogowanie  | + | + | + |
-|Edycja danych profilu | + | + | + |
+|Logowanie użytkownika| + | + | + |
+|Wylogowanie użytkownika| + | + | + |
+|Edycja danych użytkownika | + | + | + |
+|Wyświetlanie użytkownika | + | + | + |
+|Zmiana hasła użytkownika | + | + | + |
+|Zarządzanie sesjami | + | + | + |
 |Wyszukiwanie projektów | + | + | + |
-|Utworzenie projektu | + | - | - |
-|Edycja projektu | + | - | - |
-|Usuwanie projektu | + | - | - |
-|Wsparcie projektu | + | - | - |
-|Wypłata środków | + | - | - |
-|Dodawanie użytkownika | + | - | + |
-|Blokada użytkownika | + | + | + |
-|Odblokowanie użytkownika | - | + | + |
-|Zmiana uprawnień użytkownika | + | - | + |
+|Utworzenie projektów | + | - | - |
+|Edycja projektów | + | - | - |
+|Usuwanie projektów | + | - | - |
+|Dodawanie kollaboratów | + | - | - |
+|Zarządzanie kollaboratorami | + | - | - |
+|Usuwanie kollaboratorów | + | - | - |
+|Wsparcie projektów | + | - | - |
+|Wypłata środków kampanii | + | - | - |
+|Przegląd portfela kampanii | + | - | - |
+|Dodawanie użytkowników | - | - | + |
+|Blokada użytkowników | + | + | + |
+|Odblokowanie użytkowników | - | + | + |
+|Zmiana uprawnień użytkownika | - | - | + |
 
 
 ### 6. Przypadki użycia
