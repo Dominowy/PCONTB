@@ -261,10 +261,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Logowanie
 
 * **Cel**:
-* Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowy/administratorowi uzyskania dostępu.
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowy/administratorowi uzyskania dostępu.
         
 * **Główny Aktor**:
-* Użytkownik/Moderator/Administrator
+        Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
 ```
@@ -291,10 +291,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Wylogowanie
 
 * **Cel**:
-* Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi wylogowanie się z systemu tym samym zakończenie sesji korzystania z sytemu i zabezpieczenie swojego konta.
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi wylogowanie się z systemu tym samym zakończenie sesji korzystania z sytemu i zabezpieczenie swojego konta.
      
 * **Główny Aktor**:
-* Użytkownik/Moderator/Administrator
+        Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
 
@@ -314,10 +314,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Aktualizacja danych konta
 
 * **Cel**:
-* Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi zmiany danych(e-mail, nazwa) użytkownika.
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi zmiany danych(e-mail, nazwa) użytkownika.
      
 * **Główny Aktor**:
-* Administrator
+        Administrator
                 
 * **Główny Scenariusz**:
   
@@ -346,10 +346,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Zmiana hasła konta
 
 * **Cel**:
-* Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
 
 * **Główny Aktor**:
-*  Użytkownik
+        Użytkownik
 
 * **Główny Scenariusz**:
   
