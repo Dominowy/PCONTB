@@ -348,7 +348,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 </p>
 
 ---
-###Zmiana hasła konta
+### Zmiana hasła konta
 
 * **Cel**:  
   Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
