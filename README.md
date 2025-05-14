@@ -404,7 +404,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Umożliwienie przeglądania publicznego profilu innego użytkownika.
 
-* **Główny Aktor**: 
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -429,7 +429,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**:
         Umożliwienie zarządzania aktywnymi sesjami logowania.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -457,7 +457,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**:
         Umożliwienie użytkownikowi przeszukiwania bazy projektów.
 
-* **Główny Aktor**: 
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -513,7 +513,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
   Umożliwienie użytkownikowi aktualizacji danych istniejącego projektu.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -542,7 +542,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**:
         Umożliwienie użytkownikowi usunięcia projektu.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -571,7 +571,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**:
         Umożliwienie dodania współpracownika do projektu.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -599,7 +599,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Umożliwienie edycji uprawnień kollaboratorów.
 
-* **Główny Aktor**: 
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -627,7 +627,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Umożliwienie usunięcia użytkownika z listy kollaboratorów projektu.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -651,7 +651,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Umożliwienie użytkownikowi dodania grafiki do projektu.
 
-* **Główny Aktor**: 
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -677,7 +677,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**:  
         Umożliwienie edycji opisów lub nazw zdjęć.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -702,7 +702,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**:
         Umożliwienie usunięcia zdjęcia z projektu.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -728,7 +728,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**:  
         Umożliwienie stworzenia szczegółowego opisu projektu.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -753,7 +753,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Umożliwienie edycji istniejącego opisu projektu.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -776,7 +776,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Umożliwienie użytkownikowi wsparcia finansowego dla wybranego projektu.
 
-* **Główny Aktor**: 
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -804,7 +804,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Pozwala twórcy projektu wypłacić zgromadzone środki z kampanii.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
@@ -832,7 +832,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Cel**: 
         Umożliwienie użytkownikowi wglądu w aktualne saldo oraz historię transakcji projektowych.
 
-* **Główny Aktor**:  
+* **Główny Aktor**:
         Użytkownik
 
 * **Główny Scenariusz**:
