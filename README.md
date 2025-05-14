@@ -411,7 +411,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
   
 ---
-###  Zarządzanie sesjami
+### Zarządzanie sesjami
 
 * **Cel**:  
   Umożliwienie zarządzania aktywnymi sesjami logowania.
@@ -433,7 +433,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
   
 ---
-###  Wyszukiwanie projektów
+### Wyszukiwanie projektów
 
 * **Cel**:  
   Umożliwienie użytkownikowi przeszukiwania bazy projektów.
@@ -453,3 +453,234 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 2.1: Wprowadzono niedozwolone znaki – błąd walidacji.
  
 * **Przykład**:
+
+---
+### Utworzenie projektów
+
+* **Cel**:  
+  Umożliwienie użytkownikowi utworzenia nowego projektu.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik przechodzi do sekcji "Zarządzanie projektami".
+  - Krok 2: Wybiera opcję „Utwórz nowy projekt”.
+  - Krok 3: Wprowadza wymagane dane (nazwa, opis, kategorie, itp.).
+  - Krok 4: Zapisuje projekt.
+  - Krok 5: Projekt jest widoczny w systemie.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Niepełne dane – komunikat o błędzie.
+  - Krok 4.1: Błąd serwera – projekt nie został zapisany.
+
+* **Przykład**:
+
+---
+### Edycja projektów
+
+* **Cel**:  
+  Umożliwienie użytkownikowi aktualizacji danych istniejącego projektu.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik otwiera swój projekt.
+  - Krok 2: Wybiera opcję „Edytuj”.
+  - Krok 3: Wprowadza zmiany w danych.
+  - Krok 4: Zapisuje zmiany.
+  - Krok 5: Projekt zostaje zaktualizowany.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Niepoprawne dane – system zgłasza błąd.
+  - Krok 4.1: Brak połączenia z serwerem – zmiany niezapisane.
+
+* **Przykład**:
+
+---
+
+### Usuwanie projektów
+
+* **Cel**:  
+  Umożliwienie użytkownikowi usunięcia projektu.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik otwiera swój projekt.
+  - Krok 2: Wybiera opcję „Usuń projekt”.
+  - Krok 3: Potwierdza decyzję.
+  - Krok 4: System usuwa projekt.
+  - Krok 5: Wyświetlany jest komunikat o powodzeniu.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Użytkownik anuluje usuwanie.
+  - Krok 4.1: Projekt powiązany z aktywną kampanią – usunięcie zablokowane.
+
+* **Przykład**:
+
+---
+
+### Dodawanie kollaboratorów
+
+* **Cel**:  
+  Umożliwienie dodania współpracownika do projektu.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik otwiera projekt.
+  - Krok 2: Przechodzi do zakładki „Kollaboratorzy”.
+  - Krok 3: Wprowadza dane użytkownika (np. email).
+  - Krok 4: Zatwierdza dodanie.
+  - Krok 5: Kollaborator pojawia się na liście.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Nieistniejący użytkownik – informacja o błędzie.
+  - Krok 4.1: Kollaborator już istnieje – komunikat o duplikacie.
+  - 
+* **Przykład**:
+
+---
+### Zarządzanie kollaboratorami
+
+* **Cel**:  
+  Umożliwienie edycji uprawnień i ról kollaboratorów.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik otwiera listę kollaboratorów.
+  - Krok 2: Wybiera osobę do edycji.
+  - Krok 3: Zmienia rolę/uprawnienia.
+  - Krok 4: Zapisuje zmiany.
+  - Krok 5: System aktualizuje dostęp.
+
+* **Rozszerzenia**:
+  - Krok 3.1: Brak dostępu – użytkownik nie jest właścicielem.
+  - Krok 4.1: Błąd zapisu – zmiany cofnięte.
+
+* **Przykład**:
+
+---
+### Usuwanie kollaboratorów
+
+* **Cel**:  
+  Umożliwienie usunięcia użytkownika z listy kollaboratorów projektu.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Otwiera listę kollaboratorów.
+  - Krok 2: Wybiera osobę i klika „Usuń”.
+  - Krok 3: Potwierdza decyzję.
+  - Krok 4: Kollaborator zostaje usunięty.
+
+* **Rozszerzenia**:
+  - Krok 2.1: Próba usunięcia właściciela projektu – operacja zablokowana.
+
+* **Przykład**:
+
+---
+### Dodawanie zdjęć projektów
+
+* **Cel**:  
+  Umożliwienie użytkownikowi dodania grafiki do projektu.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Otwiera projekt i przechodzi do sekcji zdjęć.
+  - Krok 2: Wybiera plik graficzny.
+  - Krok 3: Dodaje zdjęcie.
+  - Krok 4: System przetwarza i zapisuje grafikę.
+
+* **Rozszerzenia**:
+  - Krok 2.1: Niepoprawny format – informacja o błędzie.
+  - Krok 3.1: Przekroczony limit zdjęć – dodanie zablokowane.
+
+* **Przykład**:
+
+---
+### Edycja zdjęć projektów
+
+* **Cel**:  
+  Umożliwienie edycji opisów lub nazw zdjęć.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik wybiera zdjęcie w projekcie.
+  - Krok 2: Edytuje opis lub tytuł.
+  - Krok 3: Zapisuje zmiany.
+
+* **Rozszerzenia**:
+  - Krok 2.1: Pole puste – walidacja błędu.
+
+* **Przykład**:
+
+---
+
+### Usuwanie zdjęć projektów
+
+* **Cel**:  
+  Umożliwienie usunięcia zdjęcia z projektu.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik otwiera listę zdjęć.
+  - Krok 2: Wybiera zdjęcie do usunięcia.
+  - Krok 3: Potwierdza usunięcie.
+  - Krok 4: System usuwa grafikę.
+
+* **Rozszerzenia**:
+  - Krok 2.1: Próba usunięcia głównego zdjęcia – wymagane wcześniejsze przypisanie innego.
+
+* **Przykład**:
+
+---
+### Tworzenie opisu projektów
+
+* **Cel**:  
+  Umożliwienie stworzenia szczegółowego opisu projektu.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik tworzy nowy projekt.
+  - Krok 2: Wprowadza treść opisu.
+  - Krok 3: Zapisuje projekt.
+
+* **Rozszerzenia**:
+  - Krok 2.1: Opis za krótki – system informuje o wymaganej długości.
+
+* **Przykład**:
+
+---
+
+### Edycja opisu projektów
+
+* **Cel**:  
+  Umożliwienie edycji istniejącego opisu projektu.
+
+* **Główny Aktor**:  
+  Użytkownik
+
+* **Główny Scenariusz**:
+  - Krok 1: Użytkownik edytuje projekt.
+  - Krok 2: Wprowadza zmiany w opisie.
+  - Krok 3: Zapisuje zmiany.
+
+* **Rozszerzenia**:
+  - Krok 2.1: Opis zawiera niedozwolone znaki – system blokuje zapis.
+
