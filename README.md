@@ -401,7 +401,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Wyświetlanie użytkownika
 
-* **Cel**: 
+* **Cel**:
         Umożliwienie przeglądania publicznego profilu innego użytkownika.
 
 * **Główny Aktor**:
@@ -482,7 +482,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Utworzenie projektów
 
-* **Cel**:  
+* **Cel**:
         Umożliwienie użytkownikowi utworzenia nowego projektu.
 
 * **Główny Aktor**:
@@ -510,7 +510,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Edycja projektów
 
-* **Cel**: 
+* **Cel**:
   Umożliwienie użytkownikowi aktualizacji danych istniejącego projektu.
 
 * **Główny Aktor**:
@@ -596,7 +596,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Zarządzanie kollaboratorami
 
-* **Cel**: 
+* **Cel**:
         Umożliwienie edycji uprawnień kollaboratorów.
 
 * **Główny Aktor**:
@@ -624,7 +624,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Usuwanie kollaboratorów
 
-* **Cel**: 
+* **Cel**:
         Umożliwienie usunięcia użytkownika z listy kollaboratorów projektu.
 
 * **Główny Aktor**:
@@ -648,7 +648,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Dodawanie zdjęć projektów
 
-* **Cel**: 
+* **Cel**:
         Umożliwienie użytkownikowi dodania grafiki do projektu.
 
 * **Główny Aktor**:
@@ -674,7 +674,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Edycja zdjęć projektów
 
-* **Cel**:  
+* **Cel**:
         Umożliwienie edycji opisów lub nazw zdjęć.
 
 * **Główny Aktor**:
@@ -725,7 +725,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Tworzenie opisu projektów
 
-* **Cel**:  
+* **Cel**:
         Umożliwienie stworzenia szczegółowego opisu projektu.
 
 * **Główny Aktor**:
@@ -750,7 +750,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 ### Edycja opisu projektów
 
-* **Cel**: 
+* **Cel**:
         Umożliwienie edycji istniejącego opisu projektu.
 
 * **Główny Aktor**:
@@ -773,7 +773,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Wsparcie projektów
 
-* **Cel**: 
+* **Cel**:
         Umożliwienie użytkownikowi wsparcia finansowego dla wybranego projektu.
 
 * **Główny Aktor**:
@@ -801,7 +801,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Wypłata środków z kampanii
 
-* **Cel**: 
+* **Cel**:
         Pozwala twórcy projektu wypłacić zgromadzone środki z kampanii.
 
 * **Główny Aktor**:
@@ -829,7 +829,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Przegląd portfela z kampanii
 
-* **Cel**: 
+* **Cel**:
         Umożliwienie użytkownikowi wglądu w aktualne saldo oraz historię transakcji projektowych.
 
 * **Główny Aktor**:
@@ -875,7 +875,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Blokada użytkowników
 
-* **Cel**: 
+* **Cel**:
         Zablokowanie konta użytkownika w przypadku naruszenia regulaminu.
 
 * **Główny Aktor**:
@@ -901,7 +901,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 ### Odblokowanie użytkowników
 
-* **Cel**: 
+* **Cel**:
         Przywrócenie dostępu do zablokowanego konta.
 
 * **Główny Aktor**:
