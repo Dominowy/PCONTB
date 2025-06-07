@@ -16,7 +16,7 @@ namespace PCONTB.Panel.Infrastructure
             using (var scope = services.BuildServiceProvider().CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                //dbContext.Database.Migrate();
+                dbContext.Database.Migrate();
             }
 
             return services;

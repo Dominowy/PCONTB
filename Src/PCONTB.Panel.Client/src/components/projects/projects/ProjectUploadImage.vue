@@ -1,14 +1,15 @@
 <template>
   <div>
     <base-form v-if="form" :formData="form" @submit="submit" @validate="validate">
-      <b-form-group label="Choose image" label-for="file-input">
-        <b-form-file
-          id="file-input"
-          v-model="file"
-          accept="image/*"
-          browse-text="Przeglądaj"
-        ></b-form-file>
-      </b-form-group>
+      <base-form-file
+        id="file"
+        class="mt-2"
+        v-model="file"
+        label="File"
+        placeholder="Select file"
+        :errors="errors"
+        :isAllTouched="isAllTouched"
+      />
       <base-form-submit-panel :isLoading="isLoading" />
     </base-form>
   </div>

@@ -23,5 +23,9 @@ export function useDisplay(title) {
     }
   };
 
-  return { content, loadData };
+  const setTitle = (title) => {
+    document.title = title;
+  }
+
+  return { content, loadData, setTitle };
 }

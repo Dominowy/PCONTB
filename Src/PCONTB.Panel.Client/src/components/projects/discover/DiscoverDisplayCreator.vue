@@ -7,7 +7,9 @@
     <b-card class="mt-2" v-if="collaborators.length > 0">
       <b-card-title>Collaborators</b-card-title>
       <template v-for="collaborator in collaborators" :key="collaborator.id">
-        <display-user :user="collaborator.user" />
+        <div class="mt-2">
+          <display-user :user="collaborator.user" />
+        </div>
       </template>
     </b-card>
   </div>

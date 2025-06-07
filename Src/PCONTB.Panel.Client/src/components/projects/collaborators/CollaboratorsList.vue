@@ -23,7 +23,7 @@
                 </button>
                 <button
                   class="btn btn-link text-secondary p-0"
-                  @click="goToProfile(collaborator.user.id, collaborator.user.username)"
+                  @click="goToProfile(collaborator.user.id)"
                 >
                   <i-material-symbols-article-person style="font-size: 1.5rem" />
                 </button>
@@ -98,11 +98,10 @@ const handleCloseModal = async () => {
   showDeleteModal.value = false;
 };
 
-const goToProfile = async (id, username) => {
+const goToProfile = async (id) => {
   router.push({
     name: "account:users:profile",
-    params: { id },
-    query: { username },
+    params: { id }
   });
 };
 

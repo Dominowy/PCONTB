@@ -46,8 +46,7 @@ const handleLogout = async () => {
 const goToProfile = async () => {
   router.push({
     name: "account:users:profile",
-    params: { id: store.user.id },
-    query: { username: store.user.username },
+    params: { id: store.user.id }
   });
 };
 </script>

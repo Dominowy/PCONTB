@@ -30,13 +30,14 @@ import { onMounted } from "vue";
 
 const route = useRoute();
 
-onMounted(() => {
-  loadData(onDataLoaded);
+onMounted(async () => {
+  await loadData(onDataLoaded);
+  setTitle(`Profile - ${content.value.user.username}`);
 });
 
 const onDataLoaded = async () => {
   return await ApiClient.request("account/users/get-by-id", { id: route.params.id });
 };
 
-const { content, loadData } = useDisplay(`Profile - ${route.query.username}`);
+const { content, loadData, setTitle } = useDisplay("Profile");
 </script>

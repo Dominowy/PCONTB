@@ -8,6 +8,7 @@ routes.push(
     path: "user/:id/profile",
     name: "account:users:profile",
     component: UserProfileView,
+    meta: { requiresAuth: false },
   },
   {
     path: "user/settings",
