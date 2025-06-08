@@ -15,6 +15,7 @@
       @input="onInput($event.target.value)"
       @blur="onBlur"
       @change="onBlur"
+      :multiple="multiple"
     />
   </base-form-field>
 </template>
@@ -39,6 +40,10 @@ const props = defineProps({
   },
   property: { type: String, default: null },
   modelValue: [String, Number, Boolean],
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const propertyName = ref(null);

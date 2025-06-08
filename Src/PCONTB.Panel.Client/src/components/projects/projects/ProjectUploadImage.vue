@@ -9,6 +9,7 @@
         placeholder="Select file"
         :errors="errors"
         :isAllTouched="isAllTouched"
+        :multiple="true"
       />
       <base-form-submit-panel :isLoading="isLoading" />
     </base-form>
