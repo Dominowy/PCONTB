@@ -6,58 +6,45 @@
     :isTouched="isTouched"
     :isAllTouched="isAllTouched"
   >
-    <input
-      :id="id"
-      class="form-control"
-      type="file"
-      :value="modelValue"
-      :placeholder="placeholder"
-      @input="onInput($event.target.value)"
-      @blur="onBlur"
-      @change="onBlur"
-      :multiple="multiple"
-    />
+    <div class="custom-file-wrapper" @click="triggerFileInput">
+      {{ fileLabel || placeholder }}
+      <input
+        ref="fileInput"
+        :id="id"
+        type="file"
+        class="hidden-input"
+        :multiple="multiple"
+        @change="onFileChange"
+        @blur="onBlur"
+      />
+    </div>
   </base-form-field>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
+
 const props = defineProps({
   id: String,
   label: String,
   placeholder: String,
-  type: {
-    type: String,
-    default: "text",
-  },
-  errors: {
-    type: Array,
-    default: () => [],
-  },
-  isAllTouched: {
-    type: Boolean,
-    default: false,
-  },
+  type: { type: String, default: "text" },
+  errors: { type: Array, default: () => [] },
+  isAllTouched: { type: Boolean, default: false },
   property: { type: String, default: null },
-  modelValue: [String, Number, Boolean],
-  multiple: {
-    type: Boolean,
-    default: false,
-  },
+  modelValue: [File, Array],
+  multiple: { type: Boolean, default: false },
 });
-
-const propertyName = ref(null);
-
-const isTouched = ref(false);
 
 const emit = defineEmits(["update:modelValue"]);
 
-onMounted(async () => {
-  propertyName.value = props.property;
+const propertyName = ref(null);
+const isTouched = ref(false);
+const fileInput = ref(null);
+const fileLabel = ref("");
 
-  if (propertyName.value == null) {
-    propertyName.value = props.label;
-  }
+onMounted(() => {
+  propertyName.value = props.property || props.label;
 });
 
 const onBlur = () => {
@@ -68,11 +55,65 @@ const onBlur = () => {
 
 const getFieldErrors = (propertyName) => {
   if (!props.errors) return [];
-
   return props.errors.filter((m) => m.propertyName === propertyName).map((m) => m.message);
 };
 
-const onInput = (event) => {
-  emit("update:modelValue", event);
+const triggerFileInput = () => {
+  fileInput.value?.click();
 };
+
+const onFileChange = (event) => {
+  const files = Array.from(event.target.files);
+  if (!files.length) return;
+
+  emit("update:modelValue", props.multiple ? files : files[0]);
+
+  fileLabel.value = props.multiple ? files.map((f) => f.name).join(", ") : files[0].name;
+
+  onBlur();
+};
+
+watch(
+  () => props.modelValue,
+  (val) => {
+    if (!val) fileLabel.value = "";
+    else if (Array.isArray(val)) {
+      fileLabel.value = val.map((f) => f.name).join(", ");
+    } else if (val.name) {
+      fileLabel.value = val.name;
+    }
+  }
+);
 </script>
+
+<style scoped>
+.custom-file-wrapper {
+  border: 2px dashed #90caf9;
+  padding: 24px;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+.file-placeholder {
+  margin: 0 0 8px;
+  color: #666;
+  font-size: 14px;
+  word-break: break-word;
+}
+.file-btn {
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.file-btn:hover {
+  background-color: #1565c0;
+}
+.hidden-input {
+  display: none;
+}
+</style>
