@@ -11,12 +11,10 @@ namespace PCONTB.Panel.Application.Functions.Projects.Images.Commands
 {
     public class UpdateImageRequest : BaseCommand, IRequest<CommandResult>
     {
-        public string ImageName { get; set; }
         public byte[] ImageData { get; set; }
+        public string ImageName { get; set; }
         public int DisplayOrder { get; set; }
         public Guid ProjectId { get; set; }
-
-        public IFormFile Image { get; set; }
     }
 
     public class UpdateImageHandler : IRequestHandler<UpdateImageRequest, CommandResult>
@@ -33,16 +31,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Images.Commands
 
             if (entity is null) throw new NotFoundException(ErrorCodes.Image.NotFound.Message);
 
-            using var memoryStream = new MemoryStream();
-            await request.Image.CopyToAsync(memoryStream);
-
             entity.SetDispalyOrder(request.DisplayOrder);
-
-            if (request.Image != null)
-            {
-                entity.SetImageName(request.Image.Name);
-                entity.SetImageData(memoryStream.ToArray());
-            }
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 

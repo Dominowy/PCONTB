@@ -1,7 +1,6 @@
 <template>
   <base-form-field
     :id="id"
-    :label="label"
     :errors="getFieldErrors(propertyName)"
     :isTouched="isTouched"
     :isAllTouched="isAllTouched"
@@ -21,19 +20,51 @@
   </base-form-field>
 </template>
 
+<style scoped>
+.custom-file-wrapper {
+  border: 2px dashed #90caf9;
+  padding: 24px;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.file-placeholder {
+  margin: 0 0 8px;
+  color: #666;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+.hidden-input {
+  display: none;
+}
+</style>
+
 <script setup>
 import { ref, onMounted, watch } from "vue";
 
 const props = defineProps({
   id: String,
-  label: String,
   placeholder: String,
-  type: { type: String, default: "text" },
-  errors: { type: Array, default: () => [] },
-  isAllTouched: { type: Boolean, default: false },
-  property: { type: String, default: null },
+  errors: {
+    type: Array,
+    default: () => [],
+  },
+  isAllTouched: {
+    type: Boolean,
+    default: false,
+  },
+  property: {
+    type: String,
+    default: null,
+  },
   modelValue: [File, Array],
-  multiple: { type: Boolean, default: false },
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -85,35 +116,3 @@ watch(
   }
 );
 </script>
-
-<style scoped>
-.custom-file-wrapper {
-  border: 2px dashed #90caf9;
-  padding: 24px;
-  border-radius: 6px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-}
-.file-placeholder {
-  margin: 0 0 8px;
-  color: #666;
-  font-size: 14px;
-  word-break: break-word;
-}
-.file-btn {
-  background-color: #1e88e5;
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-}
-.file-btn:hover {
-  background-color: #1565c0;
-}
-.hidden-input {
-  display: none;
-}
-</style>

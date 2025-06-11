@@ -30,6 +30,21 @@ export class ApiClient {
     }
   }
 
+  async requestFormData(url, formData, config = {}) {
+    try {
+      const response = await this.$http.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          ...(config.headers || {})
+        },
+        ...config
+      });
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
   async validate(url, onlyValidate, data, config) {
     let isValidating = onlyValidate === true;
 

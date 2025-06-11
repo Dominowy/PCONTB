@@ -1,6 +1,6 @@
 <template>
   <fieldset class="form-group">
-    <label :for="id" class="form-label d-block"> {{ label }}: </label>
+    <label v-if="label != null" :for="id" class="form-label d-block"> {{ label }}: </label>
     <slot></slot>
     <ul class="list-unstyled text-danger form-message my-0" v-if="hasErrors">
       <li v-for="error in errors" :key="error">

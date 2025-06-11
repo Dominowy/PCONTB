@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Function;
@@ -11,8 +12,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Images.Commands
 {
     public class AddImageRequest : BaseCommand, IRequest<CommandResult>
     {
-        public IFormFile Image { get; set; }
-        public int DisplayOrder { get; set; }
+        public List<IFormFile> Images { get; set; }
         public Guid ProjectId { get; set; }
     }
 
@@ -26,23 +26,38 @@ namespace PCONTB.Panel.Application.Functions.Projects.Images.Commands
         }
         public async Task<CommandResult> Handle(AddImageRequest request, CancellationToken cancellationToken)
         {
-            if (request.Image == null || request.Image.Length == 0)
+            if (request.Images == null || !request.Images.Any())
                 throw new BadRequestException(ErrorCodes.Image.ImageNotSelect.Message);
 
-            using var memoryStream = new MemoryStream();
-            await request.Image.CopyToAsync(memoryStream);
+            var existingImages = await _dbContext.Set<Image>()
+                .Where(i => i.ProjectId == request.ProjectId)
+                .ToListAsync(cancellationToken);
 
-            var entity = new Image(request.ProjectId);
+            var lastDisplayOrder = existingImages.Any() ? existingImages.Max(m => m.DisplayOrder): 0;
+            var images = new List<Image>();
 
-            entity.SetDispalyOrder(request.DisplayOrder);
-            entity.SetImageName(request.Image.Name);
-            entity.SetImageData(memoryStream.ToArray());
+            foreach (var image in request.Images)
+            {
+                if (image.Length == 0)
+                    throw new BadRequestException($"{image.Name} " + ErrorCodes.Image.ImageNotSelect.Message);
 
-            await _dbContext.Set<Image>().AddAsync(entity);
+                using var memoryStream = new MemoryStream();
+                await image.CopyToAsync(memoryStream, cancellationToken);
+
+                var entity = new Image(request.ProjectId);
+
+                entity.SetDispalyOrder(++lastDisplayOrder);
+                entity.SetImageName(image.FileName);
+                entity.SetImageData(memoryStream.ToArray());
+
+                images.Add(entity);
+            }
+
+            await _dbContext.Set<Image>().AddRangeAsync(images, cancellationToken);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return new CommandResult(entity.Id);
+            return new CommandResult(request.ProjectId);
         }
     }
 }

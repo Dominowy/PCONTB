@@ -65,11 +65,7 @@ const isTouched = ref(false);
 const emit = defineEmits(["update:modelValue"]);
 
 onMounted(async () => {
-  propertyName.value = props.property;
-
-  if (propertyName.value == null) {
-    propertyName.value = props.label;
-  }
+  propertyName.value = props.property || props.label;
 });
 
 const onBlur = () => {

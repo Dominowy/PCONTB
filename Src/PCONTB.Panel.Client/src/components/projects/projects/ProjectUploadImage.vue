@@ -4,12 +4,12 @@
       <base-form-file
         id="file"
         class="mt-2"
-        v-model="form.image"
-        label="File"
+        property="files"
+        v-model="form.images"
         placeholder="Select files"
         :errors="errors"
         :isAllTouched="isAllTouched"
-        :multiple="false"
+        :multiple="true"
       />
       <base-form-submit-panel :isLoading="isLoading" />
     </base-form>
@@ -24,7 +24,6 @@ import { useRouter, useRoute } from "vue-router";
 
 const router = useRouter();
 const route = useRoute();
-
 const form = reactive({});
 
 onMounted(async () => {
@@ -37,7 +36,16 @@ const getForm = async () => {
 };
 
 const submitInternal = async (onlyValidate) => {
-  return await ApiClient.validate("projects/images/add", onlyValidate, form);
+  try {
+    const formData = new FormData();
+
+    formData.append("ProjectId", route.params.id);
+    form.images.forEach((f) => formData.append("Images", f));
+
+    return await ApiClient.requestFormData("projects/images/add", formData);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const redirectAfterSucces = (id) => {

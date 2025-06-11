@@ -19,13 +19,13 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Images
         [HttpPost("add/validate")]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ValidateAddImage([FromBody] AddImageRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
+        public async Task<IActionResult> ValidateAddImage([FromForm] AddImageRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
         [HttpPost("add")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> AddImage([FromBody] AddImageRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+        public async Task<IActionResult> AddImage([FromForm] AddImageRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Add
 
