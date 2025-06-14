@@ -58,6 +58,13 @@ import { reactive, onMounted } from "vue";
 import ApiClient from "@/services/ApiClient";
 import { useRouter, useRoute } from "vue-router";
 
+const props = defineProps({
+  projectId: {
+    type: String,
+    default: null,
+  },
+});
+
 const router = useRouter();
 const route = useRoute();
 

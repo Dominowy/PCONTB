@@ -18,6 +18,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
         public Guid CategoryId { get; set; }
         public Guid? SubcategoryId { get; set; }
         public Guid CountryId { get; set; }
+        public Guid? ImageId { get; internal set; }
+        public Guid? VideoId { get; internal set; }
     }
 
     public class UpdateProjectHandler : IRequestHandler<UpdateProjectRequest, CommandResult> 

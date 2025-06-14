@@ -6,7 +6,29 @@
     :isAllTouched="isAllTouched"
   >
     <div class="custom-file-wrapper" @click="triggerFileInput">
-      {{ fileLabel || placeholder }}
+      <template v-if="isUploading">
+        <div class="progress-wrapper">
+          <div class="progress-bar" :style="{ width: uploadProgress + '%' }"></div>
+          <div class="progress-text">{{ uploadProgress }}%</div>
+        </div>
+      </template>
+      <div v-if="props.modelValue?.previewUrl">
+        <img
+          v-if="props.modelValue.contentType?.startsWith('image/')"
+          :src="props.modelValue.previewUrl"
+          alt="Preview"
+        />
+
+        <video
+          v-else-if="props.modelValue.contentType?.startsWith('video/')"
+          :src="props.modelValue.previewUrl"
+          controls
+        />
+      </div>
+      <div v-else>
+        {{ placeholder }}
+      </div>
+
       <input
         ref="fileInput"
         :id="id"
@@ -39,6 +61,40 @@
 
 .hidden-input {
   display: none;
+}
+
+.progress-wrapper {
+  position: relative;
+  height: 20px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #42a5f5;
+  transition: width 0.2s ease-in-out;
+}
+
+.progress-text {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+}
+
+video,
+img {
+  border-radius: 12px;
+  outline: none;
+  max-width: 100%;
+  max-height: 50%;
 }
 </style>
 
@@ -73,7 +129,8 @@ const emit = defineEmits(["update:modelValue"]);
 const propertyName = ref(null);
 const isTouched = ref(false);
 const fileInput = ref(null);
-const fileLabel = ref("");
+const uploadProgress = ref(0);
+const isUploading = ref(false);
 
 onMounted(() => {
   propertyName.value = props.property || props.label;
@@ -105,10 +162,19 @@ const onInput = (event) => {
 };
 
 const onFileChange = (fileName, path, contentType, file) => {
-  emit("update:modelValue", { fileName: fileName, path: path, contentType: contentType }, file);
+  const preview = URL.createObjectURL(file);
+
+  emit(
+    "update:modelValue",
+    { fileName: fileName, path: path, contentType: contentType, previewUrl: preview },
+    file
+  );
 };
 
 const uploadFile = (file) => {
+  isUploading.value = true;
+  uploadProgress.value = 0;
+
   const fileName = file.name;
   const contentType = file.type;
 
@@ -116,23 +182,30 @@ const uploadFile = (file) => {
   data.append("file", file);
 
   axios
-    .post(props.uploadUrl, data, { headers: { "Content-Type": "multipart/form-data" } })
+    .post(props.uploadUrl, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+      onUploadProgress: (progressEvent) => {
+        if (progressEvent.lengthComputable) {
+          uploadProgress.value = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        }
+      },
+    })
     .then((response) => {
+      isUploading.value = false;
       console.log("Uploading complete: " + fileName);
       onFileChange(fileName, response.data, contentType, file);
     })
     .catch((error) => {
+      isUploading.value = false;
       console.error("FAIL", error);
     });
 };
 
 watch(
-  () => props.modelValue,
-  (val) => {
-    console.log(val);
-    if (!val) fileLabel.value = "";
-    else if (val.fileName) {
-      fileLabel.value = val.fileName;
+  () => props.modelValue?.previewUrl,
+  (newVal, oldVal) => {
+    if (oldVal) {
+      URL.revokeObjectURL(oldVal);
     }
   }
 );
