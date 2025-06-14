@@ -34,7 +34,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
                 .Include(p => p.Country)
                 .Include(p => p.Category)
                 .Include(p => p.Subcategory)
-                .Include(p => p.Images)
+                .Include(p => p.Image)
                 .ToListAsync(cancellationToken);
 
             return new GetAllProjectsResponse()
@@ -61,7 +61,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
                 .Include(p => p.Country)
                 .Include(p => p.Category)
                 .Include(p => p.Subcategory)
-                .Include(p => p.Images)
+                .Include(p => p.Image)
                 .Where(p => p.UserId == request.Id || p.Collaborators.Any(m => m.UserId == request.Id))
                 .ToListAsync(cancellationToken);
 

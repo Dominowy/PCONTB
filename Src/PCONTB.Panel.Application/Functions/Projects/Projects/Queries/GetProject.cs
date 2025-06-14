@@ -29,7 +29,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
                 .Include(p => p.Collaborators).ThenInclude(p => p.User)
                 .Include(p => p.Category)
                 .Include(p => p.Subcategory)
-                .Include(p => p.Images)
+                .Include(p => p.Image)
                 .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException("Project not found");

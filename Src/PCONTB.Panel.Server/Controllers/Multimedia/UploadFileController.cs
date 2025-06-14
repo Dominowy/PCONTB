@@ -1,23 +1,30 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
+using PCONTB.Panel.Application.Services.Auth;
 using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Multimedia
 {
-    [Route("api/multimedia/file")]
-    public class FileController : BaseController
+    [Route("api/multimedia")]
+    public class UploadFileController : BaseController
     {
-        public FileController(IMediator mediator) : base(mediator)
+        private readonly ISessionAccesor _sessionAccesor;
+
+        public UploadFileController(IMediator mediator, ISessionAccesor sessionAccesor) : base(mediator)
         {
+            _sessionAccesor = sessionAccesor;
         }
 
         [HttpPost("upload-file")]
         public async Task<IActionResult> UploadFile()
         {
+            var userId = _sessionAccesor.Session.User.Id;
+
             var file = Request.Form.Files.FirstOrDefault();
             if (file == null) return BadRequest();
 
-            var tempFileName = Path.GetFileName(Path.GetTempFileName());
+            var tempFileName = userId + Path.GetFileName(Path.GetTempFileName());
             var tempPath = Path.Combine(Path.GetTempPath(), tempFileName);
 
             using (var stream = file.OpenReadStream())
@@ -29,7 +36,7 @@ namespace PCONTB.Panel.Server.Controllers.Multimedia
                 }
             }
 
-            return Json(tempPath);
+            return Ok(tempPath);
         }
     }
 }

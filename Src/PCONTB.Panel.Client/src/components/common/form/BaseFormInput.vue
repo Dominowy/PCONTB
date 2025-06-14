@@ -77,7 +77,11 @@ const onBlur = () => {
 const getFieldErrors = (propertyName) => {
   if (!props.errors) return [];
 
-  return props.errors.filter((m) => m.propertyName === propertyName).map((m) => m.message);
+  const messages = props.errors
+    .filter((m) => m.propertyName?.startsWith(propertyName))
+    .map((m) => m.message);
+
+  return [...new Set(messages)];
 };
 
 const onInput = (event) => {

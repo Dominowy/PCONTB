@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common.Models.Function;
-using PCONTB.Panel.Application.Functions.Projects.Images.Commands;
+using PCONTB.Panel.Application.Functions.Projects.Files.Images.Commands;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Images.Queries
+namespace PCONTB.Panel.Application.Functions.Projects.Files.Images.Queries
 {
     public class GetAddImageFormRequest : BaseQuery, IRequest<GetAddImageFormResponse>
     {

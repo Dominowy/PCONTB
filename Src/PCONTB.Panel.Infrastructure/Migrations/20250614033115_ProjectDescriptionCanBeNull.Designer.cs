@@ -12,8 +12,8 @@ using PCONTB.Panel.Infrastructure.Context;
 namespace PCONTB.Panel.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250507005122_ChangeProjectImageToImage")]
-    partial class ChangeProjectImageToImage
+    [Migration("20250614033115_ProjectDescriptionCanBeNull")]
+    partial class ProjectDescriptionCanBeNull
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -175,31 +175,50 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.ToTable("Collaborator");
                 });
 
-            modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Images.Image", b =>
+            modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Files.ProjectImage", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("integer");
-
-                    b.Property<byte[]>("ImageData")
-                        .IsRequired()
-                        .HasColumnType("bytea");
-
-                    b.Property<string>("ImageName")
+                    b.Property<string>("ContentType")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId");
+                    b.ToTable("ProjectImage");
+                });
 
-                    b.ToTable("Image");
+            modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Files.ProjectVideo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectVideo");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Projects.Project", b =>
@@ -214,6 +233,12 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.Property<Guid>("CountryId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("ImageId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -224,15 +249,24 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("VideoId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex("ImageId")
+                        .IsUnique();
+
                     b.HasIndex("SubcategoryId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("VideoId")
+                        .IsUnique();
 
                     b.ToTable("Project");
                 });
@@ -289,17 +323,6 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Images.Image", b =>
-                {
-                    b.HasOne("PCONTB.Panel.Domain.Projects.Projects.Project", "Project")
-                        .WithMany("Images")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Project");
-                });
-
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Projects.Project", b =>
                 {
                     b.HasOne("PCONTB.Panel.Domain.Projects.Categories.Category", "Category")
@@ -314,6 +337,11 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("PCONTB.Panel.Domain.Projects.Files.ProjectImage", "Image")
+                        .WithOne()
+                        .HasForeignKey("PCONTB.Panel.Domain.Projects.Projects.Project", "ImageId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("PCONTB.Panel.Domain.Projects.Categories.Subcategory", "Subcategory")
                         .WithMany("Projects")
                         .HasForeignKey("SubcategoryId");
@@ -324,13 +352,22 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("PCONTB.Panel.Domain.Projects.Files.ProjectVideo", "Video")
+                        .WithOne()
+                        .HasForeignKey("PCONTB.Panel.Domain.Projects.Projects.Project", "VideoId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Category");
 
                     b.Navigation("Country");
 
+                    b.Navigation("Image");
+
                     b.Navigation("Subcategory");
 
                     b.Navigation("User");
+
+                    b.Navigation("Video");
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.User", b =>
@@ -364,8 +401,6 @@ namespace PCONTB.Panel.Infrastructure.Migrations
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Projects.Project", b =>
                 {
                     b.Navigation("Collaborators");
-
-                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

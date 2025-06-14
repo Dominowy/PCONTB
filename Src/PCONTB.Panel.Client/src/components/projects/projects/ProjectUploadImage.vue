@@ -4,12 +4,12 @@
       <base-form-file
         id="file"
         class="mt-2"
-        property="files"
-        v-model="form.images"
-        placeholder="Select files"
+        property="Image"
+        v-model="form.image"
+        uploadUrl="/api/multimedia/upload-file"
+        placeholder="Select image"
         :errors="errors"
         :isAllTouched="isAllTouched"
-        :multiple="true"
       />
       <base-form-submit-panel :isLoading="isLoading" />
     </base-form>
@@ -36,16 +36,9 @@ const getForm = async () => {
 };
 
 const submitInternal = async (onlyValidate) => {
-  try {
-    const formData = new FormData();
+  form.projectId = route.params.id;
 
-    formData.append("ProjectId", route.params.id);
-    form.images.forEach((f) => formData.append("Images", f));
-
-    return await ApiClient.requestFormData("projects/images/add", formData);
-  } catch (error) {
-    console.log(error);
-  }
+  return await ApiClient.validate("projects/images/add", onlyValidate, form);
 };
 
 const redirectAfterSucces = (id) => {

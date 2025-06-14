@@ -3,10 +3,10 @@ using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
-using PCONTB.Panel.Application.Functions.Projects.Images.Commands;
-using PCONTB.Panel.Domain.Projects.Images;
+using PCONTB.Panel.Application.Functions.Projects.Files.Images.Commands;
+using PCONTB.Panel.Domain.Projects.Files;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Images.Queries
+namespace PCONTB.Panel.Application.Functions.Projects.Files.Images.Queries
 {
     public class GetUpdateImageFormRequest : BaseQuery, IRequest<GetUpdateImageFormResponse>
     {
@@ -24,7 +24,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Images.Queries
 
         public async Task<GetUpdateImageFormResponse> Handle(GetUpdateImageFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Image>().FindAsync(request.Id, cancellationToken);
+            var entity = await _dbContext.Set<ProjectFile>().FindAsync(request.Id, cancellationToken);
 
             if (entity is null) throw new NotFoundException(ErrorCodes.Image.NotFound.Message);
 
@@ -32,10 +32,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Images.Queries
             {
                 Form = new UpdateImageRequest
                 {
-                    ImageName = entity.ImageName,
-                    ImageData = entity.ImageData,
-                    DisplayOrder = entity.DisplayOrder,
-                    ProjectId = entity.ProjectId,
+                    
                 }
             };
         }

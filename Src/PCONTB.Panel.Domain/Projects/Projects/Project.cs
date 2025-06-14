@@ -3,7 +3,7 @@ using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Collaborators;
-using PCONTB.Panel.Domain.Projects.Images;
+using PCONTB.Panel.Domain.Projects.Files;
 
 namespace PCONTB.Panel.Domain.Projects.Projects
 {
@@ -25,9 +25,13 @@ namespace PCONTB.Panel.Domain.Projects.Projects
 
         public virtual List<Collaborator> Collaborators { get; private set; }
 
-        public virtual List<Image> Images { get; private set; }
+        public string? Description { get; private set; }
 
-        public string Description { get; private set; }
+        public Guid? ImageId { get; private set; }
+        public virtual ProjectImage? Image { get; private set; }
+
+        public Guid? VideoId { get; private set; }
+        public virtual ProjectVideo? Video { get; private set; }
 
         protected Project() : base()
         {

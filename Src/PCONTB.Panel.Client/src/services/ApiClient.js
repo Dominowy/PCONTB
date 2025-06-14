@@ -30,6 +30,21 @@ export class ApiClient {
     }
   }
 
+  async validate(url, onlyValidate, data, config) {
+    let isValidating = onlyValidate === true;
+
+    let suffix = isValidating ? "/validate" : "";
+    let validationUrl = url + suffix;
+
+    try {
+      let response = await this.$http.post(validationUrl, data, config);
+
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
   async requestFormData(url, formData, config = {}) {
     try {
       const response = await this.$http.post(url, formData, {
@@ -45,15 +60,20 @@ export class ApiClient {
     }
   }
 
-  async validate(url, onlyValidate, data, config) {
+  async requestFormDataValidate(url, onlyValidate, formData, config = {}) {
     let isValidating = onlyValidate === true;
 
     let suffix = isValidating ? "/validate" : "";
     let validationUrl = url + suffix;
 
     try {
-      let response = await this.$http.post(validationUrl, data, config);
-
+      const response = await this.$http.post(validationUrl, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          ...(config.headers || {})
+        },
+        ...config
+      });
       return response.data;
     } catch (error) {
       throw this.handleError(error);

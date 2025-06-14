@@ -12,8 +12,8 @@
         :id="id"
         type="file"
         class="hidden-input"
-        :multiple="multiple"
-        @change="onFileChange"
+        @input="onInput"
+        @change="onBlur"
         @blur="onBlur"
       />
     </div>
@@ -44,6 +44,7 @@
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
+import axios from "axios";
 
 const props = defineProps({
   id: String,
@@ -51,6 +52,10 @@ const props = defineProps({
   errors: {
     type: Array,
     default: () => [],
+  },
+  uploadUrl: {
+    type: String,
+    default: null,
   },
   isAllTouched: {
     type: Boolean,
@@ -60,11 +65,7 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  modelValue: [File, Array],
-  multiple: {
-    type: Boolean,
-    default: false,
-  },
+  modelValue: [Object],
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -86,32 +87,52 @@ const onBlur = () => {
 
 const getFieldErrors = (propertyName) => {
   if (!props.errors) return [];
-  return props.errors.filter((m) => m.propertyName === propertyName).map((m) => m.message);
+
+  const messages = props.errors
+    .filter((m) => m.propertyName?.startsWith(propertyName))
+    .map((m) => m.message);
+
+  return [...new Set(messages)];
 };
 
 const triggerFileInput = () => {
   fileInput.value?.click();
 };
 
-const onFileChange = (event) => {
-  const files = Array.from(event.target.files);
-  if (!files.length) return;
+const onInput = (event) => {
+  const file = event.target.files[0];
+  uploadFile(file);
+};
 
-  emit("update:modelValue", props.multiple ? files : files[0]);
+const onFileChange = (fileName, path, contentType, file) => {
+  emit("update:modelValue", { fileName: fileName, path: path, contentType: contentType }, file);
+};
 
-  fileLabel.value = props.multiple ? files.map((f) => f.name).join(", ") : files[0].name;
+const uploadFile = (file) => {
+  const fileName = file.name;
+  const contentType = file.type;
 
-  onBlur();
+  var data = new FormData();
+  data.append("file", file);
+
+  axios
+    .post(props.uploadUrl, data, { headers: { "Content-Type": "multipart/form-data" } })
+    .then((response) => {
+      console.log("Uploading complete: " + fileName);
+      onFileChange(fileName, response.data, contentType, file);
+    })
+    .catch((error) => {
+      console.error("FAIL", error);
+    });
 };
 
 watch(
   () => props.modelValue,
   (val) => {
+    console.log(val);
     if (!val) fileLabel.value = "";
-    else if (Array.isArray(val)) {
-      fileLabel.value = val.map((f) => f.name).join(", ");
-    } else if (val.name) {
-      fileLabel.value = val.name;
+    else if (val.fileName) {
+      fileLabel.value = val.fileName;
     }
   }
 );
