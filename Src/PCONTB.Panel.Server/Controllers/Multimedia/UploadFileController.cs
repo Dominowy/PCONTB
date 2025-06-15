@@ -23,8 +23,11 @@ namespace PCONTB.Panel.Server.Controllers.Multimedia
             var file = Request.Form.Files.FirstOrDefault();
             if (file == null) return BadRequest();
 
-            var tempFileName = userId + Path.GetFileName(Path.GetTempFileName());
-            var tempPath = Path.Combine(Path.GetTempPath(), tempFileName);
+            var userTempFolder = Path.Combine(Path.GetTempPath(), userId.ToString());
+            Directory.CreateDirectory(userTempFolder);
+
+            var tempFileName = Path.GetFileName(Path.GetTempFileName());
+            var tempPath = Path.Combine(userTempFolder, tempFileName);
 
             using (var stream = file.OpenReadStream())
             {

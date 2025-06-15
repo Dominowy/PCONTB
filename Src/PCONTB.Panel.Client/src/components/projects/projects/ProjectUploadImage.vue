@@ -30,7 +30,7 @@ const props = defineProps({
   videoId: {
     type: String,
     default: null,
-  },,
+  },
 });
 
 const router = useRouter();
