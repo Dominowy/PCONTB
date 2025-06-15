@@ -13,7 +13,6 @@ namespace PCONTB.Panel.Application.Functions.Projects.Files.Images.Commands
     public class AddImageRequest : BaseCommand, IRequest<CommandResult>
     {
         public FormFile Image { get; set; }
-        public Guid ProjectId { get; set; }
     }
 
     public class AddImageHandler : IRequestHandler<AddImageRequest, CommandResult>
@@ -32,7 +31,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Files.Images.Commands
 
             var data = await File.ReadAllBytesAsync(request.Image.Path, cancellationToken);
 
-            var entity = new ProjectImage(request.ProjectId, request.Image.FileName, request.Image.ContentType, data);
+            var entity = new ProjectImage(request.Image.FileName, request.Image.ContentType, data);
 
             await _dbContext.Set<ProjectImage>().AddAsync(entity, cancellationToken);
 

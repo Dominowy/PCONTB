@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
 using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
+using PCONTB.Panel.Application.Models.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
@@ -27,7 +29,9 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 
         public async Task<GetUpdateProjectFormResponse> Handle(GetUpdateProjectFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Set<Project>().FindAsync(request.Id, cancellationToken);
+            var entity = await _context.Set<Project>()
+                .Include(m => m.Collaborators).ThenInclude(m => m.User)
+                .FirstOrDefaultAsync(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException("Project not found");
 
@@ -42,6 +46,9 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
                     CategoryId = entity.CategoryId,
                     SubcategoryId = entity.SubcategoryId,
                     CountryId = entity.CountryId,
+                    Collaborators = [.. entity.Collaborators.Select(CollaboratorDto.Map)],
+                    ImageId = entity.ImageId,
+                    VideoId = entity.VideoId
                 }
             };
         }

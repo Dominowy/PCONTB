@@ -7,6 +7,7 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Application.Models.Projects.Collaborators;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Projects;
@@ -18,8 +19,9 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
         public Guid CategoryId { get; set; }
         public Guid? SubcategoryId { get; set; }
         public Guid CountryId { get; set; }
-        public Guid? ImageId { get; internal set; }
-        public Guid? VideoId { get; internal set; }
+        public List<CollaboratorDto> Collaborators { get; set; }
+        public Guid? ImageId { get; set; }
+        public Guid? VideoId { get; set; }
     }
 
     public class UpdateProjectHandler : IRequestHandler<UpdateProjectRequest, CommandResult> 
@@ -45,6 +47,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
             entity.SetCountry(request.CountryId);
             entity.SetCategory(request.CategoryId);
             entity.SetSubcategory(request.SubcategoryId);
+            entity.SetImageId(request.ImageId);
+            entity.SetVideoId(request.VideoId);
 
             await _context.SaveChangesAsync(cancellationToken);
 

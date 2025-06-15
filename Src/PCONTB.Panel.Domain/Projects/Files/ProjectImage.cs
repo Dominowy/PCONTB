@@ -8,7 +8,7 @@ namespace PCONTB.Panel.Domain.Projects.Files
         {
         }
 
-        public ProjectImage(Guid id, string fileName, string contentType, byte[] data) : base(id)
+        public ProjectImage(string fileName, string contentType, byte[] data) : base(Guid.NewGuid())
         {
             SetFileName(fileName);
             SetContentType(contentType);

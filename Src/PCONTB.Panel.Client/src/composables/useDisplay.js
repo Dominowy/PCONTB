@@ -8,7 +8,7 @@ export function useDisplay(title) {
   const content = ref(null);
 
   onMounted(() => {
-    document.title = title;
+    if (title) document.title = title;
   });
 
   const loadData = async (onDataLoaded) => {
@@ -25,7 +25,7 @@ export function useDisplay(title) {
 
   const setTitle = (title) => {
     document.title = title;
-  }
+  };
 
   return { content, loadData, setTitle };
 }

@@ -6,8 +6,6 @@ export function useAddUpdate(submitInternal, redirectAfterSuccess) {
   const errors = ref([]);
   const errorMessage = ref("");
 
-  const redirectId = ref("");
-
   const submit = async () => {
     isLoading.value = true;
     try {
@@ -32,5 +30,10 @@ export function useAddUpdate(submitInternal, redirectAfterSuccess) {
       isLoading.value = false;
     }
   };
-  return { isLoading, submit, validate, errors, isAllTouched, errorMessage, redirectId };
+
+  const setTitle = (title) => {
+    document.title = title;
+  };
+
+  return { isLoading, submit, validate, errors, isAllTouched, errorMessage, setTitle };
 }

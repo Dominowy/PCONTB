@@ -88,6 +88,12 @@
 
         public static class Image
         {
+            public static readonly ErrorCode PathNotExist = new ErrorCode
+            {
+                Code = nameof(PathNotExist) + "." + nameof(Image) + "." + nameof(NotFound),
+                Message = "Path not exist"
+            };
+
             public static readonly ErrorCode NotFound = new ErrorCode
             {
                 Code = nameof(ErrorCode) + "." + nameof(Image) + "." + nameof(NotFound),

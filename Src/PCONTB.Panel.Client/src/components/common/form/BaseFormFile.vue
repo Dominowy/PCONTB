@@ -12,16 +12,16 @@
           <div class="progress-text">{{ uploadProgress }}%</div>
         </div>
       </template>
-      <div v-if="props.modelValue?.previewUrl">
+      <div v-if="preview">
         <img
           v-if="props.modelValue.contentType?.startsWith('image/')"
-          :src="props.modelValue.previewUrl"
+          :src="preview"
           alt="Preview"
         />
 
         <video
           v-else-if="props.modelValue.contentType?.startsWith('video/')"
-          :src="props.modelValue.previewUrl"
+          :src="preview"
           controls
         />
       </div>
@@ -122,6 +122,10 @@ const props = defineProps({
     default: null,
   },
   modelValue: [Object],
+  src: {
+    type: String,
+    default: null,
+  },
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -131,10 +135,21 @@ const isTouched = ref(false);
 const fileInput = ref(null);
 const uploadProgress = ref(0);
 const isUploading = ref(false);
+const preview = ref(null);
 
 onMounted(() => {
   propertyName.value = props.property || props.label;
+  setSrc();
 });
+
+const setSrc = () => {
+  const contentType = props.modelValue?.contentType || "image/jpeg";
+  if (props.src) {
+    preview.value = `data:${contentType};base64,${props.src}`;
+  } else {
+    preview.value = null;
+  }
+};
 
 const onBlur = () => {
   setTimeout(() => {
@@ -162,13 +177,8 @@ const onInput = (event) => {
 };
 
 const onFileChange = (fileName, path, contentType, file) => {
-  const preview = URL.createObjectURL(file);
-
-  emit(
-    "update:modelValue",
-    { fileName: fileName, path: path, contentType: contentType, previewUrl: preview },
-    file
-  );
+  preview.value = URL.createObjectURL(file);
+  emit("update:modelValue", { fileName, path, contentType });
 };
 
 const uploadFile = (file) => {
@@ -178,7 +188,7 @@ const uploadFile = (file) => {
   const fileName = file.name;
   const contentType = file.type;
 
-  var data = new FormData();
+  const data = new FormData();
   data.append("file", file);
 
   axios
@@ -201,12 +211,16 @@ const uploadFile = (file) => {
     });
 };
 
+watch(preview, (newVal, oldVal) => {
+  if (oldVal && oldVal.startsWith("blob:")) {
+    URL.revokeObjectURL(oldVal);
+  }
+});
+
 watch(
-  () => props.modelValue?.previewUrl,
-  (newVal, oldVal) => {
-    if (oldVal) {
-      URL.revokeObjectURL(oldVal);
-    }
+  () => props.src,
+  () => {
+    setSrc();
   }
 );
 </script>

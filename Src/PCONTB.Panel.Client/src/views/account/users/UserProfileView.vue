@@ -1,7 +1,7 @@
 <template>
   <div v-if="content">
     <base-header :title="`Profile-${content.user.username}`" />
-    <b-row>
+    <b-row class="mb-2">
       <b-col md="12" class="mb-2">
         <b-card class="text-center">
           <b-card-title>

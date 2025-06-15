@@ -4,7 +4,7 @@
       <h2>Projects</h2>
       <b-button variant="primary" @click="goToAdd">Add</b-button>
     </div>
-    <b-row v-if="content">
+    <b-row v-if="content" class="mb-2">
       <b-col v-for="project in content.projects" :key="project.id" md="4" class="mt-2">
         <b-card>
           <b-card-title>

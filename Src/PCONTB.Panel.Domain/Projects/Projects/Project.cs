@@ -91,5 +91,21 @@ namespace PCONTB.Panel.Domain.Projects.Projects
 
             SubcategoryId = subcategoryId;
         }
+
+        public void SetImageId(Guid? imageId)
+        {
+            var anyChange = ImageId != imageId;
+            if (!anyChange) return;
+
+            ImageId = imageId;
+        }
+
+        public void SetVideoId(Guid? videoId)
+        {
+            var anyChange = VideoId != videoId;
+            if (!anyChange) return;
+
+            VideoId = videoId;
+        }
     }
 }

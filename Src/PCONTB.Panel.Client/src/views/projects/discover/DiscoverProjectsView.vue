@@ -1,7 +1,7 @@
 <template>
   <div>
     <base-header title="Discover" />
-    <b-row v-if="content">
+    <b-row v-if="content" class="mb-2">
       <b-col v-for="project in content.projects" :key="project.id" md="4" class="mt-2">
         <b-card>
           <b-card-title>

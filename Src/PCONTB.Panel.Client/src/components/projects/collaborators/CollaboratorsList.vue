@@ -101,7 +101,7 @@ const handleCloseModal = async () => {
 const goToProfile = async (id) => {
   router.push({
     name: "account:users:profile",
-    params: { id }
+    params: { id },
   });
 };
 
