@@ -77,7 +77,7 @@ namespace PCONTB.Panel.Infrastructure.Context
                 .WithOne()
                 .HasForeignKey<Project>(m => m.ImageId)
                 .HasPrincipalKey<ProjectImage>(m => m.Id)
-                .OnDelete(DeleteBehavior.Restrict); ;
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Project>()
                 .HasOne(m => m.Video)
