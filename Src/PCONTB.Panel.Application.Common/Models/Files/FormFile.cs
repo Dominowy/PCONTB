@@ -1,4 +1,4 @@
-﻿namespace PCONTB.Panel.Application.Common.Files
+﻿namespace PCONTB.Panel.Application.Common.Models.Files
 {
     public class FormFile
     {
