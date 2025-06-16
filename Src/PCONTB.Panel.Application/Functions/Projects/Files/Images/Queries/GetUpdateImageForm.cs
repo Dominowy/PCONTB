@@ -3,7 +3,7 @@ using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Files;
 using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Function;
-using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Functions.Projects.Files.Images.Commands;
 using PCONTB.Panel.Domain.Projects.Files;
 

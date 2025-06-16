@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
-using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Sessions;
 
 namespace PCONTB.Panel.Application.Services.Auth

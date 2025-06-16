@@ -2,7 +2,7 @@
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
-using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Services.Auth;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands

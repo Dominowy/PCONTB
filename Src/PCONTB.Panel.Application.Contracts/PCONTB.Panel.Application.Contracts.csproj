@@ -11,8 +11,4 @@
     <ProjectReference Include="..\PCONTB.Panel.Domain\PCONTB.Panel.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\Security\" />
-  </ItemGroup>
-
 </Project>

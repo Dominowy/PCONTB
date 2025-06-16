@@ -2,7 +2,7 @@
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Function;
-using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Locations.Countries;
 using PCONTB.Panel.Domain.Location.Countries;
 

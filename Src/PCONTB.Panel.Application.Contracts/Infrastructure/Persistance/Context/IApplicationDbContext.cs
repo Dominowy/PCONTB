@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace PCONTB.Panel.Application.Contracts.Infrastructure.DbContext
+namespace PCONTB.Panel.Application.Contracts.Infrastructure.Persistance
 {
     public interface IApplicationDbContext
     {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth.Encryption;
-using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Users;
 using System.Text.RegularExpressions;
 

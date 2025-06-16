@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Function;
-using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Projects.Projects;
 using PCONTB.Panel.Domain.Projects.Projects;
 

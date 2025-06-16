@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PCONTB.Panel.Application.Contracts.Infrastructure.DbContext;
+using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Sessions;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Domain.Location.Countries;
