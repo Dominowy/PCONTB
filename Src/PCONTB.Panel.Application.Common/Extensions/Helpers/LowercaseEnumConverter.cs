@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace PCONTB.Panel.Application.Common.EnumHelpers
+namespace PCONTB.Panel.Application.Common.Extensions.Helpers
 {
     public class LowercaseEnumConverter : JsonStringEnumConverter
     {
