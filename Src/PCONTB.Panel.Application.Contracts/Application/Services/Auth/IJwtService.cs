@@ -1,4 +1,4 @@
-﻿namespace PCONTB.Panel.Application.Contracts.Auth
+﻿namespace PCONTB.Panel.Application.Contracts.Application.Services.Auth
 {
     public interface IJwtService
     {

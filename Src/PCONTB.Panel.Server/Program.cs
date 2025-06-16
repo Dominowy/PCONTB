@@ -1,6 +1,6 @@
 using PCONTB.Panel.Application;
 using PCONTB.Panel.Application.Common.EnumHelpers;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth;
+using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Infrastructure;
 using PCONTB.Panel.Server.Middleware;
 using PCONTB.Panel.Server.Services;

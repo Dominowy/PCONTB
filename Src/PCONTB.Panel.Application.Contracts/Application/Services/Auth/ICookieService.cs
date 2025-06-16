@@ -1,4 +1,4 @@
-﻿namespace PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth
+﻿namespace PCONTB.Panel.Application.Contracts.Application.Services.Auth
 {
     public interface ICookieService 
     {

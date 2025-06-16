@@ -1,4 +1,4 @@
-﻿using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth;
+﻿using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 
 namespace PCONTB.Panel.Server.Services
 {

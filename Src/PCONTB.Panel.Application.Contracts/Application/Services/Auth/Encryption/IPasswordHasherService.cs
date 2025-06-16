@@ -1,4 +1,4 @@
-﻿namespace PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth.Encryption
+﻿namespace PCONTB.Panel.Application.Contracts.Application.Services.Auth.Encryption
 {
     public interface IPasswordHasherService
     {

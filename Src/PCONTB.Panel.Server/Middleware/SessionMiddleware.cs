@@ -1,6 +1,4 @@
 ﻿using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
-using PCONTB.Panel.Application.Contracts.Auth;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Security.Auth;
 
 namespace PCONTB.Panel.Server.Middleware
 {
