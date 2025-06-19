@@ -5,10 +5,11 @@
     </div>
     <div class="right-container">
       <slot name="right">
-        <base-loading-spinner v-if="isLoading" />
+        
         <div class="submit-actions-group">
+          <base-loading-spinner v-if="isLoading" />
           <slot name="submit-actions">
-            <base-form-submit-button :label="label" :variant="variant" />
+            <base-form-submit-button :label="label" :variant="variant" :disabled="isLoading" />
           </slot>
         </div>
       </slot>
@@ -17,6 +18,22 @@
 </template>
 
 <style scoped>
+.submit-actions-group {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: white;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 1rem;
+}
+
 .submit-actions-group .btn {
   float: right;
   margin-left: 25px;

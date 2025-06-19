@@ -1,10 +1,9 @@
 using PCONTB.Panel.Application;
-using PCONTB.Panel.Application.Common.EnumHelpers;
+using PCONTB.Panel.Application.Common.Extensions.Helpers;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Infrastructure;
 using PCONTB.Panel.Server.Middleware;
 using PCONTB.Panel.Server.Services;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 

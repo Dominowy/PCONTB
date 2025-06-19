@@ -1,5 +1,5 @@
 <template>
-  <button type="submit" class="btn" :class="variantClass">
+  <button type="submit" class="btn" :class="variantClass" :disabled="disabled">
     <slot>{{ label }}</slot>
   </button>
 </template>
@@ -15,6 +15,10 @@ const props = defineProps({
   variant: {
     type: String,
     default: "primary",
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
 });
 

@@ -115,7 +115,7 @@ const redirectAfterSucces = (id) => {
 };
 
 const onImageChange = async () => {
-  await submitInternal(false);
+  await submit();
 };
 
 const { isLoading, submit, validate, errors, isAllTouched, setTitle } = useAddUpdate(
