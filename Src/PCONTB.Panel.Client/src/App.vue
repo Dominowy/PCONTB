@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content">
+  <div>
     <LoadingLayout v-if="store.loading" />
     <TransitionLayout v-if="store.transition" />
     <router-view v-slot="{ Component }">
@@ -9,12 +9,6 @@
     </router-view>
   </div>
 </template>
-
-<style scoped>
-.page-content {
-  padding-bottom: 60px;
-}
-</style>
 
 <script setup>
 import { useStore } from "./store/index";

@@ -8,8 +8,12 @@
             <b-tab title="Users">
               <panel-users-list />
             </b-tab>
-            <b-tab title="Categories"> </b-tab>
-            <b-tab title="Countries"> </b-tab>
+            <b-tab title="Categories">
+              <panel-categories-list />
+            </b-tab>
+            <b-tab title="Countries">
+              <panel-countries-list />
+            </b-tab>
           </b-tabs>
         </b-card>
       </div>
