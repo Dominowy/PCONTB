@@ -29,7 +29,7 @@ const debouncedFetchUsers = debounce(fetchUsers, 400);
 const columns = [
   { key: "username", label: "Nazwa użytkownika", filterable: true, sortable: true },
   { key: "email", label: "Email", filterable: true, sortable: true },
-  { key: "userRoles", label: "Role", filterable: false, sortable: false },
+  { key: "userRoles", label: "Role", filterable: true, sortable: false },
   { key: "action", label: "", filterable: false, sortable: false },
 ];
 
@@ -71,7 +71,7 @@ async function fetchUsers() {
   }
 
   try {
-    console.log("Wysyłane dane:", params); // 🔍 pomoc debug
+    console.log("Wysyłane dane:", params);
     const response = await axios.post("/api/account/users/table/get-data", params);
     users.value = response.data.items;
     totalCount.value = response.data.totalCount;
