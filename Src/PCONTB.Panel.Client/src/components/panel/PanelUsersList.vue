@@ -1,65 +1,104 @@
 <template>
-  <div>
-    <b-list-group vertical="md">
-      <template v-if="content">
-        <template v-for="user in content.users" :key="user.id">
-          <b-list-group-item>
-            <div class="d-flex justify-content-between">
-              <div class="d-flex align-items-center">
-                {{ user.email }}
-              </div>
-              <div>
-                <button
-                  class="btn btn-link text-secondary p-0"
-                  @click="handleShowUpdateModal(user.id)"
-                >
-                  <i-material-symbols-settings-rounded style="font-size: 1.5rem" />
-                </button>
-                <button
-                  class="btn btn-link text-secondary p-0"
-                  @click="handleShowDeleteModal(user.id)"
-                >
-                  <i-material-symbols-person-remove style="font-size: 1.5rem" />
-                </button>
-                <button class="btn btn-link text-secondary p-0" @click="goToProfile(user.id)">
-                  <i-material-symbols-article-person style="font-size: 1.5rem" />
-                </button>
-              </div>
-            </div>
-          </b-list-group-item>
-        </template>
-      </template>
-      <b-list-group-item class="d-flex justify-content-end">
-        <button class="btn btn-link text-secondary p-0" @click="handleShowAddModal">
-          <i-material-symbols-person-add style="font-size: 1.5rem" />
-        </button>
-      </b-list-group-item>
-    </b-list-group>
-  </div>
+  <base-table
+    :data="users"
+    :totalItems="totalCount"
+    :columns="columns"
+    :pageSize="pageSize"
+    :initialPage="page"
+    :initialSort="initialSort"
+    @update:page="onPageChange"
+    @update:sort="onSortChange"
+    @update:filters="onFiltersChange"
+  >
+    <template #cell-userRoles="{ item }">
+      {{ formatRoles(item.userRoles) }}
+    </template>
+    <template #cell-action="{ item }">
+      <b-button>Test {{ item.id }}</b-button>
+    </template>
+  </base-table>
 </template>
 
 <script setup>
-import { useDisplay } from "@/composables/useDisplay";
-import ApiClient from "@/services/ApiClient";
-import { onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { ref, reactive, watch } from "vue";
+import { debounce } from "lodash";
+import axios from "axios";
 
-const router = useRouter();
+const debouncedFetchUsers = debounce(fetchUsers, 400);
 
-onMounted(() => {
-  loadData(onDataLoaded);
+const columns = [
+  { key: "username", label: "Nazwa użytkownika", filterable: true, sortable: true },
+  { key: "email", label: "Email", filterable: true, sortable: true },
+  { key: "userRoles", label: "Role", filterable: false, sortable: false },
+  { key: "action", label: "", filterable: false, sortable: false },
+];
+
+const users = ref([]);
+const totalCount = ref(0);
+const page = ref(1);
+const pageSize = 10;
+const initialSort = ref([]);
+
+const filters = reactive({
+  global: "",
+  columns: {},
 });
 
-const onDataLoaded = async () => {
-  return await ApiClient.request("account/users/get-all", {});
-};
+function formatRoles(userRoles) {
+  if (!userRoles || !Array.isArray(userRoles)) return "";
+  return userRoles.map((r) => r.name || r).join(", ");
+}
 
-const goToProfile = async (id) => {
-  router.push({
-    name: "account:users:profile",
-    params: { id },
-  });
-};
+async function fetchUsers() {
+  const params = {
+    search: filters.global || undefined,
+    page: page.value,
+    pageSize,
+    filters: {},
+  };
 
-const { content, loadData } = useDisplay("Admin");
+  for (const key in filters.columns) {
+    if (filters.columns[key]) {
+      params.filters[key] = filters.columns[key];
+    }
+  }
+
+  if (initialSort.value.length > 0) {
+    params.sorts = initialSort.value.map((s) => ({
+      field: s.key,
+      descending: s.desc,
+    }));
+  }
+
+  try {
+    console.log("Wysyłane dane:", params); // 🔍 pomoc debug
+    const response = await axios.post("/api/account/users/table/get-data", params);
+    users.value = response.data.items;
+    totalCount.value = response.data.totalCount;
+  } catch (err) {
+    console.error("Błąd pobierania użytkowników:", err);
+  }
+}
+
+function onPageChange(newPage) {
+  page.value = newPage;
+}
+
+function onSortChange(newSort) {
+  initialSort.value = newSort;
+}
+
+function onFiltersChange(newFilters) {
+  filters.global = newFilters.global;
+  filters.columns = { ...newFilters.columns };
+  page.value = 1;
+}
+
+watch(
+  [page, initialSort, () => filters.global, () => JSON.stringify(filters.columns)],
+  () => {
+    debouncedFetchUsers();
+  },
+  { immediate: true }
+);
 </script>

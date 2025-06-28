@@ -30,6 +30,15 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
 
         #endregion Get all
 
+        #region Table
+
+        [AuthorizeToken(Role.Admin)]
+        [HttpPost("table/get-data")]
+        [ProducesResponseType(typeof(GetAllUsersResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetUsersTable([FromBody] GetUsersTableRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+        #endregion Table
+
         #region Add
 
         [AuthorizeToken(Role.Admin)]
