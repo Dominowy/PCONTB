@@ -14,7 +14,7 @@
       {{ formatRoles(item.userRoles) }}
     </template>
     <template #cell-action="{ item }">
-      <b-button>Test {{ item.id }}</b-button>
+      <b-button>Test</b-button>
     </template>
   </base-table>
 </template>

@@ -4,6 +4,16 @@ namespace PCONTB.Panel.Application.Models.Account.Users
 {
     public class UserTableDto : EntityDto
     {
+        private List<string> list;
+
+        public UserTableDto(string username, string email, string password, List<string> list)
+        {
+            Username = username;
+            Email = email;
+            Password = password;
+            this.list = list;
+        }
+
         public string Username { get; set; }
 
         public string Email { get; set; }

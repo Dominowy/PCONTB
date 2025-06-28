@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth.Encryption;
 using PCONTB.Panel.Application.Services.Auth;
+using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Infrastructure.Security.Auth;
 using PCONTB.Panel.Infrastructure.Security.Auth.Encryption;
 using System.Reflection;
@@ -15,6 +16,7 @@ namespace PCONTB.Panel.Application
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(PagedQueryHandler<,>).Assembly));
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

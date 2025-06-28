@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Functions.Account.Users.Commands;
 using PCONTB.Panel.Application.Functions.Account.Users.Queries;
+using PCONTB.Panel.Application.Models.Account.Users;
+using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
@@ -35,7 +37,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [AuthorizeToken(Role.Admin)]
         [HttpPost("table/get-data")]
         [ProducesResponseType(typeof(GetAllUsersResponse), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetUsersTable([FromBody] GetUsersTableRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+        public async Task<IActionResult> GetUsersTable([FromBody] PagedQueryRequest<UserTableDto> request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Table
 
