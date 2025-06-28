@@ -36,7 +36,9 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
                 var searchLower = request.Search.ToLower();
                 query = query.Where(u =>
                     u.Username.ToLower().Contains(searchLower) ||
-                    u.Email.ToLower().Contains(searchLower));
+                    u.Email.ToLower().Contains(searchLower) ||
+                    u.UserRoles.Any(r => r.Role.ToString().ToLower().Contains(searchLower))
+                );
             }
 
             foreach (var filter in request.Filters)
@@ -48,6 +50,9 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
                 if (filter.Key == "email")
                     query = query.Where(u => u.Email.ToLower().Contains(value));
+
+                if (filter.Key == "userRoles")
+                    query = query.Where(u => u.UserRoles.Any(m => m.Role.ToString().ToLower().Contains(value)));
 
             }
 
@@ -76,10 +81,8 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
                 query = query.OrderBy(u => u.Username);
             }
 
-            // Liczymy totalCount przed paginacją
             var totalCount = await query.CountAsync(cancellationToken);
 
-            // Paginacja
             var users = await query
                 .Skip((request.Page - 1) * request.PageSize)
                 .Take(request.PageSize)
@@ -99,7 +102,6 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
             };
         }
 
-        // Pomocnik do dynamicznego sortowania (Expression<Func<User, object>>)
         private static Expression<Func<User, object>> GetPropertyExpression(string propertyName)
         {
             var param = Expression.Parameter(typeof(User), "x");
