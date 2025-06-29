@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Common.Models.Select;
+using PCONTB.Panel.Application.Functions.Account.Users.Queries;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Commands;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Queries;
+using PCONTB.Panel.Application.Models.Projects.Categories;
+using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
@@ -31,6 +34,15 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Categories
         public async Task<IActionResult> GetAllCategories([FromBody] GetAllCategoriesRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Get all
+
+        #region Table
+
+        [AuthorizeToken(Role.Admin)]
+        [HttpPost("table/get-data")]
+        [ProducesResponseType(typeof(GetAllUsersResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetCategoriesTable([FromBody] PagedQueryRequest<CategoryTableDto> request, CancellationToken cancellation) => await Send(request, cancellation);
+
+        #endregion Table
 
         #region Add
 

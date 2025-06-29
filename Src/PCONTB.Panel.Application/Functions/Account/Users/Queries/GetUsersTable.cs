@@ -3,12 +3,14 @@ using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Account.Users;
 using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Domain.Account.Users;
+using System.Data;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {
     public class UserPagedQueryHandler : PagedQueryHandler<User, UserTableDto>
     {
         private readonly IApplicationDbContext _dbContext;
+
         public UserPagedQueryHandler(IApplicationDbContext dbContext) 
         {
             _dbContext = dbContext;
@@ -66,7 +68,16 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
         protected override UserTableDto MapEntityToDto(User user)
         {
-            return UserTableDto.Map(user);
+            return new UserTableDto
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Username = user.Username,
+                UserRoles = [.. user.UserRoles.Select(m =>  new UserRoleTableDto
+                {
+                    Name = m.Role.ToString()
+                })]
+            };
         }
     }
 
