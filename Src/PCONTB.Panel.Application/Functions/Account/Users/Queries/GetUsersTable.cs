@@ -1,30 +1,66 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Account.Users;
 using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Domain.Account.Users;
-using System.Linq.Expressions;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {
     public class UserPagedQueryHandler : PagedQueryHandler<User, UserTableDto>
     {
-        public UserPagedQueryHandler(DbContext context) : base(context) { }
+        private readonly IApplicationDbContext _dbContext;
+        public UserPagedQueryHandler(IApplicationDbContext dbContext) 
+        {
+            _dbContext = dbContext;
+        }
+
+        public override async Task<PagedResultDto<UserTableDto>> Handle(PagedQueryRequest<UserTableDto> request, CancellationToken cancellationToken)
+        {
+            IQueryable<User> query = _dbContext.Set<User>()
+                .Include(u => u.UserRoles);
+
+            if (request.Filters?.TryGetValue("userRoles", out var roleValue) == true)
+            {
+                query = query.Where(u =>
+                    u.UserRoles.Any(ur => ur.Role.ToString().Contains(roleValue)));
+                request.Filters.Remove("userRoles");
+            }
+
+            var sort = request.Sorts.FirstOrDefault(s => s.Field == "userRoles");
+            if (sort != null)
+            {
+                request.Sorts.Remove(sort);
+                query = sort.Descending
+                    ? query.OrderByDescending(u => u.UserRoles.Select(ur => ur.Role.ToString()).FirstOrDefault())
+                    : query.OrderBy(u => u.UserRoles.Select(ur => ur.Role.ToString()).FirstOrDefault());
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.Search))
+            {
+                var normalized = request.Search.ToLowerInvariant();
+
+                query = query.Where(u =>
+                    u.Username.ToLower().Contains(normalized) ||
+                    u.Email.ToLower().Contains(normalized) ||
+                    u.UserRoles.Any(ur => ur.Role.ToString().ToLower().Contains(normalized))
+                );
+
+                request.Search = null;
+            }
+
+            SetQuery(query);
+
+            return await base.Handle(request, cancellationToken);
+        }
 
         protected override string[] GetGlobalSearchProperties()
         {
-            return new[] { "Username", "Email", "UserRoles.Role" };
+            return new[] { "Username", "Email" };
         }
 
         protected override UserTableDto MapEntityToDto(User user)
         {
-            return new UserTableDto(
-                user.Username,
-                user.Email,
-                user.Password,
-                user.UserRoles.Select(r => r.Role.ToString()).ToList()
-            );
+            return UserTableDto.Map(user);
         }
     }
 

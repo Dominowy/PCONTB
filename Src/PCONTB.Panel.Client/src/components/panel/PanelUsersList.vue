@@ -29,7 +29,7 @@ const debouncedFetchUsers = debounce(fetchUsers, 400);
 const columns = [
   { key: "username", label: "Nazwa użytkownika", filterable: true, sortable: true },
   { key: "email", label: "Email", filterable: true, sortable: true },
-  { key: "userRoles", label: "Role", filterable: true, sortable: false },
+  { key: "userRoles", label: "Role", filterable: true, sortable: true },
   { key: "action", label: "", filterable: false, sortable: false },
 ];
 

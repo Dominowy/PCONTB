@@ -4,7 +4,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-public enum FilterOperation
+namespace PCONTB.Panel.Application.Table
+{
+    public enum FilterOperation
 {
     Equals,
     Contains,
@@ -160,3 +162,6 @@ public static class QueryHelper
         return query.Skip((page - 1) * pageSize).Take(pageSize);
     }
 }
+}
+
+
