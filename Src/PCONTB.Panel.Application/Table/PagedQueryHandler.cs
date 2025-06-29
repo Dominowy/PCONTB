@@ -25,7 +25,7 @@ namespace PCONTB.Panel.Application.Table
 
         public virtual async Task<PagedResultDto<TDto>> Handle(PagedQueryRequest<TDto> request, CancellationToken cancellationToken)
         {
-            if (query == null) return new PagedResultDto<TDto>();
+            if (query == null) query = GetQuery();
 
             if (!string.IsNullOrWhiteSpace(request.Search))
             {
@@ -66,6 +66,11 @@ namespace PCONTB.Panel.Application.Table
         }
 
         protected virtual TDto MapEntityToDto(TEntity entity)
+        {
+            throw new NotImplementedException("Override this method to provide mapping logic.");
+        }
+
+        protected virtual IQueryable<TEntity> GetQuery()
         {
             throw new NotImplementedException("Override this method to provide mapping logic.");
         }

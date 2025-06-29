@@ -53,6 +53,12 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
             return await base.Handle(request, cancellationToken);
         }
 
+        protected virtual IQueryable<User> GetQuery()
+        {
+            return _dbContext.Set<User>()
+                .Include(u => u.UserRoles);
+        }
+
         protected override string[] GetGlobalSearchProperties()
         {
             return new[] { "Username", "Email" };
