@@ -1,51 +1,59 @@
 <template>
-  <div>
-    <input
-      v-if="showGlobalFilter"
-      v-model="globalFilter"
-      @input="onFilterChange"
-      placeholder="Szukaj..."
-    />
-
-    <table>
-      <thead>
-        <tr>
-          <th
-            v-for="col in columns"
-            :key="col.key"
-            @click="sortColumn(col.key, col.sortable)"
-            style="cursor: pointer; user-select: none"
-          >
-            {{ col.label }}
-            <span v-if="col.sortable && isSorted(col.key)" @click="sortColumn(col.key)">
-              {{ getSortDirection(col.key) === "desc" ? "↓" : "↑" }}
-            </span>
-            <div v-if="col.filterable">
-              <input
-                type="text"
-                v-model="columnFilters[col.key]"
-                @input="onFilterChange"
-                placeholder="Filtruj..."
-              />
-            </div>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr v-for="item in data" :key="item[idKey]">
-          <td v-for="col in columns" :key="col.key">
-            <slot :name="`cell-${col.key}`" :item="item">{{ item[col.key] }}</slot>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="pagination">
-      <button :disabled="page === 1" @click="changePage(page - 1)">Poprzednia</button>
-      <span>Strona {{ page }} z {{ totalPages }}</span>
-      <button :disabled="page === totalPages" @click="changePage(page + 1)">Następna</button>
+  <div class="container mt-4">
+    <div v-if="showGlobalFilter" class="mb-3">
+      <input
+        v-model="globalFilter"
+        @input="onFilterChange"
+        placeholder="Szukaj..."
+        class="form-control"
+      />
     </div>
+
+    <div class="table-responsive overflow-auto m-2">
+      <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th
+              v-for="col in columns"
+              :key="col.key"
+              @click="sortColumn(col.key, col.sortable)"
+              style="cursor: pointer; user-select: none"
+            >
+              {{ col.label }}
+              <span v-if="col.sortable && isSorted(col.key)" @click="sortColumn(col.key)">
+                {{ getSortDirection(col.key) === "desc" ? "↓" : "↑" }}
+              </span>
+              <div v-if="col.filterable" class="mt-1">
+                <input
+                  type="text"
+                  v-model="columnFilters[col.key]"
+                  @input="onFilterChange"
+                  placeholder="Filtruj..."
+                  class="form-control form-control-sm"
+                />
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr v-for="item in data" :key="item[idKey]">
+            <td v-for="col in columns" :key="col.key">
+              <slot :name="`cell-${col.key}`" :item="item">{{ item[col.key] }}</slot>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <nav class="d-flex justify-content-between align-items-center">
+      <button class="btn btn-primary" :disabled="page === 1" @click="changePage(page - 1)">
+        Previous
+      </button>
+      <span>Page {{ page }} of {{ totalPages }}</span>
+      <button class="btn btn-primary" :disabled="page === totalPages" @click="changePage(page + 1)">
+        Next
+      </button>
+    </nav>
   </div>
 </template>
 
@@ -129,24 +137,3 @@ watch(columns, () => {
   page.value = initialPage.value;
 });
 </script>
-
-<style scoped>
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-th,
-td {
-  border: 1px solid #ccc;
-  padding: 6px 12px;
-}
-th {
-  background: #fafafa;
-}
-th > div {
-  margin-top: 4px;
-}
-.pagination {
-  margin-top: 12px;
-}
-</style>

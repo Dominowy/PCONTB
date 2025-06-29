@@ -16,10 +16,14 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 
         public override async Task<PagedResultDto<CountryTableDto>> Handle(PagedQueryRequest<CountryTableDto> request, CancellationToken cancellationToken)
         {
+            var query = GetQuery();
+
+            SetQuery(query);
+
             return await base.Handle(request, cancellationToken);
         }
 
-        protected virtual IQueryable<Country> GetQuery()
+        protected override IQueryable<Country> GetQuery()
         {
             return _dbContext.Set<Country>();
         }

@@ -1,57 +1,104 @@
 <template>
-  <div>
-    <b-list-group vertical="md">
-      <template v-if="content">
-        <template v-for="country in content.countries" :key="country.id">
-          <b-list-group-item>
-            <div class="d-flex justify-content-between">
-              <div class="d-flex align-items-center">
-                {{ country.name }}
-              </div>
-              <div>
-                <button
-                  class="btn btn-link text-secondary p-0"
-                  @click="handleShowUpdateModal(country.id)"
-                >
-                  <i-material-symbols-settings-rounded style="font-size: 1.5rem" />
-                </button>
-                <button
-                  class="btn btn-link text-secondary p-0"
-                  @click="handleShowDeleteModal(country.id)"
-                >
-                  <i-material-symbols-person-remove style="font-size: 1.5rem" />
-                </button>
-                <button class="btn btn-link text-secondary p-0" @click="goToProfile(country.id)">
-                  <i-material-symbols-article-person style="font-size: 1.5rem" />
-                </button>
-              </div>
-            </div>
-          </b-list-group-item>
-        </template>
-      </template>
-      <b-list-group-item class="d-flex justify-content-end">
-        <button class="btn btn-link text-secondary p-0" @click="handleShowAddModal">
-          <i-material-symbols-person-add style="font-size: 1.5rem" />
-        </button>
-      </b-list-group-item>
-    </b-list-group>
-  </div>
+  <base-table
+    :data="users"
+    :totalItems="totalCount"
+    :columns="columns"
+    :pageSize="pageSize"
+    :initialPage="page"
+    :initialSort="initialSort"
+    @update:page="onPageChange"
+    @update:sort="onSortChange"
+    @update:filters="onFiltersChange"
+  >
+  </base-table>
 </template>
 
 <script setup>
-import { useDisplay } from "@/composables/useDisplay";
-import ApiClient from "@/services/ApiClient";
-import { onMounted } from "vue";
+import { ref, reactive, watch } from "vue";
+import { debounce } from "lodash";
+import axios from "axios";
 
-onMounted(() => {
-  loadData(onDataLoaded);
+const debouncedFetchUsers = debounce(fetchCountries, 400);
+
+const columns = [
+  {
+    key: "name",
+    accessor: "Name",
+    label: "Name",
+    filterable: true,
+    sortable: true,
+  },
+  { key: "action", label: "", filterable: false, sortable: false },
+];
+
+const users = ref([]);
+const totalCount = ref(0);
+const page = ref(1);
+const pageSize = 10;
+const initialSort = ref([]);
+
+const filters = reactive({
+  global: "",
+  columns: {},
 });
 
-const onDataLoaded = async () => {
-  return await ApiClient.request("locations/countries/get-all", {});
-};
+async function fetchCountries() {
+  const params = {
+    search: filters.global || undefined,
+    page: page.value,
+    pageSize,
+    filters: {},
+  };
 
-const goToProfile = async (id) => {};
+  for (const key in filters.columns) {
+    if (filters.columns[key]) {
+      const column = columns.find((col) => col.key === key);
+      if (column) {
+        // Użyj accessor zamiast key
+        params.filters[column.accessor] = filters.columns[key];
+      }
+    }
+  }
 
-const { content, loadData } = useDisplay();
+  if (initialSort.value.length > 0) {
+    params.sorts = initialSort.value.map((s) => {
+      const column = columns.find((col) => col.key === s.key);
+      return {
+        field: column?.accessor ?? s.key, // fallback dla bezpieczeństwa
+        descending: s.desc,
+      };
+    });
+  }
+
+  try {
+    console.log("Wysyłane dane:", params);
+    const response = await axios.post("/api/locations/countries/table/get-data", params);
+    users.value = response.data.items;
+    totalCount.value = response.data.totalCount;
+  } catch (err) {
+    console.error("Błąd pobierania użytkowników:", err);
+  }
+}
+
+function onPageChange(newPage) {
+  page.value = newPage;
+}
+
+function onSortChange(newSort) {
+  initialSort.value = newSort;
+}
+
+function onFiltersChange(newFilters) {
+  filters.global = newFilters.global;
+  filters.columns = { ...newFilters.columns };
+  page.value = 1;
+}
+
+watch(
+  [page, initialSort, () => filters.global, () => JSON.stringify(filters.columns)],
+  () => {
+    debouncedFetchUsers();
+  },
+  { immediate: true }
+);
 </script>

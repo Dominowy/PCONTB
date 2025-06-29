@@ -19,10 +19,14 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 
             public override async Task<PagedResultDto<CategoryTableDto>> Handle(PagedQueryRequest<CategoryTableDto> request, CancellationToken cancellationToken)
             {
+                var query = GetQuery();
+
+                SetQuery(query);
+
                 return await base.Handle(request, cancellationToken);
             }
 
-            protected virtual IQueryable<Category> GetQuery()
+            protected override IQueryable<Category> GetQuery()
             {
                 return _dbContext.Set<Category>();
             }

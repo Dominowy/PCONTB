@@ -6,7 +6,6 @@ using PCONTB.Panel.Application.Functions.Account.Users.Queries;
 using PCONTB.Panel.Application.Functions.Location.Countries.Commands;
 using PCONTB.Panel.Application.Functions.Location.Countries.Queries;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Queries;
-using PCONTB.Panel.Application.Models.Account.Users;
 using PCONTB.Panel.Application.Models.Locations.Countries;
 using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Domain.Account.Users;

@@ -1,28 +1,33 @@
 <template>
-  <base-table
-    :data="users"
-    :totalItems="totalCount"
-    :columns="columns"
-    :pageSize="pageSize"
-    :initialPage="page"
-    :initialSort="initialSort"
-    @update:page="onPageChange"
-    @update:sort="onSortChange"
-    @update:filters="onFiltersChange"
-  >
-    <template #cell-userRoles="{ item }">
-      {{ formatRoles(item.userRoles) }}
-    </template>
-    <template #cell-action="{ item }">
-      <b-button>Test</b-button>
-    </template>
-  </base-table>
+  <div>
+    <div class="d-flex justify-content-end">
+      <b-button variant="primary" @click="goToAdd">Add</b-button>
+    </div>
+    <base-table
+      :data="users"
+      :totalItems="totalCount"
+      :columns="columns"
+      :pageSize="pageSize"
+      :initialPage="page"
+      :initialSort="initialSort"
+      @update:page="onPageChange"
+      @update:sort="onSortChange"
+      @update:filters="onFiltersChange"
+    >
+      <template #cell-userRoles="{ item }">
+        {{ formatRoles(item.userRoles) }}
+      </template>
+    </base-table>
+  </div>
 </template>
 
 <script setup>
 import { ref, reactive, watch } from "vue";
 import { debounce } from "lodash";
 import axios from "axios";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const debouncedFetchUsers = debounce(fetchUsers, 400);
 
@@ -30,7 +35,7 @@ const columns = [
   {
     key: "username",
     accessor: "Username",
-    label: "Nazwa użytkownika",
+    label: "Username",
     filterable: true,
     sortable: true,
   },
@@ -38,7 +43,7 @@ const columns = [
   {
     key: "userRoles",
     accessor: "UserRoles.Role",
-    label: "Role",
+    label: "Roles",
     filterable: true,
     sortable: true,
   },
@@ -112,6 +117,10 @@ function onFiltersChange(newFilters) {
   filters.columns = { ...newFilters.columns };
   page.value = 1;
 }
+
+const goToAdd = async () => {
+  router.push({ name: "projects:project:add" });
+};
 
 watch(
   [page, initialSort, () => filters.global, () => JSON.stringify(filters.columns)],
