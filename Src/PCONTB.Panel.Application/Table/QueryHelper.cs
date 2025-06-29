@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Reflection;
 
 namespace PCONTB.Panel.Application.Table
@@ -26,13 +23,7 @@ namespace PCONTB.Panel.Application.Table
                 return query;
 
             var param = Expression.Parameter(typeof(TEntity), "x");
-            Expression property;
-
-            // Obsługa kolekcji Any(...)
-            if (propertyName.Contains("Any("))
-                property = BuildAnyFilterExpression<TEntity>(param, propertyName);
-            else
-                property = BuildPropertyExpression(param, propertyName);
+            Expression property = BuildSearchExpression(param, propertyName, value);
 
             Expression? condition = null;
 
@@ -50,6 +41,7 @@ namespace PCONTB.Panel.Application.Table
                     case FilterOperation.Contains:
                         condition = Expression.Call(toLowerProperty, containsMethod, loweredValue);
                         break;
+
                     case FilterOperation.Equals:
                         condition = Expression.Call(property, equalsMethod, Expression.Constant(value), Expression.Constant(StringComparison.OrdinalIgnoreCase));
                         break;
@@ -66,14 +58,20 @@ namespace PCONTB.Panel.Application.Table
                         case FilterOperation.Equals:
                             condition = Expression.Equal(property, constant);
                             break;
+
                         case FilterOperation.GreaterThan:
                             condition = Expression.GreaterThan(property, constant);
                             break;
+
                         case FilterOperation.LessThan:
                             condition = Expression.LessThan(property, constant);
                             break;
                     }
                 }
+            }
+            else if (property.Type == typeof(bool))
+            {
+                condition = condition == null ? property : Expression.OrElse(condition, property);
             }
 
             if (condition == null)
@@ -83,168 +81,206 @@ namespace PCONTB.Panel.Application.Table
             return query.Where(lambda);
         }
 
-        private static Expression BuildPropertyExpression(Expression param, string propertyName)
+        private static Expression BuildPropertyExpression(Expression param, string propertyPath)
         {
-            Expression property = param;
-            foreach (var prop in propertyName.Split('.'))
+            Expression current = param;
+            foreach (var prop in propertyPath.Split('.'))
             {
-                property = Expression.PropertyOrField(property, prop);
+                var propertyInfo = current.Type.GetProperty(prop);
+                if (propertyInfo == null)
+                    throw new ArgumentException($"Property '{prop}' not found on type '{current.Type.Name}'");
+
+                if (IsEnumerableButNotString(propertyInfo.PropertyType))
+                {
+                    // Jeśli to kolekcja, wyciągamy FirstOrDefault()
+                    var elementType = propertyInfo.PropertyType.GetGenericArguments().First();
+                    var firstMethod = typeof(Enumerable)
+                        .GetMethods()
+                        .First(m => m.Name == "FirstOrDefault" && m.GetParameters().Length == 1)
+                        .MakeGenericMethod(elementType);
+
+                    var collection = Expression.PropertyOrField(current, prop);
+                    current = Expression.Call(firstMethod, collection);
+                }
+                else
+                {
+                    current = Expression.PropertyOrField(current, prop);
+                }
             }
+            return current;
+        }
+
+        private static Expression BuildSearchExpression(Expression param, string propertyName, string search)
+        {
+            var parts = propertyName.Split('.');
+            Expression property = param;
+
+            for (int i = 0; i < parts.Length; i++)
+            {
+                var prop = parts[i];
+                var propInfo = property.Type.GetProperty(prop);
+
+                if (propInfo == null)
+                    throw new ArgumentException($"Property '{prop}' not found on type '{property.Type.Name}'");
+
+                if (IsEnumerableButNotString(propInfo.PropertyType))
+                {
+                    // Kolekcja -> musimy zbudować Any() z predykatem na elementach
+
+                    if (i + 1 >= parts.Length)
+                        throw new ArgumentException("Expected property name after collection property");
+
+                    var elementType = propInfo.PropertyType.GetGenericArguments()[0];
+                    var elementParam = Expression.Parameter(elementType, "e");
+                    var innerPropName = parts[i + 1];
+
+                    // Budujemy predykat dla elementu kolekcji, który zwraca bool (np. contains)
+                    var predicate = BuildContainsPredicate(elementParam, innerPropName, search);
+
+                    // Metoda Any<T>(IEnumerable<T>, Func<T,bool>)
+                    var anyMethod = typeof(Enumerable).GetMethods()
+                        .First(m => m.Name == "Any" && m.GetParameters().Length == 2)
+                        .MakeGenericMethod(elementType);
+
+                    // property kolekcji (np. x.UserRoles)
+                    var collectionProperty = Expression.PropertyOrField(property, prop);
+
+                    // wywołanie Any(collectionProperty, predicate)
+                    property = Expression.Call(anyMethod, collectionProperty, predicate);
+
+                    i++; // przeskakujemy nazwę właściwości elementu, bo już ją przerobiliśmy
+                }
+                else
+                {
+                    // Zwykła właściwość
+                    property = Expression.PropertyOrField(property, prop);
+                }
+            }
+
             return property;
         }
 
-        // Buduje wyrażenie dla UserRoles.Any(Role) — zwraca string (Role.ToString())
-        private static Expression BuildAnyFilterExpression<TEntity>(ParameterExpression param, string propertyName)
+        private static LambdaExpression BuildContainsPredicate(ParameterExpression param, string propertyName, string search)
         {
-            // Przykład propertyName = "UserRoles.Any(Role)"
+            var property = Expression.PropertyOrField(param, propertyName);
 
-            var anyIndex = propertyName.IndexOf("Any(", StringComparison.Ordinal);
-            var collectionName = propertyName.Substring(0, anyIndex).TrimEnd('.');
-            var innerProp = propertyName.Substring(anyIndex + 4, propertyName.Length - anyIndex - 5); // zawartość w nawiasie
+            if (property.Type == typeof(string))
+            {
+                // Dla string — zawiera tekst (Contains)
+                var notNull = Expression.NotEqual(property, Expression.Constant(null, typeof(string)));
+                var toLowerMethod = typeof(string).GetMethod("ToLower", Type.EmptyTypes)!;
+                var containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) })!;
 
-            var collectionExpr = Expression.PropertyOrField(param, collectionName);
-            var elementType = collectionExpr.Type.GetGenericArguments().First();
+                var toLowerProperty = Expression.Call(property, toLowerMethod);
+                var loweredSearch = Expression.Constant(search.ToLower());
 
-            var elementParam = Expression.Parameter(elementType, "c");
-            var innerPropExpr = Expression.PropertyOrField(elementParam, innerProp);
+                var containsCall = Expression.Call(toLowerProperty, containsMethod, loweredSearch);
 
-            // Zamiana enum na string (Role.ToString())
-            Expression keyExpr = Expression.Call(innerPropExpr, "ToString", Type.EmptyTypes);
+                var body = Expression.AndAlso(notNull, containsCall);
+                return Expression.Lambda(body, param);
+            }
+            else if (property.Type.IsEnum)
+            {
+                // Dla enum: zamieniamy enum na string (ToString()), porównujemy z search po lowercase
+                var toStringMethod = typeof(object).GetMethod("ToString", Type.EmptyTypes)!;
+                var toStringCall = Expression.Call(property, toStringMethod);
 
-            var selector = Expression.Lambda(keyExpr, elementParam);
+                var toLowerMethod = typeof(string).GetMethod("ToLower", Type.EmptyTypes)!;
+                var toLowerCall = Expression.Call(toStringCall, toLowerMethod);
 
-            // collection.Select(c => c.Role.ToString()).Any(v => v == value)
-            var selectCall = Expression.Call(
-                typeof(Enumerable),
-                "Select",
-                new Type[] { elementType, typeof(string) },
-                collectionExpr,
-                selector);
+                var loweredSearch = Expression.Constant(search.ToLower());
 
-            var anyPredicateParam = Expression.Parameter(typeof(string), "v");
-            var anyPredicateBody = Expression.Equal(anyPredicateParam, Expression.Constant(value: null, typeof(string))); // placeholder
-            var anyLambda = Expression.Lambda(anyPredicateBody, anyPredicateParam);
+                var equalsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) })!;
 
-            // Zweryfikujemy to później w ApplyFilter, gdzie mamy dostęp do value, więc zmienimy
-            // Ale Expression jest immutable, więc zamiast tego poniżej wywołujemy Any inline
+                // Możesz też użyć Contains, jeśli chcesz partial match:
+                // var containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) })!;
+                // var containsCall = Expression.Call(toLowerCall, containsMethod, loweredSearch);
 
-            // Właściwe Any(v => v.ToLower().Contains(value.ToLower())) można zrobić tutaj dynamicznie
+                var equalsCall = Expression.Call(toLowerCall, equalsMethod, loweredSearch);
 
-            // Dla prostoty – zwrócimy FirstOrDefault z kolekcji (do dalszej filtracji)
-            var firstOrDefaultCall = Expression.Call(
-                typeof(Enumerable),
-                "FirstOrDefault",
-                new Type[] { typeof(string) },
-                selectCall);
+                return Expression.Lambda(equalsCall, param);
+            }
+            else
+            {
+                throw new ArgumentException($"Property '{propertyName}' is neither string nor enum.");
+            }
+        }
 
-            return firstOrDefaultCall;
+        private static bool IsEnumerableButNotString(Type type)
+        {
+            return typeof(System.Collections.IEnumerable).IsAssignableFrom(type) && type != typeof(string);
         }
 
         public static IQueryable<TEntity> ApplyGlobalSearch<TEntity>(
-    this IQueryable<TEntity> query,
-    string search,
-    params string[] propertyNames)
+            this IQueryable<TEntity> query,
+            string search,
+            params string[] propertyNames)
         {
             if (string.IsNullOrWhiteSpace(search) || propertyNames == null || propertyNames.Length == 0)
                 return query;
 
             var param = Expression.Parameter(typeof(TEntity), "x");
+
             Expression? orExpression = null;
 
             foreach (var propName in propertyNames)
             {
-                Expression searchExpression;
+                Expression propertyExpression;
 
-                if (propName.Contains("Any("))
+                try
                 {
-                    searchExpression = BuildAnyGlobalSearchExpression<TEntity>(param, propName, search);
+                    propertyExpression = BuildSearchExpression(param, propName, search);
+                }
+                catch (ArgumentException)
+                {
+                    // Jeśli property nie istnieje lub inny błąd, pomiń
+                    continue;
+                }
+
+                // propertyExpression może być typu bool (np. Any), lub string (gdy np. ostatnia właściwość)
+                if (propertyExpression.Type == typeof(bool))
+                {
+                    orExpression = orExpression == null ? propertyExpression : Expression.OrElse(orExpression, propertyExpression);
+                }
+                else if (propertyExpression.Type == typeof(string))
+                {
+                    // Budujemy warunek Contains jak wcześniej (dla string)
+
+                    var notNull = Expression.NotEqual(propertyExpression, Expression.Constant(null, typeof(string)));
+                    var toLowerMethod = typeof(string).GetMethod("ToLower", Type.EmptyTypes)!;
+                    var containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) })!;
+                    var loweredSearch = Expression.Constant(search.ToLower());
+
+                    var toLowerProperty = Expression.Call(propertyExpression, toLowerMethod);
+                    var containsCall = Expression.Call(toLowerProperty, containsMethod, loweredSearch);
+                    var combined = Expression.AndAlso(notNull, containsCall);
+
+                    orExpression = orExpression == null ? combined : Expression.OrElse(orExpression, combined);
                 }
                 else
                 {
-                    var property = BuildPropertyExpression(param, propName);
-                    if (property.Type != typeof(string))
-                        continue;
-
-                    var toLowerMethod = typeof(string).GetMethod("ToLower", Type.EmptyTypes)!;
-                    var containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) })!;
-
-                    var notNull = Expression.NotEqual(property, Expression.Constant(null, typeof(string)));
-                    var toLowerProperty = Expression.Call(property, toLowerMethod);
-                    var loweredSearch = Expression.Constant(search.ToLower());
-
-                    var containsCall = Expression.Call(toLowerProperty, containsMethod, loweredSearch);
-
-                    searchExpression = Expression.AndAlso(notNull, containsCall);
+                    // Inny typ - pomijamy
+                    continue;
                 }
-
-                orExpression = orExpression == null ? searchExpression : Expression.OrElse(orExpression, searchExpression);
             }
 
             if (orExpression == null)
                 return query;
 
             var lambda = Expression.Lambda<Func<TEntity, bool>>(orExpression, param);
+
             return query.Where(lambda);
         }
 
-        // Podobnie jak BuildAnyFilterExpression ale dla global search, robimy concat kolekcji w jeden string, lub FirstOrDefault
-        private static Expression BuildAnyGlobalSearchExpression<TEntity>(ParameterExpression param, string propertyName, string searchValue)
-        {
-            var anyIndex = propertyName.IndexOf("Any(", StringComparison.Ordinal);
-            var collectionName = propertyName.Substring(0, anyIndex).TrimEnd('.');
-            var innerProp = propertyName.Substring(anyIndex + 4, propertyName.Length - anyIndex - 5);
-
-            var collectionExpr = Expression.PropertyOrField(param, collectionName);
-            var elementType = collectionExpr.Type.GetGenericArguments().First();
-
-            var elementParam = Expression.Parameter(elementType, "c");
-            var innerPropExpr = Expression.PropertyOrField(elementParam, innerProp);
-
-            // .ToString().ToLower().Contains(searchValue.ToLower())
-            var toStringCall = Expression.Call(innerPropExpr, "ToString", Type.EmptyTypes);
-            var toLowerMethod = typeof(string).GetMethod("ToLower", Type.EmptyTypes)!;
-            var toLowerCall = Expression.Call(toStringCall, toLowerMethod);
-            var loweredSearch = Expression.Constant(searchValue.ToLower());
-
-            var containsMethod = typeof(string).GetMethod("Contains", new[] { typeof(string) })!;
-            var containsCall = Expression.Call(toLowerCall, containsMethod, loweredSearch);
-
-            var notNull = Expression.NotEqual(toStringCall, Expression.Constant(null, typeof(string)));
-            var combined = Expression.AndAlso(notNull, containsCall);
-
-            var predicate = Expression.Lambda(combined, elementParam);
-
-            // Wywołanie Any(...) na kolekcji
-            var anyMethod = typeof(Enumerable).GetMethods()
-                .Where(m => m.Name == "Any" && m.GetParameters().Length == 2)
-                .Single()
-                .MakeGenericMethod(elementType);
-
-            var anyCall = Expression.Call(anyMethod, collectionExpr, predicate);
-
-            return anyCall;
-        }
-
-
         public static IOrderedQueryable<TEntity> ApplyOrder<TEntity>(
-            this IQueryable<TEntity> source,
-            string propertyName,
-            bool descending = false,
-            bool thenBy = false,
-            IOrderedQueryable<TEntity>? orderedQuery = null)
+        this IQueryable<TEntity> source,
+        string propertyName,
+        bool descending = false,
+        bool thenBy = false,
+        IOrderedQueryable<TEntity>? orderedQuery = null)
         {
             var param = Expression.Parameter(typeof(TEntity), "x");
-            Expression property;
-
-            if (propertyName.Contains("Any("))
-            {
-                property = BuildAnyOrderExpression<TEntity>(param, propertyName);
-            }
-            else
-            {
-                property = BuildPropertyExpression(param, propertyName);
-            }
-
+            Expression property = BuildPropertyExpression(param, propertyName);
             var lambda = Expression.Lambda(property, param);
 
             string methodName;
@@ -258,42 +294,8 @@ namespace PCONTB.Panel.Application.Table
                 .Single()
                 .MakeGenericMethod(typeof(TEntity), property.Type);
 
-            var result = method.Invoke(null, new object[] { thenBy ? orderedQuery! : source, lambda })!;
+            var result = method.Invoke(null, new object[] { orderedQuery ?? source, lambda })!;
             return (IOrderedQueryable<TEntity>)result;
-        }
-
-        private static Expression BuildAnyOrderExpression<TEntity>(ParameterExpression param, string propertyName)
-        {
-            // "UserRoles.Any(Role)" => wyciągnięcie pierwszego elementu z kolekcji i jego właściwości jako string
-
-            var anyIndex = propertyName.IndexOf("Any(", StringComparison.Ordinal);
-            var collectionName = propertyName.Substring(0, anyIndex).TrimEnd('.');
-            var innerProp = propertyName.Substring(anyIndex + 4, propertyName.Length - anyIndex - 5);
-
-            var collectionExpr = Expression.PropertyOrField(param, collectionName);
-            var elementType = collectionExpr.Type.GetGenericArguments().First();
-
-            var elementParam = Expression.Parameter(elementType, "c");
-            var innerPropExpr = Expression.PropertyOrField(elementParam, innerProp);
-
-            Expression keyExpr = Expression.Call(innerPropExpr, "ToString", Type.EmptyTypes);
-
-            var selector = Expression.Lambda(keyExpr, elementParam);
-
-            var selectCall = Expression.Call(
-                typeof(Enumerable),
-                "Select",
-                new Type[] { elementType, typeof(string) },
-                collectionExpr,
-                selector);
-
-            var firstOrDefaultCall = Expression.Call(
-                typeof(Enumerable),
-                "FirstOrDefault",
-                new Type[] { typeof(string) },
-                selectCall);
-
-            return firstOrDefaultCall;
         }
 
         public static IQueryable<TEntity> ApplyPagination<TEntity>(

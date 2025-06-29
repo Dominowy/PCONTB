@@ -27,9 +27,21 @@ import axios from "axios";
 const debouncedFetchUsers = debounce(fetchUsers, 400);
 
 const columns = [
-  { key: "username", label: "Nazwa użytkownika", filterable: true, sortable: true },
-  { key: "email", label: "Email", filterable: true, sortable: true },
-  { key: "userRoles", label: "Role", filterable: true, sortable: true },
+  {
+    key: "username",
+    accessor: "Username",
+    label: "Nazwa użytkownika",
+    filterable: true,
+    sortable: true,
+  },
+  { key: "email", accessor: "Email", label: "Email", filterable: true, sortable: true },
+  {
+    key: "userRoles",
+    accessor: "UserRoles.Role",
+    label: "Role",
+    filterable: true,
+    sortable: true,
+  },
   { key: "action", label: "", filterable: false, sortable: false },
 ];
 
@@ -59,15 +71,22 @@ async function fetchUsers() {
 
   for (const key in filters.columns) {
     if (filters.columns[key]) {
-      params.filters[key] = filters.columns[key];
+      const column = columns.find((col) => col.key === key);
+      if (column) {
+        // Użyj accessor zamiast key
+        params.filters[column.accessor] = filters.columns[key];
+      }
     }
   }
 
   if (initialSort.value.length > 0) {
-    params.sorts = initialSort.value.map((s) => ({
-      field: s.key,
-      descending: s.desc,
-    }));
+    params.sorts = initialSort.value.map((s) => {
+      const column = columns.find((col) => col.key === s.key);
+      return {
+        field: column?.accessor ?? s.key, // fallback dla bezpieczeństwa
+        descending: s.desc,
+      };
+    });
   }
 
   try {
