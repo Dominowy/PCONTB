@@ -3,7 +3,7 @@ using PCONTB.Panel.Domain.Common;
 
 namespace PCONTB.Panel.Domain.Account.Sessions
 {
-    public class Session : Entity
+    public class Session : BaseAggregateEnabled
     {
         public Guid UserId { get; private set; }
         public User User { get; private set; }
@@ -11,8 +11,6 @@ namespace PCONTB.Panel.Domain.Account.Sessions
         public DateTimeOffset Started { get; private set; }
         public DateTimeOffset Ended { get; private set; }
         public DateTimeOffset LastActivity { get; private set; }
-
-        public bool IsActive { get; private set; }
 
         protected Session() : base() 
         {
@@ -25,7 +23,7 @@ namespace PCONTB.Panel.Domain.Account.Sessions
             Started = DateTimeOffset.UtcNow;
             Ended = DateTimeOffset.UtcNow.AddDays(7);
             LastActivity = DateTimeOffset.UtcNow;
-            IsActive = true;
+            SetEnabled(true);
         }
 
         public void RefreshLastActivity()
@@ -35,7 +33,7 @@ namespace PCONTB.Panel.Domain.Account.Sessions
 
         public void EndSession()
         {
-            IsActive = false;
+            SetEnabled(false);
             Ended = DateTimeOffset.UtcNow;
             LastActivity = DateTimeOffset.UtcNow;
         }

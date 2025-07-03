@@ -47,7 +47,7 @@ namespace PCONTB.Panel.Application.Services.Auth
         public async Task EndAllSession(Guid userId, CancellationToken cancellationToken)
         {
             var sessions = await _dbContext.Set<Session>()
-                .Where(m => m.UserId == userId && m.IsActive)
+                .Where(m => m.UserId == userId && m.Enabled)
                 .ToListAsync();
 
             sessions.ForEach(session => session.EndSession());

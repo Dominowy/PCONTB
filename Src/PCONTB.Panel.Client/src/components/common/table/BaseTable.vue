@@ -33,6 +33,7 @@
                 />
               </div>
             </th>
+            <th v-if="actions.length > 0"></th>
           </tr>
         </thead>
 
@@ -40,6 +41,24 @@
           <tr v-for="item in data" :key="item[idKey]">
             <td v-for="col in columns" :key="col.key">
               <slot :name="`cell-${col.key}`" :item="item">{{ item[col.key] }}</slot>
+            </td>
+            <td v-if="actions.length > 0">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="globalActionDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                ></button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="globalActionDropdown">
+                  <li v-for="(action, index) in actions" :key="index">
+                    <a class="dropdown-item" href="#" @click.prevent="action.action()">
+                      {{ action.label }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -58,50 +77,94 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch, toRefs, computed } from "vue";
+import { ref, reactive, watch, computed } from "vue";
+import axios from "axios";
+import { debounce } from "lodash";
 
 const props = defineProps({
-  data: { type: Array, default: () => [] },
-  totalItems: { type: Number, default: 0 },
   columns: { type: Array, required: true },
+  url: { type: String, required: true },
   idKey: { type: String, default: "id" },
   pageSize: { type: Number, default: 10 },
   initialPage: { type: Number, default: 1 },
-  showGlobalFilter: { type: Boolean, default: true },
   initialSort: { type: Array, default: () => [] },
+  showGlobalFilter: { type: Boolean, default: true },
+  actions: {
+    type: Array,
+    default: () => [],
+  },
 });
 
-const emit = defineEmits(["update:page", "update:sort", "update:filters"]);
-
-const { totalItems, pageSize, initialPage, initialSort, columns } = toRefs(props);
-
-const page = ref(initialPage.value);
-const sortings = ref([...initialSort.value]);
+const page = ref(props.initialPage);
+const totalItems = ref(0);
+const data = ref([]);
+const sortings = ref([...props.initialSort]);
 
 const globalFilter = ref("");
 const columnFilters = reactive({});
-
-columns.value.forEach((col) => {
+props.columns.forEach((col) => {
   if (col.filterable) columnFilters[col.key] = "";
 });
+
+const totalPages = computed(() => Math.ceil(totalItems.value / props.pageSize));
+
+watch(
+  [page, sortings, globalFilter, () => JSON.stringify(columnFilters)],
+  debounce(fetchData, 400),
+  { immediate: true }
+);
+
+async function fetchData() {
+  const params = {
+    search: globalFilter.value || undefined,
+    page: page.value,
+    pageSize: props.pageSize,
+    filters: {},
+    sorts: [],
+  };
+
+  for (const key in columnFilters) {
+    if (columnFilters[key]) {
+      const col = props.columns.find((c) => c.key === key);
+      if (col?.accessor) {
+        params.filters[col.accessor] = columnFilters[key];
+      }
+    }
+  }
+
+  if (sortings.value.length > 0) {
+    params.sorts = sortings.value.map((s) => {
+      const col = props.columns.find((c) => c.key === s.key);
+      return {
+        field: col?.accessor ?? s.key,
+        descending: s.desc,
+      };
+    });
+  }
+
+  try {
+    const res = await axios.post(props.url, params);
+    data.value = res.data.items;
+    totalItems.value = res.data.totalCount;
+  } catch (err) {
+    console.error("Błąd pobierania danych:", err);
+  }
+}
 
 function changePage(newPage) {
   if (newPage < 1 || newPage > totalPages.value) return;
   page.value = newPage;
-  emit("update:page", page.value);
 }
 
 function sortColumn(key, sortable) {
   if (!sortable) return;
-  const index = sortings.value.findIndex((s) => s.key === key);
-  if (index >= 0) {
-    sortings.value[index].desc = !sortings.value[index].desc;
+  const idx = sortings.value.findIndex((s) => s.key === key);
+  if (idx >= 0) {
+    sortings.value[idx].desc = !sortings.value[idx].desc;
   } else {
     sortings.value.unshift({ key, desc: false });
   }
   sortings.value = sortings.value.slice(0, 3);
-
-  emit("update:sort", sortings.value);
 }
 
 function isSorted(key) {
@@ -117,23 +180,7 @@ let filterTimeout = null;
 function onFilterChange() {
   clearTimeout(filterTimeout);
   filterTimeout = setTimeout(() => {
-    emit("update:filters", {
-      global: globalFilter.value,
-      columns: { ...columnFilters },
-    });
     page.value = 1;
-    emit("update:page", page.value);
   }, 300);
 }
-
-const totalPages = computed(() => Math.ceil(totalItems.value / pageSize.value));
-
-watch(columns, () => {
-  for (const key in columnFilters) {
-    columnFilters[key] = "";
-  }
-  globalFilter.value = "";
-  sortings.value = [...initialSort.value];
-  page.value = initialPage.value;
-});
 </script>

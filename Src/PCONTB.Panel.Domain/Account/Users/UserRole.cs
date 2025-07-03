@@ -2,7 +2,7 @@
 
 namespace PCONTB.Panel.Domain.Account.Users
 {
-    public class UserRole : Entity
+    public class UserRole : BaseEntity
     {
         public Role Role { get; private set; }
 

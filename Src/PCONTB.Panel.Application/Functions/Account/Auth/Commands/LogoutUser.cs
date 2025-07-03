@@ -48,7 +48,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
             var session = await _sessionService.GetByIdAsync(sessionId, cancellationToken);
 
-            if (session is null || !session.IsActive)
+            if (session is null || !session.Enabled)
             {
                 _cookieService.Clear(cookieName);
                 throw new UnauthorizedException("Session not exist");

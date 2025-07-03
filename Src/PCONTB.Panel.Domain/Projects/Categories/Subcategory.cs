@@ -3,7 +3,7 @@ using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Domain.Projects.Categories
 {
-    public class Subcategory : EntityName
+    public class Subcategory : BaseAggregateNameEnabled
     {
         public Guid CategoryId { get; set; }
 
@@ -12,16 +12,8 @@ namespace PCONTB.Panel.Domain.Projects.Categories
 
         public Subcategory(string name, Guid categoryId) : base(Guid.NewGuid())
         {
-            Name = name;
+            SetName(name);
             CategoryId = categoryId;
-        }
-
-        public void SetName(string name)
-        {
-            var anyChange = Name != name;
-            if (!anyChange) return;
-
-            Name = name;
         }
     }
 }

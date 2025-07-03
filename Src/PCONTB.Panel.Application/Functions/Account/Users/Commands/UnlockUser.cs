@@ -39,6 +39,8 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 
+            entity.SetIsActive(true);
+
             var roleBlock = entity.UserRoles.FirstOrDefault(m => m.Role == Role.Block);
 
             if (roleBlock is null) throw new NotFoundException(ErrorCodes.User.UserIsNotBlock.Message);

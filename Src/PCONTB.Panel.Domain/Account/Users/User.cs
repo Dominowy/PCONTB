@@ -5,7 +5,7 @@ using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Domain.Account.Users
 {
-    public class User : Entity
+    public class User : BaseAggregateEnabled
     {
         public string Username { get; private set; }
 

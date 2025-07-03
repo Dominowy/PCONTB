@@ -3,13 +3,13 @@ using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Domain.Location.Countries
 {
-    public class Country : EntityName
+    public class Country : BaseAggregateNameEnabled
     {
         public virtual List<Project> Projects { get; set; }
 
         public Country(string name) : base(Guid.NewGuid())
         {
-            Name = name;
+            SetName(name);
         }
 
         public void SetName(string name)
@@ -17,7 +17,7 @@ namespace PCONTB.Panel.Domain.Location.Countries
             var anyChange = Name != name;
             if (!anyChange) return;
 
-            Name = name;
+            SetName(name);
         }
     }
 }

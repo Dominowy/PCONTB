@@ -2,7 +2,7 @@
 
 namespace PCONTB.Panel.Domain.Projects.Files
 {
-    public abstract class ProjectFile : Entity
+    public abstract class ProjectFile : BaseEntity
     {
         public byte[] Data { get; private set; }
         public string FileName { get; private set; }

@@ -1,6 +1,4 @@
-﻿using PCONTB.Panel.Domain.Projects.Projects;
-
-namespace PCONTB.Panel.Domain.Projects.Files
+﻿namespace PCONTB.Panel.Domain.Projects.Files
 {
     public class ProjectVideo : ProjectFile
     {

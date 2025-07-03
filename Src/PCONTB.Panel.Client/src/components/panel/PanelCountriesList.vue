@@ -1,24 +1,16 @@
 <template>
-  <base-table
-    :data="users"
-    :totalItems="totalCount"
-    :columns="columns"
-    :pageSize="pageSize"
-    :initialPage="page"
-    :initialSort="initialSort"
-    @update:page="onPageChange"
-    @update:sort="onSortChange"
-    @update:filters="onFiltersChange"
-  >
-  </base-table>
+  <div>
+    <div class="d-flex justify-content-end">
+      <b-button variant="primary" @click="goToAdd">Add</b-button>
+    </div>
+    <base-table :columns="columns" url="/api/locations/countries/table/get-data" />
+  </div>
 </template>
 
 <script setup>
-import { ref, reactive, watch } from "vue";
-import { debounce } from "lodash";
-import axios from "axios";
+import { useRouter } from "vue-router";
 
-const debouncedFetchUsers = debounce(fetchCountries, 400);
+const router = useRouter();
 
 const columns = [
   {
@@ -28,77 +20,9 @@ const columns = [
     filterable: true,
     sortable: true,
   },
-  { key: "action", label: "", filterable: false, sortable: false },
 ];
 
-const users = ref([]);
-const totalCount = ref(0);
-const page = ref(1);
-const pageSize = 10;
-const initialSort = ref([]);
-
-const filters = reactive({
-  global: "",
-  columns: {},
-});
-
-async function fetchCountries() {
-  const params = {
-    search: filters.global || undefined,
-    page: page.value,
-    pageSize,
-    filters: {},
-  };
-
-  for (const key in filters.columns) {
-    if (filters.columns[key]) {
-      const column = columns.find((col) => col.key === key);
-      if (column) {
-        // Użyj accessor zamiast key
-        params.filters[column.accessor] = filters.columns[key];
-      }
-    }
-  }
-
-  if (initialSort.value.length > 0) {
-    params.sorts = initialSort.value.map((s) => {
-      const column = columns.find((col) => col.key === s.key);
-      return {
-        field: column?.accessor ?? s.key, // fallback dla bezpieczeństwa
-        descending: s.desc,
-      };
-    });
-  }
-
-  try {
-    console.log("Wysyłane dane:", params);
-    const response = await axios.post("/api/locations/countries/table/get-data", params);
-    users.value = response.data.items;
-    totalCount.value = response.data.totalCount;
-  } catch (err) {
-    console.error("Błąd pobierania użytkowników:", err);
-  }
-}
-
-function onPageChange(newPage) {
-  page.value = newPage;
-}
-
-function onSortChange(newSort) {
-  initialSort.value = newSort;
-}
-
-function onFiltersChange(newFilters) {
-  filters.global = newFilters.global;
-  filters.columns = { ...newFilters.columns };
-  page.value = 1;
-}
-
-watch(
-  [page, initialSort, () => filters.global, () => JSON.stringify(filters.columns)],
-  () => {
-    debouncedFetchUsers();
-  },
-  { immediate: true }
-);
+const goToAdd = async () => {
+  router.push({ name: "projects:project:add" });
+};
 </script>

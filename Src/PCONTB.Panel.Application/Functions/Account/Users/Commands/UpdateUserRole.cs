@@ -33,6 +33,15 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 
+            if (request.Roles.Any(m => m == Role.Block))
+            {
+                entity.SetIsActive(false);
+            } 
+            else
+            {
+                entity.SetIsActive(true);
+            }
+
             var rolesToRemove = entity.UserRoles.Where(m => !request.Roles.Contains(m.Role)).ToList();
 
             _dbContext.Set<UserRole>().RemoveRange(rolesToRemove);

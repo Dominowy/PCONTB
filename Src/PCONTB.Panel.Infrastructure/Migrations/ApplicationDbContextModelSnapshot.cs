@@ -47,7 +47,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Session");
+                    b.ToTable("Session", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.User", b =>
@@ -70,7 +70,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.UserRole", b =>
@@ -89,7 +89,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRole");
+                    b.ToTable("UserRole", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Location.Countries.Country", b =>
@@ -104,7 +104,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Country");
+                    b.ToTable("Country", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Categories.Category", b =>
@@ -119,7 +119,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Categories.Subcategory", b =>
@@ -139,7 +139,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Subcategory");
+                    b.ToTable("Subcategory", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Collaborators.Collaborator", b =>
@@ -169,7 +169,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Collaborator");
+                    b.ToTable("Collaborator", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Files.ProjectImage", b =>
@@ -192,7 +192,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProjectImage");
+                    b.ToTable("ProjectImage", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Files.ProjectVideo", b =>
@@ -215,7 +215,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProjectVideo");
+                    b.ToTable("ProjectVideo", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Projects.Project", b =>
@@ -265,7 +265,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.HasIndex("VideoId")
                         .IsUnique();
 
-                    b.ToTable("Project");
+                    b.ToTable("Project", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Sessions.Session", b =>

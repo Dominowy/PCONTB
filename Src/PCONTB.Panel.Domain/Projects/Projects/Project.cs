@@ -7,7 +7,7 @@ using PCONTB.Panel.Domain.Projects.Files;
 
 namespace PCONTB.Panel.Domain.Projects.Projects
 {
-    public class Project : Entity
+    public class Project : BaseAggregateName
     {
         public string Name { get; private set; }
 
