@@ -4,7 +4,7 @@ using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Domain.Projects.Collaborators
 {
-    public class Collaborator : BaseEntity
+    public class Collaborator : BaseAggregate
     {
         public Guid ProjectId { get; private set; }
         public virtual Project Project { get; private set; }

@@ -11,13 +11,5 @@ namespace PCONTB.Panel.Domain.Location.Countries
         {
             SetName(name);
         }
-
-        public void SetName(string name)
-        {
-            var anyChange = Name != name;
-            if (!anyChange) return;
-
-            SetName(name);
-        }
     }
 }

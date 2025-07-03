@@ -1,17 +1,17 @@
 ﻿namespace PCONTB.Panel.Domain.Common
 {
-    public abstract class BaseAggregateEnabled : Aggregate, IHasEnabled
+    public abstract class BaseEntityEnabled : Entity, IHasEnabled
     {
-        public bool Enabled { get; private set; } = true;
+        public bool Enabled { get; private set; }
 
-        protected BaseAggregateEnabled() : base()
+        protected BaseEntityEnabled() : base()
         {
-
+            
         }
 
-        protected BaseAggregateEnabled(Guid id) : base(id)
+        protected BaseEntityEnabled(Guid id) : base(id)
         {
-
+           
         }
 
         public void SetEnabled(bool enabled)
@@ -20,5 +20,6 @@
             if (!anyChange) return;
             Enabled = enabled;
         }
+
     }
 }

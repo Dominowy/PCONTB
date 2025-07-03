@@ -35,11 +35,11 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             if (request.Roles.Any(m => m == Role.Block))
             {
-                entity.SetIsActive(false);
+                entity.SetEnabled(false);
             } 
             else
             {
-                entity.SetIsActive(true);
+                entity.SetEnabled(true);
             }
 
             var rolesToRemove = entity.UserRoles.Where(m => !request.Roles.Contains(m.Role)).ToList();

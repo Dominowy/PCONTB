@@ -51,7 +51,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
                     var existing = entity.Subcategories.FirstOrDefault(x => x.Id == subcategory.Id);
                     if (existing != null)
                     {
-                        existing.Name = subcategory.Name;
+                        existing.SetName(subcategory.Name);
                     }
                 }
                 else

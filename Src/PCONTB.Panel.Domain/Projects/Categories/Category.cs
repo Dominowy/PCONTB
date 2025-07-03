@@ -6,7 +6,6 @@ namespace PCONTB.Panel.Domain.Projects.Categories
     public class Category : BaseAggregateNameEnabled
     {
         public virtual List<Subcategory> Subcategories { get; set; }
-
         public virtual List<Project> Projects { get; set; }
         
 

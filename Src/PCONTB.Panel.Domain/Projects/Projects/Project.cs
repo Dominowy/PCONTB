@@ -7,10 +7,8 @@ using PCONTB.Panel.Domain.Projects.Files;
 
 namespace PCONTB.Panel.Domain.Projects.Projects
 {
-    public class Project : BaseAggregateName
+    public class Project : BaseAggregateNameEnabled
     {
-        public string Name { get; private set; }
-
         public Guid UserId { get; private set; }
         public virtual User User { get; private set; }
 
@@ -39,25 +37,19 @@ namespace PCONTB.Panel.Domain.Projects.Projects
 
         public Project(Guid id, string name, Guid userId) : base(id)
         {
-            Name = name;
+            SetName(name);
+            SetEnabled(true);
             UserId = userId;
         }
 
         public Project(Guid id, string name, Guid userId, Guid countryId, Guid categoryId, Guid? subcategoryId) : base(id)
         {
-            Name = name;
+            SetName(name);
+            SetEnabled(true);
             UserId = userId;
             CountryId = countryId;
             CategoryId = categoryId;
             SubcategoryId = subcategoryId;
-        }
-
-        public void SetName(string name)
-        {
-            var anyChange = Name != name;
-            if (!anyChange) return;
-
-            Name = name;
         }
 
         public void SetUser(Guid userId)

@@ -16,19 +16,12 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
     public class UnlockUserHandler : IRequestHandler<UnlockUserRequest, CommandResult>
     {
-        private readonly string cookieName = "access-token";
         private readonly IApplicationDbContext _dbContext;
-        private readonly ISessionAccesor _sessionAccesor;
-        private readonly ICookieService _cookieService;
-        private readonly ISessionService _sessionService;
 
 
-        public UnlockUserHandler(IApplicationDbContext dbContext, ISessionAccesor sessionAccesor, ICookieService cookieService, ISessionService sessionService)
+        public UnlockUserHandler(IApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            _sessionAccesor = sessionAccesor;
-            _cookieService = cookieService;
-            _sessionService = sessionService;
         }
 
         public async Task<CommandResult> Handle(UnlockUserRequest request, CancellationToken cancellationToken)
@@ -39,7 +32,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 
-            entity.SetIsActive(true);
+            entity.SetEnabled(true);
 
             var roleBlock = entity.UserRoles.FirstOrDefault(m => m.Role == Role.Block);
 

@@ -1,15 +1,15 @@
 ﻿namespace PCONTB.Panel.Domain.Common
 {
-    public abstract class BaseAggregateNameEnabled : BaseAggregateEnabled, IHasName
+    public abstract class BaseEntityName : Entity, IHasName
     {
         public string Name { get; private set; }
 
-        protected BaseAggregateNameEnabled() : base()
+        protected BaseEntityName() : base()
         {
 
         }
 
-        protected BaseAggregateNameEnabled(Guid id) : base(id)
+        protected BaseEntityName(Guid id) : base(id)
         {
 
         }

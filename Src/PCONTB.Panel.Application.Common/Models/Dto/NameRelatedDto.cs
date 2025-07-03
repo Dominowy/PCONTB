@@ -2,15 +2,18 @@
 
 namespace PCONTB.Panel.Application.Common.Models.Dto
 {
-    public class NameRelatedDto : EntityDto
+    public class NameRelatedDto : IEntity, IHasName
     {
+        public Guid Id { get; set; }
+
         public string Name { get; set; }
 
-        public static NameRelatedDto Map(EntityName entity)
+        public static NameRelatedDto Map<T>(T entity)
+           where T : IEntity, IHasName
         {
             if (entity == null) return null;
 
-            return new NameRelatedDto 
+            return new NameRelatedDto
             {
                 Id = entity.Id,
                 Name = entity.Name,

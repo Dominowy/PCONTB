@@ -35,7 +35,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             _sessionAccesor.VerifyWithRole(entity.Id, Role.Admin);
 
-            entity.SetIsActive(false);
+            entity.SetEnabled(false);
 
             var blockRole = new UserRole(Role.Block, entity.Id);
 
