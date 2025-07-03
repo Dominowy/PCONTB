@@ -1,6 +1,6 @@
 ﻿using PCONTB.Panel.Domain.Common;
 
-namespace PCONTB.Panel.Domain.Projects.Files
+namespace PCONTB.Panel.Domain.Projects.Projects.Files
 {
     public abstract class ProjectFile : BaseEntity
     {

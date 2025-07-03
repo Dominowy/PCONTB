@@ -3,7 +3,7 @@ using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Collaborators;
-using PCONTB.Panel.Domain.Projects.Files;
+using PCONTB.Panel.Domain.Projects.Projects.Files;
 
 namespace PCONTB.Panel.Domain.Projects.Projects
 {
