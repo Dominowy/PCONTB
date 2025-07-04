@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
+using PCONTB.Panel.Domain.Repositories;
 using PCONTB.Panel.Infrastructure.Context;
+using PCONTB.Panel.Infrastructure.Repositories;
 
 namespace PCONTB.Panel.Infrastructure
 {
@@ -12,6 +14,8 @@ namespace PCONTB.Panel.Infrastructure
         {
             services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             using (var scope = services.BuildServiceProvider().CreateScope())
             {

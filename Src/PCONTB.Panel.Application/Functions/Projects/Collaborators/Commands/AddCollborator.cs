@@ -7,8 +7,8 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Users;
-using PCONTB.Panel.Domain.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Projects;
+using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 {
@@ -37,13 +37,13 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 
             if (user is null) throw new NotFoundException(ErrorCodes.Collaborator.UserExist.Message);
 
-            var entity = new Collaborator(user.Id, request.ProjectId);
+            var entity = new ProjectCollaborator(user.Id, request.ProjectId);
 
             entity.SetManageProjectPermission(request.ManageProjectPermission);
             entity.SetManageCommunityPermission(request.ManageCommunityPermission);
             entity.SetManageFulfillmentPermission(request.ManageFulfillmentPermission);
 
-            await _dbContext.Set<Collaborator>().AddAsync(entity, cancellationToken);
+            await _dbContext.Set<ProjectCollaborator>().AddAsync(entity, cancellationToken);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
@@ -76,7 +76,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 
         private async Task<bool> UserExistInProject(Guid projectId, string email, CancellationToken cancellationToken)
         {
-            return !await _context.Set<Collaborator>()
+            return !await _context.Set<ProjectCollaborator>()
                 .AnyAsync(m => m.User.Email == email && m.ProjectId == projectId, cancellationToken);
         }
 

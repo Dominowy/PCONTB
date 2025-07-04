@@ -2,9 +2,9 @@
 using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Projects.Projects;
 
-namespace PCONTB.Panel.Domain.Projects.Collaborators
+namespace PCONTB.Panel.Domain.Projects.Projects.Collaborators
 {
-    public class Collaborator : BaseAggregate
+    public class ProjectCollaborator : BaseEntity
     {
         public Guid ProjectId { get; private set; }
         public virtual Project Project { get; private set; }
@@ -16,7 +16,7 @@ namespace PCONTB.Panel.Domain.Projects.Collaborators
         public bool ManageCommunityPermission { get; private set; }
         public bool ManageFulfillmentPermission { get; private set; }
 
-        public Collaborator(Guid userId, Guid projectId) : base(Guid.NewGuid())
+        public ProjectCollaborator(Guid userId, Guid projectId) : base(Guid.NewGuid())
         {
             ProjectId = projectId;
             UserId = userId;

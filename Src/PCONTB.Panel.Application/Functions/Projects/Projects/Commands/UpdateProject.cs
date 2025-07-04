@@ -86,7 +86,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 
         private async Task<bool> SubcategoryExist(Guid? id, CancellationToken cancellationToken)
         {
-            return await _context.Set<Subcategory>().AnyAsync(m => m.Id == id, cancellationToken);
+            return await _context.Set<CategorySubcategory>().AnyAsync(m => m.Id == id, cancellationToken);
         }
 
         private async Task<bool> ConuntryExit(Guid id, CancellationToken cancellationToken)

@@ -1,7 +1,7 @@
 ﻿using PCONTB.Panel.Domain.Account.Sessions;
 using PCONTB.Panel.Domain.Common;
-using PCONTB.Panel.Domain.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Projects;
+using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
 
 namespace PCONTB.Panel.Domain.Account.Users
 {
@@ -13,7 +13,7 @@ namespace PCONTB.Panel.Domain.Account.Users
         public string Password { get; private set; }
 
         public virtual List<Project> Projects { get; private set; }
-        public virtual List<Collaborator> Collaborators { get; private set; }
+        public virtual List<ProjectCollaborator> Collaborators { get; private set; }
         public virtual List<Session> Sessions { get; private set; }
         public virtual List<UserRole> UserRoles { get; private set; }
 

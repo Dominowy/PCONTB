@@ -5,8 +5,8 @@ namespace PCONTB.Panel.Domain.Projects.Categories
 {
     public class Category : BaseAggregateNameEnabled
     {
-        public virtual List<Subcategory> Subcategories { get; set; }
-        public virtual List<Project> Projects { get; set; }
+        public virtual List<CategorySubcategory> Subcategories { get; private set; }
+        public virtual List<Project> Projects { get; private set; }
         
 
         public Category(string name) : base(Guid.NewGuid())
@@ -14,7 +14,7 @@ namespace PCONTB.Panel.Domain.Projects.Categories
             SetName(name);
         }
 
-        public void SetSubcategories(List<Subcategory> subCategories)
+        public void SetSubcategories(List<CategorySubcategory> subCategories)
         {
             Subcategories = subCategories;
         }

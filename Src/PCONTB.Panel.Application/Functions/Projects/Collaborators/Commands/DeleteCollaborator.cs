@@ -4,7 +4,7 @@ using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
-using PCONTB.Panel.Domain.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 {
@@ -23,11 +23,11 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 
         public async Task<CommandResult> Handle(DeleteCollaboratorRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Collaborator>().FindAsync(request.Id, cancellationToken);
+            var entity = await _dbContext.Set<ProjectCollaborator>().FindAsync(request.Id, cancellationToken);
 
             if (entity is null) throw new NotFoundException(ErrorCodes.Collaborator.NotFound.Message);
 
-            _dbContext.Set<Collaborator>().Remove(entity);
+            _dbContext.Set<ProjectCollaborator>().Remove(entity);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 

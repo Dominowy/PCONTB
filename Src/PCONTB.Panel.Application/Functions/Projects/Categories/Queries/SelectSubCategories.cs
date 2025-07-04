@@ -22,7 +22,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 
         public async Task<SelectResponse> Handle(SelectSubCategoriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Set<Subcategory>()
+            var entity = await _context.Set<CategorySubcategory>()
                 .Where(m => m.CategoryId == request.Id)
                 .ToListAsync(cancellationToken);
 

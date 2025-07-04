@@ -1,33 +1,30 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
+﻿using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Domain.Account.Sessions;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Services.Auth
 {
     public class SessionService : ISessionService
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SessionService(IApplicationDbContext dbContext)
+        public SessionService(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Session?> GetByIdAsync(Guid? sessionId, CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Set<Session>()
-                .Include(m => m.User).ThenInclude(m => m.UserRoles)
-                .FirstOrDefaultAsync(s => s.Id == sessionId, cancellationToken);
+            return await _unitOfWork.SessionRepository.GetByIdAsync(sessionId, cancellationToken);
         }
 
         public async Task<Guid> CreateSession(Guid userId, CancellationToken cancellationToken)
         {
             var session = new Session(Guid.NewGuid(), userId);
 
-            await _dbContext.Set<Session>().AddAsync(session, cancellationToken);
+            await _unitOfWork.SessionRepository.InsertAsync(session, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.SaveAsync(cancellationToken);
 
             return session.Id;
         }
@@ -37,7 +34,7 @@ namespace PCONTB.Panel.Application.Services.Auth
             if (session.Ended < DateTimeOffset.UtcNow)
             {
                 session.EndSession();
-                await _dbContext.SaveChangesAsync(cancellationToken);
+                await _unitOfWork.SaveAsync(cancellationToken);
                 return true;
             }
 
@@ -46,13 +43,11 @@ namespace PCONTB.Panel.Application.Services.Auth
 
         public async Task EndAllSession(Guid userId, CancellationToken cancellationToken)
         {
-            var sessions = await _dbContext.Set<Session>()
-                .Where(m => m.UserId == userId && m.Enabled)
-                .ToListAsync();
+            var sessions = await _unitOfWork.SessionRepository.GetAllAsyncByPredicate(m => m.UserId == userId && m.Enabled, cancellationToken);
 
-            sessions.ForEach(session => session.EndSession());
+            sessions.ToList().ForEach(m => m.EndSession());
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.SaveAsync(cancellationToken);
         }
     }
 }

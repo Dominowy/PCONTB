@@ -41,7 +41,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 
             foreach (var sub in toRemove)
             {
-                _dbContext.Set<Subcategory>().Remove(sub);
+                _dbContext.Set<CategorySubcategory>().Remove(sub);
             }
 
             foreach (var subcategory in request.Subcategories)
@@ -56,7 +56,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
                 }
                 else
                 {
-                    await _dbContext.Set<Subcategory>().AddAsync(SubcategoryDto.Map(subcategory), cancellationToken);
+                    await _dbContext.Set<CategorySubcategory>().AddAsync(SubcategoryDto.Map(subcategory), cancellationToken);
                 }
             }
 

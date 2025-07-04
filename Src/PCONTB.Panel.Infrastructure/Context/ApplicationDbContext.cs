@@ -4,8 +4,8 @@ using PCONTB.Panel.Domain.Account.Sessions;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
-using PCONTB.Panel.Domain.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Projects;
+using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Projects.Files;
 
 namespace PCONTB.Panel.Infrastructure.Context
@@ -22,8 +22,8 @@ namespace PCONTB.Panel.Infrastructure.Context
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<Category> Category { get; set; }
-        public DbSet<Subcategory> Subcategory { get; set; }
-        public DbSet<Collaborator> Collaborator { get; set; }
+        public DbSet<CategorySubcategory> Subcategory { get; set; }
+        public DbSet<ProjectCollaborator> Collaborator { get; set; }
         public DbSet<ProjectImage> ProjectImage { get; set; }
         public DbSet<ProjectVideo> ProjectVideo { get; set; }
         public DbSet<Project> Project { get; set; }
@@ -35,17 +35,17 @@ namespace PCONTB.Panel.Infrastructure.Context
                 .WithMany(m => m.Sessions)
                 .HasForeignKey(m => m.UserId);
 
-            builder.Entity<Subcategory>()
+            builder.Entity<CategorySubcategory>()
                 .HasOne(m => m.Category)
                 .WithMany(m => m.Subcategories)
                 .HasForeignKey(m => m.CategoryId);
 
-            builder.Entity<Collaborator>()
+            builder.Entity<ProjectCollaborator>()
                 .HasOne(m => m.User)
                 .WithMany(m => m.Collaborators)
                 .HasForeignKey(m => m.UserId);
 
-            builder.Entity<Collaborator>()
+            builder.Entity<ProjectCollaborator>()
                 .HasOne(m => m.Project)
                 .WithMany(m => m.Collaborators)
                 .HasForeignKey(m => m.ProjectId);

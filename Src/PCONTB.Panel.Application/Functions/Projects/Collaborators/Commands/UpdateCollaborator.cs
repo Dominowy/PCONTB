@@ -7,8 +7,8 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Users;
-using PCONTB.Panel.Domain.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Projects;
+using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 {
@@ -33,7 +33,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 
         public async Task<CommandResult> Handle(UpdateCollaboratorRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Collaborator>().FindAsync(request.Id, cancellationToken);
+            var entity = await _dbContext.Set<ProjectCollaborator>().FindAsync(request.Id, cancellationToken);
 
             if (entity is null) throw new NotFoundException(ErrorCodes.Collaborator.NotFound.Message);
 
@@ -72,7 +72,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands
 
         private async Task<bool> UserExistInProject(Guid id, Guid projectId, string email, CancellationToken cancellationToken)
         {
-            return !await _context.Set<Collaborator>()
+            return !await _context.Set<ProjectCollaborator>()
                 .AnyAsync(m => m.User.Email == email && m.ProjectId == projectId && m.Id != id, cancellationToken);
         }
 

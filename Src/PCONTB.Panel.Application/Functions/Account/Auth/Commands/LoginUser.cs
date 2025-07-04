@@ -7,6 +7,7 @@ using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth.Encryption;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 {
@@ -18,19 +19,19 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
     public class LoginUserHandler : IRequestHandler<LoginUserRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPasswordHasherService _passwordHasherService;
         private readonly IJwtService _jwtService;
         private readonly ICookieService _cookieService;
         private readonly ISessionService _sessionService;
 
-        public LoginUserHandler(IApplicationDbContext dbContext,
+        public LoginUserHandler(IUnitOfWork unitOfWork,
             IPasswordHasherService passwordHasherService,
             IJwtService jwtService,
             ICookieService cookieService,
             ISessionService sessionService)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _passwordHasherService = passwordHasherService;
             _jwtService = jwtService;
             _cookieService = cookieService;
@@ -39,9 +40,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
         public async Task<CommandResult> Handle(LoginUserRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<User>()
-                .Include(m => m.UserRoles)
-                .FirstOrDefaultAsync(u => u.Email == request.Login || u.Username == request.Login, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetByPredicateAsync(u => u.Email == request.Login || u.Username == request.Login, cancellationToken);
 
             if (entity == null) throw new BadRequestException(ErrorCodes.User.LoginWrongCredential.Message);
 
@@ -52,7 +51,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
             var sessionId = await _sessionService.CreateSession(entity.Id, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.SaveAsync(cancellationToken);
 
             var token = _jwtService.GenerateToken(sessionId);
 

@@ -4,6 +4,7 @@ using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Services.Auth;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 {
@@ -16,16 +17,16 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
         private readonly string cookieName = "access-token";
         private readonly ICookieService _cookieService;
         private readonly IJwtService _jwtService;
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ISessionAccesor _sessionAccesor;
         private readonly ISessionService _sessionService;
 
-        public LogoutUserHandler(ICookieService cookieService, IJwtService jwtService, ISessionService sessionService, IApplicationDbContext dbContext, ISessionAccesor sessionAccesor)
+        public LogoutUserHandler(ICookieService cookieService, IJwtService jwtService, ISessionService sessionService, IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor)
         {
             _cookieService = cookieService;
             _jwtService = jwtService;
             _sessionService = sessionService;
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _sessionAccesor = sessionAccesor;
         }
 
@@ -55,7 +56,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
             }
 
             session.EndSession();
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.SaveAsync(cancellationToken);
 
             _cookieService.Clear(cookieName);
 
@@ -63,6 +64,5 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
             return new CommandResult(session.Id);
         }
-
     }
 }

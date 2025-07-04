@@ -3,14 +3,14 @@ using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Domain.Projects.Categories
 {
-    public class Subcategory : BaseEntityNameEnabled
+    public class CategorySubcategory : BaseEntityNameEnabled
     {
         public Guid CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual List<Project> Projects { get; set; }
 
-        public Subcategory(string name, Guid categoryId) : base(Guid.NewGuid())
+        public CategorySubcategory(string name, Guid categoryId) : base(Guid.NewGuid())
         {
             SetEnabled(true);
             SetName(name);

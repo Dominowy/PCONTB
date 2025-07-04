@@ -5,7 +5,7 @@ using PCONTB.Panel.Application.Common.Models.Codes;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Functions.Projects.Collaborators.Commands;
-using PCONTB.Panel.Domain.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Queries
 {
@@ -24,7 +24,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Queries
 
         public async Task<GetUpdateCollaboratorFormResponse> Handle(GetUpdateCollaboratorFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Collaborator>()
+            var entity = await _dbContext.Set<ProjectCollaborator>()
                 .Include(m => m.User)
                 .FirstOrDefaultAsync(m => m.Id == request.Id, cancellationToken);
 

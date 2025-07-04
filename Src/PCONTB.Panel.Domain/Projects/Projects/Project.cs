@@ -2,7 +2,7 @@
 using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
-using PCONTB.Panel.Domain.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Projects.Files;
 
 namespace PCONTB.Panel.Domain.Projects.Projects
@@ -19,9 +19,9 @@ namespace PCONTB.Panel.Domain.Projects.Projects
         public virtual Category Category { get; private set; }
 
         public Guid? SubcategoryId { get; private set; }
-        public virtual Subcategory? Subcategory { get; private set; }
+        public virtual CategorySubcategory? Subcategory { get; private set; }
 
-        public virtual List<Collaborator> Collaborators { get; private set; }
+        public virtual List<ProjectCollaborator> Collaborators { get; private set; }
 
         public string? Description { get; private set; }
 

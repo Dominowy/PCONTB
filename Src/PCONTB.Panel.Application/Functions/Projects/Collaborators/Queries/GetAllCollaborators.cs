@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Projects.Collaborators;
-using PCONTB.Panel.Domain.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Queries
 {
@@ -21,7 +21,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Collaborators.Queries
 
         public async Task<GetAllCollaboratorsResponse> Handle(GetAllCollaboratorsRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Collaborator>()
+            var entity = await _dbContext.Set<ProjectCollaborator>()
                 .Where(m => m.ProjectId == request.Id)
                 .Include(m => m.User)
                 .ToListAsync(cancellationToken);
