@@ -15,16 +15,16 @@ namespace PCONTB.Panel.Application.Services.Auth
 
         public async Task<Session?> GetByIdAsync(Guid? sessionId, CancellationToken cancellationToken = default)
         {
-            return await _unitOfWork.SessionRepository.GetByIdAsync(sessionId, cancellationToken);
+            return await _unitOfWork.SessionRepository.GetBy(m => m.Id == sessionId, cancellationToken);
         }
 
         public async Task<Guid> CreateSession(Guid userId, CancellationToken cancellationToken)
         {
             var session = new Session(Guid.NewGuid(), userId);
 
-            await _unitOfWork.SessionRepository.InsertAsync(session, cancellationToken);
+            await _unitOfWork.SessionRepository.Add(session, cancellationToken);
 
-            await _unitOfWork.SaveAsync(cancellationToken);
+            await _unitOfWork.Save(cancellationToken);
 
             return session.Id;
         }
@@ -34,7 +34,10 @@ namespace PCONTB.Panel.Application.Services.Auth
             if (session.Ended < DateTimeOffset.UtcNow)
             {
                 session.EndSession();
-                await _unitOfWork.SaveAsync(cancellationToken);
+
+                await _unitOfWork.SessionRepository.Update(session, cancellationToken);
+
+                await _unitOfWork.Save(cancellationToken);
                 return true;
             }
 
@@ -43,11 +46,15 @@ namespace PCONTB.Panel.Application.Services.Auth
 
         public async Task EndAllSession(Guid userId, CancellationToken cancellationToken)
         {
-            var sessions = await _unitOfWork.SessionRepository.GetAllAsyncByPredicate(m => m.UserId == userId && m.Enabled, cancellationToken);
+            var sessions = await _unitOfWork.SessionRepository.GetAll(m => m.UserId == userId && m.Enabled, cancellationToken);
 
-            sessions.ToList().ForEach(m => m.EndSession());
+            foreach (var session in sessions)
+            {
+                session.EndSession();
+                await _unitOfWork.SessionRepository.Update(session, cancellationToken);
+            }
 
-            await _unitOfWork.SaveAsync(cancellationToken);
+            await _unitOfWork.Save(cancellationToken);
         }
     }
 }

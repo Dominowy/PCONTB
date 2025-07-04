@@ -16,46 +16,52 @@ namespace PCONTB.Panel.Infrastructure.Repositories
             dbSet = context.Set<T>();
         }
 
-        public virtual async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken)
+        public virtual IQueryable<T> GetQuery()
         {
-            return await dbSet.ToListAsync();
+            return dbSet.AsNoTracking();
         }
 
-        public virtual async Task<IEnumerable<T>> GetAllAsyncByPredicate(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
+        public virtual async Task<IEnumerable<T>> GetAll(CancellationToken cancellationToken)
         {
-            var result = await dbSet.Where(predicate).ToListAsync(cancellationToken);
-
-            return await Task.FromResult(result);
+            return await dbSet
+                .AsNoTracking()
+                .ToListAsync(cancellationToken);
         }
 
-        public virtual async Task<T> GetByIdAsync(Guid? id, CancellationToken cancellationToken)
+        public virtual async Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
         {
-            return await dbSet.FindAsync(id, cancellationToken);
+            return await dbSet
+                .Where(predicate)
+                .AsNoTracking()
+                .ToListAsync(cancellationToken);
         }
 
-        public virtual async Task InsertAsync(T entity, CancellationToken cancellationToken)
+        public virtual async Task<T?> GetBy(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await dbSet
+                .Where(predicate)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public virtual async Task Add(T entity, CancellationToken cancellationToken)
         {
             await dbSet.AddAsync(entity, cancellationToken);
         }
 
-        public virtual async Task UpdateAsync(T entityToUpdate, CancellationToken cancellationToken)
+        public virtual async Task Update(T entityToUpdate, CancellationToken cancellationToken)
         {
-            dbSet.Attach(entityToUpdate);
             _context.Entry(entityToUpdate).State = EntityState.Modified;
+            await Task.CompletedTask;
         }
 
-        public virtual async Task DeleteAsync(Guid? id, CancellationToken cancellationToken)
+        public virtual async Task Delete(T entityToDelete, CancellationToken cancellationToken)
         {
-            var entityToDelete = await dbSet.FindAsync(id, cancellationToken);
             dbSet.Remove(entityToDelete);
+            await Task.CompletedTask;
         }
 
-        public virtual async Task<T> GetByPredicateAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
-        {
-            return await dbSet.Where(predicate).FirstOrDefaultAsync(cancellationToken);
-        }
-
-        public virtual async Task<bool> ExistAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
+        public virtual async Task<bool> Exist(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken)
         {
             return await dbSet.AnyAsync(predicate, cancellationToken);
         }

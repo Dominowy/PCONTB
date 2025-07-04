@@ -1,9 +1,7 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Select;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
-using PCONTB.Panel.Domain.Location.Countries;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 {
@@ -13,17 +11,16 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 
     public class SelectCountriesHandler : IRequestHandler<SelectCountriesRequest, SelectResponse>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SelectCountriesHandler(IApplicationDbContext context)
+        public SelectCountriesHandler(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<SelectResponse> Handle(SelectCountriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Set<Country>()
-                .ToListAsync(cancellationToken);
+            var entity = await _unitOfWork.CountryRepository.GetAll(cancellationToken);
 
             return new SelectResponse
             {

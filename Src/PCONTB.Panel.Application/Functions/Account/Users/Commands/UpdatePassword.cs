@@ -8,6 +8,7 @@ using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth.Encryption;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Repositories;
 using System.Text.RegularExpressions;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
@@ -20,14 +21,14 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
     public class UpdatePasswordHandler : IRequestHandler<UpdatePasswordRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ISessionAccesor _sessionAccesor;
         private readonly IPasswordHasherService _passwordHasherService;
 
-        public UpdatePasswordHandler(IApplicationDbContext context, IPasswordHasherService passwordHasherService, ISessionAccesor sessionAccesor)
+        public UpdatePasswordHandler(IUnitOfWork unitOfWork, IPasswordHasherService passwordHasherService, ISessionAccesor sessionAccesor)
         {
             _passwordHasherService = passwordHasherService;
-            _context = context;
+            _unitOfWork = unitOfWork;
             _sessionAccesor = sessionAccesor;
         }
 
@@ -35,7 +36,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         {
             var hashedPassword = _passwordHasherService.Generate(request.Password);
 
-            var entity = await _context.Set<User>().FindAsync(request.Id, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException("User not found");
 
@@ -43,7 +44,9 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             entity.SetPassword(hashedPassword);
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.UserRepository.Update(entity, cancellationToken);
+
+            await _unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

@@ -7,6 +7,7 @@ using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Commands;
 using PCONTB.Panel.Application.Models.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 {
@@ -17,19 +18,17 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 
     public class GetUpdateCategoryFormHandler : IRequestHandler<GetUpdateCategoryFormRequest, GetUpdateCategoryFormResponse>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetUpdateCategoryFormHandler(IApplicationDbContext dbContext)
+        public GetUpdateCategoryFormHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<GetUpdateCategoryFormResponse> Handle(GetUpdateCategoryFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Category>()
-                .Include(m => m.Subcategories)
-                .FirstOrDefaultAsync(m => m.Id == request.Id, cancellationToken);
-
+            var entity = await _unitOfWork.CategoryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            
             if (entity is null) throw new NotFoundException(ErrorCodes.Category.NotFound.Message);
 
             return new GetUpdateCategoryFormResponse

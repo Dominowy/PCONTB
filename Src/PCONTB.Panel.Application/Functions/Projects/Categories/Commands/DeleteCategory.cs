@@ -5,6 +5,7 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 {
@@ -15,23 +16,22 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 
     public class DeleteCategoryHandler : IRequestHandler<DeleteCategoryRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteCategoryHandler(IApplicationDbContext dbContext)
+        public DeleteCategoryHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CommandResult> Handle(DeleteCategoryRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Category>()
-                .FindAsync(request.Id, cancellationToken);
+            var entity = await _unitOfWork.CategoryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException(ErrorCodes.Category.NotFound.Message);
 
-            _dbContext.Set<Category>().Remove(entity);
+            await _unitOfWork.CategoryRepository.Delete(entity, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

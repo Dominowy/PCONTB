@@ -7,6 +7,7 @@ using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 {
@@ -16,19 +17,16 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
     public class UnlockUserHandler : IRequestHandler<UnlockUserRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-
-        public UnlockUserHandler(IApplicationDbContext dbContext)
+        public UnlockUserHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CommandResult> Handle(UnlockUserRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<User>()
-                .Include(m => m.UserRoles)
-                .FirstOrDefaultAsync(m => m.Id == request.Id, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 
@@ -38,9 +36,11 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             if (roleBlock is null) throw new NotFoundException(ErrorCodes.User.UserIsNotBlock.Message);
 
-            _dbContext.Set<UserRole>().Remove(roleBlock);
+            entity.UserRoles.Remove(roleBlock);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.UserRepository.Update(entity, cancellationToken);
+
+            await _unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

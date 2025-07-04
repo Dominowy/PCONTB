@@ -8,6 +8,7 @@ using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 {
@@ -18,18 +19,16 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 
     public class UpdateCategoryHandler : IRequestHandler<UpdateCategoryRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateCategoryHandler(IApplicationDbContext dbContext)
+        public UpdateCategoryHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CommandResult> Handle(UpdateCategoryRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Category>()
-                .Include(m => m.Subcategories)
-                .FirstOrDefaultAsync(m => m.Id == request.Id, cancellationToken);
+            var entity = await _unitOfWork.CategoryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity is null) throw new NotFoundException(ErrorCodes.Category.NotFound.Message);
 
@@ -41,7 +40,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 
             foreach (var sub in toRemove)
             {
-                _dbContext.Set<CategorySubcategory>().Remove(sub);
+                entity.Subcategories.Remove(sub);
             }
 
             foreach (var subcategory in request.Subcategories)
@@ -56,12 +55,13 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
                 }
                 else
                 {
-                    await _dbContext.Set<CategorySubcategory>().AddAsync(SubcategoryDto.Map(subcategory), cancellationToken);
+                    entity.Subcategories.Add(SubcategoryDto.Map(subcategory));
                 }
             }
 
+            await _unitOfWork.CategoryRepository.Update(entity, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

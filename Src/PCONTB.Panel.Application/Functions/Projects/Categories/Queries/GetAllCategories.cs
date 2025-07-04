@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 {
@@ -12,18 +13,16 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 
     public class GetAllCategoriesHandler : IRequestHandler<GetAllCategoriesRequest, GetAllCategoriesResponse>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetAllCategoriesHandler(IApplicationDbContext dbContext)
+        public GetAllCategoriesHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<GetAllCategoriesResponse> Handle(GetAllCategoriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Category>()
-                .Include(m => m.Subcategories)
-                .ToListAsync(cancellationToken);
+            var entity = await _unitOfWork.CategoryRepository.GetAll(cancellationToken);
 
             return new GetAllCategoriesResponse
             {

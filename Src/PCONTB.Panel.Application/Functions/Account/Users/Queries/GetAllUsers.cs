@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Account.Users;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {
@@ -12,18 +13,16 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
     public class GetAllUsersHandler : IRequestHandler<GetAllUsersRequest, GetAllUsersResponse>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetAllUsersHandler(IApplicationDbContext dbContext)
+        public GetAllUsersHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<GetAllUsersResponse> Handle(GetAllUsersRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<User>()
-                .Include(m => m.UserRoles)
-                .ToListAsync(cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetAll(cancellationToken);
 
             return new GetAllUsersResponse
             {

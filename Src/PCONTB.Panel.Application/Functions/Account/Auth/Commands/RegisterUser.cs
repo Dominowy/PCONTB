@@ -7,6 +7,7 @@ using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth.Encryption;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Repositories;
 using System.Text.RegularExpressions;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
@@ -20,15 +21,15 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
     public class RegisterHandler : IRequestHandler<RegisterUserRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IPasswordHasherService _passwordHasherService;
         private readonly IJwtService _jwtService;
         private readonly ICookieService _cookieService;
         private readonly ISessionService _sessionService;
 
-        public RegisterHandler(IApplicationDbContext dbContext, IPasswordHasherService passwordHasherService, IJwtService jwtService, ICookieService cookieService, ISessionService sessionService)
+        public RegisterHandler(IUnitOfWork unitOfWork, IPasswordHasherService passwordHasherService, IJwtService jwtService, ICookieService cookieService, ISessionService sessionService)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _passwordHasherService = passwordHasherService;
             _jwtService = jwtService;
             _cookieService = cookieService;
@@ -41,13 +42,13 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
             var entity = new User(Guid.NewGuid(), request.Username, request.Email, hashedPassword);
 
-            await _dbContext.Set<User>().AddAsync(entity, cancellationToken);
-
             var role = new UserRole(Role.User, entity.Id);
 
-            await _dbContext.Set<UserRole>().AddAsync(role, cancellationToken);
+            entity.UserRoles.Add(role);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.UserRepository.Add(entity, cancellationToken);
+
+            await _unitOfWork.Save(cancellationToken);
 
             var sessionId = await _sessionService.CreateSession(entity.Id, cancellationToken);
 
@@ -61,11 +62,11 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
     public class RegisterUserValidator : AbstractValidator<RegisterUserRequest>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterUserValidator(IApplicationDbContext dbContext)
+        public RegisterUserValidator(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
 
             RuleFor(p => p.Username)
                 .NotEmpty().WithMessage(ErrorCodes.User.UsernameEmpty.Message)
@@ -85,12 +86,12 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
         private async Task<bool> CheckUsernameIsUnique(string username, CancellationToken cancellationToken)
         {
-            return !await _dbContext.Set<User>().AnyAsync(m => m.Username == username, cancellationToken);
+            return !await _unitOfWork.UserRepository.Exist(m => m.Username == username, cancellationToken);
         }
 
         private async Task<bool> CheckEmailIsUnique(string email, CancellationToken cancellationToken)
         {
-            return !await _dbContext.Set<User>().AnyAsync(m => m.Email == email, cancellationToken);
+            return !await _unitOfWork.UserRepository.Exist(m => m.Email == email, cancellationToken);
         }
     }
 }

@@ -12,9 +12,26 @@ namespace PCONTB.Panel.Infrastructure.Repositories
         public UserRepository(ApplicationDbContext context) : base(context)
         {
         }
-        public override async Task<User> GetByPredicateAsync(Expression<Func<User, bool>> predicate, CancellationToken cancellationToken)
+
+        public override IQueryable<User> GetQuery()
         {
-            return await dbSet.Where(predicate).Include(m => m.UserRoles)
+            return dbSet.Include(m => m.UserRoles).AsNoTracking();
+        }
+
+        public override async Task<IEnumerable<User>> GetAll(CancellationToken cancellationToken)
+        {
+            return await dbSet
+                .Include(m => m.UserRoles)
+                .AsNoTracking()
+                .ToListAsync(cancellationToken);
+        }
+
+        public override async Task<User?> GetBy(Expression<Func<User, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await dbSet
+                .Where(predicate)
+                .Include(m => m.UserRoles)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
         }
     }

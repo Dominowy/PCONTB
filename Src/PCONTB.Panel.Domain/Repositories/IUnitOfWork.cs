@@ -8,6 +8,6 @@
         public ICategoryRepository CategoryRepository { get; }
         public IProjectRepository ProjectRepository { get; }
 
-        Task SaveAsync(CancellationToken cancellationToken);
+        Task Save(CancellationToken cancellationToken);
     }
 }

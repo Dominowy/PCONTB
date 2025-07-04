@@ -9,6 +9,7 @@ using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Commands;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 {
@@ -19,23 +20,24 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 
     public class UpdateCountryHandler : IRequestHandler<UpdateCountryRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateCountryHandler(IApplicationDbContext dbContext)
+        public UpdateCountryHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CommandResult> Handle(UpdateCountryRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Country>()
-                .FindAsync(request.Id, cancellationToken);
+            var entity = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity is null) throw new NotFoundException(ErrorCodes.Country.NotFound.Message);
 
             entity.SetName(request.Name);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CountryRepository.Update(entity, cancellationToken);
+
+            await _unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

@@ -4,6 +4,7 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Select;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 {
@@ -13,22 +14,20 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 
     public class SelectSubCategoriesHandler : IRequestHandler<SelectSubCategoriesRequest, SelectResponse>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SelectSubCategoriesHandler(IApplicationDbContext context)
+        public SelectSubCategoriesHandler(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<SelectResponse> Handle(SelectSubCategoriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Set<CategorySubcategory>()
-                .Where(m => m.CategoryId == request.Id)
-                .ToListAsync(cancellationToken);
+            var entity = await _unitOfWork.CategoryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             return new SelectResponse
             {
-                Data = [.. entity.Select(m => new SelectData(m.Id, m.Name))],
+                Data = [.. entity.Subcategories.Select(m => new SelectData(m.Id, m.Name))],
             };
         }
     }

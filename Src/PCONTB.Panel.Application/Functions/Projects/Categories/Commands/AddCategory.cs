@@ -7,6 +7,7 @@ using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Projects.Categories;
 using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 {
@@ -17,11 +18,11 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 
     public class AddCategoryHandler : IRequestHandler<AddCategoryRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AddCategoryHandler(IApplicationDbContext dbContext)
+        public AddCategoryHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CommandResult> Handle(AddCategoryRequest request, CancellationToken cancellationToken)
@@ -32,8 +33,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 
             entity.SetSubcategories(subCategoryToAdd);
 
-            await _dbContext.Set<Category>().AddAsync(entity, cancellationToken);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.CategoryRepository.Add(entity, cancellationToken);
+            await _unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
 

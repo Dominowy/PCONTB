@@ -6,6 +6,7 @@ using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 {
@@ -15,21 +16,21 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
     public class LockUserHandler : IRequestHandler<LockUserRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ISessionAccesor _sessionAccesor;
         private readonly ISessionService _sessionService;
 
 
-        public LockUserHandler(IApplicationDbContext dbContext, ISessionAccesor sessionAccesor, ISessionService sessionService)
+        public LockUserHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor, ISessionService sessionService)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _sessionAccesor = sessionAccesor;
             _sessionService = sessionService;
         }
 
         public async Task<CommandResult> Handle(LockUserRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<User>().FindAsync(request.Id, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 
@@ -39,11 +40,13 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             var blockRole = new UserRole(Role.Block, entity.Id);
 
-            await _dbContext.Set<UserRole>().AddAsync(blockRole, cancellationToken);
+            entity.UserRoles.Add(blockRole);
 
             await _sessionService.EndAllSession(entity.Id, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.UserRepository.Update(entity, cancellationToken);
+
+            await _unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

@@ -7,7 +7,6 @@ namespace PCONTB.Panel.Application.Models.Account.Users
     {
         public string Username { get; set; }
         public string Email { get; set; }
-        public List<UserProjectsDto> Projects { get; set; }
 
         public static UserDto Map(User user)
         {

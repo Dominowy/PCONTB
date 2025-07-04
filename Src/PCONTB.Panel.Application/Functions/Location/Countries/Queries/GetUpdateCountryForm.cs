@@ -5,6 +5,7 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Functions.Location.Countries.Commands;
 using PCONTB.Panel.Domain.Location.Countries;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 {   
@@ -15,17 +16,16 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 
     public class GetUpdateCountryFormHandler : IRequestHandler<GetUpdateCountryFormRequest, GetUpdateCountryFormResponse>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetUpdateCountryFormHandler(IApplicationDbContext dbContext)
+        public GetUpdateCountryFormHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<GetUpdateCountryFormResponse> Handle(GetUpdateCountryFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Country>()
-                .FindAsync(request.Id, cancellationToken);
+            var entity = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity is null) throw new NotFoundException(ErrorCodes.Country.NotFound.Message);
 

@@ -1,19 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
-using PCONTB.Panel.Application.Models.Account.Users;
+﻿using PCONTB.Panel.Application.Models.Account.Users;
 using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Repositories;
 using System.Data;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {
     public class UserPagedQueryHandler : PagedQueryHandler<User, UserTableDto>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserPagedQueryHandler(IApplicationDbContext dbContext) 
+        public UserPagedQueryHandler(IUnitOfWork unitOfWork) 
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public override async Task<PagedResultDto<UserTableDto>> Handle(PagedQueryRequest<UserTableDto> request, CancellationToken cancellationToken)
@@ -27,8 +26,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
         protected override IQueryable<User> GetQuery()
         {
-            return _dbContext.Set<User>()
-                .Include(u => u.UserRoles);
+            return _unitOfWork.UserRepository.GetQuery();
         }
 
         protected override string[] GetGlobalSearchProperties()

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Models.Select;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 {
@@ -12,16 +13,16 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 
     public class SelectCategoriesHandler : IRequestHandler<SelectCategoriesRequest, SelectResponse>
     {
-        private readonly IApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SelectCategoriesHandler(IApplicationDbContext context)
+        public SelectCategoriesHandler(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<SelectResponse> Handle(SelectCategoriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _context.Set<Category>().ToListAsync(cancellationToken);
+            var entity = await _unitOfWork.CategoryRepository.GetAll(cancellationToken);
 
             return new SelectResponse
             {

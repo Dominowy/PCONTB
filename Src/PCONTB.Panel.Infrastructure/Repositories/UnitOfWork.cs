@@ -27,7 +27,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
 
         public IProjectRepository ProjectRepository => _project ??= new ProjectRepository(_dbContext);
 
-        public async Task SaveAsync(CancellationToken cancellationToken)
+        public async Task Save(CancellationToken cancellationToken)
         {
             await _dbContext.SaveChangesAsync(cancellationToken);
         }

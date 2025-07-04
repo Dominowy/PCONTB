@@ -7,6 +7,7 @@ using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Functions.Account.Users.Commands;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {
@@ -17,18 +18,18 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
     public class GetUpdateUserFormHandler : IRequestHandler<GetUpdateUserFormRequest, GetUpdateUserFormResponse>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ISessionAccesor _sessionAccesor;
 
-        public GetUpdateUserFormHandler(IApplicationDbContext dbContext, ISessionAccesor sessionAccesor)
+        public GetUpdateUserFormHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
             _sessionAccesor = sessionAccesor;
         }
 
         public async Task<GetUpdateUserFormResponse> Handle(GetUpdateUserFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<User>().FirstOrDefaultAsync(m => m.Id == request.Id, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 

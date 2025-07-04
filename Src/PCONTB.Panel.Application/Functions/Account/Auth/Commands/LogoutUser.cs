@@ -56,7 +56,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
             }
 
             session.EndSession();
-            await _unitOfWork.SaveAsync(cancellationToken);
+            await _unitOfWork.Save(cancellationToken);
 
             _cookieService.Clear(cookieName);
 

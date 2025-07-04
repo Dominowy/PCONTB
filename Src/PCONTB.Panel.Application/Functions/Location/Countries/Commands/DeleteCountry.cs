@@ -5,6 +5,7 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Location.Countries;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 {
@@ -15,23 +16,22 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 
     public class DeleteCountryHandler : IRequestHandler<DeleteCountryRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteCountryHandler(IApplicationDbContext dbContext)
+        public DeleteCountryHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CommandResult> Handle(DeleteCountryRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Country>()
-                .FindAsync(request.Id, cancellationToken);
+            var entity = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException(ErrorCodes.Country.NotFound.Message);
 
-            _dbContext.Set<Country>().Remove(entity);
+            await _unitOfWork.CountryRepository.Delete(entity, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

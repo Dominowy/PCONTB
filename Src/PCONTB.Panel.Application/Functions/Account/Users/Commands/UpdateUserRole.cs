@@ -7,6 +7,7 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Repositories;
 using System.Data;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
@@ -18,18 +19,16 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
     public class UpdateUserRoleHandler : IRequestHandler<UpdateUserRoleRequest, CommandResult>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateUserRoleHandler(IApplicationDbContext dbContext)
+        public UpdateUserRoleHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CommandResult> Handle(UpdateUserRoleRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<User>()
-                .Include(m => m.UserRoles)
-                .FirstOrDefaultAsync(m => m.Id == request.Id, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 
@@ -44,15 +43,17 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             var rolesToRemove = entity.UserRoles.Where(m => !request.Roles.Contains(m.Role)).ToList();
 
-            _dbContext.Set<UserRole>().RemoveRange(rolesToRemove);
+            entity.UserRoles.RemoveAll(m => !request.Roles.Contains(m.Role));
 
             var rolesToAdd = request.Roles.Where(m => !entity.UserRoles.Any(x => x.Role == m))
                               .Select(m => new UserRole(m, entity.Id))
                               .ToList();
 
-            _dbContext.Set<UserRole>().AddRange(rolesToAdd);
+            entity.UserRoles.AddRange(rolesToAdd);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.UserRepository.Update(entity, cancellationToken);
+
+            await _unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

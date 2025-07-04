@@ -40,7 +40,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
         public async Task<CommandResult> Handle(LoginUserRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetByPredicateAsync(u => u.Email == request.Login || u.Username == request.Login, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetBy(u => u.Email == request.Login || u.Username == request.Login, cancellationToken);
 
             if (entity == null) throw new BadRequestException(ErrorCodes.User.LoginWrongCredential.Message);
 
@@ -51,7 +51,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
             var sessionId = await _sessionService.CreateSession(entity.Id, cancellationToken);
 
-            await _unitOfWork.SaveAsync(cancellationToken);
+            await _unitOfWork.Save(cancellationToken);
 
             var token = _jwtService.GenerateToken(sessionId);
 

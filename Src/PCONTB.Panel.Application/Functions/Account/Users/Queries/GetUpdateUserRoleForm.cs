@@ -8,6 +8,7 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Functions.Account.Users.Commands;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {
@@ -18,16 +19,16 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
     public class GetUpdateUserRoleFormHandler : IRequestHandler<GetUpdateUserRoleFormRequest, GetUpdateUserRoleFormResponse>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetUpdateUserRoleFormHandler(IApplicationDbContext dbContext)
+        public GetUpdateUserRoleFormHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<GetUpdateUserRoleFormResponse> Handle(GetUpdateUserRoleFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<User>().FindAsync(request.Id, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
 
@@ -36,7 +37,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
                 Form = new UpdateUserRoleRequest
                 {
                     Id = entity.Id,
-                    Roles = entity.UserRoles.Select(m => m.Role).ToList(),
+                    Roles = [.. entity.UserRoles.Select(m => m.Role)],
                 },
                 Roles = EnumHelper.EnumToList<Role>()
             };

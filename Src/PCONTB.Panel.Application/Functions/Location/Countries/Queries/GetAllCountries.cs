@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Locations.Countries;
 using PCONTB.Panel.Domain.Location.Countries;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 {
@@ -12,17 +13,16 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 
     public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesRequest, GetAllCountriesResponse>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetAllCountriesHandler(IApplicationDbContext dbContext)
+        public GetAllCountriesHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<GetAllCountriesResponse> Handle(GetAllCountriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Country>().ToListAsync(cancellationToken);
-
+            var entity = await _unitOfWork.CountryRepository.GetAll(cancellationToken);
 
             return new GetAllCountriesResponse
             {
