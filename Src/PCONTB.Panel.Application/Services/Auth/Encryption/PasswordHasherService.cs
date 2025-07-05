@@ -1,4 +1,4 @@
-﻿using PCONTB.Panel.Application.Contracts.Application.Services.Auth.Encryption;
+﻿using PCONTB.Panel.Application.Contracts.Services.Auth.Encryption;
 
 namespace PCONTB.Panel.Infrastructure.Security.Auth.Encryption
 {

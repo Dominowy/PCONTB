@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Domain.Account.Sessions;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Domain.Location.Countries;
@@ -10,7 +9,7 @@ using PCONTB.Panel.Domain.Projects.Projects.Files;
 
 namespace PCONTB.Panel.Infrastructure.Context
 {
-    public class ApplicationDbContext : DbContext, IApplicationDbContext
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

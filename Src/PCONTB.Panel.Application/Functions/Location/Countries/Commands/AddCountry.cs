@@ -37,11 +37,11 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 
     public class AddCountryValidator : AbstractValidator<AddCountryRequest>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AddCountryValidator(IApplicationDbContext dbContext)
+        public AddCountryValidator(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
 
             RuleFor(m => m.Name)
                 .NotEmpty().WithMessage(ErrorCodes.Country.NameEmpty.Message)
@@ -50,7 +50,7 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 
         private async Task<bool> CheckNameIsUnique(string name, CancellationToken cancellationToken)
         {
-            return !await _dbContext.Set<Country>().AnyAsync(m => m.Name == name, cancellationToken);
+            return !await _unitOfWork.CountryRepository.Exist(m => m.Name == name, cancellationToken);
         }
     }
 }

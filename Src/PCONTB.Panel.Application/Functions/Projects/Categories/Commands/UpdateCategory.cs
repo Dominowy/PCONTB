@@ -69,11 +69,11 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 
     public class UpdateCategoryValidator : AbstractValidator<UpdateCategoryRequest>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateCategoryValidator(IApplicationDbContext dbContext)
+        public UpdateCategoryValidator(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
 
             RuleFor(m => m.Name)
                 .NotEmpty().WithMessage(ErrorCodes.Category.NameEmpty.Message)
@@ -82,7 +82,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Commands
 
         private async Task<bool> CheckNameIsUnique(Guid id, string name, CancellationToken cancellationToken)
         {
-            return !await _dbContext.Set<Category>().AnyAsync(m => m.Name == name && m.Id != id, cancellationToken);
+            return !await _unitOfWork.CategoryRepository.Exist(m => m.Name == name && m.Id != id, cancellationToken);
         }
     }
 }

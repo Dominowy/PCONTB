@@ -1,5 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
+using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Infrastructure.Security.Auth;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

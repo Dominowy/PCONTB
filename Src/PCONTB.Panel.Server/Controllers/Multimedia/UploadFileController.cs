@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
+using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Server.Controllers.Common;
 
 namespace PCONTB.Panel.Server.Controllers.Multimedia

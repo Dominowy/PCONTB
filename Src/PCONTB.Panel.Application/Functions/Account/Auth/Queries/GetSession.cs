@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
+using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Models.Account.Auth;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Queries

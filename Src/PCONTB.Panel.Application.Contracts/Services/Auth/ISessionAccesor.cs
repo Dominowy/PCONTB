@@ -1,7 +1,7 @@
 ﻿using PCONTB.Panel.Domain.Account.Sessions;
 using PCONTB.Panel.Domain.Account.Users;
 
-namespace PCONTB.Panel.Application.Contracts.Application.Services.Auth
+namespace PCONTB.Panel.Application.Contracts.Services.Auth
 {
     public interface ISessionAccesor
     {

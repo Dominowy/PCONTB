@@ -4,6 +4,7 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Projects.Projects;
 using PCONTB.Panel.Domain.Projects.Projects;
+using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 {
@@ -17,53 +18,29 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 
     
 
-    public class GetAllProjectsHandler : IRequestHandler<GetAllProjectsRequest, GetAllProjectsResponse>
+    public class GetAllProjectsHandler : IRequestHandler<GetAllProjectsRequest, GetAllProjectsResponse>,
+        IRequestHandler<GetAllByUserIdProjectsRequest, GetAllProjectsResponse>
     {
-        private readonly IApplicationDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetAllProjectsHandler(IApplicationDbContext dbContext)
+        public GetAllProjectsHandler(IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<GetAllProjectsResponse> Handle(GetAllProjectsRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Project>()
-                .Include(p => p.User)
-                .Include(p => p.Collaborators)
-                .Include(p => p.Country)
-                .Include(p => p.Category)
-                .Include(p => p.Subcategory)
-                .Include(p => p.Image)
-                .ToListAsync(cancellationToken);
+            var entity = await _unitOfWork.ProjectRepository.GetAll(cancellationToken);
 
             return new GetAllProjectsResponse()
             {
                 Projects = [.. entity.Select(ProjectDto.Map)],
             };
-        }
-    }
-
-    public class GetAllByUserIdProjectsHandler : IRequestHandler<GetAllByUserIdProjectsRequest, GetAllProjectsResponse>
-    {
-        private readonly IApplicationDbContext _dbContext;
-
-        public GetAllByUserIdProjectsHandler(IApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
         }
 
         public async Task<GetAllProjectsResponse> Handle(GetAllByUserIdProjectsRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _dbContext.Set<Project>()
-                .Include(p => p.User)
-                .Include(p => p.Collaborators)
-                .Include(p => p.Country)
-                .Include(p => p.Category)
-                .Include(p => p.Subcategory)
-                .Include(p => p.Image)
-                .Where(p => p.UserId == request.Id || p.Collaborators.Any(m => m.UserId == request.Id))
-                .ToListAsync(cancellationToken);
+            var entity = await _unitOfWork.ProjectRepository.GetAll(p => p.UserId == request.Id || p.Collaborators.Any(m => m.UserId == request.Id), cancellationToken);
 
             return new GetAllProjectsResponse()
             {
@@ -71,7 +48,6 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
             };
         }
     }
-
 
     public class GetAllProjectsResponse
     {

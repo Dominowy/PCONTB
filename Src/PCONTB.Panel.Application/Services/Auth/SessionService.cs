@@ -1,4 +1,4 @@
-﻿using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
+﻿using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Domain.Account.Sessions;
 using PCONTB.Panel.Domain.Repositories;
 

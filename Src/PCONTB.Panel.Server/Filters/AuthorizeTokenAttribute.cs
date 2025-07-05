@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using PCONTB.Panel.Application.Contracts.Application.Services.Auth;
+using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Domain.Account.Users;
 
 namespace PCONTB.Panel.Infrastructure.Security.Filters
