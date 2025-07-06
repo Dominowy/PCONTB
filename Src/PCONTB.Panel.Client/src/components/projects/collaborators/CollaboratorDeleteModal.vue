@@ -12,6 +12,9 @@
 import { useAddUpdate } from "@/composables/useAddUpdate";
 import { onMounted, ref } from "vue";
 import ApiClient from "@/services/ApiClient";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const props = defineProps({
   collaboratorId: String,
@@ -32,6 +35,7 @@ const handleDelete = async () => {
   try {
     await ApiClient.request("projects/collaborators/delete", {
       id: props.collaboratorId,
+      projectId: route.params.id,
     });
   } finally {
     isLoading.value = false;

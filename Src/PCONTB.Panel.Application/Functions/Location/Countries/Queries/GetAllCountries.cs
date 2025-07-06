@@ -1,8 +1,5 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Locations.Countries;
-using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries

@@ -1,8 +1,5 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Models.Select;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
-using PCONTB.Panel.Domain.Projects.Categories;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries

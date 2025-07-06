@@ -1,13 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
-using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
-using PCONTB.Panel.Application.Functions.Projects.Projects.Queries;
+using PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands;
+using PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Queries;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
 
-namespace PCONTB.Panel.Server.Controllers.Projects.Projects
+namespace PCONTB.Panel.Server.Controllers.Projects.Projects.Projects
 {
     [Route("api/projects/projects")]
     public class ProjectController(IMediator mediator) : BaseController(mediator)

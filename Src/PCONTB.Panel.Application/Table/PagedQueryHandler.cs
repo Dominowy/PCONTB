@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
-using PCONTB.Panel.Application.Functions.Account.Users.Queries;
 
 namespace PCONTB.Panel.Application.Table
 {

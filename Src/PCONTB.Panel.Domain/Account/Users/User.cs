@@ -12,10 +12,10 @@ namespace PCONTB.Panel.Domain.Account.Users
         public string Email { get; private set; }
         public string Password { get; private set; }
 
-        public virtual List<Project> Projects { get; private set; }
-        public virtual List<ProjectCollaborator> Collaborators { get; private set; }
-        public virtual List<Session> Sessions { get; private set; }
-        public virtual List<UserRole> UserRoles { get; private set; }
+        public virtual List<Project> Projects { get; private set; } = new List<Project>();
+        public virtual List<ProjectCollaborator> Collaborators { get; private set; } = new List<ProjectCollaborator>();
+        public virtual List<Session> Sessions { get; private set; } = new List<Session>();
+        public virtual List<UserRole> UserRoles { get; private set; } = new List<UserRole>();
 
         protected User() : base()
         {

@@ -21,7 +21,7 @@ namespace PCONTB.Panel.Domain.Projects.Projects
         public Guid? SubcategoryId { get; private set; }
         public virtual CategorySubcategory? Subcategory { get; private set; }
 
-        public virtual List<ProjectCollaborator> Collaborators { get; private set; }
+        public virtual List<ProjectCollaborator> Collaborators { get; private set; } = new List<ProjectCollaborator>();
 
         public string? Description { get; private set; }
 
@@ -84,12 +84,12 @@ namespace PCONTB.Panel.Domain.Projects.Projects
             SubcategoryId = subcategoryId;
         }
 
-        public void SetImageId(Guid? imageId)
+        public void SetImage(ProjectImage image)
         {
-            var anyChange = ImageId != imageId;
+            var anyChange = Image != image;
             if (!anyChange) return;
 
-            ImageId = imageId;
+            Image = image;
         }
 
         public void SetVideoId(Guid? videoId)
@@ -98,6 +98,11 @@ namespace PCONTB.Panel.Domain.Projects.Projects
             if (!anyChange) return;
 
             VideoId = videoId;
+        }
+
+        public void AddCollaborator(ProjectCollaborator entity)
+        {
+            Collaborators.Add(entity);
         }
     }
 }

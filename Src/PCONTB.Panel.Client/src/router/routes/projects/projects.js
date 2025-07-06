@@ -17,8 +17,8 @@ routes.push(
     meta: { requiresAuth: true },
   },
   {
-    path: ":id/settings",
-    name: "projects:project:settings",
+    path: ":id/update",
+    name: "projects:project:update",
     component: ProjectAddUpdateView,
     meta: { requiresAuth: true },
   }

@@ -1,19 +1,17 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Codes;
+using PCONTB.Panel.Application.Common.Models.Files;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Models.Projects.Collaborators;
-using PCONTB.Panel.Domain.Location.Countries;
-using PCONTB.Panel.Domain.Projects.Categories;
-using PCONTB.Panel.Domain.Projects.Projects;
+using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.Projects.Files;
 using PCONTB.Panel.Domain.Repositories;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
+namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands
 {
     public class UpdateProjectRequest : BaseCommand, IRequest<CommandResult>
     {
@@ -21,7 +19,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
         public Guid? SubcategoryId { get; set; }
         public Guid CountryId { get; set; }
         public List<CollaboratorDto> Collaborators { get; set; }
-        public Guid? ImageId { get; set; }
+        public FormFile Image { get; set; }
+        public byte[] ImageData { get; set; }
         public Guid? VideoId { get; set; }
     }
 
@@ -38,7 +37,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 
         public async Task<CommandResult> Handle(UpdateProjectRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.ProjectRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var entity = await _unitOfWork.ProjectRepository.GetByTracking(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException("Project not found");
 
@@ -48,10 +47,25 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
             entity.SetCountry(request.CountryId);
             entity.SetCategory(request.CategoryId);
             entity.SetSubcategory(request.SubcategoryId);
-            entity.SetImageId(request.ImageId);
-            entity.SetVideoId(request.VideoId);
 
-            await _unitOfWork.ProjectRepository.Update(entity, cancellationToken);
+            if (request.Image != null)
+            {
+                if (!string.IsNullOrEmpty(request.Image.Path))
+                {
+                    var data = await File.ReadAllBytesAsync(request.Image.Path, cancellationToken);
+
+                    if (entity.Image == null)
+                    {
+                        entity.SetImage(new ProjectImage(request.Image.FileName, request.Image.ContentType, data));
+                    }
+                    else
+                    {
+                        entity.Image.SetFileName(request.Image.FileName);
+                        entity.Image.SetImageData(data);
+                        entity.Image.SetContentType(request.Image.ContentType);
+                    }
+                }
+            }
 
             await _unitOfWork.Save(cancellationToken);
 
@@ -62,6 +76,15 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
     public class UpdateProjectRequestValidator : AbstractValidator<UpdateProjectRequest>
     {
         private readonly IUnitOfWork _unitOfWork;
+
+        private static readonly string[] AllowedContentTypes =
+        [
+            "image/jpeg",
+            "image/png",
+            "image/webp",
+            "image/gif"
+        ];
+
         public UpdateProjectRequestValidator(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -77,6 +100,16 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
                 .NotEmpty().WithMessage(ErrorCodes.Project.CountryEmpty.Message)
                 .MustAsync(ConuntryExit).WithMessage(ErrorCodes.Project.CountryExist.Message);
 
+            RuleFor(x => x.Image).ChildRules(images =>
+            {
+                //images.RuleFor(f => f.Length)
+                //    .LessThanOrEqualTo(MaxFileSizeInBytes)
+                //    .WithMessage("Each image must be smaller than 5 MB.");
+
+                images.RuleFor(f => f.ContentType)
+                    .Must(ct => AllowedContentTypes.Contains(ct))
+                    .WithMessage("Only JPG, PNG, WEBP or GIF files are allowed.");
+            });
         }
 
         private async Task<bool> CategoryExist(Guid id, CancellationToken cancellationToken)
@@ -86,7 +119,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 
         private async Task<bool> ConuntryExit(Guid id, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.CategoryRepository.Exist(m => m.Id == id, cancellationToken);
+            return await _unitOfWork.CountryRepository.Exist(m => m.Id == id, cancellationToken);
         }
     }
 }

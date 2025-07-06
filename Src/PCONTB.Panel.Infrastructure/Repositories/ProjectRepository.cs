@@ -44,13 +44,26 @@ namespace PCONTB.Panel.Infrastructure.Repositories
         {
             return await dbSet
                 .Include(p => p.User)
-                .Include(p => p.Collaborators)
+                .Include(p => p.Collaborators).ThenInclude(p => p.User)
                 .Include(p => p.Country)
                 .Include(p => p.Category)
                 .Include(p => p.Subcategory)
                 .Include(p => p.Image)
                 .Where(predicate)
                 .AsNoTracking()
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<Project?> GetByTracking(Expression<Func<Project, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await _context.Set<Project>()
+                .Include(p => p.User)
+                .Include(p => p.Collaborators).ThenInclude(p => p.User)
+                .Include(p => p.Country)
+                .Include(p => p.Category)
+                .Include(p => p.Subcategory)
+                .Include(p => p.Image)
+                .Where(predicate)
                 .FirstOrDefaultAsync(cancellationToken);
         }
     }

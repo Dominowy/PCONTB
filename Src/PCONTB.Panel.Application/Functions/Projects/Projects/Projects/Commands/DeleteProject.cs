@@ -2,12 +2,10 @@
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
-using PCONTB.Panel.Domain.Projects.Projects;
 using PCONTB.Panel.Domain.Repositories;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
+namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands
 {
     public class DeleteProjectRequest : BaseCommand, IRequest<CommandResult>
     {

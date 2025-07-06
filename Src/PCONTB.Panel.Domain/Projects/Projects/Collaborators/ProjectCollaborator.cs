@@ -16,7 +16,17 @@ namespace PCONTB.Panel.Domain.Projects.Projects.Collaborators
         public bool ManageCommunityPermission { get; private set; }
         public bool ManageFulfillmentPermission { get; private set; }
 
-        public ProjectCollaborator(Guid userId, Guid projectId) : base(Guid.NewGuid())
+        public ProjectCollaborator() : base()
+        {
+
+        }
+
+        public ProjectCollaborator(Guid id) : base(id)
+        {
+
+        }
+
+        public ProjectCollaborator(Guid userId, Guid projectId) : base()
         {
             ProjectId = projectId;
             UserId = userId;

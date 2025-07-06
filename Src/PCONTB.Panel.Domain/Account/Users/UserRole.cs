@@ -9,7 +9,17 @@ namespace PCONTB.Panel.Domain.Account.Users
         public Guid UserId { get; private set; }
         public User User { get; private set; }
 
-        public UserRole(Role role, Guid userId) : base(Guid.NewGuid())
+        public UserRole() : base()
+        {
+
+        }
+
+        public UserRole(Guid id) : base(id)
+        {
+
+        }
+
+        public UserRole(Role role, Guid userId) : base()
         {
             Role = role;
             UserId = userId;

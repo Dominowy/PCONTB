@@ -1,6 +1,4 @@
-﻿using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
-using PCONTB.Panel.Application.Models.Locations.Countries;
-using PCONTB.Panel.Application.Models.Projects.Categories;
+﻿using PCONTB.Panel.Application.Models.Projects.Categories;
 using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Domain.Projects.Categories;
 using PCONTB.Panel.Domain.Repositories;

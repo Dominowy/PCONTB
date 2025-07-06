@@ -1,12 +1,9 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Models.Function;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Models.Projects.Projects;
-using PCONTB.Panel.Domain.Projects.Projects;
 using PCONTB.Panel.Domain.Repositories;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
+namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Queries
 {
     public class GetAllProjectsRequest : IRequest<GetAllProjectsResponse>
     {

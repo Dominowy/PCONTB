@@ -58,7 +58,17 @@
               <collaborators-list />
             </b-tab>
             <b-tab title="Images">
-              <project-upload-image v-model="form.imageId" @onImageChange="onImageChange" />
+              <base-form-file
+                id="file"
+                class="mt-2"
+                property="Image"
+                v-model="form.image"
+                uploadUrl="/api/multimedia/upload-file"
+                placeholder="Select image"
+                :errors="errors"
+                :src="form.imageData"
+                :isAllTouched="isAllTouched"
+              />
             </b-tab>
           </b-tabs>
         </b-card>
@@ -69,7 +79,7 @@
 
 <script setup>
 import { useAddUpdate } from "@/composables/useAddUpdate";
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, watch } from "vue";
 import ApiClient from "@/services/ApiClient";
 import { useRouter, useRoute } from "vue-router";
 
@@ -111,12 +121,24 @@ const submitInternal = async (onlyValidate) => {
 };
 
 const redirectAfterSucces = (id) => {
-  router.push({ name: "projects:project:settings", params: { id: id } });
+  router.push({ name: "projects:project:update", params: { id: id } });
 };
 
-const onImageChange = async () => {
-  await submit();
-};
+watch(
+  () => route.params.id,
+  async (newId, oldId) => {
+    if (newId !== oldId) {
+      title.value = newId ? "Update project" : "Add project";
+      const response = await getForm();
+      Object.assign(form, response.form);
+      if (newId) {
+        title.value = `Update - ${form.name}`;
+      }
+      setTitle(title.value);
+    }
+  },
+  { immediate: false } // nie wykonujemy od razu, bo onMounted już to robi
+);
 
 const { isLoading, submit, validate, errors, isAllTouched, setTitle } = useAddUpdate(
   submitInternal,

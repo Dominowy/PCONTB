@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
+using PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
+namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Queries
 {
     public class GetAddProjectFormRequest : IRequest<GetAddProjectFormResponse>
     {

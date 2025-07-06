@@ -7,7 +7,12 @@
             
         }
 
-        public ProjectVideo(string fileName, string contentType, byte[] data) : base(Guid.NewGuid())
+        public ProjectVideo(Guid id) : base(id)
+        {
+
+        }
+
+        public ProjectVideo(string fileName, string contentType, byte[] data) : base()
         {
             SetFileName(fileName);
             SetContentType(contentType);

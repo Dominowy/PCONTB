@@ -1,15 +1,13 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Application.Common.Exceptions;
+using PCONTB.Panel.Application.Common.Models.Files;
 using PCONTB.Panel.Application.Common.Models.Function;
-using PCONTB.Panel.Application.Contracts.Infrastructure.Persistance;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
-using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
+using PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands;
 using PCONTB.Panel.Application.Models.Projects.Collaborators;
-using PCONTB.Panel.Domain.Projects.Projects;
 using PCONTB.Panel.Domain.Repositories;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
+namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Queries
 {
     public class GetUpdateProjectFormRequest : BaseQuery, IRequest<GetUpdateProjectFormResponse>
     {
@@ -36,6 +34,17 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 
             _sessionAccesor.Verify(entity.UserId);
 
+            FormFile image = null;
+
+            if (entity.Image != null)
+            {
+                image = new FormFile
+                {
+                    ContentType = entity.Image.ContentType,
+                    FileName = entity.Image.FileName,
+                };
+            }
+
             return new GetUpdateProjectFormResponse()
             {
                 Form = new UpdateProjectRequest
@@ -46,8 +55,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
                     SubcategoryId = entity.SubcategoryId,
                     CountryId = entity.CountryId,
                     Collaborators = [.. entity.Collaborators.Select(CollaboratorDto.Map)],
-                    ImageId = entity.ImageId,
-                    VideoId = entity.VideoId
+                    Image = image,
+                    ImageData = entity.Image == null ? null : entity.Image.Data
                 }
             };
         }

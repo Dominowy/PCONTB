@@ -16,12 +16,6 @@ namespace PCONTB.Panel.Infrastructure
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            using (var scope = services.BuildServiceProvider().CreateScope())
-            {
-                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                //dbContext.Database.Migrate();
-            }
-
             return services;
         }
     }

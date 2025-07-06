@@ -8,10 +8,6 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router";
-
-const router = useRouter();
-
 defineProps({
   title: {
     type: String,
@@ -20,6 +16,9 @@ defineProps({
 });
 
 const goBack = () => {
-  router.back();
+  window.history.back();
+  setTimeout(() => {
+    window.location.reload();
+  }, 100);
 };
 </script>

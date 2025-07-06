@@ -4,11 +4,19 @@ namespace PCONTB.Panel.Domain.Projects.Projects.Files
 {
     public class ProjectImage : ProjectFile
     {
-        public ProjectImage(Guid id) : base(id)
+        public Project Project { get; private set; }
+
+        public ProjectImage() : base()
         {
+
         }
 
-        public ProjectImage(string fileName, string contentType, byte[] data) : base(Guid.NewGuid())
+        public ProjectImage(Guid id) : base(id)
+        {
+
+        }
+
+        public ProjectImage(string fileName, string contentType, byte[] data) : base()
         {
             SetFileName(fileName);
             SetContentType(contentType);

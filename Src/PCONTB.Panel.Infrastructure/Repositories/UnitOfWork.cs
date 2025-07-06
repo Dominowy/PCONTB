@@ -1,4 +1,5 @@
-﻿using PCONTB.Panel.Domain.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using PCONTB.Panel.Domain.Repositories;
 using PCONTB.Panel.Infrastructure.Context;
 
 namespace PCONTB.Panel.Infrastructure.Repositories
@@ -12,10 +13,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
         private ICategoryRepository _category;
         private IProjectRepository _project;
 
-        public UnitOfWork(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        public UnitOfWork(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
         public ISessionRepository SessionRepository => _session ??= new SessionRepository(_dbContext);
 
@@ -25,10 +23,24 @@ namespace PCONTB.Panel.Infrastructure.Repositories
 
         public ICategoryRepository CategoryRepository => _category ??= new CategoryRepository(_dbContext);
 
-        public IProjectRepository ProjectRepository => _project ??= new ProjectRepository(_dbContext);
+        public IProjectRepository ProjectRepository
+        {
+            get
+            {
+                if (_project == null)
+                {
+                    _project = new ProjectRepository(_dbContext);
+                }
+                return _project;
+            }
+        }
 
         public async Task Save(CancellationToken cancellationToken)
         {
+            var entries = _dbContext.ChangeTracker.Entries();
+            foreach (var e in entries)
+                Console.WriteLine($"{e.Entity.GetType().Name} = {e.State}");
+
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 

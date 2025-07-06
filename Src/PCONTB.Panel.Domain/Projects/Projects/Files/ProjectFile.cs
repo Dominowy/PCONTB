@@ -8,12 +8,14 @@ namespace PCONTB.Panel.Domain.Projects.Projects.Files
         public string FileName { get; private set; }
         public string ContentType { get; private set; }
 
-        protected ProjectFile() : base()
+        public ProjectFile() : base()
         {
+
         }
 
-        protected ProjectFile(Guid id) : base(id)
+        public ProjectFile(Guid id) : base(id)
         {
+
         }
 
         public void SetFileName(string imageName)
