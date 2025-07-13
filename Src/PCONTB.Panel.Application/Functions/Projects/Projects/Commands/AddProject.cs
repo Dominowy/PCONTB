@@ -5,12 +5,12 @@ using PCONTB.Panel.Application.Common.Models.Files;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Common.Models.Result;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
-using PCONTB.Panel.Application.Models.Projects.Collaborators;
+using PCONTB.Panel.Application.Functions.Projects.Projects.Commands.Models;
 using PCONTB.Panel.Domain.Projects.Projects;
 using PCONTB.Panel.Domain.Projects.Projects.Files;
 using PCONTB.Panel.Domain.Repositories;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands
+namespace PCONTB.Panel.Application.Functions.Projects.Projects.Commands
 {
     public class AddProjectRequest : BaseCommand, IRequest<CommandResult>
     {
@@ -18,7 +18,12 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands
         public Guid? SubcategoryId { get; set; }
         public Guid? CountryId { get; set; }
 
-        public FormFile Image { get; set; }
+        public FormFile? Image { get; set; }
+        public byte[] ImageData { get; set; }
+        public FormFile? Video { get; set; }
+        public byte[] VideoData { get; set; }
+        public List<ProjectCollaboratorDto> Collaborators { get; set; } = new List<ProjectCollaboratorDto>();
+
     }
 
     public class AddProjectHandler : IRequestHandler<AddProjectRequest, CommandResult>
@@ -46,6 +51,10 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands
 
                 aggregate.SetImage(entity);
             }
+
+            var collaborators = request.Collaborators.Select(m => ProjectCollaboratorDto.Map(m, aggregate.Id)).ToList();
+
+            aggregate.SetCollaborators(collaborators);
 
             await _unitOfWork.ProjectRepository.Add(aggregate, cancellationToken);
 
@@ -91,6 +100,28 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands
                 images.RuleFor(f => f.ContentType)
                     .Must(ct => AllowedContentTypes.Contains(ct))
                     .WithMessage("Only JPG, PNG, WEBP or GIF files are allowed.");
+            });
+
+            RuleFor(x => x.Collaborators).Custom((list, context) =>
+            {
+                var duplicateEmails = list
+                    .GroupBy(c => c.Email?.Trim().ToLower())
+                    .Where(g => g.Count() > 1)
+                    .Select(g => g.Key)
+                    .ToList();
+
+                foreach (var email in duplicateEmails)
+                {
+                    var indexes = list
+                        .Select((item, index) => new { item, index })
+                        .Where(x => x.item.Email?.Trim().ToLower() == email)
+                        .Select(x => x.index);
+
+                    foreach (var i in indexes)
+                    {
+                        context.AddFailure($"Collaborators[{i}].Email", $"Duplicate email: {email}");
+                    }
+                }
             });
         }
 

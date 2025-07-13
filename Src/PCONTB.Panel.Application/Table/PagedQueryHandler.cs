@@ -29,28 +29,28 @@ namespace PCONTB.Panel.Application.Table
             {
                 var globalSearchProps = GetGlobalSearchProperties();
 
-                query = QueryHelper.ApplyGlobalSearch(query, request.Search, globalSearchProps);
+                query = query.ApplyGlobalSearch(request.Search, globalSearchProps);
             }
 
             if (request.Filters != null)
             {
                 foreach (var filter in request.Filters)
                 {
-                    query = QueryHelper.ApplyFilter(query, filter.Key, filter.Value);
+                    query = query.ApplyFilter(filter.Key, filter.Value);
                 }
             }
 
             IOrderedQueryable<TEntity>? orderedQuery = null;
             foreach (var sort in request.Sorts)
             {
-                orderedQuery = QueryHelper.ApplyOrder(query, sort.Field, sort.Descending, thenBy: orderedQuery != null, orderedQuery);
+                orderedQuery = query.ApplyOrder(sort.Field, sort.Descending, thenBy: orderedQuery != null, orderedQuery);
                 if (orderedQuery != null)
                     query = orderedQuery;
             }
 
             var totalCount = await query.CountAsync(cancellationToken);
 
-            query = QueryHelper.ApplyPagination(query, request.Page, request.PageSize);
+            query = query.ApplyPagination(request.Page, request.PageSize);
 
             var entities = await query.ToListAsync(cancellationToken);
 

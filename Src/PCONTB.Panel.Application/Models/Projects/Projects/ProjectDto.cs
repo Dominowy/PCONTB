@@ -1,6 +1,5 @@
 ﻿using PCONTB.Panel.Application.Common.Models.Dto;
 using PCONTB.Panel.Application.Models.Account.Users;
-using PCONTB.Panel.Application.Models.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Projects;
 
 namespace PCONTB.Panel.Application.Models.Projects.Projects
@@ -13,7 +12,7 @@ namespace PCONTB.Panel.Application.Models.Projects.Projects
         public NameRelatedDto Category { get; set; }
         public NameRelatedDto? Subcategory { get; set; }
 
-        public List<CollaboratorDto> Collaborators { get; set; }
+        public List<ProjectCollaboratorDto> Collaborators { get; set; }
 
         public static ProjectDto Map(Project entity)
         {
@@ -25,7 +24,7 @@ namespace PCONTB.Panel.Application.Models.Projects.Projects
                 Country = NameRelatedDto.Map(entity.Country),
                 Category = NameRelatedDto.Map(entity.Category),
                 Subcategory = NameRelatedDto.Map(entity.Subcategory),
-                Collaborators = [.. entity.Collaborators.Select(CollaboratorDto.Map)]
+                Collaborators = [.. entity.Collaborators.Select(ProjectCollaboratorDto.Map)]
             };
         }
     }

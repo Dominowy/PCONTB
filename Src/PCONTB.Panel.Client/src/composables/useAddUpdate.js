@@ -11,7 +11,7 @@ export function useAddUpdate(submitInternal, redirectAfterSuccess) {
     try {
       var response = await submitInternal(false);
       errors.value = [];
-      redirectAfterSuccess(response.id);
+      redirectAfterSuccess(response);
     } catch (error) {
       errors.value = error.message.errors;
       errorMessage.value = error.message;

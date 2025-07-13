@@ -4,7 +4,7 @@ using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Models.Projects.Projects;
 using PCONTB.Panel.Domain.Repositories;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Queries
+namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 {
     public class GetProjectRequest : BaseQuery, IRequest<GetProjectResponse>
     {

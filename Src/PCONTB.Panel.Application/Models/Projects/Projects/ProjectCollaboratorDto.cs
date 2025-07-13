@@ -2,14 +2,14 @@
 using PCONTB.Panel.Application.Models.Account.Users;
 using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
 
-namespace PCONTB.Panel.Application.Models.Projects.Collaborators
+namespace PCONTB.Panel.Application.Models.Projects.Projects
 {
-    public class CollaboratorDto : EntityDto
+    public class ProjectCollaboratorDto : EntityDto
     {
         public UserDto User { get; set; }
-        public static CollaboratorDto Map(ProjectCollaborator m)
+        public static ProjectCollaboratorDto Map(ProjectCollaborator m)
         {
-            return new CollaboratorDto
+            return new ProjectCollaboratorDto
             {
                 Id = m.Id,
                 User = UserDto.Map(m.User)

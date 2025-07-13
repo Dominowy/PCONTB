@@ -2,7 +2,7 @@
   <div>
     <LoadingLayout v-if="store.loading" />
     <TransitionLayout v-if="store.transition" />
-    <router-view v-slot="{ Component }">
+    <router-view :key="$route.fullPath" v-slot="{ Component }">
       <transition name="fade" mode="out-in">
         <component :is="Component" />
       </transition>

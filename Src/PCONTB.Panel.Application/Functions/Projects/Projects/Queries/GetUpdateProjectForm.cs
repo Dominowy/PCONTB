@@ -3,11 +3,11 @@ using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Models.Files;
 using PCONTB.Panel.Application.Common.Models.Function;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
-using PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands;
-using PCONTB.Panel.Application.Models.Projects.Collaborators;
+using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
+using PCONTB.Panel.Application.Functions.Projects.Projects.Commands.Models;
 using PCONTB.Panel.Domain.Repositories;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Queries
+namespace PCONTB.Panel.Application.Functions.Projects.Projects.Queries
 {
     public class GetUpdateProjectFormRequest : BaseQuery, IRequest<GetUpdateProjectFormResponse>
     {
@@ -28,20 +28,20 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Queries
 
         public async Task<GetUpdateProjectFormResponse> Handle(GetUpdateProjectFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.ProjectRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var aggregate = await _unitOfWork.ProjectRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
-            if (entity == null) throw new NotFoundException("Project not found");
+            if (aggregate == null) throw new NotFoundException("Project not found");
 
-            _sessionAccesor.Verify(entity.UserId);
+            _sessionAccesor.Verify(aggregate.UserId);
 
             FormFile image = null;
 
-            if (entity.Image != null)
+            if (aggregate.Image != null)
             {
                 image = new FormFile
                 {
-                    ContentType = entity.Image.ContentType,
-                    FileName = entity.Image.FileName,
+                    ContentType = aggregate.Image.ContentType,
+                    FileName = aggregate.Image.FileName,
                 };
             }
 
@@ -49,14 +49,14 @@ namespace PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Queries
             {
                 Form = new UpdateProjectRequest
                 {
-                    Id = entity.Id,
-                    Name = entity.Name,
-                    CategoryId = entity.CategoryId,
-                    SubcategoryId = entity.SubcategoryId,
-                    CountryId = entity.CountryId,
-                    Collaborators = [.. entity.Collaborators.Select(CollaboratorDto.Map)],
+                    Id = aggregate.Id,
+                    Name = aggregate.Name,
+                    CategoryId = aggregate.CategoryId,
+                    SubcategoryId = aggregate.SubcategoryId,
+                    CountryId = aggregate.CountryId,
                     Image = image,
-                    ImageData = entity.Image == null ? null : entity.Image.Data
+                    ImageData = aggregate.Image == null ? null : aggregate.Image.Data,
+                    Collaborators = [.. aggregate.Collaborators.Select(ProjectCollaboratorDto.Map)]
                 }
             };
         }

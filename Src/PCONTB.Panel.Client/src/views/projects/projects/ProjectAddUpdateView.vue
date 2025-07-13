@@ -50,12 +50,17 @@
             :isAllTouched="isAllTouched"
             api-url="/locations/countries/select-countries"
           />
-          <base-form-submit-panel :isLoading="isLoading" />
         </b-card>
-        <b-card v-if="route.params.id" no-body class="mt-2">
+        <b-card no-body class="mt-2">
           <b-tabs card>
             <b-tab title="Collaborators">
-              <collaborators-list />
+              <collaborators-list
+                :items="form.collaborators"
+                :errors="errors"
+                :isAllTouched="isAllTouched"
+                @addUpdate="addUpdateCollaborator"
+                @delete="deleteCollaborator"
+              />
             </b-tab>
             <b-tab title="Images">
               <base-form-file
@@ -72,6 +77,7 @@
             </b-tab>
           </b-tabs>
         </b-card>
+        <base-form-submit-panel :isLoading="isLoading" />
       </base-form>
     </b-row>
   </div>
@@ -79,7 +85,7 @@
 
 <script setup>
 import { useAddUpdate } from "@/composables/useAddUpdate";
-import { reactive, onMounted, ref, watch } from "vue";
+import { reactive, onMounted, ref } from "vue";
 import ApiClient from "@/services/ApiClient";
 import { useRouter, useRoute } from "vue-router";
 
@@ -120,25 +126,22 @@ const submitInternal = async (onlyValidate) => {
   return await ApiClient.validate("projects/projects/add", onlyValidate, form);
 };
 
-const redirectAfterSucces = (id) => {
-  router.push({ name: "projects:project:update", params: { id: id } });
+const redirectAfterSucces = (response) => {
+  router.push({ name: "projects:project:update", params: { id: response.id } });
 };
 
-watch(
-  () => route.params.id,
-  async (newId, oldId) => {
-    if (newId !== oldId) {
-      title.value = newId ? "Update project" : "Add project";
-      const response = await getForm();
-      Object.assign(form, response.form);
-      if (newId) {
-        title.value = `Update - ${form.name}`;
-      }
-      setTitle(title.value);
-    }
-  },
-  { immediate: false } // nie wykonujemy od razu, bo onMounted już to robi
-);
+const deleteCollaborator = (idToDelete) => {
+  form.collaborators = form.collaborators.filter((c) => c.id !== idToDelete);
+};
+
+const addUpdateCollaborator = (collaborator) => {
+  const index = form.collaborators.findIndex((c) => c.id === collaborator.id);
+  if (index !== -1) {
+    form.collaborators[index] = collaborator;
+  } else {
+    form.collaborators.push(collaborator);
+  }
+};
 
 const { isLoading, submit, validate, errors, isAllTouched, setTitle } = useAddUpdate(
   submitInternal,

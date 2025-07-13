@@ -9,44 +9,25 @@
 </template>
 
 <script setup>
-import { useAddUpdate } from "@/composables/useAddUpdate";
-import { onMounted, ref } from "vue";
-import ApiClient from "@/services/ApiClient";
-import { useRoute } from "vue-router";
-
-const route = useRoute();
+import { ref } from "vue";
 
 const props = defineProps({
-  collaboratorId: String,
+  collaborator: Object,
 });
 
-const emit = defineEmits(["close", "refresh"]);
+const emit = defineEmits(["close", "delete"]);
 
+const isLoading = ref(false);
 const title = ref("Delete collaborator");
-
-onMounted(async () => {
-  isLoading.value = true;
-
-  isLoading.value = false;
-});
 
 const handleDelete = async () => {
   isLoading.value = true;
-  try {
-    await ApiClient.request("projects/collaborators/delete", {
-      id: props.collaboratorId,
-      projectId: route.params.id,
-    });
-  } finally {
-    isLoading.value = false;
-    emit("refresh");
-    emit("close");
-  }
+  emit("delete", props.collaborator.id);
+  isLoading.value = false;
+  emit("close");
 };
 
 const handleCloseModal = () => {
   emit("close");
 };
-
-const { isLoading } = useAddUpdate();
 </script>

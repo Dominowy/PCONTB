@@ -100,9 +100,33 @@ namespace PCONTB.Panel.Domain.Projects.Projects
             VideoId = videoId;
         }
 
-        public void AddCollaborator(ProjectCollaborator entity)
+        public void SetCollaborators(List<ProjectCollaborator> entity)
         {
-            Collaborators.Add(entity);
+            var toDelete = Collaborators.ToDictionary(c => c.Id);
+
+            foreach (var item in entity)
+            {
+                var existing = Collaborators.FirstOrDefault(m => m.Id == item.Id);
+                if (existing != null)
+                {
+                    existing.SetPermissions(item);
+
+                    toDelete.Remove(item.Id);
+                }
+                else
+                {
+                    var itemToAdd = new ProjectCollaborator(item.UserId, item.ProjectId);
+
+                    item.SetPermissions(itemToAdd);
+
+                    Collaborators.Add(itemToAdd);
+                }
+            }
+
+            foreach (var itemToDelete in toDelete.Values)
+            {
+                Collaborators.Remove(itemToDelete);
+            }
         }
     }
 }

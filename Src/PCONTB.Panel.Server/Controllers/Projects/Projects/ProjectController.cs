@@ -1,13 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Common.Models.Result;
-using PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Commands;
-using PCONTB.Panel.Application.Functions.Projects.Projects.Projects.Queries;
+using PCONTB.Panel.Application.Functions.Projects.Projects.Commands;
+using PCONTB.Panel.Application.Functions.Projects.Projects.Queries;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
 
-namespace PCONTB.Panel.Server.Controllers.Projects.Projects.Projects
+namespace PCONTB.Panel.Server.Controllers.Projects.Projects
 {
     [Route("api/projects/projects")]
     public class ProjectController(IMediator mediator) : BaseController(mediator)
@@ -42,7 +42,7 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Projects.Projects
         [AuthorizeToken(Role.User)]
         [HttpPost("add/form")]
         [ProducesResponseType(typeof(GetAddProjectFormResponse), StatusCodes.Status200OK)]
-        public async Task<IActionResult> AddProject([FromBody] GetAddProjectFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+        public async Task<IActionResult> AddProjectForm([FromBody] GetAddProjectFormRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         [AuthorizeToken(Role.User)]
         [HttpPost("add/validate")]
@@ -97,5 +97,16 @@ namespace PCONTB.Panel.Server.Controllers.Projects.Projects.Projects
         public async Task<IActionResult> DeleteProject([FromBody] DeleteProjectRequest request, CancellationToken cancellation) => await Send(request, cancellation);
 
         #endregion Delete
+
+        #region Collaborator
+
+        [AuthorizeToken(Role.User)]
+        [HttpPost("get-collaborator-user")]
+        [ProducesResponseType(typeof(GetProjectCollaboratorUserResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetCollaboratorUser([FromBody] GetProjectCollaboratorUserRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+
+        #endregion Collaborator
     }
 }
