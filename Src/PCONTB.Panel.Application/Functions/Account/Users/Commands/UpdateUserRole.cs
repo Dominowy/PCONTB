@@ -28,7 +28,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         {
             var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
-            if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
+            if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
             if (request.Roles.Any(m => m == Role.Block))
             {
@@ -62,9 +62,9 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         public UpdateUserRoleValidator()
         {
             RuleFor(p => p.Roles)
-                .NotEmpty().WithMessage(ErrorCodes.User.RoleEmpty.Message)
-                .Must(NoDuplicates).WithMessage(ErrorCodes.User.RoleDuplicate.Message)
-                .Must(AllRolesValid).WithMessage(ErrorCodes.User.RoleValid.Message);
+                .NotEmpty().WithMessage(ErrorCodes.Users.User.RoleEmpty.Message)
+                .Must(NoDuplicates).WithMessage(ErrorCodes.Users.User.RoleDuplicate.Message)
+                .Must(AllRolesValid).WithMessage(ErrorCodes.Users.User.RoleValid.Message);
         }
 
         private bool NoDuplicates(List<Role> roles)

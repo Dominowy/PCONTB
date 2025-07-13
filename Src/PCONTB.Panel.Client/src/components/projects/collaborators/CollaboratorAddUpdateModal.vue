@@ -92,9 +92,7 @@ const handleAddUpdate = async () => {
     emit("addUpdate", form);
     emit("close");
   } catch (error) {
-    if (error.code == 404) {
-      errorMessage.value = error.message;
-    }
+    errorMessage.value = error.message;
   } finally {
     isLoading.value = false;
   }

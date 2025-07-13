@@ -28,7 +28,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
         {
             var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
-            if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
+            if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
             _sessionAccesor.Verify(entity.Id);
 

@@ -25,7 +25,7 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
         {
             var entity = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
-            if (entity == null) throw new NotFoundException(ErrorCodes.Country.NotFound.Message);
+            if (entity == null) throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
 
             await _unitOfWork.CountryRepository.Delete(entity, cancellationToken);
 

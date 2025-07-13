@@ -1,7 +1,7 @@
 ﻿using PCONTB.Panel.Domain.Account.Sessions;
 using PCONTB.Panel.Domain.Common;
-using PCONTB.Panel.Domain.Projects.Projects;
-using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects;
+using PCONTB.Panel.Domain.Projects.Collaborators;
 
 namespace PCONTB.Panel.Domain.Account.Users
 {

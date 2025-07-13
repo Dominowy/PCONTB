@@ -1,4 +1,4 @@
-﻿using PCONTB.Panel.Domain.Projects.Categories;
+﻿using PCONTB.Panel.Domain.Categories;
 
 namespace PCONTB.Panel.Domain.Repositories
 {

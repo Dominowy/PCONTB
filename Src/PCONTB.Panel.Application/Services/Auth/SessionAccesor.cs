@@ -23,7 +23,7 @@ namespace PCONTB.Panel.Application.Services.Auth
         public void Verify(Guid id)
         {
             if (Session.User.Id != id) 
-                throw new UnauthorizedException(ErrorCodes.User.AccesDenied.Message);
+                throw new UnauthorizedException(ErrorCodes.Users.User.AccesDenied.Message);
         }
 
         public void VerifyWithRole(Guid id, Role role)
@@ -31,7 +31,7 @@ namespace PCONTB.Panel.Application.Services.Auth
             if (Session.User.UserRoles.Any(r => r.Role == role)) return;
 
             if (Session.User.Id != id)
-                throw new UnauthorizedException(ErrorCodes.User.AccesDenied.Message);
+                throw new UnauthorizedException(ErrorCodes.Users.User.AccesDenied.Message);
         }
     }
 }

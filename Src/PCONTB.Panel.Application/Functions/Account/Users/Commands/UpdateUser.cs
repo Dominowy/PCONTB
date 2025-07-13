@@ -54,14 +54,14 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
             _unitOfWork = unitOfWork;
 
             RuleFor(p => p.Username)
-                .NotEmpty().WithMessage(ErrorCodes.User.UsernameEmpty.Message)
+                .NotEmpty().WithMessage(ErrorCodes.Users.User.UsernameEmpty.Message)
                 .MustAsync(async (s, u, ct) => await CheckUsernameIsUnique(s.Id, u, ct))
-                .WithMessage(ErrorCodes.User.UsernameExist.Message);
+                .WithMessage(ErrorCodes.Users.User.UsernameExist.Message);
 
             RuleFor(p => p.Email)
-                .NotEmpty().WithMessage(ErrorCodes.User.EmailEmpty.Message)
-                .EmailAddress().WithMessage(ErrorCodes.User.EmailBadFormat.Message)
-                .MustAsync(async (s, u, ct) => await CheckEmailIsUnique(s.Id, u, ct)).WithMessage(ErrorCodes.User.EmailExist.Message);
+                .NotEmpty().WithMessage(ErrorCodes.Users.User.EmailEmpty.Message)
+                .EmailAddress().WithMessage(ErrorCodes.Users.User.EmailBadFormat.Message)
+                .MustAsync(async (s, u, ct) => await CheckEmailIsUnique(s.Id, u, ct)).WithMessage(ErrorCodes.Users.User.EmailExist.Message);
         }
 
         private async Task<bool> CheckUsernameIsUnique(Guid id, string username, CancellationToken cancellationToken)

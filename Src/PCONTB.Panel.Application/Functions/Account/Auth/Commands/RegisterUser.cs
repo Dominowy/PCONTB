@@ -67,19 +67,19 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
             _unitOfWork = unitOfWork;
 
             RuleFor(p => p.Username)
-                .NotEmpty().WithMessage(ErrorCodes.User.UsernameEmpty.Message)
-                .MustAsync(CheckUsernameIsUnique).WithMessage(ErrorCodes.User.UsernameExist.Message);
+                .NotEmpty().WithMessage(ErrorCodes.Users.User.UsernameEmpty.Message)
+                .MustAsync(CheckUsernameIsUnique).WithMessage(ErrorCodes.Users.User.UsernameExist.Message);
 
             RuleFor(p => p.Email)
-                .NotEmpty().WithMessage(ErrorCodes.User.EmailEmpty.Message)
-                .EmailAddress().WithMessage(ErrorCodes.User.EmailBadFormat.Message)
-                .MustAsync(CheckEmailIsUnique).WithMessage(ErrorCodes.User.EmailExist.Message);
+                .NotEmpty().WithMessage(ErrorCodes.Users.User.EmailEmpty.Message)
+                .EmailAddress().WithMessage(ErrorCodes.Users.User.EmailBadFormat.Message)
+                .MustAsync(CheckEmailIsUnique).WithMessage(ErrorCodes.Users.User.EmailExist.Message);
 
             RuleFor(p => p.Password)
-                .NotEmpty().WithMessage(ErrorCodes.User.PasswordEmpty.Message)
-                .MinimumLength(8).WithMessage(ErrorCodes.User.PasswordMinimalLength.Message)
+                .NotEmpty().WithMessage(ErrorCodes.Users.User.PasswordEmpty.Message)
+                .MinimumLength(8).WithMessage(ErrorCodes.Users.User.PasswordMinimalLength.Message)
                 .Matches(new Regex(@"(?=[A-Za-z0-9@#$%^&+-_!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+-_!=]).*$"))
-                .WithMessage(ErrorCodes.User.PasswordMatchRules.Message);
+                .WithMessage(ErrorCodes.Users.User.PasswordMatchRules.Message);
         }
 
         private async Task<bool> CheckUsernameIsUnique(string username, CancellationToken cancellationToken)

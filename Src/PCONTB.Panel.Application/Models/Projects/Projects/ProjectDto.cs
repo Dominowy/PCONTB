@@ -1,6 +1,6 @@
 ﻿using PCONTB.Panel.Application.Common.Models.Dto;
 using PCONTB.Panel.Application.Models.Account.Users;
-using PCONTB.Panel.Domain.Projects.Projects;
+using PCONTB.Panel.Domain.Projects;
 
 namespace PCONTB.Panel.Application.Models.Projects.Projects
 {

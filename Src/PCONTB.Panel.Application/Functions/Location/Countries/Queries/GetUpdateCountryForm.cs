@@ -25,7 +25,7 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
         {
             var entity = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
-            if (entity is null) throw new NotFoundException(ErrorCodes.Country.NotFound.Message);
+            if (entity is null) throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
 
             return new GetUpdateCountryFormResponse
             {

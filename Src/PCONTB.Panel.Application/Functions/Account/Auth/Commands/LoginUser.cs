@@ -40,12 +40,12 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
         {
             var entity = await _unitOfWork.UserRepository.GetBy(u => u.Email == request.Login || u.Username == request.Login, cancellationToken);
 
-            if (entity == null) throw new BadRequestException(ErrorCodes.User.LoginWrongCredential.Message);
+            if (entity == null) throw new BadRequestException(ErrorCodes.Users.User.LoginWrongCredential.Message);
 
-            if (entity.UserRoles.Any(r => r.Role == Role.Block)) throw new BadRequestException(ErrorCodes.User.AccountLock.Message);
+            if (entity.UserRoles.Any(r => r.Role == Role.Block)) throw new BadRequestException(ErrorCodes.Users.User.AccountLock.Message);
 
             if (!_passwordHasherService.Verify(request.Password, entity.Password))
-                throw new BadRequestException(ErrorCodes.User.LoginWrongCredential.Message);
+                throw new BadRequestException(ErrorCodes.Users.User.LoginWrongCredential.Message);
 
             var sessionId = await _sessionService.CreateSession(entity.Id, cancellationToken);
 

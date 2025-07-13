@@ -25,13 +25,13 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         {
             var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
-            if (entity == null) throw new NotFoundException(ErrorCodes.User.NotFound.Message);
+            if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
             entity.SetEnabled(true);
 
             var roleBlock = entity.UserRoles.FirstOrDefault(m => m.Role == Role.Block);
 
-            if (roleBlock is null) throw new NotFoundException(ErrorCodes.User.UserIsNotBlock.Message);
+            if (roleBlock is null) throw new NotFoundException(ErrorCodes.Users.User.UserIsNotBlock.Message);
 
             entity.UserRoles.Remove(roleBlock);
 

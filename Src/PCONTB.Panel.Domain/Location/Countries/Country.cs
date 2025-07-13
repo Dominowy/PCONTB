@@ -1,5 +1,5 @@
 ﻿using PCONTB.Panel.Domain.Common;
-using PCONTB.Panel.Domain.Projects.Projects;
+using PCONTB.Panel.Domain.Projects;
 
 namespace PCONTB.Panel.Domain.Location.Countries
 {

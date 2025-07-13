@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Domain.Account.Sessions;
-using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Categories;
 using PCONTB.Panel.Domain.Repositories;
 using PCONTB.Panel.Infrastructure.Context;
 using System.Linq.Expressions;

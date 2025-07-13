@@ -182,6 +182,8 @@ const onFileChange = (fileName, path, contentType, file) => {
 };
 
 const uploadFile = (file) => {
+  if (file == null) return;
+
   isUploading.value = true;
   uploadProgress.value = 0;
 
@@ -207,6 +209,7 @@ const uploadFile = (file) => {
     })
     .catch((error) => {
       isUploading.value = false;
+      preview.value = null;
       console.error("FAIL", error);
     });
 };
@@ -222,5 +225,15 @@ watch(
   () => {
     setSrc();
   }
+);
+
+watch(
+  () => props.errors,
+  (newErrors) => {
+    if (newErrors.some((m) => m.propertyName?.startsWith(propertyName.value))) {
+      preview.value = null;
+    }
+  },
+  { immediate: true, deep: true }
 );
 </script>

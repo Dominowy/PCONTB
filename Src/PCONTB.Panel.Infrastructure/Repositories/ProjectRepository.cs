@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PCONTB.Panel.Domain.Projects.Projects;
+using PCONTB.Panel.Domain.Projects;
 using PCONTB.Panel.Domain.Repositories;
 using PCONTB.Panel.Infrastructure.Context;
 using System.Linq;

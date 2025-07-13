@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Domain.Account.Sessions;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Categories;
 using PCONTB.Panel.Domain.Location.Countries;
-using PCONTB.Panel.Domain.Projects.Categories;
-using PCONTB.Panel.Domain.Projects.Projects;
-using PCONTB.Panel.Domain.Projects.Projects.Collaborators;
-using PCONTB.Panel.Domain.Projects.Projects.Files;
+using PCONTB.Panel.Domain.Projects;
+using PCONTB.Panel.Domain.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.Files;
 
 namespace PCONTB.Panel.Infrastructure.Context
 {

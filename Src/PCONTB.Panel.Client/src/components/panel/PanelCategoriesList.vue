@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-end">
       <b-button variant="primary" @click="goToAdd">Add</b-button>
     </div>
-    <base-table :columns="columns" url="/api/projects/categories/table/get-data" />
+    <base-table :columns="columns" url="/api/categories/table/get-data" />
   </div>
 </template>
 

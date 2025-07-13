@@ -1,5 +1,5 @@
 ﻿using PCONTB.Panel.Application.Common.Models.Dto;
-using PCONTB.Panel.Domain.Projects.Categories;
+using PCONTB.Panel.Domain.Categories;
 
 namespace PCONTB.Panel.Application.Models.Projects.Categories
 {

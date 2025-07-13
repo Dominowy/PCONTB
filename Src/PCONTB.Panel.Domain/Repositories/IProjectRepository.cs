@@ -1,4 +1,4 @@
-﻿using PCONTB.Panel.Domain.Projects.Projects;
+﻿using PCONTB.Panel.Domain.Projects;
 using System.Linq.Expressions;
 
 namespace PCONTB.Panel.Domain.Repositories

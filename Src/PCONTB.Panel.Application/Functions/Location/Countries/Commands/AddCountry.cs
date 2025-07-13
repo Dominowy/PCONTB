@@ -42,8 +42,8 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
             _unitOfWork = unitOfWork;
 
             RuleFor(m => m.Name)
-                .NotEmpty().WithMessage(ErrorCodes.Country.NameEmpty.Message)
-                .MustAsync(CheckNameIsUnique).WithMessage(ErrorCodes.Country.NameExist.Message);
+                .NotEmpty().WithMessage(ErrorCodes.Countries.Country.NameEmpty.Message)
+                .MustAsync(CheckNameIsUnique).WithMessage(ErrorCodes.Countries.Country.NameExist.Message);
         }
 
         private async Task<bool> CheckNameIsUnique(string name, CancellationToken cancellationToken)

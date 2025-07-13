@@ -56,14 +56,14 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         public UpdatePasswordRequestValidator()
         {
             RuleFor(p => p.Password)
-                .NotEmpty().WithMessage(ErrorCodes.User.PasswordEmpty.Message)
-                .MinimumLength(8).WithMessage(ErrorCodes.User.PasswordMinimalLength.Message)
+                .NotEmpty().WithMessage(ErrorCodes.Users.User.PasswordEmpty.Message)
+                .MinimumLength(8).WithMessage(ErrorCodes.Users.User.PasswordMinimalLength.Message)
                 .Matches(new Regex(@"(?=[A-Za-z0-9@#$%^&+-_!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+-_!=]).*$"))
-                .WithMessage(ErrorCodes.User.PasswordMatchRules.Message);
+                .WithMessage(ErrorCodes.Users.User.PasswordMatchRules.Message);
 
             RuleFor(p => p.ConfirmPassword)
-                .NotEmpty().WithMessage(ErrorCodes.User.PasswordEmpty.Message)
-                .Equal(u => u.Password).WithMessage(ErrorCodes.User.PasswordsNotEqual.Message);
+                .NotEmpty().WithMessage(ErrorCodes.Users.User.PasswordEmpty.Message)
+                .Equal(u => u.Password).WithMessage(ErrorCodes.Users.User.PasswordsNotEqual.Message);
         }
     }
 }

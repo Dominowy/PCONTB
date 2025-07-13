@@ -26,7 +26,7 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
         {
             var entity = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
-            if (entity is null) throw new NotFoundException(ErrorCodes.Country.NotFound.Message);
+            if (entity is null) throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
 
             entity.SetName(request.Name);
 
@@ -47,8 +47,8 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
             _unitOfWork = unitOfWork;
 
             RuleFor(m => m.Name)
-                .NotEmpty().WithMessage(ErrorCodes.Country.NameEmpty.Message)
-                .MustAsync(async (s, c, ct) => await CheckNameIsUnique(s.Id, c, ct)).WithMessage(ErrorCodes.Country.NameExist.Message);
+                .NotEmpty().WithMessage(ErrorCodes.Countries.Country.NameEmpty.Message)
+                .MustAsync(async (s, c, ct) => await CheckNameIsUnique(s.Id, c, ct)).WithMessage(ErrorCodes.Countries.Country.NameExist.Message);
         }
 
         private async Task<bool> CheckNameIsUnique(Guid id, string name, CancellationToken cancellationToken)

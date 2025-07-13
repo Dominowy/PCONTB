@@ -22,7 +22,7 @@
             property="CategoryId"
             :errors="errors"
             :isAllTouched="isAllTouched"
-            api-url="/projects/categories/select-categories"
+            api-url="/categories/select-categories"
           />
           <base-form-select
             :key="form.categoryId"
@@ -34,7 +34,7 @@
             placeholder="No subcategory"
             :errors="errors"
             :isAllTouched="isAllTouched"
-            api-url="/projects/categories/select-subcategories"
+            api-url="/categories/select-subcategories"
             :searchOption="form.categoryId"
             :disabled="form.categoryId == null"
             :required="false"
