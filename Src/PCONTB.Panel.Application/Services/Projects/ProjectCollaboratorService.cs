@@ -3,7 +3,7 @@ using PCONTB.Panel.Application.Models.Projects;
 using PCONTB.Panel.Domain.Projects;
 using PCONTB.Panel.Domain.Projects.Collaborators;
 
-namespace PCONTB.Panel.Application.Services.Auth.Projects
+namespace PCONTB.Panel.Application.Services.Projects
 {
     public class ProjectCollaboratorService : IProjectCollaboratorService
     {

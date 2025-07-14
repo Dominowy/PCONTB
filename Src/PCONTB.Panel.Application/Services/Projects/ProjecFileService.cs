@@ -3,7 +3,7 @@ using PCONTB.Panel.Application.Contracts.Services.Projects;
 using PCONTB.Panel.Domain.Projects;
 using PCONTB.Panel.Domain.Projects.Files;
 
-namespace PCONTB.Panel.Application.Services.Auth.Projects
+namespace PCONTB.Panel.Application.Services.Projects
 {
     public class ProjecFileService : IProjectFileService
     {

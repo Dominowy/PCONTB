@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Settings</h2>
+    <base-header title="Settings" />
     <b-card no-body>
       <b-tabs card>
         <b-tab title="Account">
@@ -15,6 +15,9 @@
 </template>
 
 <script setup>
+import UserAccount from "./components/UserAccount.vue";
+import UserPassword from "./components/UserPassword.vue";
+
 import { useView } from "@/composables/useView";
 
 useView("Settings");

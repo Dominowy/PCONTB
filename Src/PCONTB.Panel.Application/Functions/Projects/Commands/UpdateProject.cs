@@ -6,8 +6,6 @@ using PCONTB.Panel.Application.Common.Functions.Files;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Services.Projects;
 using PCONTB.Panel.Application.Models.Projects;
-using PCONTB.Panel.Application.Services.Auth.Projects;
-using PCONTB.Panel.Domain.Projects.Files;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Commands

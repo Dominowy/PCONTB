@@ -6,10 +6,7 @@
     <base-table
       :columns="columns"
       url="/api/account/users/table/get-data"
-      :actions="[
-        { label: 'Edit', action: () => router.push({ name: 'projects:project:add' }) },
-        { label: 'Edit', action: () => router.push({ name: 'projects:project:add' }) },
-      ]"
+      :actions="[{ label: 'Display', action: () => router.push({ name: 'panel:user' }) }]"
     >
       <template #cell-userRoles="{ item }">
         {{ formatRoles(item.userRoles) }}
@@ -53,6 +50,6 @@ function formatRoles(userRoles) {
 }
 
 const goToAdd = () => {
-  router.push({ name: "projects:project:add" });
+  router.push({ name: "panel:user:add" });
 };
 </script>

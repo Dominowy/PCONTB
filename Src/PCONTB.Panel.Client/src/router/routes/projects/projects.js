@@ -1,5 +1,5 @@
-import ProjectsListView from "@/views/projects/projects/ProjectsListView.vue";
-import ProjectAddUpdateView from "@/views/projects/projects/ProjectAddUpdateView.vue";
+import ProjectsListView from "@/views/projects/projects/ProjectsTableView.vue";
+import ProjectAddUpdateView from "@/views/projects/projects/ProjectAddUpdate.vue";
 
 let routes = [];
 

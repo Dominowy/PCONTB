@@ -1,0 +1,91 @@
+<template>
+  <base-form-field
+    :id="id"
+    :label="label"
+    :errors="getFieldErrors(propertyName)"
+    :isTouched="isTouched"
+    :isAllTouched="isAllTouched"
+  >
+    <div class="flex gap-6">
+      <div class="w-1/2">
+        <h3>Available {{ placeholder }}</h3>
+        <ul class="border p-2 h-48 overflow-y-auto">
+          <li
+            v-for="item in availableItems"
+            :key="item.id"
+            @dblclick="assignItem(item)"
+            class="cursor-pointer hover:bg-gray-100 p-1"
+          >
+            {{ item.value }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="w-1/2">
+        <h3>Assigned {{ placeholder }}</h3>
+        <ul class="border p-2 h-48 overflow-y-auto">
+          <li
+            v-for="item in selectedItems"
+            :key="item.id"
+            @dblclick="unassignItem(item)"
+            class="cursor-pointer hover:bg-gray-100 p-1"
+          >
+            {{ item.value }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </base-form-field>
+</template>
+
+<script setup>
+import { ref, computed } from "vue";
+
+const props = defineProps({
+  id: String,
+  label: String,
+  placeholder: String,
+  modelValue: Array,
+  errors: {
+    type: Array,
+    default: () => [],
+  },
+  isAllTouched: Boolean,
+  property: String,
+  disabled: Boolean,
+  required: Boolean,
+  options: {
+    type: Array,
+    default: () => [],
+  },
+});
+
+const emit = defineEmits(["update:modelValue"]);
+
+const propertyName = ref(props.property || props.label);
+const isTouched = ref(false);
+
+const selectedItems = computed({
+  get: () => props.modelValue || [],
+  set: (val) => emit("update:modelValue", val),
+});
+
+const availableItems = computed(() =>
+  props.options.filter((item) => !selectedItems.value.some((r) => r.id === item.id))
+);
+
+const assignItem = (item) => {
+  if (!selectedItems.value.find((r) => r.id === item.id)) {
+    selectedItems.value = [...selectedItems.value, item];
+  }
+};
+
+const unassignItem = (item) => {
+  selectedItems.value = selectedItems.value.filter((r) => r.id !== item.id);
+};
+
+const getFieldErrors = () => {
+  const field = props.property || props.label;
+  return props.errors.filter((m) => m.propertyName === field).map((m) => m.message);
+};
+</script>

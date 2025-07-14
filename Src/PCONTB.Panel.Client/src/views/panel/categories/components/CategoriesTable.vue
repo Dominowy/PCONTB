@@ -23,6 +23,6 @@ const columns = [
 ];
 
 const goToAdd = async () => {
-  router.push({ name: "projects:project:add" });
+  router.push({ name: "panel:user:add" });
 };
 </script>

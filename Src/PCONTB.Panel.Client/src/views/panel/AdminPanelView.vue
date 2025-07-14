@@ -6,13 +6,13 @@
         <b-card no-body>
           <b-tabs card>
             <b-tab title="Users">
-              <panel-users-list />
+              <panel-users-table />
             </b-tab>
             <b-tab title="Categories">
-              <panel-categories-list />
+              <panel-categories-table />
             </b-tab>
             <b-tab title="Countries">
-              <panel-countries-list />
+              <panel-countries-table />
             </b-tab>
           </b-tabs>
         </b-card>
@@ -22,6 +22,10 @@
 </template>
 
 <script setup>
+import PanelUsersTable from "./users/components/UsersTable.vue";
+import PanelCategoriesTable from "./categories/components/CategoriesTable.vue";
+import PanelCountriesTable from "./countries/components/CountriesTable.vue";
+
 import { useView } from "@/composables/useView";
 
 useView("Admin - Panel");

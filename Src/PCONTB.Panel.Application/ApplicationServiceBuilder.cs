@@ -6,7 +6,7 @@ using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Services.Auth.Encryption;
 using PCONTB.Panel.Application.Contracts.Services.Projects;
 using PCONTB.Panel.Application.Services.Auth;
-using PCONTB.Panel.Application.Services.Auth.Projects;
+using PCONTB.Panel.Application.Services.Projects;
 using PCONTB.Panel.Infrastructure.Security.Auth;
 using PCONTB.Panel.Infrastructure.Security.Auth.Encryption;
 using System.Reflection;
