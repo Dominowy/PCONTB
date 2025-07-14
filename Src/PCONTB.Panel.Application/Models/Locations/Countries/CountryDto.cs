@@ -1,4 +1,4 @@
-﻿using PCONTB.Panel.Application.Common.Models.Dto;
+﻿using PCONTB.Panel.Application.Common.Models;
 using PCONTB.Panel.Domain.Location.Countries;
 
 namespace PCONTB.Panel.Application.Models.Locations.Countries

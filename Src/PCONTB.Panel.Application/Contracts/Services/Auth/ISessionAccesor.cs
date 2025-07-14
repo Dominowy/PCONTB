@@ -1,0 +1,14 @@
+﻿using PCONTB.Panel.Domain.Account.Sessions;
+using PCONTB.Panel.Domain.Account.Users;
+
+namespace PCONTB.Panel.Application.Contracts.Services.Auth
+{
+    public interface ISessionAccesor
+    {
+        Session Session { get; }
+        public void SetSession(Session session);
+        public void ClearSession();
+        public void Verify(Guid id);
+        void VerifyWithRole(Guid id, Role role);
+    }
+}

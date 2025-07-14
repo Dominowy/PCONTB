@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Common.Models.Function;
-using PCONTB.Panel.Application.Common.Models.Select;
+using PCONTB.Panel.Application.Common.Functions;
+using PCONTB.Panel.Application.Common.Functions.Selects;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Categories.Queries

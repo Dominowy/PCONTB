@@ -1,6 +1,5 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Common.Extension.Helpers;
-using PCONTB.Panel.Application.Common.Extensions.Helpers;
+using PCONTB.Panel.Application.Common.Extensions.Helpers.Enums;
 using PCONTB.Panel.Application.Functions.Account.Users.Commands;
 using PCONTB.Panel.Domain.Account.Users;
 

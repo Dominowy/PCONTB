@@ -1,5 +1,5 @@
-﻿using PCONTB.Panel.Application.Models.Account.Users;
-using PCONTB.Panel.Application.Table;
+﻿using PCONTB.Panel.Application.Common.Functions.Tables;
+using PCONTB.Panel.Application.Models.Account.Users;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Domain.Repositories;
 using System.Data;

@@ -1,4 +1,4 @@
-﻿using PCONTB.Panel.Application.Common.Models.Dto;
+﻿using PCONTB.Panel.Application.Common.Models;
 using PCONTB.Panel.Application.Models.Account.Users;
 using PCONTB.Panel.Domain.Projects;
 

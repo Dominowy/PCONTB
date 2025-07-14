@@ -1,13 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PCONTB.Panel.Application.Common.Models.Result;
-using PCONTB.Panel.Application.Common.Models.Select;
+using PCONTB.Panel.Application.Common;
+using PCONTB.Panel.Application.Common.Functions;
+using PCONTB.Panel.Application.Common.Functions.Selects;
+using PCONTB.Panel.Application.Common.Functions.Tables;
 using PCONTB.Panel.Application.Functions.Account.Users.Queries;
 using PCONTB.Panel.Application.Functions.Location.Countries.Commands;
 using PCONTB.Panel.Application.Functions.Location.Countries.Queries;
 using PCONTB.Panel.Application.Functions.Projects.Categories.Queries;
 using PCONTB.Panel.Application.Models.Locations.Countries;
-using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;

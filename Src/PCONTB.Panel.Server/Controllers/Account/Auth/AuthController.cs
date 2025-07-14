@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PCONTB.Panel.Application.Common.Models.Result;
+using PCONTB.Panel.Application.Common;
+using PCONTB.Panel.Application.Common.Functions;
 using PCONTB.Panel.Application.Functions.Account.Auth.Commands;
 using PCONTB.Panel.Application.Functions.Account.Auth.Queries;
 using PCONTB.Panel.Domain.Account.Users;

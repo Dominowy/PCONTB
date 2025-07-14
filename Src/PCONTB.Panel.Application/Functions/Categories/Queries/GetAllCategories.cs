@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Models.Projects.Categories;
+using PCONTB.Panel.Application.Models.Categories;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Categories.Queries

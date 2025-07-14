@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Common.Models.Result;
+using PCONTB.Panel.Application.Common;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 {

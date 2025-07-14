@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PCONTB.Panel.Application.Common.Functions.Tables;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Services.Auth.Encryption;
 using PCONTB.Panel.Application.Services.Auth;
-using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Infrastructure.Security.Auth;
 using PCONTB.Panel.Infrastructure.Security.Auth.Encryption;
 using System.Reflection;

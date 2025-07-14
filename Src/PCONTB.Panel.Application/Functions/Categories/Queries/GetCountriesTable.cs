@@ -1,5 +1,5 @@
-﻿using PCONTB.Panel.Application.Models.Projects.Categories;
-using PCONTB.Panel.Application.Table;
+﻿using PCONTB.Panel.Application.Common.Functions.Tables;
+using PCONTB.Panel.Application.Models.Categories;
 using PCONTB.Panel.Domain.Categories;
 using PCONTB.Panel.Domain.Repositories;
 

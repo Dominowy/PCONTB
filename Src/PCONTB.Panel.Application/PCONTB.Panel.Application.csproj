@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PCONTB.Panel.Application.Contracts\PCONTB.Panel.Application.Contracts.csproj" />
+    <ProjectReference Include="..\PCONTB.Panel.Application.Common\PCONTB.Panel.Application.Common.csproj" />
   </ItemGroup>
 
 </Project>

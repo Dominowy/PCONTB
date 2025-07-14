@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using PCONTB.Panel.Application.Common.Models.Function;
+using PCONTB.Panel.Application.Common.Functions;
 using PCONTB.Panel.Application.Models.Projects.Projects;
 using PCONTB.Panel.Domain.Repositories;
 

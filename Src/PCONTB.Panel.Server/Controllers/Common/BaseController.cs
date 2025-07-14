@@ -1,8 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PCONTB.Panel.Application.Common.Models.Codes;
-using PCONTB.Panel.Application.Common.Models.Result;
+using PCONTB.Panel.Application.Common.Functions;
 
 namespace PCONTB.Panel.Server.Controllers.Common
 {

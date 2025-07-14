@@ -1,12 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
+using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Common.Exceptions;
-using PCONTB.Panel.Application.Common.Models.Codes;
-using PCONTB.Panel.Application.Common.Models.Files;
-using PCONTB.Panel.Application.Common.Models.Function;
-using PCONTB.Panel.Application.Common.Models.Result;
+using PCONTB.Panel.Application.Common.Functions.Files;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
-using PCONTB.Panel.Application.Functions.Projects.Commands.Models;
+using PCONTB.Panel.Application.Models.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Files;
 using PCONTB.Panel.Domain.Repositories;
 
@@ -21,7 +19,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
         public byte[] ImageData { get; set; }
         public FormFile? Video { get; set; }
         public byte[] VideoData { get; set; }
-        public List<ProjectCollaboratorDto> Collaborators { get; set; } = new List<ProjectCollaboratorDto>();
+        public List<UpdateProjectCollaboratorDto> Collaborators { get; set; } = new List<UpdateProjectCollaboratorDto>();
 
     }
 
@@ -68,7 +66,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
                 }
             }
 
-            var collaborators = request.Collaborators.Select(m => ProjectCollaboratorDto.Map(m, aggregate.Id)).ToList();
+            var collaborators = request.Collaborators.Select(m => UpdateProjectCollaboratorDto.Map(m, aggregate.Id)).ToList();
 
             aggregate.SetCollaborators(collaborators);
 

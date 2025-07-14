@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
-using PCONTB.Panel.Application.Common.Models.Codes;
-using PCONTB.Panel.Application.Common.Models.Function;
-using PCONTB.Panel.Application.Common.Models.Result;
+using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Repositories;
 

@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PCONTB.Panel.Application.Common.Models.Result;
+using PCONTB.Panel.Application.Common;
+using PCONTB.Panel.Application.Common.Functions;
+using PCONTB.Panel.Application.Common.Functions.Tables;
 using PCONTB.Panel.Application.Functions.Account.Users.Commands;
 using PCONTB.Panel.Application.Functions.Account.Users.Queries;
 using PCONTB.Panel.Application.Models.Account.Users;
-using PCONTB.Panel.Application.Table;
 using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;

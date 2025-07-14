@@ -1,8 +1,8 @@
 ﻿using MediatR;
+using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Common.Exceptions;
-using PCONTB.Panel.Application.Common.Models.Codes;
-using PCONTB.Panel.Application.Common.Models.Function;
-using PCONTB.Panel.Application.Models.Projects.Categories;
+using PCONTB.Panel.Application.Common.Functions;
+using PCONTB.Panel.Application.Models.Categories;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Categories.Queries

@@ -1,4 +1,4 @@
-﻿using PCONTB.Panel.Application.Common.Models.Dto;
+﻿using PCONTB.Panel.Application.Common.Models;
 using PCONTB.Panel.Domain.Account.Users;
 
 namespace PCONTB.Panel.Application.Models.Account.Auth

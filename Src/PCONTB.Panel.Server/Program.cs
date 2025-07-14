@@ -1,5 +1,5 @@
 using PCONTB.Panel.Application;
-using PCONTB.Panel.Application.Common.Extensions.Helpers;
+using PCONTB.Panel.Application.Common.Extensions.Helpers.Enums;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Infrastructure;
 using PCONTB.Panel.Server.Middleware;
