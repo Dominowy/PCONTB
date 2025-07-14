@@ -2,7 +2,7 @@
 using PCONTB.Panel.Application.Models.Account.Users;
 using PCONTB.Panel.Domain.Projects;
 
-namespace PCONTB.Panel.Application.Models.Projects.Projects
+namespace PCONTB.Panel.Application.Models.Projects
 {
     public class ProjectDto : EntityDto
     {

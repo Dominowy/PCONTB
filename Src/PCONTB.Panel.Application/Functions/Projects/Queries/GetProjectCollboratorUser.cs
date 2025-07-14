@@ -3,7 +3,7 @@ using MediatR;
 using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
-using PCONTB.Panel.Application.Models.Projects.Collaborators;
+using PCONTB.Panel.Application.Models.Projects;
 using PCONTB.Panel.Application.Services.Auth;
 using PCONTB.Panel.Domain.Repositories;
 

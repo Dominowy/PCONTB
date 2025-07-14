@@ -1,7 +1,7 @@
 ﻿using PCONTB.Panel.Application.Common.Models;
 using PCONTB.Panel.Domain.Account.Users;
 
-namespace PCONTB.Panel.Application.Models.Projects.Projects
+namespace PCONTB.Panel.Application.Models.Projects
 {
     public class ProjectCollaboratorUserDto : EntityDto
     {

@@ -4,7 +4,7 @@ using PCONTB.Panel.Application.Common.Functions;
 using PCONTB.Panel.Application.Common.Functions.Files;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Functions.Projects.Commands;
-using PCONTB.Panel.Application.Models.Projects.Collaborators;
+using PCONTB.Panel.Application.Models.Projects;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Queries
@@ -56,7 +56,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                     CountryId = aggregate.CountryId,
                     Image = image,
                     ImageData = aggregate.Image == null ? null : aggregate.Image.Data,
-                    Collaborators = [.. aggregate.Collaborators.Select(AddUpdateProjectCollaboratorDto.Map)]
+                    Collaborators = [.. aggregate.Collaborators.Select(UpdateProjectCollaboratorDto.Map)]
                 }
             };
         }

@@ -63,7 +63,7 @@ const form = reactive({
   manageCommunityPermission: false,
   manageFulfillmentPermission: false,
   manageProjectPermission: false,
-  projectId: route.params.id ?? uuidv4(),
+  projectId: route.params.id ?? null,
   userId: null,
 });
 

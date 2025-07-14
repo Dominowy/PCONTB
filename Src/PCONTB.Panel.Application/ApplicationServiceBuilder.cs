@@ -4,7 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using PCONTB.Panel.Application.Common.Functions.Tables;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Services.Auth.Encryption;
+using PCONTB.Panel.Application.Contracts.Services.Projects;
 using PCONTB.Panel.Application.Services.Auth;
+using PCONTB.Panel.Application.Services.Auth.Projects;
 using PCONTB.Panel.Infrastructure.Security.Auth;
 using PCONTB.Panel.Infrastructure.Security.Auth.Encryption;
 using System.Reflection;
@@ -29,6 +31,9 @@ namespace PCONTB.Panel.Application
             services.AddScoped<ISessionService, SessionService>();
             services.AddScoped<ISessionAccesor, SessionAccesor>();
             services.AddScoped<IJwtService, JwtService>();
+
+            services.AddScoped<IProjectFileService, ProjecFileService>();
+            services.AddScoped<IProjectCollaboratorService, ProjectCollaboratorService>();
 
             return services;
         }

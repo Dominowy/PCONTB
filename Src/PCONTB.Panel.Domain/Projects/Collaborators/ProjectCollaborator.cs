@@ -20,16 +20,19 @@ namespace PCONTB.Panel.Domain.Projects.Collaborators
 
         }
 
-        public ProjectCollaborator(Guid id, Guid userId, Guid projectId) : base(id)
+        public ProjectCollaborator(Guid userId, Guid projectId) : base()
         {
             ProjectId = projectId;
             UserId = userId;
         }
 
-        public ProjectCollaborator(Guid userId, Guid projectId) : base()
+        public ProjectCollaborator(Guid userId, Guid projectId, bool manageProjectPermission, bool manageCommunityPermission, bool manageFulfillmentPermission) : base()
         {
             ProjectId = projectId;
             UserId = userId;
+            ManageProjectPermission = manageProjectPermission;
+            ManageCommunityPermission = manageCommunityPermission;
+            ManageFulfillmentPermission = manageFulfillmentPermission;
         }
 
         public void SetManageProjectPermission(bool permission)
@@ -54,13 +57,6 @@ namespace PCONTB.Panel.Domain.Projects.Collaborators
             if (!anyChange) return;
 
             ManageFulfillmentPermission = permission;
-        }
-
-        public void SetPermissions(ProjectCollaborator source)
-        {
-            SetManageProjectPermission(source.ManageProjectPermission);
-            SetManageCommunityPermission(source.ManageCommunityPermission);
-            SetManageFulfillmentPermission(source.ManageFulfillmentPermission);
         }
     }
 }

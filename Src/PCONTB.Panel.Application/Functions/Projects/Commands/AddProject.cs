@@ -3,9 +3,9 @@ using MediatR;
 using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Common.Functions.Files;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
-using PCONTB.Panel.Application.Models.Projects.Collaborators;
+using PCONTB.Panel.Application.Contracts.Services.Projects;
+using PCONTB.Panel.Application.Models.Projects;
 using PCONTB.Panel.Domain.Projects;
-using PCONTB.Panel.Domain.Projects.Files;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Commands
@@ -28,11 +28,15 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISessionAccesor _sessionAccesor;
+        private readonly IProjectFileService _projectFileService;
+        private readonly IProjectCollaboratorService _projectCollabortatorService;
 
-        public AddProjectHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor)
+        public AddProjectHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor, IProjectFileService projectFileService, IProjectCollaboratorService projectCollabortatorService)
         {
             _unitOfWork = unitOfWork;
             _sessionAccesor = sessionAccesor;
+            _projectFileService = projectFileService;
+            _projectCollabortatorService = projectCollabortatorService;
         }
 
         public async Task<CommandResult> Handle(AddProjectRequest request, CancellationToken cancellationToken)
@@ -41,18 +45,9 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
 
             var aggregate = new Project(Guid.NewGuid(), request.Name, userId, (Guid)request.CountryId, (Guid)request.CategoryId, request.SubcategoryId);
 
-            if (request.Image is not null)
-            {
-                var data = await File.ReadAllBytesAsync(request.Image.Path, cancellationToken);
+            await _projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
 
-                var entity = new ProjectImage(request.Image.FileName, request.Image.ContentType, data);
-
-                aggregate.SetImage(entity);
-            }
-
-            var collaborators = request.Collaborators.Select(m => AddProjectCollaboratorDto.Map(m, aggregate.Id)).ToList();
-
-            aggregate.SetCollaborators(collaborators);
+            await _projectCollabortatorService.AddCollaborators(aggregate, request.Collaborators, cancellationToken);
 
             await _unitOfWork.ProjectRepository.Add(aggregate, cancellationToken);
 
@@ -117,6 +112,17 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
                     }
                 }
             });
+
+            RuleFor(x => x.Collaborators).ForEach(collaborator =>
+            {
+                collaborator.ChildRules(c =>
+                {
+                    c.RuleFor(colab => colab.Email)
+                        .NotEmpty().WithMessage(ErrorCodes.Projects.ProjectCollaborator.UserEmpty.Message)
+                        .MustAsync(UserExist).WithMessage(ErrorCodes.Projects.ProjectCollaborator.UserExist.Message)
+                        .WithMessage(ErrorCodes.Projects.ProjectCollaborator.UserExistInProject.Message);
+                });
+            });
         }
 
         private async Task<bool> CategoryExist(Guid? id, CancellationToken cancellationToken)
@@ -127,6 +133,11 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
         private async Task<bool> ConuntryExit(Guid? id, CancellationToken cancellationToken)
         {
             return await _unitOfWork.CountryRepository.Exist(m => m.Id == id, cancellationToken);
+        }
+
+        private async Task<bool> UserExist(string email, CancellationToken cancellationToken)
+        {
+            return await _unitOfWork.UserRepository.Exist(m => m.Email == email, cancellationToken);
         }
     }
 }
