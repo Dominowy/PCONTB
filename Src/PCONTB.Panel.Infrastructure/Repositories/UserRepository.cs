@@ -34,5 +34,13 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
         }
+
+        public async Task<User?> GetByTracking(Expression<Func<User, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await dbSet
+                .Where(predicate)
+                .Include(m => m.UserRoles)
+                .FirstOrDefaultAsync(cancellationToken);
+        }
     }
 }

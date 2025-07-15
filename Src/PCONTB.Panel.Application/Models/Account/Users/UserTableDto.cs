@@ -8,6 +8,8 @@ namespace PCONTB.Panel.Application.Models.Account.Users
         public string Username { get; set; }
 
         public string Email { get; set; }
+
+        public bool Enabled { get; set; }
         public virtual List<UserRoleTableDto> UserRoles { get; set; }
     }
 

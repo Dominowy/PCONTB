@@ -31,7 +31,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
         protected override string[] GetGlobalSearchProperties()
         {
-            return new[] { "Username", "Email", "UserRoles.Role" };
+            return new[] { "Username", "Email", "UserRoles.Role", "Enabled" };
         }
 
         protected override UserTableDto MapEntityToDto(User user)
@@ -41,6 +41,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
                 Id = user.Id,
                 Email = user.Email,
                 Username = user.Username,
+                Enabled = user.Enabled,
                 UserRoles = [.. user.UserRoles.Select(m =>  new UserRoleTableDto
                 {
                     Name = m.Role.ToString()

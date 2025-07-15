@@ -53,7 +53,12 @@
                 ></button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="globalActionDropdown">
                   <li v-for="(action, index) in actions" :key="index">
-                    <a class="dropdown-item" href="#" @click.prevent="action.action()">
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      v-if="action.show ? action.show(item) : true"
+                      @click.prevent="action.action(item)"
+                    >
                       {{ action.label }}
                     </a>
                   </li>

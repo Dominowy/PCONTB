@@ -10,7 +10,8 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 {
     public class UpdateUserRoleRequest : BaseCommand, IRequest<CommandResult>
     {
-        public List<Role> Roles { get; set; }
+        public string Username { get; set; }
+        public List<Role> Roles { get; set; } = [];
     }
 
     public class UpdateUserRoleHandler : IRequestHandler<UpdateUserRoleRequest, CommandResult>
@@ -24,7 +25,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
         public async Task<CommandResult> Handle(UpdateUserRoleRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetByTracking(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
@@ -46,8 +47,6 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
                               .ToList();
 
             entity.UserRoles.AddRange(rolesToAdd);
-
-            await _unitOfWork.UserRepository.Update(entity, cancellationToken);
 
             await _unitOfWork.Save(cancellationToken);
 

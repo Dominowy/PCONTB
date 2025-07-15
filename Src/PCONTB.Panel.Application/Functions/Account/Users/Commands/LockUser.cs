@@ -27,11 +27,11 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
         public async Task<CommandResult> Handle(LockUserRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetByTracking(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
-            _sessionAccesor.VerifyWithRole(entity.Id, Role.Admin);
+            _sessionAccesor.VerifyWithRoles(entity.Id, [Role.Admin, Role.Moderator]);
 
             entity.SetEnabled(false);
 
@@ -40,8 +40,6 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
             entity.UserRoles.Add(blockRole);
 
             await _sessionService.EndAllSession(entity.Id, cancellationToken);
-
-            await _unitOfWork.UserRepository.Update(entity, cancellationToken);
 
             await _unitOfWork.Save(cancellationToken);
 

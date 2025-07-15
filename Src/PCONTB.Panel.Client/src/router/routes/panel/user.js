@@ -1,19 +1,19 @@
-import UserAddView from "@/views/panel/users/UserAddView.vue";
-import UserDisplayView from "@/views/panel/users/UserDisplayView.vue";
+import UserAddUpdateView from "@/views/panel/users/UserAddView.vue";
+import UserUpdateRoleView from "@/views/panel/users/UserUpdateRoleView.vue";
 
 let routes = [];
 
 routes.push(
   {
-    path: "user",
-    name: "panel:user",
-    component: UserDisplayView,
+    path: "user/add",
+    name: "panel:user:add",
+    component: UserAddUpdateView,
     meta: { requiresAuth: true, role: "admin" },
   },
   {
-    path: "user/add",
-    name: "panel:user:add",
-    component: UserAddView,
+    path: "user/:id/update",
+    name: "panel:user:update",
+    component: UserUpdateRoleView,
     meta: { requiresAuth: true, role: "admin" },
   }
 );

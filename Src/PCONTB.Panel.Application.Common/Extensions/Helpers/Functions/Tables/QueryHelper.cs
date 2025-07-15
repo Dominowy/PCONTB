@@ -70,7 +70,17 @@ namespace PCONTB.Panel.Application.Common.Extensions.Helpers.Functions.Tables
             }
             else if (property.Type == typeof(bool))
             {
-                condition = condition == null ? property : Expression.OrElse(condition, property);
+                if (bool.TryParse(value, out var boolValue))
+                {
+                    var constant = Expression.Constant(boolValue, typeof(bool));
+
+                    switch (operation)
+                    {
+                        case FilterOperation.Contains:
+                            condition = Expression.Equal(property, constant);
+                            break;
+                    }
+                }
             }
 
             if (condition == null)

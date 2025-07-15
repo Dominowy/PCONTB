@@ -8,7 +8,7 @@
   >
     <div class="flex gap-6">
       <div class="w-1/2">
-        <h3>Available {{ placeholder }}</h3>
+        Available {{ placeholder }}:
         <ul class="border p-2 h-48 overflow-y-auto">
           <li
             v-for="item in availableItems"
@@ -16,13 +16,13 @@
             @dblclick="assignItem(item)"
             class="cursor-pointer hover:bg-gray-100 p-1"
           >
-            {{ item.value }}
+            {{ toPascalCase(item.value) }}
           </li>
         </ul>
       </div>
 
       <div class="w-1/2">
-        <h3>Assigned {{ placeholder }}</h3>
+        Assigned {{ placeholder }}:
         <ul class="border p-2 h-48 overflow-y-auto">
           <li
             v-for="item in selectedItems"
@@ -30,7 +30,7 @@
             @dblclick="unassignItem(item)"
             class="cursor-pointer hover:bg-gray-100 p-1"
           >
-            {{ item.value }}
+            {{ toPascalCase(item.value) }}
           </li>
         </ul>
       </div>
@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 
 const props = defineProps({
   id: String,
@@ -65,10 +65,7 @@ const emit = defineEmits(["update:modelValue"]);
 const propertyName = ref(props.property || props.label);
 const isTouched = ref(false);
 
-const selectedItems = computed({
-  get: () => props.modelValue || [],
-  set: (val) => emit("update:modelValue", val),
-});
+const selectedItems = ref([]);
 
 const availableItems = computed(() =>
   props.options.filter((item) => !selectedItems.value.some((r) => r.id === item.id))
@@ -77,15 +74,36 @@ const availableItems = computed(() =>
 const assignItem = (item) => {
   if (!selectedItems.value.find((r) => r.id === item.id)) {
     selectedItems.value = [...selectedItems.value, item];
+    emit(
+      "update:modelValue",
+      selectedItems.value.map((i) => i.value)
+    );
   }
 };
 
 const unassignItem = (item) => {
   selectedItems.value = selectedItems.value.filter((r) => r.id !== item.id);
+  emit(
+    "update:modelValue",
+    selectedItems.value.map((i) => i.value)
+  );
 };
 
 const getFieldErrors = () => {
   const field = props.property || props.label;
   return props.errors.filter((m) => m.propertyName === field).map((m) => m.message);
 };
+
+function toPascalCase(str) {
+  if (!str) return "";
+  return str[0].toUpperCase() + str.slice(1);
+}
+
+watch(
+  () => [props.modelValue, props.options],
+  ([modelValue, options]) => {
+    selectedItems.value = options.filter((opt) => modelValue.includes(opt.value));
+  },
+  { immediate: true }
+);
 </script>

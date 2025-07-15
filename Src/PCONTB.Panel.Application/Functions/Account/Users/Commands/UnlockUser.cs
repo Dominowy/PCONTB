@@ -21,7 +21,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
         public async Task<CommandResult> Handle(UnlockUserRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var entity = await _unitOfWork.UserRepository.GetByTracking(m => m.Id == request.Id, cancellationToken);
 
             if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
@@ -32,8 +32,6 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
             if (roleBlock is null) throw new NotFoundException(ErrorCodes.Users.User.UserIsNotBlock.Message);
 
             entity.UserRoles.Remove(roleBlock);
-
-            await _unitOfWork.UserRepository.Update(entity, cancellationToken);
 
             await _unitOfWork.Save(cancellationToken);
 

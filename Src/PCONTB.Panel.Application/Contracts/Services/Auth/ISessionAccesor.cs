@@ -9,6 +9,6 @@ namespace PCONTB.Panel.Application.Contracts.Services.Auth
         public void SetSession(Session session);
         public void ClearSession();
         public void Verify(Guid id);
-        void VerifyWithRole(Guid id, Role role);
+        void VerifyWithRoles(Guid id, List<Role> roles);
     }
 }

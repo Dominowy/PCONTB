@@ -9,9 +9,18 @@
                 .Select(e => new EnumItem
                 {
                     Id = Convert.ToInt32(e),
-                    Value = e.ToString()
+                    Value = ToCamelCase(e.ToString())
                 })
                 .ToList();
         }
+
+        private static string ToCamelCase(string input)
+        {
+            if (string.IsNullOrEmpty(input) || input.Length < 2)
+                return input?.ToLower();
+
+            return char.ToLowerInvariant(input[0]) + input.Substring(1);
+        }
+
     }
 }

@@ -54,7 +54,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [HttpPost("add/validate")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ValidateAddUser([FromBody] AddUserRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+        public async Task<IActionResult> ValidateAddUser([FromBody] AddUserRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
         [AuthorizeToken(Role.Admin)]
         [HttpPost("add")]
@@ -77,7 +77,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [HttpPost("update/validate")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ValidateUpdateUser([FromBody] UpdateUserRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+        public async Task<IActionResult> ValidateUpdateUser([FromBody] UpdateUserRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
         [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
         [HttpPost("update")]
@@ -100,7 +100,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [HttpPost("update-role/validate")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ValidateUpdateUserRole([FromBody] UpdateUserRoleRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+        public async Task<IActionResult> ValidateUpdateUserRole([FromBody] UpdateUserRoleRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
         [AuthorizeToken(Role.Admin)]
         [HttpPost("update-role")]
@@ -123,7 +123,7 @@ namespace PCONTB.Panel.Server.Controllers.Account.Users
         [HttpPost("update-password/validate")]
         [ProducesResponseType(typeof(CommandResult), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ValidationResult), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ValidateUpdatePassword([FromBody] UpdatePasswordRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+        public async Task<IActionResult> ValidateUpdatePassword([FromBody] UpdatePasswordRequest request, CancellationToken cancellation) => await Validate(request, cancellation);
 
         [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
         [HttpPost("update-password")]
