@@ -62,7 +62,8 @@ const availableRoles = ref([]);
 onMounted(async () => {
   const response = await getForm();
   Object.assign(form, response.form);
-  availableRoles.value = response.roles;
+
+  setTitle("User - add");
 });
 
 const getForm = async () => {
@@ -74,10 +75,10 @@ const submitInternal = async (onlyValidate) => {
 };
 
 const redirectAfterSucces = (response) => {
-  router.push({ name: "apnel:user:update", params: { id: response.id } });
+  router.push({ name: "panel:user:update", params: { id: response.id } });
 };
 
-const { isLoading, submit, validate, errors, isAllTouched } = useAddUpdate(
+const { isLoading, submit, validate, errors, isAllTouched, setTitle } = useAddUpdate(
   submitInternal,
   redirectAfterSucces
 );

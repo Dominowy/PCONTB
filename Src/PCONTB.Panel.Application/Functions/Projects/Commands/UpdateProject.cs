@@ -49,7 +49,6 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
             aggregate.SetName(request.Name);
             aggregate.SetCountry(request.CountryId);
             aggregate.SetCategory(request.CategoryId);
-            aggregate.SetSubcategory(request.SubcategoryId);
 
             await _projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
 

@@ -52,7 +52,6 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                     Id = aggregate.Id,
                     Name = aggregate.Name,
                     CategoryId = aggregate.CategoryId,
-                    SubcategoryId = aggregate.SubcategoryId,
                     CountryId = aggregate.CountryId,
                     Image = image,
                     ImageData = aggregate.Image == null ? null : aggregate.Image.Data,

@@ -3,7 +3,16 @@
     <div class="d-flex justify-content-end">
       <b-button variant="primary" @click="goToAdd">Add</b-button>
     </div>
-    <base-table :columns="columns" url="/api/locations/countries/table/get-data" />
+    <base-table
+      :columns="columns"
+      url="/api/locations/countries/table/get-data"
+      :actions="[
+        {
+          label: 'Update',
+          action: (row) => router.push({ name: 'panel:country:update', params: { id: row.id } }),
+        },
+      ]"
+    />
   </div>
 </template>
 
@@ -23,6 +32,6 @@ const columns = [
 ];
 
 const goToAdd = async () => {
-  router.push({ name: "projects:project:add" });
+  router.push({ name: "panel:country:add" });
 };
 </script>

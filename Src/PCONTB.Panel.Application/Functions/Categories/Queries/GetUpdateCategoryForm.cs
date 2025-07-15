@@ -34,7 +34,6 @@ namespace PCONTB.Panel.Application.Functions.Categories.Queries
                 {
                     Id = entity.Id,
                     Name = entity.Name,
-                    Subcategories = [.. entity.Subcategories.Select(SubcategoryDto.Map)]
                 }
             };
         }

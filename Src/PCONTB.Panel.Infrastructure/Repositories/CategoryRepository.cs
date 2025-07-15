@@ -16,7 +16,6 @@ namespace PCONTB.Panel.Infrastructure.Repositories
         public override async Task<IEnumerable<Category>> GetAll(CancellationToken cancellationToken)
         {
             return await dbSet
-                .Include(m => m.Subcategories)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
@@ -24,7 +23,6 @@ namespace PCONTB.Panel.Infrastructure.Repositories
         public virtual async Task<Category?> GetBy(Expression<Func<Category, bool>> predicate, CancellationToken cancellationToken)
         {
             return await dbSet
-                .Include(m => m.Subcategories)
                 .Where(predicate)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);

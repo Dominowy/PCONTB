@@ -7,7 +7,6 @@ namespace PCONTB.Panel.Application.Models.Categories
     {
         public string Name { get; set; }
 
-        public List<SubcategoryDto> SubCategories { get; set; }
 
         public static CategoryDto Map(Category item)
         {
@@ -15,7 +14,6 @@ namespace PCONTB.Panel.Application.Models.Categories
             {
                 Id = item.Id,
                 Name = item.Name,
-                SubCategories = [.. item.Subcategories.Select(SubcategoryDto.Map)],
             };
         }
     }

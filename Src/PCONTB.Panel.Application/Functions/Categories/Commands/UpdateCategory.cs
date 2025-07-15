@@ -2,14 +2,12 @@
 using MediatR;
 using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Common.Exceptions;
-using PCONTB.Panel.Application.Models.Categories;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Categories.Commands
 {
     public class UpdateCategoryRequest : BaseCommand, IRequest<CommandResult>
     {
-        public List<SubcategoryDto> Subcategories { get; set; }
     }
 
     public class UpdateCategoryHandler : IRequestHandler<UpdateCategoryRequest, CommandResult>
@@ -28,31 +26,6 @@ namespace PCONTB.Panel.Application.Functions.Categories.Commands
             if (entity is null) throw new NotFoundException(ErrorCodes.Categories.Category.NotFound.Message);
 
             entity.SetName(request.Name);
-
-            var toRemove = entity.Subcategories
-                .Where(existing => !request.Subcategories.Any(x => x.Id == existing.Id))
-                .ToList();
-
-            foreach (var sub in toRemove)
-            {
-                entity.Subcategories.Remove(sub);
-            }
-
-            foreach (var subcategory in request.Subcategories)
-            {
-                if (subcategory.Id != Guid.Empty)
-                {
-                    var existing = entity.Subcategories.FirstOrDefault(x => x.Id == subcategory.Id);
-                    if (existing != null)
-                    {
-                        existing.SetName(subcategory.Name);
-                    }
-                }
-                else
-                {
-                    entity.Subcategories.Add(SubcategoryDto.Map(subcategory));
-                }
-            }
 
             await _unitOfWork.CategoryRepository.Update(entity, cancellationToken);
 

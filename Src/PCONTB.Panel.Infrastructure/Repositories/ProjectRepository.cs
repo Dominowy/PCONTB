@@ -20,7 +20,6 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Country)
                 .Include(p => p.Collaborators).ThenInclude(p => p.User)
                 .Include(p => p.Category)
-                .Include(p => p.Subcategory)
                 .Include(p => p.Image)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
@@ -33,7 +32,6 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Country)
                 .Include(p => p.Collaborators).ThenInclude(p => p.User)
                 .Include(p => p.Category)
-                .Include(p => p.Subcategory)
                 .Include(p => p.Image)
                 .Where(predicate)
                 .AsNoTracking()
@@ -47,7 +45,6 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Collaborators).ThenInclude(p => p.User)
                 .Include(p => p.Country)
                 .Include(p => p.Category)
-                .Include(p => p.Subcategory)
                 .Include(p => p.Image)
                 .Where(predicate)
                 .AsNoTracking()
@@ -61,7 +58,6 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Collaborators).ThenInclude(p => p.User)
                 .Include(p => p.Country)
                 .Include(p => p.Category)
-                .Include(p => p.Subcategory)
                 .Include(p => p.Image)
                 .Where(predicate)
                 .FirstOrDefaultAsync(cancellationToken);

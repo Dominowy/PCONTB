@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
 using PCONTB.Panel.Application.Common;
-using PCONTB.Panel.Application.Models.Categories;
 using PCONTB.Panel.Domain.Categories;
 using PCONTB.Panel.Domain.Repositories;
 
@@ -9,7 +8,6 @@ namespace PCONTB.Panel.Application.Functions.Categories.Commands
 {
     public class AddCategoryRequest : BaseCommand, IRequest<CommandResult>
     {
-        public List<SubcategoryDto> Subcategories { get; set; }
     }
 
     public class AddCategoryHandler : IRequestHandler<AddCategoryRequest, CommandResult>
@@ -24,10 +22,6 @@ namespace PCONTB.Panel.Application.Functions.Categories.Commands
         public async Task<CommandResult> Handle(AddCategoryRequest request, CancellationToken cancellationToken)
         {
             var entity = new Category(request.Name);
-
-            var subCategoryToAdd = request.Subcategories.Select(m => SubcategoryDto.Map(m, entity.Id)).ToList();
-
-            entity.SetSubcategories(subCategoryToAdd);
 
             await _unitOfWork.CategoryRepository.Add(entity, cancellationToken);
             await _unitOfWork.Save(cancellationToken);

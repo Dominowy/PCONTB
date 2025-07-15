@@ -21,7 +21,6 @@ namespace PCONTB.Panel.Infrastructure.Context
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<Category> Category { get; set; }
-        public DbSet<CategorySubcategory> CategorySubcategory { get; set; }
         public DbSet<ProjectCollaborator> ProjectCollaborator { get; set; }
         public DbSet<ProjectImage> ProjectImage { get; set; }
         public DbSet<ProjectVideo> ProjectVideo { get; set; }
@@ -40,15 +39,6 @@ namespace PCONTB.Panel.Infrastructure.Context
                 .HasForeignKey(m => m.UserId);
 
             builder.Entity<UserRole>()
-                .Property(m => m.Id)
-                .ValueGeneratedOnAdd();
-
-            builder.Entity<CategorySubcategory>()
-                .HasOne(m => m.Category)
-                .WithMany(m => m.Subcategories)
-                .HasForeignKey(m => m.CategoryId);
-
-            builder.Entity<CategorySubcategory>()
                 .Property(m => m.Id)
                 .ValueGeneratedOnAdd();
 
@@ -82,11 +72,6 @@ namespace PCONTB.Panel.Infrastructure.Context
                 .WithMany(m => m.Projects)
                 .HasForeignKey(m => m.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Project>()
-                .HasOne(m => m.Subcategory)
-                .WithMany(m => m.Projects)
-                .HasForeignKey(m => m.SubcategoryId);
 
             builder.Entity<Project>()
                 .HasOne(m => m.Image)

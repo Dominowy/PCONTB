@@ -18,9 +18,6 @@ namespace PCONTB.Panel.Domain.Projects
         public Guid CategoryId { get; private set; }
         public virtual Category Category { get; private set; }
 
-        public Guid? SubcategoryId { get; private set; }
-        public virtual CategorySubcategory? Subcategory { get; private set; }
-
         public virtual List<ProjectCollaborator> Collaborators { get; private set; } = new List<ProjectCollaborator>();
 
         public string? Description { get; private set; }
@@ -49,7 +46,6 @@ namespace PCONTB.Panel.Domain.Projects
             UserId = userId;
             CountryId = countryId;
             CategoryId = categoryId;
-            SubcategoryId = subcategoryId;
         }
 
         public void SetUser(Guid userId)
@@ -74,14 +70,6 @@ namespace PCONTB.Panel.Domain.Projects
             if (!anyChange) return;
 
             CategoryId = categoryId;
-        }
-
-        public void SetSubcategory(Guid? subcategoryId)
-        {
-            var anyChange = SubcategoryId != subcategoryId;
-            if (!anyChange) return;
-
-            SubcategoryId = subcategoryId;
         }
 
         public void SetImage(ProjectImage image)

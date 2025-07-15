@@ -3,7 +3,16 @@
     <div class="d-flex justify-content-end">
       <b-button variant="primary" @click="goToAdd">Add</b-button>
     </div>
-    <base-table :columns="columns" url="/api/categories/table/get-data" />
+    <base-table
+      :columns="columns"
+      url="/api/categories/table/get-data"
+      :actions="[
+        {
+          label: 'Update',
+          action: (row) => router.push({ name: 'panel:category:update', params: { id: row.id } }),
+        },
+      ]"
+    />
   </div>
 </template>
 
@@ -23,6 +32,6 @@ const columns = [
 ];
 
 const goToAdd = async () => {
-  router.push({ name: "panel:user:add" });
+  router.push({ name: "panel:category:add" });
 };
 </script>

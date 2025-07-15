@@ -23,7 +23,6 @@ namespace PCONTB.Panel.Application.Models.Projects
                 User = UserDto.Map(entity.User),
                 Country = NameRelatedDto.Map(entity.Country),
                 Category = NameRelatedDto.Map(entity.Category),
-                Subcategory = NameRelatedDto.Map(entity.Subcategory),
                 Collaborators = [.. entity.Collaborators.Select(ProjectCollaboratorDto.Map)]
             };
         }
