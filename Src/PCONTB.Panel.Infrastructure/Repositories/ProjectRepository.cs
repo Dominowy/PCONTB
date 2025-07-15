@@ -2,7 +2,6 @@
 using PCONTB.Panel.Domain.Projects;
 using PCONTB.Panel.Domain.Repositories;
 using PCONTB.Panel.Infrastructure.Context;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace PCONTB.Panel.Infrastructure.Repositories

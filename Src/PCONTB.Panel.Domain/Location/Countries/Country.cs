@@ -7,9 +7,10 @@ namespace PCONTB.Panel.Domain.Location.Countries
     {
         public virtual List<Project> Projects { get; set; }
 
-        public Country(string name) : base(Guid.NewGuid())
+        public Country(string name, bool enabled) : base(Guid.NewGuid())
         {
             SetName(name);
+            SetEnabled(enabled);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 
         public async Task<SelectResponse> Handle(SelectCountriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.CountryRepository.GetAll(cancellationToken);
+            var entity = await _unitOfWork.CountryRepository.GetAll(m => m.Enabled, cancellationToken);
 
             return new SelectResponse
             {

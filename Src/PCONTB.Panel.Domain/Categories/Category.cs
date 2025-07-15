@@ -7,9 +7,10 @@ namespace PCONTB.Panel.Domain.Categories
     {
         public virtual List<Project> Projects { get; private set; } = new List<Project>();
         
-        public Category(string name) : base(Guid.NewGuid())
+        public Category(string name, bool enabled) : base(Guid.NewGuid())
         {
             SetName(name);
+            SetEnabled(enabled);
         }
     }
 }

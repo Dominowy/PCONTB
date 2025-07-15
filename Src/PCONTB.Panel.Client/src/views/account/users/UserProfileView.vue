@@ -14,9 +14,26 @@
         </b-col>
         <b-col md="12" class="mb-2">
           <b-card>
-            <b-tabs>
-              <b-tab title="Created" class="border"> </b-tab>
-            </b-tabs>
+            <b-row>
+              <b-col v-for="project in content.user.projects" :key="project.id" md="4" class="mt-2">
+                <b-card>
+                  <b-card-title>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div>{{ project.name }}</div>
+                      <button
+                        class="btn btn-link text-secondary p-0"
+                        @click="goToSetting(project.id)"
+                      >
+                        <IMaterialSymbolsSettingsRounded style="font-size: 1.5rem" />
+                      </button>
+                    </div>
+                  </b-card-title>
+                  <div class="d-flex mt-2">
+                    {{ project.category.name }}
+                  </div>
+                </b-card>
+              </b-col>
+            </b-row>
           </b-card>
         </b-col>
       </b-row>

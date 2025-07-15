@@ -13,6 +13,13 @@
             :errors="errors"
             :isAllTouched="isAllTouched"
           />
+          <base-form-input
+            id="enabled"
+            class="mt-2"
+            v-model="form.enabled"
+            label="Enabled"
+            type="checkbox"
+          />
           <base-form-submit-panel :isLoading="isLoading" />
         </base-form>
       </b-card>

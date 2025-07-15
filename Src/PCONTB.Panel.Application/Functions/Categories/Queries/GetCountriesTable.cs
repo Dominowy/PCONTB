@@ -32,7 +32,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 
             protected override string[] GetGlobalSearchProperties()
             {
-                return new[] { "Name" };
+                return new[] { "Name", "Enabled" };
             }
 
             protected override CategoryTableDto MapEntityToDto(Category country)
@@ -40,7 +40,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
                 return new CategoryTableDto
                 {
                     Id = country.Id,
-                    Name = country.Name
+                    Name = country.Name,
+                    Enabled = country.Enabled
                 };
             }
         }

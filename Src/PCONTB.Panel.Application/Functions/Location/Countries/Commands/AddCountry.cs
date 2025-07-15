@@ -8,6 +8,7 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 {
     public class AddCountryRequest : BaseCommand, IRequest<CommandResult>
     {
+        public bool Enabled { get; set; }
     }
 
     public class AddCountryHandler : IRequestHandler<AddCountryRequest, CommandResult>
@@ -21,13 +22,13 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 
         public async Task<CommandResult> Handle(AddCountryRequest request, CancellationToken cancellationToken)
         {
-            var entity = new Country(request.Name);
+            var aggregate = new Country(request.Name, request.Enabled);
 
-            await _unitOfWork.CountryRepository.Add(entity, cancellationToken);
+            await _unitOfWork.CountryRepository.Add(aggregate, cancellationToken);
 
             await _unitOfWork.Save(cancellationToken);
 
-            return new CommandResult(entity.Id);
+            return new CommandResult(aggregate.Id);
         }
     }
 

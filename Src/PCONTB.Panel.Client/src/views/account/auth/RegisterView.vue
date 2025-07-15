@@ -50,6 +50,7 @@
 </style>
 
 <script setup>
+import AuthFormHeader from "./components/AuthFormHeader.vue";
 import { useAddUpdate } from "@/composables/useAddUpdate";
 import { useView } from "@/composables/useView";
 import { reactive, onMounted } from "vue";

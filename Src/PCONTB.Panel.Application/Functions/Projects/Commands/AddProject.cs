@@ -13,7 +13,6 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
     public class AddProjectRequest : BaseCommand, IRequest<CommandResult>
     {
         public Guid? CategoryId { get; set; }
-        public Guid? SubcategoryId { get; set; }
         public Guid? CountryId { get; set; }
 
         public FormFile? Image { get; set; }
@@ -43,7 +42,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
         {
             var userId = _sessionAccesor.Session.UserId;
 
-            var aggregate = new Project(Guid.NewGuid(), request.Name, userId, (Guid)request.CountryId, (Guid)request.CategoryId, request.SubcategoryId);
+            var aggregate = new Project(Guid.NewGuid(), request.Name, userId, (Guid)request.CountryId, (Guid)request.CategoryId);
 
             await _projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
 

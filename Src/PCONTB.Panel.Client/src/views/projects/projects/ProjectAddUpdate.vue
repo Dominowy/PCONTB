@@ -25,21 +25,6 @@
             api-url="/categories/select-categories"
           />
           <base-form-select
-            :key="form.categoryId"
-            id="subcategory"
-            class="mt-2"
-            v-model="form.subcategoryId"
-            label="Subcategory"
-            property="SubcategoryId"
-            placeholder="No subcategory"
-            :errors="errors"
-            :isAllTouched="isAllTouched"
-            api-url="/categories/select-subcategories"
-            :searchOption="form.categoryId"
-            :disabled="form.categoryId == null"
-            :required="false"
-          />
-          <base-form-select
             id="country"
             class="mt-2"
             v-model="form.countryId"

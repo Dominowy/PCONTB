@@ -31,6 +31,8 @@ namespace PCONTB.Panel.Infrastructure.Repositories
             return await dbSet
                 .Where(predicate)
                 .Include(m => m.UserRoles)
+                .Include(m => m.Projects).ThenInclude(m => m.Category)
+                .Include(m => m.Projects).ThenInclude(m => m.Country)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
         }

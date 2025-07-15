@@ -30,12 +30,6 @@
                     Message = "Category not exist."
                 };
 
-                public static readonly ErrorCode SubcategoryExist = new ErrorCode
-                {
-                    Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(SubcategoryExist),
-                    Message = "Subcategory not exist."
-                };
-
                 public static readonly ErrorCode CountryExist = new ErrorCode
                 {
                     Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(CountryExist),
@@ -143,6 +137,12 @@
                 {
                     Code = nameof(ErrorCode) + "." + nameof(Category) + "." + nameof(NameExist),
                     Message = "A category with the provided name already exists."
+                };
+
+                public static readonly ErrorCode ProjectExist = new ErrorCode
+                {
+                    Code = nameof(ErrorCode) + "." + nameof(Category) + "." + nameof(ProjectExist),
+                    Message = "Exist related projects."
                 };
             }
         }
@@ -275,6 +275,12 @@
                 {
                     Code = nameof(ErrorCode) + "." + nameof(Country) + "." + nameof(NameExist),
                     Message = "A country with the provided name already exists."
+                };
+
+                public static readonly ErrorCode ProjectExist = new ErrorCode
+                {
+                    Code = nameof(ErrorCode) + "." + nameof(Country) + "." + nameof(ProjectExist),
+                    Message = "Exist related projects."
                 };
             }
         }

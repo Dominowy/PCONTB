@@ -8,6 +8,7 @@ namespace PCONTB.Panel.Application.Functions.Categories.Commands
 {
     public class AddCategoryRequest : BaseCommand, IRequest<CommandResult>
     {
+        public bool Enabled { get; set; }
     }
 
     public class AddCategoryHandler : IRequestHandler<AddCategoryRequest, CommandResult>
@@ -21,12 +22,12 @@ namespace PCONTB.Panel.Application.Functions.Categories.Commands
 
         public async Task<CommandResult> Handle(AddCategoryRequest request, CancellationToken cancellationToken)
         {
-            var entity = new Category(request.Name);
+            var aggregate = new Category(request.Name, request.Enabled);
 
-            await _unitOfWork.CategoryRepository.Add(entity, cancellationToken);
+            await _unitOfWork.CategoryRepository.Add(aggregate, cancellationToken);
             await _unitOfWork.Save(cancellationToken);
 
-            return new CommandResult(entity.Id);
+            return new CommandResult(aggregate.Id);
 
         }
     }

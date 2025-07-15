@@ -14,7 +14,6 @@
           </b-card-title>
           <div class="d-flex mt-2">
             {{ project.category.name }}
-            <div v-if="project.subcategory" class="ms-2">{{ "  " + project.subcategory.name }}</div>
           </div>
         </b-card>
       </b-col>

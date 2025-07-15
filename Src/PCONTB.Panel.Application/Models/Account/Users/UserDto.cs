@@ -8,6 +8,8 @@ namespace PCONTB.Panel.Application.Models.Account.Users
         public string Username { get; set; }
         public string Email { get; set; }
 
+        public List<UserProjectDto> Projects { get; set; } = [];
+
         public static UserDto Map(User user)
         {
             if (user == null) return null;
@@ -17,6 +19,7 @@ namespace PCONTB.Panel.Application.Models.Account.Users
                 Id = user.Id,
                 Username = user.Username,
                 Email = user.Email,
+                Projects = [.. user.Projects.Select(UserProjectDto.Map)]
             };
         }
     }

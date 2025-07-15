@@ -28,7 +28,6 @@
         class="mt-2"
         v-model="form.manageFulfillmentPermission"
         label="Manage Fulfillment Permission"
-        placeholder="Enter email"
         type="checkbox"
       />
     </template>

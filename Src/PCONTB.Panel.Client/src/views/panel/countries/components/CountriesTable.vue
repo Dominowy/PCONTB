@@ -11,6 +11,15 @@
           label: 'Update',
           action: (row) => router.push({ name: 'panel:country:update', params: { id: row.id } }),
         },
+        {
+          label: 'Delete',
+          action: (row) =>
+            router.push({
+              name: 'panel:country:delete',
+              params: { id: row.id },
+              query: { name: row.name },
+            }),
+        },
       ]"
     />
   </div>
@@ -26,6 +35,13 @@ const columns = [
     key: "name",
     accessor: "Name",
     label: "Name",
+    filterable: true,
+    sortable: true,
+  },
+  {
+    key: "enabled",
+    accessor: "Enabled",
+    label: "Enabled",
     filterable: true,
     sortable: true,
   },

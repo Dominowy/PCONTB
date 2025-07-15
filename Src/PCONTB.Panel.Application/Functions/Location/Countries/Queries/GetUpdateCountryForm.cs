@@ -23,16 +23,17 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 
         public async Task<GetUpdateCountryFormResponse> Handle(GetUpdateCountryFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var aggregate = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
-            if (entity is null) throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
+            if (aggregate is null) throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
 
             return new GetUpdateCountryFormResponse
             {
                 Form = new UpdateCountryRequest
                 {
-                    Id = entity.Id,
-                    Name = entity.Name,
+                    Id = aggregate.Id,
+                    Name = aggregate.Name,
+                    Enabled = aggregate.Enabled
                 }
             };
         }

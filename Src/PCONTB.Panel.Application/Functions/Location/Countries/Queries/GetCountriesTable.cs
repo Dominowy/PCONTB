@@ -30,7 +30,7 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 
         protected override string[] GetGlobalSearchProperties()
         {
-            return new[] { "Name" };
+            return new[] { "Name", "Enabled" };
         }
 
         protected override CountryTableDto MapEntityToDto(Country country)
@@ -38,7 +38,8 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
             return new CountryTableDto
             {
                 Id = country.Id,
-                Name = country.Name
+                Name = country.Name,
+                Enabled = country.Enabled
             };
         }
     }

@@ -13,6 +13,13 @@
             :errors="errors"
             :isAllTouched="isAllTouched"
           />
+          <base-form-input
+            id="enabled"
+            class="mt-2"
+            v-model="form.enabled"
+            label="Enabled"
+            type="checkbox"
+          />
           <base-form-submit-panel :isLoading="isLoading" />
         </base-form>
       </b-card>
@@ -30,7 +37,7 @@ const router = useRouter();
 const route = useRoute();
 const form = reactive({});
 
-const title = ref("Add country");
+const title = ref("Update country");
 
 onMounted(async () => {
   const response = await getForm();
@@ -52,7 +59,7 @@ const getForm = async () => {
 
 const submitInternal = async (onlyValidate) => {
   if (route.params.id) {
-    return await ApiClient.request("locations/countries/update", onlyValidate, form);
+    return await ApiClient.validate("locations/countries/update", onlyValidate, form);
   }
   return await ApiClient.validate("locations/countries/add", onlyValidate, form);
 };

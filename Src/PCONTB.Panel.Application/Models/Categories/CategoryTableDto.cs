@@ -5,5 +5,6 @@ namespace PCONTB.Panel.Application.Models.Categories
     public class CategoryTableDto : EntityDto
     {
         public string Name { get; set; }
+        public bool Enabled { get; set; }
     }
 }

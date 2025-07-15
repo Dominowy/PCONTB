@@ -44,6 +44,7 @@
 </style>
 
 <script setup>
+import AuthFormHeader from "./components/AuthFormHeader.vue";
 import { reactive, onMounted } from "vue";
 import ApiClient from "@/services/ApiClient";
 import { useAddUpdate } from "@/composables/useAddUpdate";

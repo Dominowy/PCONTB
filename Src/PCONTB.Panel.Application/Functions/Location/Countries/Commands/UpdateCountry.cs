@@ -8,7 +8,7 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 {
     public class UpdateCountryRequest : BaseCommand, IRequest<CommandResult>
     {
-
+        public bool Enabled { get; set; }
     }
 
     public class UpdateCountryHandler : IRequestHandler<UpdateCountryRequest, CommandResult>
@@ -22,17 +22,18 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 
         public async Task<CommandResult> Handle(UpdateCountryRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var aggregate = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
 
-            if (entity is null) throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
+            if (aggregate is null) throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
 
-            entity.SetName(request.Name);
+            aggregate.SetName(request.Name);
+            aggregate.SetEnabled(request.Enabled);
 
-            await _unitOfWork.CountryRepository.Update(entity, cancellationToken);
+            await _unitOfWork.CountryRepository.Update(aggregate, cancellationToken);
 
             await _unitOfWork.Save(cancellationToken);
 
-            return new CommandResult(entity.Id);
+            return new CommandResult(aggregate.Id);
         }
     }
 

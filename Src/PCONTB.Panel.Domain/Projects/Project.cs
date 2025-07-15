@@ -39,7 +39,7 @@ namespace PCONTB.Panel.Domain.Projects
             UserId = userId;
         }
 
-        public Project(Guid id, string name, Guid userId, Guid countryId, Guid categoryId, Guid? subcategoryId) : base(id)
+        public Project(Guid id, string name, Guid userId, Guid countryId, Guid categoryId) : base(id)
         {
             SetName(name);
             SetEnabled(true);

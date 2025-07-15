@@ -9,6 +9,9 @@
         <b-tab title="Password">
           <user-password />
         </b-tab>
+        <b-tab title="Lock">
+          <user-lock />
+        </b-tab>
       </b-tabs>
     </b-card>
   </div>
@@ -17,6 +20,7 @@
 <script setup>
 import UserAccount from "./components/UserAccount.vue";
 import UserPassword from "./components/UserPassword.vue";
+import UserLock from "./components/UserLock.vue";
 
 import { useView } from "@/composables/useView";
 

@@ -13,7 +13,6 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
     public class UpdateProjectRequest : BaseCommand, IRequest<CommandResult>
     {
         public Guid CategoryId { get; set; }
-        public Guid? SubcategoryId { get; set; }
         public Guid CountryId { get; set; }
         public FormFile Image { get; set; }
         public byte[] ImageData { get; set; }
