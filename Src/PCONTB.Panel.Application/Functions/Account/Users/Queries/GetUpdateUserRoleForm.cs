@@ -14,20 +14,13 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
     }
 
-    public class GetUpdateUserRoleFormHandler : IRequestHandler<GetUpdateUserRoleFormRequest, GetUpdateUserRoleFormResponse>
+    public class GetUpdateUserRoleFormHandler(IUnitOfWork unitOfWork) 
+        : IRequestHandler<GetUpdateUserRoleFormRequest, GetUpdateUserRoleFormResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public GetUpdateUserRoleFormHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<GetUpdateUserRoleFormResponse> Handle(GetUpdateUserRoleFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
-
-            if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
+            var entity = await unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
             return new GetUpdateUserRoleFormResponse
             {

@@ -12,20 +12,12 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 
     }
 
-    public class GetCountryHandler : IRequestHandler<GetCountryRequest, GetCountryResponse>
+    public class GetCountryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetCountryRequest, GetCountryResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public GetCountryHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<GetCountryResponse> Handle(GetCountryRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
-
-            if (entity == null) throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
+            var entity = await unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
 
             return new GetCountryResponse
             {

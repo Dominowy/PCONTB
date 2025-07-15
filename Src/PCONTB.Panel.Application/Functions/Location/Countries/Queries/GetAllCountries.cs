@@ -8,18 +8,12 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
     {
     }
 
-    public class GetAllCountriesHandler : IRequestHandler<GetAllCountriesRequest, GetAllCountriesResponse>
+    public class GetAllCountriesHandler(IUnitOfWork unitOfWork) 
+        : IRequestHandler<GetAllCountriesRequest, GetAllCountriesResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public GetAllCountriesHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<GetAllCountriesResponse> Handle(GetAllCountriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.CountryRepository.GetAll(cancellationToken);
+            var entity = await unitOfWork.CountryRepository.GetAll(cancellationToken);
 
             return new GetAllCountriesResponse
             {

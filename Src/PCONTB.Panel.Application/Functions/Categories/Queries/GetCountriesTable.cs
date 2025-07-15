@@ -7,15 +7,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 {
     namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
     {
-        public class CountryPagedQueryHandler : PagedQueryHandler<Category, CategoryTableDto>
+        public class CountryPagedQueryHandler(IUnitOfWork unitOfWork) : PagedQueryHandler<Category, CategoryTableDto>
         {
-            private readonly IUnitOfWork _unitOfWork;
-
-            public CountryPagedQueryHandler(IUnitOfWork unitOfWork)
-            {
-                _unitOfWork = unitOfWork;
-            }
-
             public override async Task<PagedResultDto<CategoryTableDto>> Handle(PagedQueryRequest<CategoryTableDto> request, CancellationToken cancellationToken)
             {
                 var query = GetQuery();
@@ -27,7 +20,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
 
             protected override IQueryable<Category> GetQuery()
             {
-                return _unitOfWork.CategoryRepository.GetQuery();
+                return unitOfWork.CategoryRepository.GetQuery();
             }
 
             protected override string[] GetGlobalSearchProperties()

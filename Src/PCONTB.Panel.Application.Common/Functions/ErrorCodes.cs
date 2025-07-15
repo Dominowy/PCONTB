@@ -41,6 +41,12 @@
                     Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(CountryEmpty),
                     Message = "Country cannot be empty."
                 };
+
+                public static readonly ErrorCode Access = new ErrorCode
+                {
+                    Code = nameof(ErrorCode) + "." + nameof(Project) + "." + nameof(Access),
+                    Message = "You don't have a access to project."
+                };
             }
 
             public static class ProjectCollaborator
@@ -85,6 +91,24 @@
                 {
                     Code = nameof(ErrorCode) + "." + nameof(ProjectCollaborator) + "." + nameof(ProjectExist),
                     Message = "Project not exist."
+                };
+
+                public static readonly ErrorCode ManageProject = new ErrorCode
+                {
+                    Code = nameof(ErrorCode) + "." + nameof(ProjectCollaborator) + "." + nameof(ManageProject),
+                    Message = "You do not have permission to manage this project."
+                };
+
+                public static readonly ErrorCode ManageCommunity = new ErrorCode
+                {
+                    Code = nameof(ErrorCode) + "." + nameof(ProjectCollaborator) + "." + nameof(ManageCommunity),
+                    Message = "You do not have permission to manage the community for this project."
+                };
+
+                public static readonly ErrorCode ManageFulfillment = new ErrorCode
+                {
+                    Code = nameof(ErrorCode) + "." + nameof(ProjectCollaborator) + "." + nameof(ManageFulfillment),
+                    Message = "You do not have permission to manage fulfillment for this project."
                 };
             }
             public static class ProjectImage

@@ -8,18 +8,12 @@ namespace PCONTB.Panel.Application.Functions.Categories.Queries
     {
     }
 
-    public class GetAllCategoriesHandler : IRequestHandler<GetAllCategoriesRequest, GetAllCategoriesResponse>
+    public class GetAllCategoriesHandler(IUnitOfWork unitOfWork) 
+        : IRequestHandler<GetAllCategoriesRequest, GetAllCategoriesResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public GetAllCategoriesHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<GetAllCategoriesResponse> Handle(GetAllCategoriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.CategoryRepository.GetAll(cancellationToken);
+            var entity = await unitOfWork.CategoryRepository.GetAll(cancellationToken);
 
             return new GetAllCategoriesResponse
             {

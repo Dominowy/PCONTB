@@ -13,24 +13,14 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
     }
 
-    public class GetUpdateUserFormHandler : IRequestHandler<GetUpdateUserFormRequest, GetUpdateUserFormResponse>
+    public class GetUpdateUserFormHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor) : IRequestHandler<GetUpdateUserFormRequest, GetUpdateUserFormResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISessionAccesor _sessionAccesor;
-
-        public GetUpdateUserFormHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor)
-        {
-            _unitOfWork = unitOfWork;
-            _sessionAccesor = sessionAccesor;
-        }
-
         public async Task<GetUpdateUserFormResponse> Handle(GetUpdateUserFormRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var entity = await unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
-            if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
-
-            _sessionAccesor.Verify(entity.Id);
+            sessionAccesor.Verify(entity.Id);
 
             return new GetUpdateUserFormResponse
             {

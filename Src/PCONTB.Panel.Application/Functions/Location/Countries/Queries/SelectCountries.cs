@@ -3,24 +3,18 @@ using PCONTB.Panel.Application.Common.Functions;
 using PCONTB.Panel.Application.Common.Functions.Selects;
 using PCONTB.Panel.Domain.Repositories;
 
-namespace PCONTB.Panel.Application.Functions.Projects.Categories.Queries
+namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 {
     public class SelectCountriesRequest : BaseQuery, IRequest<SelectResponse>
     {
+        public Guid IncludedId { get; set; }
     }
 
-    public class SelectCountriesHandler : IRequestHandler<SelectCountriesRequest, SelectResponse>
+    public class SelectCountriesHandler(IUnitOfWork unitOfWork) : IRequestHandler<SelectCountriesRequest, SelectResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public SelectCountriesHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<SelectResponse> Handle(SelectCountriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.CountryRepository.GetAll(m => m.Enabled, cancellationToken);
+            var entity = await unitOfWork.CountryRepository.GetAll(m => m.Enabled || m.Id == request.IncludedId, cancellationToken);
 
             return new SelectResponse
             {

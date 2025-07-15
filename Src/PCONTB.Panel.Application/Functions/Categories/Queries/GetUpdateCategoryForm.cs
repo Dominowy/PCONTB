@@ -12,20 +12,13 @@ namespace PCONTB.Panel.Application.Functions.Categories.Queries
 
     }
 
-    public class GetUpdateCategoryFormHandler : IRequestHandler<GetUpdateCategoryFormRequest, GetUpdateCategoryFormResponse>
+    public class GetUpdateCategoryFormHandler(IUnitOfWork unitOfWork) 
+        : IRequestHandler<GetUpdateCategoryFormRequest, GetUpdateCategoryFormResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public GetUpdateCategoryFormHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<GetUpdateCategoryFormResponse> Handle(GetUpdateCategoryFormRequest request, CancellationToken cancellationToken)
         {
-            var aggregate = await _unitOfWork.CategoryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
-            
-            if (aggregate is null) throw new NotFoundException(ErrorCodes.Categories.Category.NotFound.Message);
+            var aggregate = await unitOfWork.CategoryRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Categories.Category.NotFound.Message);
 
             return new GetUpdateCategoryFormResponse
             {

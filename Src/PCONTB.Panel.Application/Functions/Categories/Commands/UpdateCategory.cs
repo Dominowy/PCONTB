@@ -11,27 +11,19 @@ namespace PCONTB.Panel.Application.Functions.Categories.Commands
         public bool Enabled { get; set; }
     }
 
-    public class UpdateCategoryHandler : IRequestHandler<UpdateCategoryRequest, CommandResult>
+    public class UpdateCategoryHandler(IUnitOfWork unitOfWork) : IRequestHandler<UpdateCategoryRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public UpdateCategoryHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<CommandResult> Handle(UpdateCategoryRequest request, CancellationToken cancellationToken)
         {
-            var aggregate = await _unitOfWork.CategoryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
-
-            if (aggregate is null) throw new NotFoundException(ErrorCodes.Categories.Category.NotFound.Message);
-
+            var aggregate = await unitOfWork.CategoryRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Categories.Category.NotFound.Message);
+            
             aggregate.SetName(request.Name);
             aggregate.SetEnabled(request.Enabled);
 
-            await _unitOfWork.CategoryRepository.Update(aggregate, cancellationToken);
+            await unitOfWork.CategoryRepository.Update(aggregate, cancellationToken);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(aggregate.Id);
         }

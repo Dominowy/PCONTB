@@ -5,15 +5,8 @@ using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 {
-    public class CountryPagedQueryHandler : PagedQueryHandler<Country, CountryTableDto>
+    public class CountryPagedQueryHandler(IUnitOfWork unitOfWork) : PagedQueryHandler<Country, CountryTableDto>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public CountryPagedQueryHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public override async Task<PagedResultDto<CountryTableDto>> Handle(PagedQueryRequest<CountryTableDto> request, CancellationToken cancellationToken)
         {
             var query = GetQuery();
@@ -25,7 +18,7 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 
         protected override IQueryable<Country> GetQuery()
         {
-            return _unitOfWork.CountryRepository.GetQuery();
+            return unitOfWork.CountryRepository.GetQuery();
         }
 
         protected override string[] GetGlobalSearchProperties()

@@ -39,7 +39,7 @@
         <b-card no-body class="mt-2">
           <b-tabs card>
             <b-tab title="Collaborators">
-              <collaborators-list
+              <collaborators-table
                 :items="form.collaborators"
                 :errors="errors"
                 :isAllTouched="isAllTouched"
@@ -69,6 +69,7 @@
 </template>
 
 <script setup>
+import CollaboratorsTable from "./components/CollaboratorsTable.vue";
 import { useAddUpdate } from "@/composables/useAddUpdate";
 import { reactive, onMounted, ref } from "vue";
 import ApiClient from "@/services/ApiClient";

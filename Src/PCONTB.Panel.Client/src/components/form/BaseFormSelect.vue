@@ -67,10 +67,7 @@ onMounted(async () => {
     propertyName.value = props.label;
   }
 
-  if (props.apiUrl) {
-    const res = await ApiClient.request(props.apiUrl, { id: props.searchOption });
-    options.value = res.data;
-  }
+  await fetchData();
 });
 
 watch(
@@ -79,6 +76,23 @@ watch(
     options.value = [...newOptions];
   }
 );
+
+watch(
+  () => props.modelValue,
+  async () => {
+    await fetchData();
+  }
+);
+
+const fetchData = async () => {
+  if (props.apiUrl) {
+    const res = await ApiClient.request(props.apiUrl, {
+      id: props.searchOption,
+      includedId: props.modelValue,
+    });
+    options.value = res.data;
+  }
+};
 
 const onInput = (e) => {
   emit("update:modelValue", e.target.value);

@@ -1,12 +1,16 @@
 <template>
   <div v-if="content">
     <base-header :title="content.project.name" />
-    <b-card> </b-card>
+    <b-card>
+      <img
+        class="w-75"
+        :src="`data:${content.project.image.contentType};base64,${content.project.imageData}`"
+    /></b-card>
     <b-card no-body>
       <b-tabs card>
         <b-tab title="Campaign"> </b-tab>
         <b-tab title="Creator">
-          <discover-display-creator
+          <project-creator-display
             :user="content.project.user"
             :collaborators="content.project.collaborators"
           />
@@ -17,6 +21,7 @@
 </template>
 
 <script setup>
+import ProjectCreatorDisplay from "./components/ProjectCreatorDisplay.vue";
 import { useDisplay } from "@/composables/useDisplay";
 import ApiClient from "@/services/ApiClient";
 import { onMounted } from "vue";

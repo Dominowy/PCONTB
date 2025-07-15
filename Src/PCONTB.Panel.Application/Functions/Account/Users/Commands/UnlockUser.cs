@@ -10,30 +10,21 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
     {
     }
 
-    public class UnlockUserHandler : IRequestHandler<UnlockUserRequest, CommandResult>
+    public class UnlockUserHandler(IUnitOfWork unitOfWork) : IRequestHandler<UnlockUserRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public UnlockUserHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<CommandResult> Handle(UnlockUserRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetByTracking(m => m.Id == request.Id, cancellationToken);
-
-            if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
+            var entity = await unitOfWork.UserRepository.GetByTracking(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
             entity.SetEnabled(true);
 
-            var roleBlock = entity.UserRoles.FirstOrDefault(m => m.Role == Role.Block);
-
-            if (roleBlock is null) throw new NotFoundException(ErrorCodes.Users.User.UserIsNotBlock.Message);
+            var roleBlock = entity.UserRoles.FirstOrDefault(m => m.Role == Role.Block) 
+                ?? throw new NotFoundException(ErrorCodes.Users.User.UserIsNotBlock.Message);
 
             entity.UserRoles.Remove(roleBlock);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

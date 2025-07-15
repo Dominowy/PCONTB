@@ -16,26 +16,17 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
         public string Password { get; set; }
     }
 
-    public class RegisterHandler : IRequestHandler<RegisterUserRequest, CommandResult>
+    public class RegisterHandler(
+        IUnitOfWork unitOfWork,
+        IPasswordHasherService passwordHasherService, 
+        IJwtService jwtService, 
+        ICookieService cookieService, 
+        ISessionService sessionService) 
+        : IRequestHandler<RegisterUserRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IPasswordHasherService _passwordHasherService;
-        private readonly IJwtService _jwtService;
-        private readonly ICookieService _cookieService;
-        private readonly ISessionService _sessionService;
-
-        public RegisterHandler(IUnitOfWork unitOfWork, IPasswordHasherService passwordHasherService, IJwtService jwtService, ICookieService cookieService, ISessionService sessionService)
-        {
-            _unitOfWork = unitOfWork;
-            _passwordHasherService = passwordHasherService;
-            _jwtService = jwtService;
-            _cookieService = cookieService;
-            _sessionService = sessionService;
-        }
-
         public async Task<CommandResult> Handle(RegisterUserRequest request, CancellationToken cancellationToken)
         {
-            var hashedPassword = _passwordHasherService.Generate(request.Password);
+            var hashedPassword = passwordHasherService.Generate(request.Password);
 
             var entity = new User(Guid.NewGuid(), request.Username, request.Email, hashedPassword);
 
@@ -43,15 +34,15 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
             entity.UserRoles.Add(role);
 
-            await _unitOfWork.UserRepository.Add(entity, cancellationToken);
+            await unitOfWork.UserRepository.Add(entity, cancellationToken);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
-            var sessionId = await _sessionService.CreateSession(entity.Id, cancellationToken);
+            var sessionId = await sessionService.CreateSession(entity.Id, cancellationToken);
 
-            var token = _jwtService.GenerateToken(sessionId);
+            var token = jwtService.GenerateToken(sessionId);
 
-            _cookieService.Set(token, "access-token");
+            cookieService.Set(token, "access-token");
 
             return new CommandResult(sessionId);
         }

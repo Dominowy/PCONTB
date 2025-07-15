@@ -14,20 +14,12 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         public List<Role> Roles { get; set; } = [];
     }
 
-    public class UpdateUserRoleHandler : IRequestHandler<UpdateUserRoleRequest, CommandResult>
+    public class UpdateUserRoleHandler(IUnitOfWork unitOfWork) : IRequestHandler<UpdateUserRoleRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public UpdateUserRoleHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<CommandResult> Handle(UpdateUserRoleRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetByTracking(m => m.Id == request.Id, cancellationToken);
-
-            if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
+            var entity = await unitOfWork.UserRepository.GetByTracking(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
             if (request.Roles.Any(m => m == Role.Block))
             {
@@ -48,7 +40,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             entity.UserRoles.AddRange(rolesToAdd);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

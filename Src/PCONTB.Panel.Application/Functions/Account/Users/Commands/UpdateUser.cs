@@ -13,31 +13,22 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         public string Email { get; set; }
     }
 
-    public class UpdateUserHandler : IRequestHandler<UpdateUserRequest, CommandResult>
+    public class UpdateUserHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor) 
+        : IRequestHandler<UpdateUserRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISessionAccesor _sessionAccesor;
-
-        public UpdateUserHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor)
-        {
-            _unitOfWork = unitOfWork;
-            _sessionAccesor = sessionAccesor;
-        }
-
         public async Task<CommandResult> Handle(UpdateUserRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var entity = await unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException("User not found");
 
-            if (entity == null) throw new NotFoundException("User not found");
-
-            _sessionAccesor.Verify(entity.Id);
+            sessionAccesor.Verify(entity.Id);
 
             entity.SetEmail(request.Email);
             entity.SetUsername(request.Username);
 
-            await _unitOfWork.UserRepository.Update(entity, cancellationToken);
+            await unitOfWork.UserRepository.Update(entity, cancellationToken);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

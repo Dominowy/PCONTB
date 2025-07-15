@@ -62,6 +62,8 @@
 </template>
 
 <script setup>
+import CollaboratorAddUpdateModal from "./CollaboratorAddUpdateModal.vue";
+import CollaboratorDeleteModal from "./CollaboratorDeleteModal.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 

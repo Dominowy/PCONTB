@@ -14,24 +14,16 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
         public string Email { get; set; }
     }
 
-    public class GetProjectCollaboratorUserHandler : IRequestHandler<GetProjectCollaboratorUserRequest, GetProjectCollaboratorUserResponse>
+    public class GetProjectCollaboratorUserHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor) 
+        : IRequestHandler<GetProjectCollaboratorUserRequest, GetProjectCollaboratorUserResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISessionAccesor _sessionAccesor;
-
-        public GetProjectCollaboratorUserHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor)
-        {
-            _unitOfWork = unitOfWork;
-            _sessionAccesor = sessionAccesor;
-        }
-
         public async Task<GetProjectCollaboratorUserResponse> Handle(GetProjectCollaboratorUserRequest request, CancellationToken cancellationToken)
         {
-            var user = await _unitOfWork.UserRepository.GetBy(m => m.Email == request.Email, cancellationToken);
+            var user = await unitOfWork.UserRepository.GetBy(m => m.Email == request.Email, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Projects.ProjectCollaborator.UserExistInProject.Message);
 
-            if (user is null) throw new NotFoundException(ErrorCodes.Projects.ProjectCollaborator.UserExistInProject.Message);
-
-            if (user.Id == _sessionAccesor.Session.UserId) throw new BadRequestException(ErrorCodes.Projects.ProjectCollaborator.TryToAddCreator.Message);
+            if (user.Id == sessionAccesor.Session.UserId) 
+                throw new BadRequestException(ErrorCodes.Projects.ProjectCollaborator.TryToAddCreator.Message);
 
             return new GetProjectCollaboratorUserResponse 
             { 

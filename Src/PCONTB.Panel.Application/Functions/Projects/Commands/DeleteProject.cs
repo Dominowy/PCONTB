@@ -11,28 +11,19 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
 
     }
 
-    public class DeleteProjectHandler : IRequestHandler<DeleteProjectRequest, CommandResult>
+    public class DeleteProjectHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor) 
+        : IRequestHandler<DeleteProjectRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISessionAccesor _sessionAccesor;
-
-        public DeleteProjectHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor)
-        {
-            _unitOfWork = unitOfWork;
-            _sessionAccesor = sessionAccesor;
-        }
-
         public async Task<CommandResult> Handle(DeleteProjectRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.ProjectRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var entity = await unitOfWork.ProjectRepository.GetBy(m => m.Id == request.Id, cancellationToken)
+                ?? throw new NotFoundException("Project not found");
 
-            if (entity == null) throw new NotFoundException("Project not found");
+            sessionAccesor.Verify(entity.UserId);
 
-            _sessionAccesor.Verify(entity.UserId);
+            await unitOfWork.ProjectRepository.Delete(entity, cancellationToken);
 
-            await _unitOfWork.ProjectRepository.Delete(entity, cancellationToken);
-
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

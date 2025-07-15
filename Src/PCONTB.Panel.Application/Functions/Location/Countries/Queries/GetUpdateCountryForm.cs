@@ -12,20 +12,13 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 
     }
 
-    public class GetUpdateCountryFormHandler : IRequestHandler<GetUpdateCountryFormRequest, GetUpdateCountryFormResponse>
+    public class GetUpdateCountryFormHandler(IUnitOfWork unitOfWork) 
+        : IRequestHandler<GetUpdateCountryFormRequest, GetUpdateCountryFormResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public GetUpdateCountryFormHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<GetUpdateCountryFormResponse> Handle(GetUpdateCountryFormRequest request, CancellationToken cancellationToken)
         {
-            var aggregate = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
-
-            if (aggregate is null) throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
+            var aggregate = await unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
 
             return new GetUpdateCountryFormResponse
             {

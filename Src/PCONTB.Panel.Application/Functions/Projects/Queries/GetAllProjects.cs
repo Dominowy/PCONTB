@@ -15,19 +15,14 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
 
     
 
-    public class GetAllProjectsHandler : IRequestHandler<GetAllProjectsRequest, GetAllProjectsResponse>,
+    public class GetAllProjectsHandler(IUnitOfWork unitOfWork) 
+        : IRequestHandler<GetAllProjectsRequest, GetAllProjectsResponse>,
         IRequestHandler<GetAllByUserIdProjectsRequest, GetAllProjectsResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public GetAllProjectsHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
 
         public async Task<GetAllProjectsResponse> Handle(GetAllProjectsRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.ProjectRepository.GetAll(cancellationToken);
+            var entity = await unitOfWork.ProjectRepository.GetAll(cancellationToken);
 
             return new GetAllProjectsResponse()
             {
@@ -37,7 +32,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
 
         public async Task<GetAllProjectsResponse> Handle(GetAllByUserIdProjectsRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.ProjectRepository.GetAll(p => p.UserId == request.Id || p.Collaborators.Any(m => m.UserId == request.Id), cancellationToken);
+            var entity = await unitOfWork.ProjectRepository.GetAll(p => p.UserId == request.Id || p.Collaborators.Any(m => m.UserId == request.Id), cancellationToken);
 
             return new GetAllProjectsResponse()
             {

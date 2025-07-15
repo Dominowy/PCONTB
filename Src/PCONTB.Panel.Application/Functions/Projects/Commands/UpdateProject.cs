@@ -3,7 +3,6 @@ using MediatR;
 using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Functions.Files;
-using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Services.Projects;
 using PCONTB.Panel.Application.Models.Projects;
 using PCONTB.Panel.Domain.Repositories;
@@ -22,38 +21,31 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
 
     }
 
-    public class UpdateProjectHandler : IRequestHandler<UpdateProjectRequest, CommandResult> 
+    public class UpdateProjectHandler(
+        IUnitOfWork unitOfWork,
+        IProjectFileService projectFileService,
+        IProjectCollaboratorService projectCollabortatorService, 
+        IProjectCollaboratorPermissionService permissionService) 
+        : IRequestHandler<UpdateProjectRequest, CommandResult> 
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISessionAccesor _sessionAccesor;
-        private readonly IProjectFileService _projectFileService;
-        private readonly IProjectCollaboratorService _projectCollabortatorService;
 
-        public UpdateProjectHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor, IProjectCollaboratorService projectCollabortatorService, IProjectFileService projectFileService)
-        {
-            _unitOfWork = unitOfWork;
-            _sessionAccesor = sessionAccesor;
-            _projectFileService = projectFileService;
-            _projectCollabortatorService = projectCollabortatorService;
-        }
 
         public async Task<CommandResult> Handle(UpdateProjectRequest request, CancellationToken cancellationToken)
         {
-            var aggregate = await _unitOfWork.ProjectRepository.GetByTracking(m => m.Id == request.Id, cancellationToken);
+            var aggregate = await unitOfWork.ProjectRepository.GetByTracking(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException("Project not found");
 
-            if (aggregate == null) throw new NotFoundException("Project not found");
-
-            _sessionAccesor.Verify(aggregate.UserId);
+            await permissionService.Verify(aggregate, ProjectPermission.ManageProjectPermission, cancellationToken);
 
             aggregate.SetName(request.Name);
             aggregate.SetCountry(request.CountryId);
             aggregate.SetCategory(request.CategoryId);
 
-            await _projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
+            await projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
 
-            await _projectCollabortatorService.UpdateCollaborators(aggregate, request.Collaborators, cancellationToken);
+            await projectCollabortatorService.UpdateCollaborators(aggregate, request.Collaborators, cancellationToken);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(aggregate.Id);
         }

@@ -11,18 +11,12 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
     }
 
-    public class GetUpdatePasswordFormHandler : IRequestHandler<GetUpdatePasswordFormRequest, GetUpdatePasswordFormResponse>
+    public class GetUpdatePasswordFormHandler(ISessionAccesor sessionAccesor) 
+        : IRequestHandler<GetUpdatePasswordFormRequest, GetUpdatePasswordFormResponse>
     {
-        private readonly ISessionAccesor _sessionAccesor;
-
-        public GetUpdatePasswordFormHandler(ISessionAccesor sessionAccesor)
-        {
-            _sessionAccesor = sessionAccesor;
-        }
-
         public async Task<GetUpdatePasswordFormResponse> Handle(GetUpdatePasswordFormRequest request, CancellationToken cancellationToken)
         {
-            _sessionAccesor.Verify(request.Id);
+            sessionAccesor.Verify(request.Id);
 
             return await Task.FromResult(new GetUpdatePasswordFormResponse
             {

@@ -11,22 +11,15 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
         public bool Enabled { get; set; }
     }
 
-    public class AddCountryHandler : IRequestHandler<AddCountryRequest, CommandResult>
+    public class AddCountryHandler(IUnitOfWork unitOfWork) : IRequestHandler<AddCountryRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public AddCountryHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<CommandResult> Handle(AddCountryRequest request, CancellationToken cancellationToken)
         {
             var aggregate = new Country(request.Name, request.Enabled);
 
-            await _unitOfWork.CountryRepository.Add(aggregate, cancellationToken);
+            await unitOfWork.CountryRepository.Add(aggregate, cancellationToken);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(aggregate.Id);
         }

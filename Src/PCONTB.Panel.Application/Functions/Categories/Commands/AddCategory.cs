@@ -11,21 +11,14 @@ namespace PCONTB.Panel.Application.Functions.Categories.Commands
         public bool Enabled { get; set; }
     }
 
-    public class AddCategoryHandler : IRequestHandler<AddCategoryRequest, CommandResult>
+    public class AddCategoryHandler(IUnitOfWork unitOfWork) : IRequestHandler<AddCategoryRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public AddCategoryHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<CommandResult> Handle(AddCategoryRequest request, CancellationToken cancellationToken)
         {
             var aggregate = new Category(request.Name, request.Enabled);
 
-            await _unitOfWork.CategoryRepository.Add(aggregate, cancellationToken);
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.CategoryRepository.Add(aggregate, cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(aggregate.Id);
 

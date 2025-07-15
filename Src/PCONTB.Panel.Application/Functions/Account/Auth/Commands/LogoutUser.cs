@@ -10,55 +10,47 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
     {
     }
 
-    public class LogoutUserHandler : IRequestHandler<LogoutUserRequest, CommandResult>
+    public class LogoutUserHandler(
+        ICookieService cookieService, 
+        IJwtService jwtService, 
+        ISessionService sessionService, 
+        IUnitOfWork unitOfWork, 
+        ISessionAccesor sessionAccesor) 
+        : IRequestHandler<LogoutUserRequest, CommandResult>
     {
         private readonly string cookieName = "access-token";
-        private readonly ICookieService _cookieService;
-        private readonly IJwtService _jwtService;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISessionAccesor _sessionAccesor;
-        private readonly ISessionService _sessionService;
-
-        public LogoutUserHandler(ICookieService cookieService, IJwtService jwtService, ISessionService sessionService, IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor)
-        {
-            _cookieService = cookieService;
-            _jwtService = jwtService;
-            _sessionService = sessionService;
-            _unitOfWork = unitOfWork;
-            _sessionAccesor = sessionAccesor;
-        }
 
         public async Task<CommandResult> Handle(LogoutUserRequest request, CancellationToken cancellationToken)
         {
-            var token = _cookieService.Get(cookieName);
+            var token = cookieService.Get(cookieName);
 
-            if (string.IsNullOrWhiteSpace(token) || _jwtService.IsTokenExpired(token))
+            if (string.IsNullOrWhiteSpace(token) || jwtService.IsTokenExpired(token))
             {
-                _cookieService.Clear(cookieName);
+                cookieService.Clear(cookieName);
                 throw new UnauthorizedException("Token expired or not exist");
             }
 
-            var sessionId = _jwtService.GetSessionIdFromToken(token);
+            var sessionId = jwtService.GetSessionIdFromToken(token);
             if (sessionId is null)
             {
-                _cookieService.Clear(cookieName);
+                cookieService.Clear(cookieName);
                 throw new UnauthorizedException("Session not exist");
             }
 
-            var session = await _sessionService.GetByIdAsync(sessionId, cancellationToken);
+            var session = await sessionService.GetByIdAsync(sessionId, cancellationToken);
 
             if (session is null || !session.Enabled)
             {
-                _cookieService.Clear(cookieName);
+                cookieService.Clear(cookieName);
                 throw new UnauthorizedException("Session not exist");
             }
 
             session.EndSession();
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
-            _cookieService.Clear(cookieName);
+            cookieService.Clear(cookieName);
 
-            _sessionAccesor.ClearSession();
+            sessionAccesor.ClearSession();
 
             return new CommandResult(session.Id);
         }

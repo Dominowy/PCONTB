@@ -23,34 +23,26 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
 
     }
 
-    public class AddProjectHandler : IRequestHandler<AddProjectRequest, CommandResult>
+    public class AddProjectHandler(
+        IUnitOfWork unitOfWork, 
+        ISessionAccesor sessionAccesor, 
+        IProjectFileService projectFileService, 
+        IProjectCollaboratorService projectCollabortatorService) 
+        : IRequestHandler<AddProjectRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISessionAccesor _sessionAccesor;
-        private readonly IProjectFileService _projectFileService;
-        private readonly IProjectCollaboratorService _projectCollabortatorService;
-
-        public AddProjectHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor, IProjectFileService projectFileService, IProjectCollaboratorService projectCollabortatorService)
-        {
-            _unitOfWork = unitOfWork;
-            _sessionAccesor = sessionAccesor;
-            _projectFileService = projectFileService;
-            _projectCollabortatorService = projectCollabortatorService;
-        }
-
         public async Task<CommandResult> Handle(AddProjectRequest request, CancellationToken cancellationToken)
         {
-            var userId = _sessionAccesor.Session.UserId;
+            var userId = sessionAccesor.Session.UserId;
 
             var aggregate = new Project(Guid.NewGuid(), request.Name, userId, (Guid)request.CountryId, (Guid)request.CategoryId);
 
-            await _projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
+            await projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
 
-            await _projectCollabortatorService.AddCollaborators(aggregate, request.Collaborators, cancellationToken);
+            await projectCollabortatorService.AddCollaborators(aggregate, request.Collaborators, cancellationToken);
 
-            await _unitOfWork.ProjectRepository.Add(aggregate, cancellationToken);
+            await unitOfWork.ProjectRepository.Add(aggregate, cancellationToken);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(aggregate.Id);
         }

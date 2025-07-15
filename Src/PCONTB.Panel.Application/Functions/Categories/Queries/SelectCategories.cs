@@ -6,20 +6,14 @@ namespace PCONTB.Panel.Application.Functions.Categories.Queries
 {
     public class SelectCategoriesRequest : IRequest<SelectResponse>
     {
+        public Guid IncludedId { get; set; }
     }
 
-    public class SelectCategoriesHandler : IRequestHandler<SelectCategoriesRequest, SelectResponse>
+    public class SelectCategoriesHandler(IUnitOfWork unitOfWork) : IRequestHandler<SelectCategoriesRequest, SelectResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public SelectCategoriesHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<SelectResponse> Handle(SelectCategoriesRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.CategoryRepository.GetAll(m => m.Enabled, cancellationToken);
+            var entity = await unitOfWork.CategoryRepository.GetAll(m => m.Enabled || m.Id == request.IncludedId, cancellationToken);
 
             return new SelectResponse
             {

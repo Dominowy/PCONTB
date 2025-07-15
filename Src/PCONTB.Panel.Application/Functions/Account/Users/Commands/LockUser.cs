@@ -11,27 +11,18 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
     {
     }
 
-    public class LockUserHandler : IRequestHandler<LockUserRequest, CommandResult>
+    public class LockUserHandler(
+        IUnitOfWork unitOfWork, 
+        ISessionAccesor sessionAccesor, 
+        ISessionService sessionService) 
+        : IRequestHandler<LockUserRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISessionAccesor _sessionAccesor;
-        private readonly ISessionService _sessionService;
-
-
-        public LockUserHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor, ISessionService sessionService)
-        {
-            _unitOfWork = unitOfWork;
-            _sessionAccesor = sessionAccesor;
-            _sessionService = sessionService;
-        }
-
         public async Task<CommandResult> Handle(LockUserRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetByTracking(m => m.Id == request.Id, cancellationToken);
+            var entity = await unitOfWork.UserRepository.GetByTracking(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
 
-            if (entity == null) throw new NotFoundException(ErrorCodes.Users.User.NotFound.Message);
-
-            _sessionAccesor.VerifyWithRoles(entity.Id, [Role.Admin, Role.Moderator]);
+            sessionAccesor.VerifyWithRoles(entity.Id, [Role.Admin, Role.Moderator]);
 
             entity.SetEnabled(false);
 
@@ -39,9 +30,9 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             entity.UserRoles.Add(blockRole);
 
-            await _sessionService.EndAllSession(entity.Id, cancellationToken);
+            await sessionService.EndAllSession(entity.Id, cancellationToken);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

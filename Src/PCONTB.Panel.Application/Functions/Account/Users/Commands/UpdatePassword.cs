@@ -15,34 +15,26 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         public string ConfirmPassword { get; set; }
     }
 
-    public class UpdatePasswordHandler : IRequestHandler<UpdatePasswordRequest, CommandResult>
+    public class UpdatePasswordHandler(
+        IUnitOfWork unitOfWork, 
+        IPasswordHasherService passwordHasherService, 
+        ISessionAccesor sessionAccesor) 
+        : IRequestHandler<UpdatePasswordRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ISessionAccesor _sessionAccesor;
-        private readonly IPasswordHasherService _passwordHasherService;
-
-        public UpdatePasswordHandler(IUnitOfWork unitOfWork, IPasswordHasherService passwordHasherService, ISessionAccesor sessionAccesor)
-        {
-            _passwordHasherService = passwordHasherService;
-            _unitOfWork = unitOfWork;
-            _sessionAccesor = sessionAccesor;
-        }
-
         public async Task<CommandResult> Handle(UpdatePasswordRequest request, CancellationToken cancellationToken)
         {
-            var hashedPassword = _passwordHasherService.Generate(request.Password);
+            var hashedPassword = passwordHasherService.Generate(request.Password);
 
-            var entity = await _unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var entity = await unitOfWork.UserRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException("User not found");
 
-            if (entity == null) throw new NotFoundException("User not found");
-
-            _sessionAccesor.Verify(entity.Id);
+            sessionAccesor.Verify(entity.Id);
 
             entity.SetPassword(hashedPassword);
 
-            await _unitOfWork.UserRepository.Update(entity, cancellationToken);
+            await unitOfWork.UserRepository.Update(entity, cancellationToken);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

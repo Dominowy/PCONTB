@@ -8,18 +8,12 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Queries
     {
     }
 
-    public class GetSessionHandler : IRequestHandler<GetSessionRequest, GetSessionResponse>
+    public class GetSessionHandler(ISessionAccesor sessionAccesor) 
+        : IRequestHandler<GetSessionRequest, GetSessionResponse>
     {
-        private readonly ISessionAccesor _sessionAccesor;
-
-        public GetSessionHandler(ISessionAccesor sessionAccesor)
-        {
-            _sessionAccesor = sessionAccesor;
-        }
-
         public async Task<GetSessionResponse> Handle(GetSessionRequest request, CancellationToken cancellationToken)
         {
-            var user = _sessionAccesor.Session.User;
+            var user = sessionAccesor.Session.User;
 
             return await Task.FromResult(new GetSessionResponse
             {

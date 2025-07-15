@@ -11,24 +11,16 @@ namespace PCONTB.Panel.Application.Functions.Categories.Commands
         
     }
 
-    public class DeleteCategoryHandler : IRequestHandler<DeleteCategoryRequest, CommandResult>
+    public class DeleteCategoryHandler(IUnitOfWork unitOfWork) : IRequestHandler<DeleteCategoryRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public DeleteCategoryHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<CommandResult> Handle(DeleteCategoryRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.CategoryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var entity = await unitOfWork.CategoryRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Categories.Category.NotFound.Message);
 
-            if (entity == null) throw new NotFoundException(ErrorCodes.Categories.Category.NotFound.Message);
+            await unitOfWork.CategoryRepository.Delete(entity, cancellationToken);
 
-            await _unitOfWork.CategoryRepository.Delete(entity, cancellationToken);
-
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

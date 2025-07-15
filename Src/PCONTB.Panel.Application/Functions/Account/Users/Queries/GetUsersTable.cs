@@ -6,15 +6,8 @@ using System.Data;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {
-    public class UserPagedQueryHandler : PagedQueryHandler<User, UserTableDto>
+    public class UserPagedQueryHandler(IUnitOfWork unitOfWork) : PagedQueryHandler<User, UserTableDto>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public UserPagedQueryHandler(IUnitOfWork unitOfWork) 
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public override async Task<PagedResultDto<UserTableDto>> Handle(PagedQueryRequest<UserTableDto> request, CancellationToken cancellationToken)
         {
             IQueryable<User> query = GetQuery();
@@ -26,7 +19,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 
         protected override IQueryable<User> GetQuery()
         {
-            return _unitOfWork.UserRepository.GetQuery();
+            return unitOfWork.UserRepository.GetQuery();
         }
 
         protected override string[] GetGlobalSearchProperties()

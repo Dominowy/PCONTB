@@ -8,18 +8,11 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
     {
     }
 
-    public class GetAllUsersHandler : IRequestHandler<GetAllUsersRequest, GetAllUsersResponse>
+    public class GetAllUsersHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetAllUsersRequest, GetAllUsersResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public GetAllUsersHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<GetAllUsersResponse> Handle(GetAllUsersRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.UserRepository.GetAll(cancellationToken);
+            var entity = await unitOfWork.UserRepository.GetAll(cancellationToken);
 
             return new GetAllUsersResponse
             {

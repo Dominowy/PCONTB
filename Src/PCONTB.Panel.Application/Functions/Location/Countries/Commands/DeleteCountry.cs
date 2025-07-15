@@ -12,24 +12,16 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Commands
 
     }
 
-    public class DeleteCountryHandler : IRequestHandler<DeleteCountryRequest, CommandResult>
+    public class DeleteCountryHandler(IUnitOfWork unitOfWork) : IRequestHandler<DeleteCountryRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public DeleteCountryHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
-
         public async Task<CommandResult> Handle(DeleteCountryRequest request, CancellationToken cancellationToken)
         {
-            var entity = await _unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken);
+            var entity = await unitOfWork.CountryRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
+                ?? throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
 
-            if (entity == null) throw new NotFoundException(ErrorCodes.Countries.Country.NotFound.Message);
+            await unitOfWork.CountryRepository.Delete(entity, cancellationToken);
 
-            await _unitOfWork.CountryRepository.Delete(entity, cancellationToken);
-
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }

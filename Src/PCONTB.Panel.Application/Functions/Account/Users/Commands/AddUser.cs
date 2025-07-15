@@ -16,20 +16,12 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
         public List<Role> Roles { get; set; } = [];
     }
 
-    public class AddUserHandler : IRequestHandler<AddUserRequest, CommandResult>
+    public class AddUserHandler(IUnitOfWork unitOfWork, IPasswordHasherService passwordHasherService) 
+        : IRequestHandler<AddUserRequest, CommandResult>
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IPasswordHasherService _passwordHasherService;
-
-        public AddUserHandler(IUnitOfWork unitOfWork, IPasswordHasherService passwordHasherService)
-        {
-            _unitOfWork = unitOfWork;
-            _passwordHasherService = passwordHasherService;
-        }
-
         public async Task<CommandResult> Handle(AddUserRequest request, CancellationToken cancellationToken)
         {
-            var hashedPassword = _passwordHasherService.Generate(request.Password);
+            var hashedPassword = passwordHasherService.Generate(request.Password);
 
             var entity = new User(Guid.NewGuid(), request.Username, request.Email, hashedPassword);
 
@@ -37,9 +29,9 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             entity.UserRoles.AddRange(roles);
 
-            await _unitOfWork.UserRepository.Add(entity, cancellationToken);
+            await unitOfWork.UserRepository.Add(entity, cancellationToken);
 
-            await _unitOfWork.Save(cancellationToken);
+            await unitOfWork.Save(cancellationToken);
 
             return new CommandResult(entity.Id);
         }
