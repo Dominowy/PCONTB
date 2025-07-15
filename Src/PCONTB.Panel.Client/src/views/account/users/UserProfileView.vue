@@ -22,9 +22,9 @@
                       <div>{{ project.name }}</div>
                       <button
                         class="btn btn-link text-secondary p-0"
-                        @click="goToSetting(project.id)"
+                        @click="goToProject(project.id)"
                       >
-                        <IMaterialSymbolsSettingsRounded style="font-size: 1.5rem" />
+                        <i-bi-arrow-right style="font-size: 1.5rem" />
                       </button>
                     </div>
                   </b-card-title>
@@ -46,7 +46,9 @@ import { useDisplay } from "@/composables/useDisplay";
 import { useRoute } from "vue-router";
 import ApiClient from "@/services/ApiClient";
 import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const route = useRoute();
 
 const title = ref("Profile");
@@ -65,6 +67,10 @@ onMounted(async () => {
 
 const onDataLoaded = async () => {
   return await ApiClient.request("account/users/get-by-id", { id: route.params.id });
+};
+
+const goToProject = (id) => {
+  router.push({ name: "projects:discover:display", params: { id: id } });
 };
 
 const { content, loadData, setTitle } = useDisplay(title.value);
