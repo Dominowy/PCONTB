@@ -111,6 +111,7 @@
                     Message = "You do not have permission to manage fulfillment for this project."
                 };
             }
+
             public static class ProjectImage
             {
                 public static readonly ErrorCode PathNotExist = new ErrorCode
@@ -136,8 +137,30 @@
                     Code = nameof(ErrorCode) + "." + nameof(ProjectImage) + "." + nameof(TypeAllowed),
                     Message = "Only JPG, PNG, WEBP or GIF files are allowed."
                 };
+            }
 
-                
+            public static class ProjectVideo
+            {
+                public static readonly ErrorCode PathNotExist = new ErrorCode
+                {
+                    Code = nameof(PathNotExist) + "." + nameof(ProjectVideo) + "." + nameof(NotFound),
+                    Message = "Path not exist"
+                };
+                public static readonly ErrorCode NotFound = new ErrorCode
+                {
+                    Code = nameof(ErrorCode) + "." + nameof(ProjectVideo) + "." + nameof(NotFound),
+                    Message = "Video not found"
+                };
+                public static readonly ErrorCode VideoNotSelect = new ErrorCode
+                {
+                    Code = nameof(ErrorCode) + "." + nameof(ProjectVideo) + "." + nameof(VideoNotSelect),
+                    Message = "Video not select"
+                };
+                public static readonly ErrorCode TypeAllowed = new ErrorCode
+                {
+                    Code = nameof(ErrorCode) + "." + nameof(ProjectVideo) + "." + nameof(TypeAllowed),
+                    Message = "Only MP4, WEBM or OGG files are allowed."
+                };
             }
         }
 

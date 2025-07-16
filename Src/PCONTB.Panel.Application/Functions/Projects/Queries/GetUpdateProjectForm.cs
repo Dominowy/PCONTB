@@ -25,7 +25,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
             var aggregate = await unitOfWork.ProjectRepository.GetBy(m => m.Id == request.Id, cancellationToken) 
                 ?? throw new NotFoundException("Project not found");
 
-            await permissionService.Verify(aggregate, ProjectPermission.ManageProjectPermission, cancellationToken);
+            var currentCollaborator = await permissionService.GetCurrentCollaborator(aggregate, cancellationToken);
 
             FormFile image = null;
 
@@ -35,6 +35,17 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                 {
                     ContentType = aggregate.Image.ContentType,
                     FileName = aggregate.Image.FileName,
+                };
+            }
+
+            FormFile video = null;
+
+            if (aggregate.Video != null)
+            {
+                video = new FormFile
+                {
+                    ContentType = aggregate.Video.ContentType,
+                    FileName = aggregate.Video.FileName,
                 };
             }
 
@@ -48,8 +59,11 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                     CountryId = aggregate.CountryId,
                     Image = image,
                     ImageData = aggregate.Image?.Data,
+                    Video = video,
+                    VideoData = aggregate.Video?.Data,
                     Collaborators = [.. aggregate.Collaborators.Select(UpdateProjectCollaboratorDto.Map)]
-                }
+                },
+                CurrentCollaborator = currentCollaborator != null ? ProjectCollaboratorPermissionDto.Map(currentCollaborator) : null
             };
         }
     }
@@ -57,6 +71,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
     public class GetUpdateProjectFormResponse
     {
         public UpdateProjectRequest Form{ get; set; }
+        public ProjectCollaboratorPermissionDto? CurrentCollaborator { get; set; }
     }
 
 }

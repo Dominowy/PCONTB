@@ -38,6 +38,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
 
             await projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
 
+            await projectFileService.UploadVideo(aggregate, request.Video, cancellationToken);
+
             await projectCollabortatorService.AddCollaborators(aggregate, request.Collaborators, cancellationToken);
 
             await unitOfWork.ProjectRepository.Add(aggregate, cancellationToken);
@@ -52,12 +54,20 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        private static readonly string[] AllowedContentTypes =
+        private static readonly string[] AllowedImageContentTypes =
         [
             "image/jpeg",
             "image/png",
             "image/webp",
             "image/gif"
+        ];
+
+        private static readonly string[] AllowedVideoContentTypes =
+        [
+            "video/mp4",
+            "video/webm",
+            "video/ogg",
+            "video/quicktime"
         ];
 
         public AddProjectRequestValidator(IUnitOfWork unitOfWork)
@@ -78,8 +88,15 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
             RuleFor(x => x.Image).ChildRules(images =>
             {
                 images.RuleFor(f => f.ContentType)
-                    .Must(ct => AllowedContentTypes.Contains(ct))
+                    .Must(ct => AllowedImageContentTypes.Contains(ct))
                     .WithMessage(ErrorCodes.Projects.ProjectImage.TypeAllowed.Message);
+            });
+
+            RuleFor(x => x.Video).ChildRules(videos =>
+            {
+                videos.RuleFor(f => f.ContentType)
+                    .Must(ct => AllowedVideoContentTypes.Contains(ct))
+                    .WithMessage(ErrorCodes.Projects.ProjectVideo.TypeAllowed.Message);
             });
 
             RuleFor(x => x.Collaborators).Custom((list, context) =>

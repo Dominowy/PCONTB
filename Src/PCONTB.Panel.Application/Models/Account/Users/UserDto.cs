@@ -19,7 +19,6 @@ namespace PCONTB.Panel.Application.Models.Account.Users
                 Id = user.Id,
                 Username = user.Username,
                 Email = user.Email,
-                Projects = [.. user.Projects.Select(UserProjectDto.Map)]
             };
         }
     }

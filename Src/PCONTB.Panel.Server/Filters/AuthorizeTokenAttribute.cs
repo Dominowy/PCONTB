@@ -6,15 +6,9 @@ using PCONTB.Panel.Domain.Account.Users;
 namespace PCONTB.Panel.Infrastructure.Security.Filters
 {
     [AttributeUsage(AttributeTargets.All)]
-    public class AuthorizeToken : Attribute, IAuthorizationFilter
+    public class AuthorizeToken(params Role[] roles) : Attribute, IAuthorizationFilter
     {
         private readonly string cookieName = "access-token";
-        private readonly Role[] _allowedRoles;
-
-        public AuthorizeToken(params Role[] roles)
-        {
-            _allowedRoles = roles;
-        }
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
@@ -44,7 +38,7 @@ namespace PCONTB.Panel.Infrastructure.Security.Filters
             {
                 var userRoles = session.User.UserRoles.Select(r => r.Role);
 
-                if (!userRoles.Any(r => _allowedRoles.Contains(r)))
+                if (!userRoles.Any(r => roles.Contains(r)))
                 {
                     context.Result = new UnauthorizedResult();
                     return;

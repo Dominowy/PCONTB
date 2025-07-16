@@ -7,15 +7,8 @@ using System.Text;
 
 namespace PCONTB.Panel.Application.Services.Auth
 {
-    public class JwtService : IJwtService
+    public class JwtService(TokenSettings settings) : IJwtService
     {
-        private readonly TokenSettings _settings;
-
-        public JwtService(TokenSettings settings)
-        {
-            _settings = settings;
-        }
-
         public string GenerateToken(Guid sessionId)
         {
             var claims = new[]
@@ -23,13 +16,13 @@ namespace PCONTB.Panel.Application.Services.Auth
                 new Claim(ClaimTypes.NameIdentifier, sessionId.ToString()),
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.JwtKey));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.JwtKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: _settings.JwtIssuer,
+                issuer: settings.JwtIssuer,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(_settings.JwtExpireMinutes),
+                expires: DateTime.Now.AddMinutes(settings.JwtExpireMinutes),
                 signingCredentials: creds
             );
 
@@ -41,7 +34,7 @@ namespace PCONTB.Panel.Application.Services.Auth
             if (token == null) return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_settings.JwtKey);
+            var key = Encoding.UTF8.GetBytes(settings.JwtKey);
 
             try
             {
@@ -52,7 +45,7 @@ namespace PCONTB.Panel.Application.Services.Auth
                     ValidateLifetime = false,
                     ClockSkew = TimeSpan.Zero,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidIssuer = _settings.JwtIssuer,
+                    ValidIssuer = settings.JwtIssuer,
                 }, out var validatedToken);
 
                 return principal;

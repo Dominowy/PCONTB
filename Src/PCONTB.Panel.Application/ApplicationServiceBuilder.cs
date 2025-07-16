@@ -34,6 +34,7 @@ namespace PCONTB.Panel.Application
 
             services.AddScoped<IProjectFileService, ProjecFileService>();
             services.AddScoped<IProjectCollaboratorService, ProjectCollaboratorService>();
+            services.AddScoped<IProjectCollaboratorPermissionService, ProjectCollaboratorPermissionService>();
 
             return services;
         }

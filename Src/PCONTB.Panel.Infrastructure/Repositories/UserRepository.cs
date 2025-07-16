@@ -7,12 +7,9 @@ using System.Linq.Expressions;
 
 namespace PCONTB.Panel.Infrastructure.Repositories
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public class UserRepository(ApplicationDbContext context) 
+        : Repository<User>(context), IUserRepository
     {
-        public UserRepository(ApplicationDbContext context) : base(context)
-        {
-        }
-
         public override IQueryable<User> GetQuery()
         {
             return dbSet.Include(m => m.UserRoles).AsNoTracking();
@@ -33,6 +30,8 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(m => m.UserRoles)
                 .Include(m => m.Projects).ThenInclude(m => m.Category)
                 .Include(m => m.Projects).ThenInclude(m => m.Country)
+                .Include(m => m.Collaborators).ThenInclude(m => m.Project).ThenInclude(m => m.Category)
+                .Include(m => m.Collaborators).ThenInclude(m => m.Project).ThenInclude(m => m.Country)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
         }

@@ -2,18 +2,11 @@
 
 namespace PCONTB.Panel.Server.Services
 {
-    public class CookieService : ICookieService
+    public class CookieService(IHttpContextAccessor accessor) : ICookieService
     {
-        private readonly IHttpContextAccessor _accessor;
-
-        public CookieService(IHttpContextAccessor accessor)
-        {
-            _accessor = accessor;
-        }
-
         public void Set(string value, string name)
         {
-            _accessor.HttpContext.Response.Cookies.Append(name, value, new CookieOptions
+            accessor.HttpContext.Response.Cookies.Append(name, value, new CookieOptions
             {
                 HttpOnly = true,
                 Secure = true,
@@ -24,12 +17,12 @@ namespace PCONTB.Panel.Server.Services
 
         public string Get(string name)
         {
-            return _accessor.HttpContext.Request.Cookies[name];
+            return accessor.HttpContext.Request.Cookies[name];
         }
 
         public void Clear(string name)
         {
-            _accessor.HttpContext.Response.Cookies.Delete(name);
+            accessor.HttpContext.Response.Cookies.Delete(name);
         }
     }
 }

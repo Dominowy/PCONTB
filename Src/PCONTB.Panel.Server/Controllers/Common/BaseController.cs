@@ -5,15 +5,8 @@ using PCONTB.Panel.Application.Common.Functions;
 
 namespace PCONTB.Panel.Server.Controllers.Common
 {
-    public abstract class BaseController : ControllerBase
+    public abstract class BaseController(IMediator mediator) : ControllerBase
     {
-        public IMediator _mediator;
-
-        protected BaseController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         protected async Task<IActionResult> Send<TRequest>(TRequest request, CancellationToken cancellationToken = default)
         {
             var validator = HttpContext.RequestServices.GetService<IValidator<TRequest>>();
@@ -29,7 +22,7 @@ namespace PCONTB.Panel.Server.Controllers.Common
                 }
             }
 
-            var response = await _mediator.Send(request, cancellationToken);
+            var response = await mediator.Send(request, cancellationToken);
 
             return Ok(response);
         }

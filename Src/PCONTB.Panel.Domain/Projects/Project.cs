@@ -80,12 +80,12 @@ namespace PCONTB.Panel.Domain.Projects
             Image = image;
         }
 
-        public void SetVideoId(Guid? videoId)
+        public void SetVideo(ProjectVideo video)
         {
-            var anyChange = VideoId != videoId;
+            var anyChange = Video != video;
             if (!anyChange) return;
 
-            VideoId = videoId;
+            Video = video;
         }
 
         public void AddCollaborator(ProjectCollaborator entity)

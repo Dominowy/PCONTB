@@ -6,19 +6,12 @@ using PCONTB.Panel.Server.Controllers.Common;
 namespace PCONTB.Panel.Server.Controllers.Multimedia
 {
     [Route("api/multimedia")]
-    public class UploadFileController : BaseController
+    public class UploadFileController(IMediator mediator, ISessionAccesor sessionAccesor) : BaseController(mediator)
     {
-        private readonly ISessionAccesor _sessionAccesor;
-
-        public UploadFileController(IMediator mediator, ISessionAccesor sessionAccesor) : base(mediator)
-        {
-            _sessionAccesor = sessionAccesor;
-        }
-
         [HttpPost("upload-file")]
         public async Task<IActionResult> UploadFile()
         {
-            var userId = _sessionAccesor.Session.User.Id;
+            var userId = sessionAccesor.Session.User.Id;
 
             var file = Request.Form.Files.FirstOrDefault();
             if (file == null) return BadRequest();

@@ -13,7 +13,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
     {
         public Guid CategoryId { get; set; }
         public Guid CountryId { get; set; }
-        public FormFile Image { get; set; }
+        public FormFile? Image { get; set; }
         public byte[] ImageData { get; set; }
         public FormFile? Video { get; set; }
         public byte[] VideoData { get; set; }
@@ -43,6 +43,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
 
             await projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
 
+            await projectFileService.UploadVideo(aggregate, request.Video, cancellationToken);
+
             await projectCollabortatorService.UpdateCollaborators(aggregate, request.Collaborators, cancellationToken);
 
             await unitOfWork.Save(cancellationToken);
@@ -61,6 +63,14 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
             "image/png",
             "image/webp",
             "image/gif"
+        ];
+
+        private static readonly string[] AllowedVideoContentTypes =
+        [
+            "video/mp4",
+            "video/webm",
+            "video/ogg",
+            "video/quicktime"
         ];
 
         public UpdateProjectRequestValidator(IUnitOfWork unitOfWork)
@@ -83,6 +93,13 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
                 images.RuleFor(f => f.ContentType)
                     .Must(ct => AllowedContentTypes.Contains(ct))
                     .WithMessage(ErrorCodes.Projects.ProjectImage.TypeAllowed.Message);
+            });
+
+            RuleFor(x => x.Video).ChildRules(videos =>
+            {
+                videos.RuleFor(f => f.ContentType)
+                    .Must(ct => AllowedVideoContentTypes.Contains(ct))
+                    .WithMessage(ErrorCodes.Projects.ProjectVideo.TypeAllowed.Message);
             });
 
             RuleFor(x => x.Collaborators).Custom((list, context) =>

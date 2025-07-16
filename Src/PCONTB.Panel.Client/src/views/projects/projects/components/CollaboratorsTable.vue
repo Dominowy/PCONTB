@@ -26,7 +26,7 @@
                 <button
                   type="button"
                   class="btn btn-link text-secondary p-0"
-                  @click="goToProfile(collaborator.user.id)"
+                  @click="goToProfile(collaborator.userId)"
                 >
                   <i-material-symbols-article-person style="font-size: 1.5rem" />
                 </button>

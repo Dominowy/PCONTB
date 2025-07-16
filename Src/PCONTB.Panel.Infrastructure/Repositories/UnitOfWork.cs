@@ -4,44 +4,32 @@ using PCONTB.Panel.Infrastructure.Context;
 
 namespace PCONTB.Panel.Infrastructure.Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork(ApplicationDbContext dbContext) : IUnitOfWork
     {
-        private readonly ApplicationDbContext _dbContext;
         private ISessionRepository _session;
         private IUserRepository _user;
         private ICountryRepository _country;
         private ICategoryRepository _category;
         private IProjectRepository _project;
 
-        public UnitOfWork(ApplicationDbContext dbContext) => _dbContext = dbContext;
+        public ISessionRepository SessionRepository => _session ??= new SessionRepository(dbContext);
 
-        public ISessionRepository SessionRepository => _session ??= new SessionRepository(_dbContext);
+        public IUserRepository UserRepository => _user ??= new UserRepository(dbContext);
 
-        public IUserRepository UserRepository => _user ??= new UserRepository(_dbContext);
+        public ICountryRepository CountryRepository => _country ??= new CountryRepository(dbContext);
 
-        public ICountryRepository CountryRepository => _country ??= new CountryRepository(_dbContext);
+        public ICategoryRepository CategoryRepository => _category ??= new CategoryRepository(dbContext);
 
-        public ICategoryRepository CategoryRepository => _category ??= new CategoryRepository(_dbContext);
+        public IProjectRepository ProjectRepository => _project ??= new ProjectRepository(dbContext);
 
-        public IProjectRepository ProjectRepository
-        {
-            get
-            {
-                if (_project == null)
-                {
-                    _project = new ProjectRepository(_dbContext);
-                }
-                return _project;
-            }
-        }
 
         public async Task Save(CancellationToken cancellationToken)
         {
-            var entries = _dbContext.ChangeTracker.Entries();
+            var entries = dbContext.ChangeTracker.Entries();
             foreach (var e in entries)
                 Console.WriteLine($"{e.Entity.GetType().Name} = {e.State}");
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
         }
 
         public void Dispose()
@@ -54,7 +42,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
         {
             if (disposing)
             {
-                _dbContext.Dispose();
+                dbContext.Dispose();
             }
         }
     }

@@ -32,6 +32,16 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                 result.ImageData = aggregate.Image.Data;
             }
 
+            if (aggregate.Video != null)
+            {
+                result.Video = new FormFile
+                {
+                    ContentType = aggregate.Video.ContentType,
+                    FileName = aggregate.Video.FileName,
+                };
+                result.VideoData = aggregate.Video.Data;
+            }
+
             return new GetProjectResponse()
             {
                 Project = result

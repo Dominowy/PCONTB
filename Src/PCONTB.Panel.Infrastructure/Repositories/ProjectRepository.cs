@@ -6,12 +6,9 @@ using System.Linq.Expressions;
 
 namespace PCONTB.Panel.Infrastructure.Repositories
 {
-    public class ProjectRepository : Repository<Project>, IProjectRepository
+    public class ProjectRepository(ApplicationDbContext context) 
+        : Repository<Project>(context), IProjectRepository
     {
-        public ProjectRepository(ApplicationDbContext context) : base(context)
-        {
-        }
-
         public override async Task<IEnumerable<Project>> GetAll(CancellationToken cancellationToken)
         {
             return await dbSet
@@ -20,6 +17,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Collaborators).ThenInclude(p => p.User)
                 .Include(p => p.Category)
                 .Include(p => p.Image)
+                .Include(p => p.Video)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
@@ -32,6 +30,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Collaborators).ThenInclude(p => p.User)
                 .Include(p => p.Category)
                 .Include(p => p.Image)
+                .Include(p => p.Video)
                 .Where(predicate)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
@@ -45,6 +44,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Country)
                 .Include(p => p.Category)
                 .Include(p => p.Image)
+                .Include(p => p.Video)
                 .Where(predicate)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
@@ -52,12 +52,13 @@ namespace PCONTB.Panel.Infrastructure.Repositories
 
         public async Task<Project?> GetByTracking(Expression<Func<Project, bool>> predicate, CancellationToken cancellationToken)
         {
-            return await _context.Set<Project>()
+            return await dbSet
                 .Include(p => p.User)
                 .Include(p => p.Collaborators).ThenInclude(p => p.User)
                 .Include(p => p.Country)
                 .Include(p => p.Category)
                 .Include(p => p.Image)
+                .Include(p => p.Video)
                 .Where(predicate)
                 .FirstOrDefaultAsync(cancellationToken);
         }

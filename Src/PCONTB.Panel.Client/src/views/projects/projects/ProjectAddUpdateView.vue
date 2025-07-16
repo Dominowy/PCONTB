@@ -49,7 +49,7 @@
             </b-tab>
             <b-tab title="Images">
               <base-form-file
-                id="file"
+                id="file-image"
                 class="mt-2"
                 property="Image"
                 v-model="form.image"
@@ -60,9 +60,26 @@
                 :isAllTouched="isAllTouched"
               />
             </b-tab>
+            <b-tab title="Video">
+              <base-form-file
+                id="file-video"
+                class="mt-2"
+                property="Video"
+                v-model="form.video"
+                uploadUrl="/api/multimedia/upload-file"
+                placeholder="Select video"
+                :errors="errors"
+                :src="form.videoData"
+                :isAllTouched="isAllTouched"
+              />
+            </b-tab>
           </b-tabs>
         </b-card>
-        <base-form-submit-panel :isLoading="isLoading" />
+        <base-form-submit-panel :isLoading="isLoading">
+          <template #left>
+            <div class="text-danger">{{ errorMessage }}</div>
+          </template>
+        </base-form-submit-panel>
       </base-form>
     </b-row>
   </div>
@@ -129,7 +146,7 @@ const addUpdateCollaborator = (collaborator) => {
   }
 };
 
-const { isLoading, submit, validate, errors, isAllTouched, setTitle } = useAddUpdate(
+const { isLoading, submit, validate, errors, errorMessage, isAllTouched, setTitle } = useAddUpdate(
   submitInternal,
   redirectAfterSucces
 );

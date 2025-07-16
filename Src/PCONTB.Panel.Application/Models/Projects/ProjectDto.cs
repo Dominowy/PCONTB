@@ -12,6 +12,8 @@ namespace PCONTB.Panel.Application.Models.Projects
         public NameRelatedDto Category { get; set; }
         public FormFile Image { get; set; }
         public byte[] ImageData { get; set; }
+        public FormFile Video { get; set; }
+        public byte[] VideoData { get; set; }
         public List<ProjectCollaboratorDto> Collaborators { get; set; }
 
         public static ProjectDto Map(Project entity)

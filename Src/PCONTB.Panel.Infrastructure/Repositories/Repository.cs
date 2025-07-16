@@ -5,16 +5,10 @@ using System.Linq.Expressions;
 
 namespace PCONTB.Panel.Infrastructure.Repositories
 {
-    public abstract class Repository<T> : IRepository<T> where T : class
+    public abstract class Repository<T>(ApplicationDbContext context) 
+        : IRepository<T> where T : class
     {
-        internal ApplicationDbContext _context;
-        internal DbSet<T> dbSet;
-
-        public Repository(ApplicationDbContext context)
-        {
-            _context = context;
-            dbSet = context.Set<T>();
-        }
+        internal DbSet<T> dbSet = context.Set<T>();
 
         public virtual IQueryable<T> GetQuery()
         {
@@ -51,7 +45,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
 
         public virtual async Task Update(T entityToUpdate, CancellationToken cancellationToken)
         {
-            _context.Entry(entityToUpdate).State = EntityState.Modified;
+            context.Entry(entityToUpdate).State = EntityState.Modified;
             await Task.CompletedTask;
         }
 

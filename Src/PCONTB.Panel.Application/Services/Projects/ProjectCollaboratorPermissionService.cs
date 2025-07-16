@@ -11,6 +11,19 @@ namespace PCONTB.Panel.Application.Services.Projects
     public class ProjectCollaboratorPermissionService(ISessionAccesor sessionAccesor) 
         : IProjectCollaboratorPermissionService
     {
+        public async Task<ProjectCollaborator?> GetCurrentCollaborator(Project aggregate, CancellationToken cancellationToken)
+        {
+            var userId = sessionAccesor.Session.UserId;
+
+            if (aggregate.UserId == userId)
+                return null;
+
+            var collaborator = aggregate.Collaborators.FirstOrDefault(c => c.UserId == userId) 
+                ?? throw new UnauthorizedException(ErrorCodes.Projects.Project.Access.Message);
+
+            return collaborator;
+        }
+
         public async Task Verify(Project project, ProjectPermission permission, CancellationToken cancellationToken)
         {
             var userId = sessionAccesor.Session.UserId;
@@ -18,11 +31,8 @@ namespace PCONTB.Panel.Application.Services.Projects
             if (project.UserId == userId)
                 return;
 
-            var collaborator = project.Collaborators.FirstOrDefault(c => c.UserId == userId);
-
-            if (collaborator == null)
-                throw new UnauthorizedException(ErrorCodes.Projects.Project.Access.Message);
-
+            var collaborator = project.Collaborators.FirstOrDefault(c => c.UserId == userId) ?? throw new UnauthorizedException(ErrorCodes.Projects.Project.Access.Message);
+            
             switch (permission)
             {
                 case ProjectPermission.ManageProjectPermission:
@@ -42,19 +52,19 @@ namespace PCONTB.Panel.Application.Services.Projects
         private static void VerifyManageProjectPermission(ProjectCollaborator collaborator)
         {
             if (!collaborator.ManageProjectPermission)
-                throw new UnauthorizedException(ErrorCodes.Projects.ProjectCollaborator.ManageProject.Message);
+                throw new BadRequestException(ErrorCodes.Projects.ProjectCollaborator.ManageProject.Message);
         }
 
         private static void VerifyManageCommunityPermission(ProjectCollaborator collaborator)
         {
             if (!collaborator.ManageCommunityPermission)
-                throw new UnauthorizedException(ErrorCodes.Projects.ProjectCollaborator.ManageCommunity.Message);
+                throw new BadRequestException(ErrorCodes.Projects.ProjectCollaborator.ManageCommunity.Message);
         }
 
         private static void VerifyManageFulfillmentPermission(ProjectCollaborator collaborator)
         {
             if (!collaborator.ManageFulfillmentPermission)
-                throw new UnauthorizedException(ErrorCodes.Projects.ProjectCollaborator.ManageFulfillment.Message);
+                throw new BadRequestException(ErrorCodes.Projects.ProjectCollaborator.ManageFulfillment.Message);
         }
     }
 }

@@ -6,12 +6,9 @@ using System.Linq.Expressions;
 
 namespace PCONTB.Panel.Infrastructure.Repositories
 {
-    public class CountryRepository : Repository<Country>, ICountryRepository
+    public class CountryRepository(ApplicationDbContext context) 
+        : Repository<Country>(context), ICountryRepository
     {
-        public CountryRepository(ApplicationDbContext context) : base(context)
-        {
-        }
-
         public override async Task<Country?> GetBy(Expression<Func<Country, bool>> predicate, CancellationToken cancellationToken)
         {
             return await dbSet

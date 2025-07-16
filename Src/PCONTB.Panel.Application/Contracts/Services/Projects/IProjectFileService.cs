@@ -5,6 +5,7 @@ namespace PCONTB.Panel.Application.Contracts.Services.Projects
 {
     public interface IProjectFileService
     {
-        Task UploadImage(Project project, FormFile file, CancellationToken token);
+        Task UploadImage(Project project, FormFile? file, CancellationToken token);
+        Task UploadVideo(Project aggregate, FormFile? file, CancellationToken token);
     }
 }

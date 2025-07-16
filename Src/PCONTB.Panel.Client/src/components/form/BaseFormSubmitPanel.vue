@@ -1,18 +1,17 @@
 <template>
   <div class="d-flex justify-content-between mt-4">
-    <div class="left-container">
-      <slot name="left"> </slot>
-    </div>
-    <div class="right-container">
-      <slot name="right">
-        
-        <div class="submit-actions-group">
+    <div class="submit-actions-group">
+      <div class="left-container">
+        <slot name="left"> </slot>
+      </div>
+      <div class="right-container">
+        <slot name="right">
           <base-loading-spinner v-if="isLoading" />
           <slot name="submit-actions">
             <base-form-submit-button :label="label" :variant="variant" :disabled="isLoading" />
           </slot>
-        </div>
-      </slot>
+        </slot>
+      </div>
     </div>
   </div>
 </template>

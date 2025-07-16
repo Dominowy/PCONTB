@@ -6,12 +6,9 @@ using System.Linq.Expressions;
 
 namespace PCONTB.Panel.Infrastructure.Repositories
 {
-    public class SessionRepository : Repository<Session>, ISessionRepository
+    public class SessionRepository(ApplicationDbContext context) 
+        : Repository<Session>(context), ISessionRepository
     {
-        public SessionRepository(ApplicationDbContext context) : base(context)
-        {
-        }
-
         public virtual async Task<Session?> GetBy(Expression<Func<Session, bool>> predicate, CancellationToken cancellationToken)
         {
             return await dbSet

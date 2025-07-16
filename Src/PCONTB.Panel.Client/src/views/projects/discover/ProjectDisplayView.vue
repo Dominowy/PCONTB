@@ -3,9 +3,17 @@
     <base-header :title="content.project.name" />
     <b-card>
       <img
+        v-if="content.project.image"
         class="w-75"
         :src="`data:${content.project.image.contentType};base64,${content.project.imageData}`"
-    /></b-card>
+      />
+      <video
+        v-if="content.project.video"
+        class="w-75"
+        :src="`data:${content.project.video.contentType};base64,${content.project.videoData}`"
+        controls
+      />
+    </b-card>
     <b-card no-body>
       <b-tabs card>
         <b-tab title="Campaign"> </b-tab>

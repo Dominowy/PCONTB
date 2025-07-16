@@ -2,15 +2,9 @@
 
 namespace PCONTB.Panel.Server.Middleware
 {
-    public class SessionMiddleware
+    public class SessionMiddleware(RequestDelegate next)
     {
-        private readonly RequestDelegate _next;
         private readonly string _cookieName = "access-token";
-
-        public SessionMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
 
         public async Task InvokeAsync(
             HttpContext context,
@@ -24,7 +18,7 @@ namespace PCONTB.Panel.Server.Middleware
 
             if (string.IsNullOrEmpty(token))
             {
-                await _next(context);
+                await next(context);
                 return;
             }
 
@@ -62,7 +56,7 @@ namespace PCONTB.Panel.Server.Middleware
                 accesor.SetSession(session);
             }
 
-            await _next(context);
+            await next(context);
         }
     }
 }
