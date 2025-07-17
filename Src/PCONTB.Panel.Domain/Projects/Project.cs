@@ -2,7 +2,7 @@
 using PCONTB.Panel.Domain.Categories;
 using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Location.Countries;
-using PCONTB.Panel.Domain.Projects.Campaign;
+using PCONTB.Panel.Domain.Projects.Campaigns;
 using PCONTB.Panel.Domain.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Files;
 
@@ -20,7 +20,6 @@ namespace PCONTB.Panel.Domain.Projects
         public virtual Category Category { get; private set; }
 
         public virtual List<ProjectCollaborator> Collaborators { get; private set; } = new List<ProjectCollaborator>();
-
         public string? Description { get; private set; }
 
         public Guid? ImageId { get; private set; }
@@ -29,8 +28,9 @@ namespace PCONTB.Panel.Domain.Projects
         public Guid? VideoId { get; private set; }
         public virtual ProjectVideo? Video { get; private set; }
 
-        public Guid? ProjectCampaingId { get; private set; }
-        public virtual ProjectCampaign? ProjectCampaing { get; private set; }
+        public Guid? CampaingId { get; private set; }
+        public virtual ProjectCampaign? Campaing { get; private set; }
+
         protected Project() : base()
         {
         }

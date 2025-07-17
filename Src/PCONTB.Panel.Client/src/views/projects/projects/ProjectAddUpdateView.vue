@@ -73,11 +73,14 @@
                 :isAllTouched="isAllTouched"
               />
             </b-tab>
+            <b-tab title="Campaing">
+              <project-campaign-editor :types="types" />
+            </b-tab>
           </b-tabs>
         </b-card>
         <base-form-submit-panel :isLoading="isLoading">
           <template #left>
-            <div class="text-danger">{{ errorMessage }}</div>
+            <div v-if="!errors" class="text-danger">{{ errorMessage }}</div>
           </template>
         </base-form-submit-panel>
       </base-form>
@@ -87,6 +90,7 @@
 
 <script setup>
 import CollaboratorsTable from "./components/CollaboratorsTable.vue";
+import ProjectCampaignEditor from "./components/ProjectCampaignEditor.vue";
 import { useAddUpdate } from "@/composables/useAddUpdate";
 import { reactive, onMounted, ref } from "vue";
 import ApiClient from "@/services/ApiClient";
@@ -99,6 +103,8 @@ const route = useRoute();
 
 const form = reactive({});
 
+const types = ref(null);
+
 onMounted(async () => {
   if (route.params.id) {
     title.value = "Update project";
@@ -106,6 +112,8 @@ onMounted(async () => {
 
   const response = await getForm();
   Object.assign(form, response.form);
+
+  types.value = response.projectCampaignContentType;
 
   if (route.params.id) {
     title.value = `Update - ${form.name}`;

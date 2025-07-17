@@ -4,6 +4,7 @@ using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Domain.Categories;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects;
+using PCONTB.Panel.Domain.Projects.Campaigns;
 using PCONTB.Panel.Domain.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Files;
 
@@ -25,6 +26,9 @@ namespace PCONTB.Panel.Infrastructure.Context
         public DbSet<ProjectImage> ProjectImage { get; set; }
         public DbSet<ProjectVideo> ProjectVideo { get; set; }
         public DbSet<Project> Project { get; set; }
+        public DbSet<ProjectCampaign> ProjectCampaign { get; set; }
+        public DbSet<ProjectCampaignContent> ProjectCampaignContent { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -92,6 +96,23 @@ namespace PCONTB.Panel.Infrastructure.Context
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ProjectVideo>()
+                .Property(m => m.Id)
+                .ValueGeneratedOnAdd();
+
+            builder.Entity<Project>()
+                .HasOne(m => m.Campaing)
+                .WithOne()
+                .HasForeignKey<Project>(m => m.CampaingId)
+                .HasPrincipalKey<ProjectCampaign>(m => m.Id)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ProjectCampaignContent>()
+                .HasOne(m => m.Campaign)
+                .WithMany(m => m.CampaignContents)
+                .HasForeignKey(m => m.CampaignId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ProjectCampaignContent>()
                 .Property(m => m.Id)
                 .ValueGeneratedOnAdd();
         }

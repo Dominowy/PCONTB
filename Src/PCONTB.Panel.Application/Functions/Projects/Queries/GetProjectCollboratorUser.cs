@@ -12,6 +12,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
     public class GetProjectCollaboratorUserRequest : BaseCommand, IRequest<GetProjectCollaboratorUserResponse>
     {
         public string Email { get; set; }
+        public Guid? ProjectId { get; set; }
     }
 
     public class GetProjectCollaboratorUserHandler(IUnitOfWork unitOfWork, ISessionAccesor sessionAccesor) 
@@ -22,8 +23,18 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
             var user = await unitOfWork.UserRepository.GetBy(m => m.Email == request.Email, cancellationToken) 
                 ?? throw new NotFoundException(ErrorCodes.Projects.ProjectCollaborator.UserExistInProject.Message);
 
-            if (user.Id == sessionAccesor.Session.UserId) 
-                throw new BadRequestException(ErrorCodes.Projects.ProjectCollaborator.TryToAddCreator.Message);
+            if (request.ProjectId != null)
+            {
+                var project = await unitOfWork.ProjectRepository.GetBy(m => m.Id == request.ProjectId, cancellationToken);
+
+                if (project.UserId == user.Id)
+                    throw new BadRequestException(ErrorCodes.Projects.ProjectCollaborator.TryToAddCreator.Message);
+            }
+            else 
+            {
+                if (user.Id == sessionAccesor.Session.UserId)
+                    throw new BadRequestException(ErrorCodes.Projects.ProjectCollaborator.TryToAddCreator.Message);
+            }
 
             return new GetProjectCollaboratorUserResponse 
             { 

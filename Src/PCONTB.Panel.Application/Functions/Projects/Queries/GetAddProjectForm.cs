@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using PCONTB.Panel.Application.Common.Extensions.Helpers.Enums;
 using PCONTB.Panel.Application.Functions.Projects.Commands;
+using PCONTB.Panel.Domain.Projects.Campaigns;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Queries
 {
@@ -14,6 +16,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
             return await Task.FromResult(new GetAddProjectFormResponse()
             {
                 Form = new AddProjectRequest(),
+                ProjectCampaignContentType = EnumHelper.EnumToList<ProjectCampaignContentType>()
             });
         }
     }
@@ -21,5 +24,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
     public class GetAddProjectFormResponse
     {
         public AddProjectRequest Form { get; set; }
+        public List<EnumItem> ProjectCampaignContentType { get; set; } = [];
+
     }
 }

@@ -79,6 +79,7 @@ const handleAddUpdate = async () => {
     if (props.collaborator == null) {
       let response = await ApiClient.request("projects/projects/get-collaborator-user", {
         email: form.email,
+        projectId: form.projectId,
       });
 
       if (response != null) {

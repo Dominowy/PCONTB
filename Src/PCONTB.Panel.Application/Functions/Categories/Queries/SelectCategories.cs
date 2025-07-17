@@ -6,7 +6,7 @@ namespace PCONTB.Panel.Application.Functions.Categories.Queries
 {
     public class SelectCategoriesRequest : IRequest<SelectResponse>
     {
-        public Guid IncludedId { get; set; }
+        public Guid? IncludedId { get; set; }
     }
 
     public class SelectCategoriesHandler(IUnitOfWork unitOfWork) : IRequestHandler<SelectCategoriesRequest, SelectResponse>

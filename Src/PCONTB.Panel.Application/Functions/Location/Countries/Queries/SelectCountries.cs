@@ -7,7 +7,7 @@ namespace PCONTB.Panel.Application.Functions.Location.Countries.Queries
 {
     public class SelectCountriesRequest : BaseQuery, IRequest<SelectResponse>
     {
-        public Guid IncludedId { get; set; }
+        public Guid? IncludedId { get; set; }
     }
 
     public class SelectCountriesHandler(IUnitOfWork unitOfWork) : IRequestHandler<SelectCountriesRequest, SelectResponse>

@@ -1,11 +1,14 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common.Exceptions;
+using PCONTB.Panel.Application.Common.Extensions.Helpers.Enums;
 using PCONTB.Panel.Application.Common.Functions;
 using PCONTB.Panel.Application.Common.Functions.Files;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Services.Projects;
 using PCONTB.Panel.Application.Functions.Projects.Commands;
 using PCONTB.Panel.Application.Models.Projects;
+using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Projects.Campaigns;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Projects.Queries
@@ -63,7 +66,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                     VideoData = aggregate.Video?.Data,
                     Collaborators = [.. aggregate.Collaborators.Select(UpdateProjectCollaboratorDto.Map)]
                 },
-                CurrentCollaborator = currentCollaborator != null ? ProjectCollaboratorPermissionDto.Map(currentCollaborator) : null
+                CurrentCollaborator = currentCollaborator != null ? ProjectCollaboratorPermissionDto.Map(currentCollaborator) : null,
+                ProjectCampaignContentType = EnumHelper.EnumToList<ProjectCampaignContentType>()
             };
         }
     }
@@ -72,6 +76,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
     {
         public UpdateProjectRequest Form{ get; set; }
         public ProjectCollaboratorPermissionDto? CurrentCollaborator { get; set; }
+        public List<EnumItem> ProjectCampaignContentType { get; set; }  = [];
+
     }
 
 }
