@@ -15,6 +15,7 @@ namespace PCONTB.Panel.Application.Models.Projects
         public FormFile Video { get; set; }
         public byte[] VideoData { get; set; }
         public List<ProjectCollaboratorDto> Collaborators { get; set; }
+        public ProjectCampaignDto Campaign { get; set; }
 
         public static ProjectDto Map(Project entity)
         {

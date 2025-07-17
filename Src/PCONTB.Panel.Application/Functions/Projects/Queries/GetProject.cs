@@ -2,6 +2,7 @@
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Functions;
 using PCONTB.Panel.Application.Common.Functions.Files;
+using PCONTB.Panel.Application.Contracts.Services.Projects;
 using PCONTB.Panel.Application.Models.Projects;
 using PCONTB.Panel.Domain.Repositories;
 
@@ -12,7 +13,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
 
     }
 
-    public class GetProjectHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetProjectRequest, GetProjectResponse>
+    public class GetProjectHandler(IUnitOfWork unitOfWork, IProjectCampaignService projectCampaignService) 
+        : IRequestHandler<GetProjectRequest, GetProjectResponse>
     {
 
         public async Task<GetProjectResponse> Handle(GetProjectRequest request, CancellationToken cancellationToken)
@@ -41,6 +43,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                 };
                 result.VideoData = aggregate.Video.Data;
             }
+
+            result.Campaign = await projectCampaignService.GetCampaign(aggregate, cancellationToken);
 
             return new GetProjectResponse()
             {

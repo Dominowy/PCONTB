@@ -1,4 +1,5 @@
 ﻿using PCONTB.Panel.Domain.Common;
+using PCONTB.Panel.Domain.Projects.Collaborators;
 
 namespace PCONTB.Panel.Domain.Projects.Campaigns
 {
@@ -17,6 +18,20 @@ namespace PCONTB.Panel.Domain.Projects.Campaigns
         public ProjectCampaign(Guid projectId) : base()
         {
             ProjectId = projectId;
+        }
+
+        public void AddContent(ProjectCampaignContent entity)
+        {
+            if (entity == null) return;
+
+            CampaignContents.Add(entity);
+        }
+
+        public void RemoveContent(ProjectCampaignContent entity)
+        {
+            if (entity == null) return;
+
+            CampaignContents.Remove(entity);
         }
     }
 }

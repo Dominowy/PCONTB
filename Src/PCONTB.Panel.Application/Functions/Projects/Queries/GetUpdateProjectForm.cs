@@ -20,7 +20,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
 
     public class GetUpdateProjectFormHandler(
         IUnitOfWork unitOfWork, 
-        IProjectCollaboratorPermissionService permissionService) 
+        IProjectCollaboratorPermissionService permissionService,
+        IProjectCampaignService projectCampaignService) 
         : IRequestHandler<GetUpdateProjectFormRequest, GetUpdateProjectFormResponse>
     {
         public async Task<GetUpdateProjectFormResponse> Handle(GetUpdateProjectFormRequest request, CancellationToken cancellationToken)
@@ -52,6 +53,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                 };
             }
 
+            var contents = await projectCampaignService.GetCampaign(aggregate, cancellationToken);
+
             return new GetUpdateProjectFormResponse()
             {
                 Form = new UpdateProjectRequest
@@ -64,7 +67,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                     ImageData = aggregate.Image?.Data,
                     Video = video,
                     VideoData = aggregate.Video?.Data,
-                    Collaborators = [.. aggregate.Collaborators.Select(UpdateProjectCollaboratorDto.Map)]
+                    Collaborators = [.. aggregate.Collaborators.Select(UpdateProjectCollaboratorDto.Map)],
+                    Campaign = contents
                 },
                 CurrentCollaborator = currentCollaborator != null ? ProjectCollaboratorPermissionDto.Map(currentCollaborator) : null,
                 ProjectCampaignContentType = EnumHelper.EnumToList<ProjectCampaignContentType>()

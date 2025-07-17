@@ -18,6 +18,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Category)
                 .Include(p => p.Image)
                 .Include(p => p.Video)
+                .Include(p => p.Campaing).ThenInclude(p => p.CampaignContents)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
@@ -31,6 +32,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Category)
                 .Include(p => p.Image)
                 .Include(p => p.Video)
+                .Include(p => p.Campaing).ThenInclude(p => p.CampaignContents)
                 .Where(predicate)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
@@ -45,6 +47,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Category)
                 .Include(p => p.Image)
                 .Include(p => p.Video)
+                .Include(p => p.Campaing).ThenInclude(p => p.CampaignContents)
                 .Where(predicate)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
@@ -59,6 +62,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
                 .Include(p => p.Category)
                 .Include(p => p.Image)
                 .Include(p => p.Video)
+                .Include(p => p.Campaing).ThenInclude(p => p.CampaignContents)
                 .Where(predicate)
                 .FirstOrDefaultAsync(cancellationToken);
         }

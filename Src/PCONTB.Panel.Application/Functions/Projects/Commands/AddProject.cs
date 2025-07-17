@@ -19,7 +19,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
         public byte[] ImageData { get; set; }
         public FormFile? Video { get; set; }
         public byte[] VideoData { get; set; }
-        public List<AddProjectCollaboratorDto> Collaborators { get; set; } = new List<AddProjectCollaboratorDto>();
+        public List<AddProjectCollaboratorDto> Collaborators { get; set; } = [];
+        public ProjectCampaignDto Campaign { get; set; }
 
     }
 
@@ -27,7 +28,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
         IUnitOfWork unitOfWork, 
         ISessionAccesor sessionAccesor, 
         IProjectFileService projectFileService, 
-        IProjectCollaboratorService projectCollabortatorService) 
+        IProjectCollaboratorService projectCollabortatorService,
+        IProjectCampaignService projectCampaingService) 
         : IRequestHandler<AddProjectRequest, CommandResult>
     {
         public async Task<CommandResult> Handle(AddProjectRequest request, CancellationToken cancellationToken)
@@ -41,6 +43,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
             await projectFileService.UploadVideo(aggregate, request.Video, cancellationToken);
 
             await projectCollabortatorService.AddCollaborators(aggregate, request.Collaborators, cancellationToken);
+
+            await projectCampaingService.SetCampaign(aggregate, request.Campaign, cancellationToken);
 
             await unitOfWork.ProjectRepository.Add(aggregate, cancellationToken);
 

@@ -33,6 +33,7 @@ namespace PCONTB.Panel.Application
             services.AddScoped<IJwtService, JwtService>();
 
             services.AddScoped<IProjectFileService, ProjecFileService>();
+            services.AddScoped<IProjectCampaignService, ProjectCampaignService>();
             services.AddScoped<IProjectCollaboratorService, ProjectCollaboratorService>();
             services.AddScoped<IProjectCollaboratorPermissionService, ProjectCollaboratorPermissionService>();
 

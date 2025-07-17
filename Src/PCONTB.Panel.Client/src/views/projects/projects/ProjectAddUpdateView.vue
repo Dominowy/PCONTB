@@ -73,8 +73,8 @@
                 :isAllTouched="isAllTouched"
               />
             </b-tab>
-            <b-tab title="Campaing">
-              <project-campaign-editor :types="types" />
+            <b-tab title="Campaign">
+              <project-campaign-editor v-model="form.campaign" :types="types" />
             </b-tab>
           </b-tabs>
         </b-card>

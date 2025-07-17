@@ -24,5 +24,28 @@ namespace PCONTB.Panel.Domain.Projects.Campaigns
             Type = type;
             Data = data;
         }
+
+        public ProjectCampaignContent(int order, ProjectCampaignContentType type, string? data = null) : base()
+        {
+            Order = order;
+            Type = type;
+            Data = data;
+        }
+
+        public void SetType(ProjectCampaignContentType type)
+        {
+            var anyChange = Type != type;
+            if (!anyChange) return;
+
+            Type = type;
+        }
+
+        public void SetData(string? data)
+        {
+            var anyChange = Data != data;
+            if (!anyChange) return;
+
+            Data = data;
+        }
     }
 }

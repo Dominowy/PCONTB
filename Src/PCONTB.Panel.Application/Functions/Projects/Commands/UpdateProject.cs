@@ -18,6 +18,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
         public FormFile? Video { get; set; }
         public byte[] VideoData { get; set; }
         public List<UpdateProjectCollaboratorDto> Collaborators { get; set; } = [];
+        public ProjectCampaignDto Campaign { get; set; }
 
     }
 
@@ -25,7 +26,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
         IUnitOfWork unitOfWork,
         IProjectFileService projectFileService,
         IProjectCollaboratorService projectCollabortatorService, 
-        IProjectCollaboratorPermissionService permissionService) 
+        IProjectCollaboratorPermissionService permissionService,
+        IProjectCampaignService projectCampaingService) 
         : IRequestHandler<UpdateProjectRequest, CommandResult> 
     {
 
@@ -46,6 +48,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
             await projectFileService.UploadVideo(aggregate, request.Video, cancellationToken);
 
             await projectCollabortatorService.UpdateCollaborators(aggregate, request.Collaborators, cancellationToken);
+
+            await projectCampaingService.SetCampaign(aggregate, request.Campaign, cancellationToken);
 
             await unitOfWork.Save(cancellationToken);
 

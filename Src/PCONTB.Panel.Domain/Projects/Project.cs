@@ -104,5 +104,13 @@ namespace PCONTB.Panel.Domain.Projects
 
             Collaborators.Remove(entity);
         }
+
+        public void SetProjectCampaing(ProjectCampaign campaign)
+        {
+            var anyChange = Campaing != campaign;
+            if (!anyChange) return;
+
+            Campaing = campaign;
+        }
     }
 }

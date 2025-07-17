@@ -1,135 +1,132 @@
 <template>
   <div>
-    <b-card v-for="(content, index) in contents" :key="content.id">
-      <div class="mb-2">
-        <label :for="'types' + index" class="form-label d-block"> Type: </label>
-        <select :id="'types' + index" class="form-select" v-model="content.type">
-          <option v-for="type in types" :key="type.id" :value="type.value">
-            {{ toPascalCase(type.value) }}
-          </option>
-        </select>
-      </div>
-      <div>
-        <template v-if="content.type == 'title'">
-          <base-form-input
-            :id="'title' + index"
-            class="mt-2"
-            v-model="content.data.title"
-            label="Title"
-            placeholder="Enter title"
-          />
-        </template>
-        <template v-if="content.type == 'subtitle'">
-          <base-form-input
-            :id="'subtitle' + index"
-            class="mt-2"
-            v-model="content.data.subtitle"
-            label="Subtitle"
-            placeholder="Enter subtitle"
-          />
-        </template>
-        <template v-if="content.type == 'paragraph'">
-          <textarea
-            v-model="content.data.paragraph"
-            class="form-control"
-            rows="4"
-            placeholder="Enter paragraph"
-          ></textarea>
-        </template>
-        <template v-if="content.type == 'image'">
-          <base-form-file
-            :id="'file-image' + index"
-            class="mt-2"
-            property="Image"
-            v-model="content.data.image"
-            uploadUrl="/api/multimedia/upload-file"
-            placeholder="Select image"
-            :src="content.data.imageData"
-          />
-        </template>
-        <template v-if="content.type == 'quote'">
-          <base-form-input
-            :id="'quote' + index"
-            class="mt-2"
-            v-model="content.data.quote"
-            label="Quote"
-            placeholder="Enter quote"
-          />
-        </template>
-        <template v-if="content.type == 'video'">
-          <base-form-file
-            :id="'file-video' + index"
-            class="mt-2"
-            property="Video"
-            v-model="content.data.video"
-            uploadUrl="/api/multimedia/upload-file"
-            placeholder="Select image"
-            :src="content.data.videoData"
-          />
-        </template>
-        <template v-if="content.type == 'button'"> Button</template>
-        <template v-if="content.type == 'divider'"></template>
-        <template v-if="content.type == 'list'"> List</template>
-      </div>
-    </b-card>
-    <b-card>
-      <div class="mb-2">
-        <label for="types" class="form-label d-block"> Type: </label>
-        <select id="types" class="form-select" @input="handleSelectType">
-          <option value="">Select type</option>
-          <option v-for="type in types" :key="type.id" :value="type.value">
-            {{ toPascalCase(type.value) }}
-          </option>
-        </select>
-      </div>
-      <div class="d-flex mb-2">
-        <template v-if="selectType == 'title'"> Title </template>
-        <template v-if="selectType == 'subtitle'"> Subititle </template>
-        <template v-if="selectType == 'paragraph'"> Paragraph </template>
-        <template v-if="selectType == 'image'"> Image</template>
-        <template v-if="selectType == 'quote'"> Quote</template>
-        <template v-if="selectType == 'video'"> Video</template>
-        <template v-if="selectType == 'button'"> Button</template>
-        <template v-if="selectType == 'divider'"> Divider</template>
-        <template v-if="selectType == 'list'"> List</template>
-      </div>
-      <div class="d-flex justify-content-end">
-        <b-button variant="primary" @click="addContent"> Add </b-button>
-      </div>
-    </b-card>
+    <div v-for="(content, index) in campaign.contents" :key="content.id" class="mb-4">
+      <project-content
+        :content="content"
+        :index="index + 1"
+        @update="(updatedContent) => updateContent(index, updatedContent)"
+        @remove="() => removeContent(index)"
+        @move-up="() => moveUp(index)"
+        @move-down="() => moveDown(index)"
+      />
+    </div>
+
+    <div class="mb-3" v-if="!readonly">
+      <label for="newType" class="form-label">Add content:</label>
+      <select id="newType" class="form-select" v-model="newType">
+        <option disabled value="">Select type</option>
+        <option v-for="type in types" :key="type" :value="type.value">
+          {{ toPascalCase(type.value) }}
+        </option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" @click="addContent" :disabled="!newType">Add Content</button>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { v4 as uuidv4 } from "uuid";
 
-defineProps({
+const props = defineProps({
+  modelValue: Object,
   types: Array,
+  readonly: { type: Boolean, default: false },
+});
+const emit = defineEmits(["update:modelValue"]);
+
+const campaign = computed({
+  get: () => props.modelValue || { contents: [] },
+  set: (val) => emit("update:modelValue", val),
 });
 
-const contents = ref([]);
-const selectType = ref(null);
+const newType = ref("");
 
-const addContent = () => {
-  if (!selectType.value) return;
+function addContent() {
+  if (!newType.value) return;
 
-  contents.value.push({
+  const contents = campaign.value.contents ? [...campaign.value.contents] : [];
+
+  const nextOrder = contents.length ? Math.max(...contents.map((c) => c.order || 0)) + 1 : 1;
+
+  const newContent = {
     id: uuidv4(),
-    type: selectType.value,
-    order: 1,
-    data: {},
-  });
+    type: newType.value,
+    order: nextOrder,
+    data: defaultDataMap[newType.value]?.() || {},
+  };
 
-  selectType.value = "";
-};
+  campaign.value = {
+    ...campaign.value,
+    contents: [...contents, newContent],
+  };
 
-const handleSelectType = (e) => {
-  selectType.value = e.target.value;
-};
+  newType.value = "";
+}
+
+function updateContent(index, updatedContent) {
+  const updatedContents = [...campaign.value.contents];
+  updatedContents[index] = { ...updatedContent };
+
+  campaign.value = {
+    ...campaign.value,
+    contents: updatedContents,
+  };
+}
+
+function removeContent(index) {
+  const updatedContents = [...campaign.value.contents];
+  updatedContents.splice(index, 1);
+  updatedContents.forEach((item, idx) => (item.order = idx + 1));
+
+  campaign.value = {
+    ...campaign.value,
+    contents: updatedContents,
+  };
+}
+
+function moveUp(index) {
+  if (index === 0) return;
+
+  const contents = [...campaign.value.contents];
+  [contents[index - 1], contents[index]] = [contents[index], contents[index - 1]];
+
+  contents.forEach((item, idx) => (item.order = idx + 1));
+
+  campaign.value = {
+    ...campaign.value,
+    contents,
+  };
+}
+function moveDown(index) {
+  if (index === campaign.value.contents.length - 1) return;
+
+  const contents = [...campaign.value.contents];
+  [contents[index], contents[index + 1]] = [contents[index + 1], contents[index]];
+
+  contents.forEach((item, idx) => (item.order = idx + 1));
+
+  campaign.value = {
+    ...campaign.value,
+    contents,
+  };
+}
 
 function toPascalCase(str) {
   if (!str) return "";
   return str[0].toUpperCase() + str.slice(1);
 }
+
+const defaultDataMap = {
+  title: () => ({ title: "" }),
+  subtitle: () => ({ subtitle: "" }),
+  paragraph: () => ({ paragraph: "" }),
+  image: () => ({ image: {}, imageData: "" }),
+  quote: () => ({ quote: "" }),
+  video: () => ({ video: {}, videoData: "" }),
+  button: () => ({ text: "", link: "" }),
+  list: () => ({ items: [] }),
+  divider: () => ({}),
+};
 </script>

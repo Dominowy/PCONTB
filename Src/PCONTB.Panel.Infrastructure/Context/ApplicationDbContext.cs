@@ -7,6 +7,7 @@ using PCONTB.Panel.Domain.Projects;
 using PCONTB.Panel.Domain.Projects.Campaigns;
 using PCONTB.Panel.Domain.Projects.Collaborators;
 using PCONTB.Panel.Domain.Projects.Files;
+using System.Reflection.Emit;
 
 namespace PCONTB.Panel.Infrastructure.Context
 {
@@ -110,7 +111,7 @@ namespace PCONTB.Panel.Infrastructure.Context
                 .HasOne(m => m.Campaign)
                 .WithMany(m => m.CampaignContents)
                 .HasForeignKey(m => m.CampaignId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<ProjectCampaignContent>()
                 .Property(m => m.Id)
