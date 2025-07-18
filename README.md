@@ -195,31 +195,28 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 |:-------------:|:----------:|:------------:|:------------:|
 |Rejestracja | + | - | - |
 |Logowanie | + | + | + |
-|Wylogowanie sesji| + | + | + |
+|Wylogowanie | + | + | + |
 |Aktualizacja danych konta | + | + | + |
 |Zmiana hasła konta | + | + | + |
-|Zamknięcie konta | + | + | + |
+|Blokada konta | + | + | + |
 |Wyświetlanie użytkownika | + | + | + |
 |Zarządzanie sesjami | + | + | + |
-|Wyszukiwanie projektów | + | + | + |
-|Utworzenie projektów | + | - | - |
-|Edycja projektów | + | - | - |
-|Usuwanie projektów | + | - | - |
-|Dodawanie kollaboratów | + | - | - |
-|Zarządzanie kollaboratorami | + | - | - |
-|Usuwanie kollaboratorów | + | - | - |
-|Dodawanie zdjęć projektów | + | - | - |
-|Edycja zdjęć projektów | + | - | - |
-|Usuwanie zdjęć projektów | + | - | - |
-|Tworzenie opisu projektów | + | - | - |
-|Edycja opisu projektów | + | - | - |
-|Wsparcie projektów | + | - | - |
+|Wyświetlanie projektu | + | + | + |
+|Utworzenie projektu | + | - | - |
+|Edycja projektu | + | - | - |
+|Wsparcie projektu | + | - | - |
 |Wypłata środków z kampanii | + | - | - |
 |Przegląd portfela z kampanii | + | - | - |
-|Dodawanie użytkowników | - | - | + |
-|Blokada użytkowników | + | + | + |
-|Odblokowanie użytkowników | - | + | + |
+|Dodawanie użytkownika | - | - | + |
+|Blokada użytkownika | - | + | + |
+|Odblokowanie użytkownika | - | + | + |
 |Zmiana uprawnień użytkownika | - | - | + |
+|Dodawanie kategorii | - | - | + |
+|Edycja kategorii | - | - | + |
+|Usuwanie kategorii | - | - | + |
+|Dodanie lokalizacji | - | - | + |
+|Edycja lokalizacji | - | - | + |
+|Usuwanie lokalizacji | - | - | + |
 
 
 ### 6. Przypadki użycia
@@ -235,10 +232,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Użytkownik przechodzi do logowanie.
+- Krok 1: Użytkownik/Moderator/Administrator przechodzi do logowanie.
 - Krok 2: Klika przycisk link Rejestruj
-- Krok 3: Użytkownik wypełnia wymagane dane w formularzu.
-- Krok 4: Użytkownik klika przycisk "Rejestruj".
+- Krok 3: Użytkownik/Moderator/Administrator wypełnia wymagane dane w formularzu.
+- Krok 4: Użytkownik/Moderator/Administrator klika przycisk "Rejestruj".
 - Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
 - Krok 6: Otrzymuje informację o pozytywnym wykreowaniu konta.
 ```
@@ -246,7 +243,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Rozszerzenia**:
   
 ```
-- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzających się.
 - Krok 5.2: System prosi o ponowne wprowadzenie danych.
 ```
         
@@ -260,7 +257,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Logowanie
 
 * **Cel**:
-        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowy/administratorowi uzyskania dostępu.
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi uzyskania dostępu.
         
 * **Główny Aktor**:
         Użytkownik/Moderator/Administrator
@@ -268,7 +265,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Główny Scenariusz**:
 ```
       
-- Krok 1: Użytkownik/Moderator/Administrator wyświetla się ekran z możliwością zarejestrowania lub zalogowania.
+- Krok 1: Użytkownik/Moderator/Administrator wyświetla się ekran z możliwością zalogowania.
 - Krok 2: Użytkownik/Moderator/Administrator wypełnia dane w formularzu logowania.
 - Krok 3: Sprawdzana jest poprawność wprowadzonych danych.
 - Krok 4: Użytkownik/Moderator/Administrator zostaje pomyślnie zalogowany.
@@ -276,7 +273,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 * **Rozszerzenia**:
 ```
-- Krok 3.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
+- Krok 3.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzającyh się.
 - Krok 3.2: System prosi o ponowne wprowadzenie danych.
 ```
 
@@ -290,7 +287,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Wylogowanie
 
 * **Cel**:
-        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi wylogowanie się z systemu tym samym zakończenie sesji korzystania z sytemu i zabezpieczenie swojego konta.
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi wylogowanie się z systemu tym samym zakończenie sesji i zabezpieczenie swojego konta.
      
 * **Główny Aktor**:
         Użytkownik/Moderator/Administrator
@@ -331,7 +328,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Rozszerzenia**:
   
 ```
-- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub się powtarzają.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzających się.
 - Krok 5.2: System prosi o ponowne wprowadzenie danych.
 ```
        
@@ -363,8 +360,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Rozszerzenia**:
   
 ```
-- Krok 4.1: Niepoprawne stare hasło – informacja o błędzie. 
-- Krok 4.2: Zbyt słabe hasło – system prosi o mocniejsze.
+- Krok 4.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych. 
 ```
 
 * **Przykład**:
@@ -373,7 +369,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ### Zamknięcie konta
 
 * **Cel**:
-        Umożliwienie użytkownikowi trwałego zamknięcia konta.
+        Umożliwienie użytkownikowi blokady swojego konta.
 
 * **Główny Aktor**:
         Użytkownik
@@ -382,17 +378,18 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 ```
 - Krok 1: Użytkownik przechodzi do ustawień konta.
-- Krok 2: Wybiera opcję zamknięcia konta.
+- Krok 2: Wybiera opcję blokady konta.
 - Krok 3: Potwierdza decyzję.
-- Krok 4: System usuwa lub dezaktywuje konto.
+- Krok 4: System dezaktywuje konto.
 - Krok 5: Komunikat o poprawnej operacji.
+- Krok 6: Wylogowanie wszystkich aktywnych sesji.
 ```
 
 * **Rozszerzenia**:
 
 ```
 - Krok 3.1: Użytkownik anuluje proces – konto pozostaje aktywne.
-- Krok 4.1: Konto powiązane z aktywnymi kampaniami – informacja o konieczności ich zamknięcia.
+- Krok 4.1: Informacja o powiązanyiach z aktywnymi kampaniami - brak możliwości zamknięcia konta.
 ```
 
 * **Przykład**:
@@ -451,10 +448,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
   
 ---
-### Wyszukiwanie projektów
+### Wyświetlanie projektu
 
 * **Cel**:
-        Umożliwienie użytkownikowi przeszukiwania bazy projektów.
+        Umożliwienie użytkownikowi przeglądanie projektu.
 
 * **Główny Aktor**:
         Użytkownik
@@ -462,10 +459,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik przechodzi do sekcji Discover.
-- Krok 2: Wprowadza frazę lub ustawia filtry.
-- Krok 3: System wyświetla wyniki wyszukiwania.
-- Krok 4: Użytkownik przegląda szczegóły projektów.
+- Krok 1: Wprowadza frazę lub ustawia filtry.
+- Krok 2: System wyświetla wyniki wyszukiwania.
+- Krok 3: Użytkownik wybiera projekt z listy.
+- Krok 4: Użytkownik przegląda szczegóły projektó.u
 - Krok 5: Może przejść do wsparcia lub kontaktu z twórcą.
 ```
 
@@ -473,13 +470,12 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   
 ```
 - Krok 3.1: Brak wyników – wyświetlany komunikat.
-- Krok 2.1: Wprowadzono niedozwolone znaki – błąd walidacji.
 ```
 
 * **Przykład**:
 
 ---
-### Utworzenie projektów
+### Utworzenie projektu
 
 * **Cel**:
         Umożliwienie użytkownikowi utworzenia nowego projektu.
@@ -490,8 +486,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Użytkownik przechodzi do sekcji "Zarządzanie projektami".
-- Krok 2: Wybiera opcję „Utwórz nowy projekt”.
+- Krok 1: Użytkownik przechodzi do strony swoich projektów".
+- Krok 2: Wybiera opcję „Dodaj”.
 - Krok 3: Wprowadza wymagane dane (nazwa, opis, kategorie, itp.).
 - Krok 4: Zapisuje projekt.
 - Krok 5: Projekt jest widoczny w systemie.
@@ -507,7 +503,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 ---
-### Edycja projektów
+### Edycja projektu
 
 * **Cel**:
   Umożliwienie użytkownikowi aktualizacji danych istniejącego projektu.
@@ -536,241 +532,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 ---
 
-### Usuwanie projektów
-
-* **Cel**:
-        Umożliwienie użytkownikowi usunięcia projektu.
-
-* **Główny Aktor**:
-        Użytkownik
-
-* **Główny Scenariusz**:
-
-```
-- Krok 1: Użytkownik otwiera swój projekt.
-- Krok 2: Wybiera opcję „Usuń projekt”.
-- Krok 3: Potwierdza decyzję.
-- Krok 4: System usuwa projekt.
-- Krok 5: Wyświetlany jest komunikat o powodzeniu.
-```
-
-* **Rozszerzenia**:
-  
-```
-- Krok 3.1: Użytkownik anuluje usuwanie.
-- Krok 4.1: Projekt powiązany z aktywną kampanią – usunięcie zablokowane.
-```
-
-* **Przykład**:
-
----
-
-### Dodawanie kollaboratorów
-
-* **Cel**:
-        Umożliwienie dodania współpracownika do projektu.
-
-* **Główny Aktor**:
-        Użytkownik
-
-* **Główny Scenariusz**:
-
-```
-- Krok 1: Użytkownik otwiera projekt.
-- Krok 2: Przechodzi do zakładki „Kollaboratorzy”.
-- Krok 3: Wprowadza dane użytkownika (np. email).
-- Krok 4: Zatwierdza dodanie.
-- Krok 5: Kollaborator pojawia się na liście.
-```
-
-* **Rozszerzenia**:
-  
-```
-- Krok 3.1: Nieistniejący użytkownik – informacja o błędzie.
-- Krok 4.1: Kollaborator już istnieje – komunikat o duplikacie.
-```
-
-* **Przykład**:
-
----
-### Zarządzanie kollaboratorami
-
-* **Cel**:
-        Umożliwienie edycji uprawnień kollaboratorów.
-
-* **Główny Aktor**:
-        Użytkownik
-
-* **Główny Scenariusz**:
-
-```
-- Krok 1: Użytkownik otwiera listę kollaboratorów.
-- Krok 2: Wybiera osobę do edycji.
-- Krok 3: Zmienia rolę/uprawnienia.
-- Krok 4: Zapisuje zmiany.
-- Krok 5: System aktualizuje dostęp.
-```
-
-* **Rozszerzenia**:
-  
-```
-- Krok 3.1: Brak dostępu – użytkownik nie jest właścicielem.
-- Krok 4.1: Błąd zapisu – zmiany cofnięte.
-```
-
-* **Przykład**:
-
----
-### Usuwanie kollaboratorów
-
-* **Cel**:
-        Umożliwienie usunięcia użytkownika z listy kollaboratorów projektu.
-
-* **Główny Aktor**:
-        Użytkownik
-
-* **Główny Scenariusz**:
-
-```
-- Krok 1: Otwiera listę kollaboratorów.
-- Krok 2: Wybiera osobę i klika „Usuń”.
-- Krok 3: Potwierdza decyzję.
-- Krok 4: Kollaborator zostaje usunięty.
-```
-* **Rozszerzenia**:
-  
-```
-- Krok 2.1: Próba usunięcia właściciela projektu – operacja zablokowana.
-```
-* **Przykład**:
-
----
-### Dodawanie zdjęć projektów
-
-* **Cel**:
-        Umożliwienie użytkownikowi dodania grafiki do projektu.
-
-* **Główny Aktor**:
-        Użytkownik
-
-* **Główny Scenariusz**:
-
-```
-- Krok 1: Otwiera projekt i przechodzi do sekcji zdjęć.
-- Krok 2: Wybiera plik graficzny.
-- Krok 3: Dodaje zdjęcie.
-- Krok 4: System przetwarza i zapisuje grafikę.
-```
-* **Rozszerzenia**:
-  
-```
-- Krok 2.1: Niepoprawny format – informacja o błędzie.
-- Krok 3.1: Przekroczony limit zdjęć – dodanie zablokowane.
-```
-
-* **Przykład**:
-
----
-### Edycja zdjęć projektów
-
-* **Cel**:
-        Umożliwienie edycji opisów lub nazw zdjęć.
-
-* **Główny Aktor**:
-        Użytkownik
-
-* **Główny Scenariusz**:
-
-```
-- Krok 1: Użytkownik wybiera zdjęcie w projekcie.
-- Krok 2: Edytuje opis lub tytuł.
-- Krok 3: Zapisuje zmiany.
-```
-
-* **Rozszerzenia**:
-  
-```
-- Krok 2.1: Pole puste – walidacja błędu.
-```
-* **Przykład**:
-
----
-
-### Usuwanie zdjęć projektów
-
-* **Cel**:
-        Umożliwienie usunięcia zdjęcia z projektu.
-
-* **Główny Aktor**:
-        Użytkownik
-
-* **Główny Scenariusz**:
-
-```
-- Krok 1: Użytkownik otwiera listę zdjęć.
-- Krok 2: Wybiera zdjęcie do usunięcia.
-- Krok 3: Potwierdza usunięcie.
-- Krok 4: System usuwa grafikę.
-```
-
-* **Rozszerzenia**:
-
-```
-- Krok 2.1: Próba usunięcia głównego zdjęcia – wymagane wcześniejsze przypisanie innego.
-```
-
-* **Przykład**:
-
----
-### Tworzenie opisu projektów
-
-* **Cel**:
-        Umożliwienie stworzenia szczegółowego opisu projektu.
-
-* **Główny Aktor**:
-        Użytkownik
-
-* **Główny Scenariusz**:
-
-```
-- Krok 1: Użytkownik tworzy nowy projekt.
-- Krok 2: Wprowadza treść opisu.
-- Krok 3: Zapisuje projekt.
-```
-
-* **Rozszerzenia**:
-  
-```
-- Krok 2.1: Opis za krótki – system informuje o wymaganej długości.
-```
-* **Przykład**:
-
----
-
-### Edycja opisu projektów
-
-* **Cel**:
-        Umożliwienie edycji istniejącego opisu projektu.
-
-* **Główny Aktor**:
-        Użytkownik
-
-* **Główny Scenariusz**:
-
-```
-- Krok 1: Użytkownik edytuje projekt.
-- Krok 2: Wprowadza zmiany w opisie.
-- Krok 3: Zapisuje zmiany.
-```
-
-* **Rozszerzenia**:
-```
-- Krok 2.1: Opis zawiera niedozwolone znaki – system blokuje zapis.
-```
-* **Przykład**:
-
----
-### Wsparcie projektów
+### Wsparcie projektu
 
 * **Cel**:
         Umożliwienie użytkownikowi wsparcia finansowego dla wybranego projektu.
@@ -872,7 +634,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 ---
-### Blokada użytkowników
+### Blokada użytkownika
 
 * **Cel**:
         Zablokowanie konta użytkownika w przypadku naruszenia regulaminu.
@@ -923,6 +685,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
   
 ---
+
 ### Zmiana uprawnień użytkownika
 
 * **Cel**:
@@ -948,3 +711,122 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 ---
+
+### Dodawanie kategorii  
+* **Cel**:  
+  Administrator może dodać nową kategorię do systemu.  
+* **Główny Aktor**:  
+  Administrator  
+* **Główny Scenariusz**:  
+  ```
+  - Krok 1: Administrator otwiera panel zarządzania kategoriami.  
+  - Krok 2: Wybiera opcję "Dodaj kategorię".  
+  - Krok 3: Wprowadza nazwę i ewentualny opis kategorii.  
+  - Krok 4: Zatwierdza dodanie.  
+  - Krok 5: Kategoria zostaje dodana do systemu.  
+  ```  
+* **Rozszerzenia**:  
+  ```
+  - Krok 3.1: Wprowadzono pustą nazwę – wyświetlany jest komunikat o błędzie.  
+  - Krok 4.1: Kategoria o podanej nazwie już istnieje – operacja odrzucona.  
+  ```
+
+---
+
+### Edycja kategorii  
+* **Cel**:  
+  Administrator może edytować istniejącą kategorię.  
+* **Główny Aktor**:  
+  Administrator  
+* **Główny Scenariusz**:  
+  ```
+  - Krok 1: Administrator otwiera listę kategorii.  
+  - Krok 2: Wybiera kategorię do edycji.  
+  - Krok 3: Modyfikuje dane kategorii.  
+  - Krok 4: Zatwierdza zmiany.  
+  - Krok 5: Kategoria zostaje zaktualizowana.  
+  ```  
+* **Rozszerzenia**:  
+  ```
+  - Krok 3.1: Zmiana nazwy na istniejącą – operacja odrzucona.  
+  ```
+
+---
+
+### Usuwanie kategorii  
+* **Cel**:  
+  Administrator może usunąć kategorię z systemu.  
+* **Główny Aktor**:  
+  Administrator  
+* **Główny Scenariusz**:  
+  ```
+  - Krok 1: Administrator otwiera listę kategorii.  
+  - Krok 2: Wybiera kategorię do usunięcia.  
+  - Krok 3: Potwierdza usunięcie.  
+  - Krok 4: Kategoria zostaje usunięta z systemu.  
+  ```  
+* **Rozszerzenia**:  
+  ```
+  - Krok 2.1: Kategoria jest powiązana z aktywnymi danymi – operacja odrzucona.  
+  ```
+
+---
+
+### Dodanie lokalizacji  
+* **Cel**:  
+  Administrator może dodać nową lokalizację do systemu.  
+* **Główny Aktor**:  
+  Administrator  
+* **Główny Scenariusz**:  
+  ```
+  - Krok 1: Administrator otwiera panel zarządzania lokalizacjami.  
+  - Krok 2: Wybiera opcję "Dodaj lokalizację".  
+  - Krok 3: Wprowadza dane lokalizacji.  
+  - Krok 4: Zatwierdza dodanie.  
+  - Krok 5: Lokalizacja zostaje dodana.  
+  ```  
+* **Rozszerzenia**:  
+  ```
+  - Krok 3.1: Niepełne dane – wyświetlany jest komunikat o błędzie.  
+  - Krok 4.1: Lokalizacja już istnieje – operacja odrzucona.  
+  ```
+
+---
+
+### Edycja lokalizacji  
+* **Cel**:  
+  Administrator może edytować dane istniejącej lokalizacji.  
+* **Główny Aktor**:  
+  Administrator  
+* **Główny Scenariusz**:  
+  ```
+  - Krok 1: Administrator otwiera listę lokalizacji.  
+  - Krok 2: Wybiera lokalizację do edycji.  
+  - Krok 3: Modyfikuje dane lokalizacji.  
+  - Krok 4: Zatwierdza zmiany.  
+  - Krok 5: Dane lokalizacji zostają zaktualizowane.  
+  ```  
+* **Rozszerzenia**:  
+  ```
+  - Krok 3.1: Błędny format danych – operacja odrzucona.  
+  ```
+
+---
+
+### Usuwanie lokalizacji  
+* **Cel**:  
+  Administrator może usunąć lokalizację z systemu.  
+* **Główny Aktor**:  
+  Administrator  
+* **Główny Scenariusz**:  
+  ```
+  - Krok 1: Administrator otwiera listę lokalizacji.  
+  - Krok 2: Wybiera lokalizację do usunięcia.  
+  - Krok 3: Potwierdza usunięcie.  
+  - Krok 4: Lokalizacja zostaje usunięta.  
+  ```  
+* **Rozszerzenia**:  
+  ```
+  - Krok 2.1: Lokalizacja jest przypisana do aktywnych zasobów – operacja odrzucona.  
+  ```
+
