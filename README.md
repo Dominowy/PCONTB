@@ -731,6 +731,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 4.1: Kategoria o podanej nazwie już istnieje – operacja odrzucona.  
   ```
 
+  * **Przykład**:
+
 ---
 
 ### Edycja kategorii  
@@ -751,6 +753,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 3.1: Zmiana nazwy na istniejącą – operacja odrzucona.  
   ```
 
+  * **Przykład**:
+
 ---
 
 ### Usuwanie kategorii  
@@ -769,6 +773,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   ```
   - Krok 2.1: Kategoria jest powiązana z aktywnymi danymi – operacja odrzucona.  
   ```
+
+  * **Przykład**:
 
 ---
 
@@ -791,6 +797,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 4.1: Lokalizacja już istnieje – operacja odrzucona.  
   ```
 
+  * **Przykład**:
+
 ---
 
 ### Edycja lokalizacji  
@@ -811,6 +819,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 3.1: Błędny format danych – operacja odrzucona.  
   ```
 
+  * **Przykład**:
+
 ---
 
 ### Usuwanie lokalizacji  
@@ -829,4 +839,6 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   ```
   - Krok 2.1: Lokalizacja jest przypisana do aktywnych zasobów – operacja odrzucona.  
   ```
+
+  * **Przykład**:
 
