@@ -185,7 +185,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 - Baza danych - PostgreSQL - odpowiedzialny z przechowywanie danych o projektach oraz użytkownikach
 2. Ledger - w nim znajdą się informację o płatnościach oraz transakcjach backend będzie wymieniał z nim dane na temat transakcji.
 
-![image](https://github.com/user-attachments/assets/0e996372-d122-495d-b421-495c441211e9)
+<img width="588" height="461" alt="image" src="https://github.com/user-attachments/assets/dd95be82-c127-41c0-a52f-e08e1c3ca4d7" />
 
 <img width="1228" height="902" alt="image" src="https://github.com/user-attachments/assets/f68ed2a3-1a5a-43dc-afa4-70123cb00f0d" />
 
