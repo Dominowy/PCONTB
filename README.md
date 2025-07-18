@@ -336,7 +336,6 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/56208135/165722805-7997efdf-9c1e-46c6-b46d-e8fef952a646.png" />
 </p>
 
 ---
@@ -365,6 +364,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ```
 
 * **Przykład**:
+
+<p align="center">
+</p>
   
 ---
 ### Zamknięcie konta
@@ -394,6 +396,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ```
 
 * **Przykład**:
+
+<p align="center">
+</p>
   
 ---
 ### Wyświetlanie użytkownika
@@ -419,6 +424,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ```
 
 * **Przykład**:
+
+<p align="center">
+</p>
   
 ---
 ### Zarządzanie sesjami
@@ -447,6 +455,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ```
 
 * **Przykład**:
+
+<p align="center">
+</p>
   
 ---
 ### Wyświetlanie projektu
@@ -474,6 +485,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ```
 
 * **Przykład**:
+
+<p align="center">
+</p>
 
 ---
 ### Utworzenie projektu
@@ -503,6 +517,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 * **Przykład**:
 
+<p align="center">
+</p>
+
 ---
 ### Edycja projektu
 
@@ -530,6 +547,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ```
 
 * **Przykład**:
+
+<p align="center">
+</p>
 
 ---
 
@@ -560,6 +580,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 * **Przykład**:
 
+<p align="center">
+</p>
+
 ---
 ### Wypłata środków z kampanii
 
@@ -588,6 +611,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 * **Przykład**:
 
+<p align="center">
+</p>
+
 ---
 ### Przegląd portfela z kampanii
 
@@ -609,6 +635,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 - Krok 2.1: Błąd API – brak dostępu do danych portfela.
 ```
 * **Przykład**:
+
+<p align="center">
+</p>
 
 ---
 ### Dodawanie użytkowników
@@ -633,6 +662,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 - Krok 2.1: Użytkownik o tym adresie e-mail już istnieje.
 ```
 * **Przykład**:
+
+<p align="center">
+</p>
 
 ---
 ### Blokada użytkownika
@@ -660,6 +692,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 * **Przykład**:
 
+<p align="center">
+</p>
+
 ---
 ### Odblokowanie użytkowników
 
@@ -684,6 +719,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ```
 
 * **Przykład**:
+
+<p align="center">
+</p>
   
 ---
 
@@ -711,6 +749,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 * **Przykład**:
 
+<p align="center">
+</p>
+
 ---
 
 ### Dodawanie kategorii  
@@ -734,6 +775,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 * **Przykład**:
 
+<p align="center">
+</p>
+
 ---
 
 ### Edycja kategorii  
@@ -756,6 +800,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 * **Przykład**:
 
+<p align="center">
+</p>
+
 ---
 
 ### Usuwanie kategorii  
@@ -776,6 +823,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   ```
 
  * **Przykład**:
+
+<p align="center">
+</p>
 
 ---
 
@@ -800,6 +850,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 * **Przykład**:
 
+<p align="center">
+</p>
+
 ---
 
 ### Edycja lokalizacji  
@@ -822,6 +875,9 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 * **Przykład**:
 
+<p align="center">
+</p>
+
 ---
 
 ### Usuwanie lokalizacji  
@@ -842,4 +898,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   ```
 
 * **Przykład**:
+
+<p align="center">
+</p>
 
