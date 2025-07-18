@@ -187,7 +187,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
 ![image](https://github.com/user-attachments/assets/0e996372-d122-495d-b421-495c441211e9)
 
-![image](https://github.com/user-attachments/assets/875a6a96-e8b3-423f-8737-0e67a434b3c9)
+<img width="1228" height="902" alt="image" src="https://github.com/user-attachments/assets/f68ed2a3-1a5a-43dc-afa4-70123cb00f0d" />
+
 
 ### 5. Lista przypdków użycia
 
@@ -731,7 +732,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 4.1: Kategoria o podanej nazwie już istnieje – operacja odrzucona.  
   ```
 
-  * **Przykład**:
+* **Przykład**:
 
 ---
 
@@ -753,7 +754,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 3.1: Zmiana nazwy na istniejącą – operacja odrzucona.  
   ```
 
-  * **Przykład**:
+* **Przykład**:
 
 ---
 
@@ -774,7 +775,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 2.1: Kategoria jest powiązana z aktywnymi danymi – operacja odrzucona.  
   ```
 
-  * **Przykład**:
+ * **Przykład**:
 
 ---
 
@@ -797,7 +798,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 4.1: Lokalizacja już istnieje – operacja odrzucona.  
   ```
 
-  * **Przykład**:
+* **Przykład**:
 
 ---
 
@@ -819,7 +820,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 3.1: Błędny format danych – operacja odrzucona.  
   ```
 
-  * **Przykład**:
+* **Przykład**:
 
 ---
 
@@ -840,5 +841,5 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 2.1: Lokalizacja jest przypisana do aktywnych zasobów – operacja odrzucona.  
   ```
 
-  * **Przykład**:
+* **Przykład**:
 
