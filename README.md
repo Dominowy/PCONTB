@@ -713,11 +713,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 
 ### Dodawanie kategorii  
-* **Cel**:  
-  Administrator może dodać nową kategorię do systemu.  
-* **Główny Aktor**:  
-  Administrator  
-* **Główny Scenariusz**:  
+* **Cel**:  Administrator może dodać nową kategorię do systemu.  
+* **Główny Aktor**:  Administrator  
+* **Główny Scenariusz**:
+  
   ```
   - Krok 1: Administrator otwiera panel zarządzania kategoriami.  
   - Krok 2: Wybiera opcję "Dodaj kategorię".  
@@ -725,7 +724,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 4: Zatwierdza dodanie.  
   - Krok 5: Kategoria zostaje dodana do systemu.  
   ```  
-* **Rozszerzenia**:  
+* **Rozszerzenia**:
+  
   ```
   - Krok 3.1: Wprowadzono pustą nazwę – wyświetlany jest komunikat o błędzie.  
   - Krok 4.1: Kategoria o podanej nazwie już istnieje – operacja odrzucona.  
@@ -734,19 +734,19 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 
 ### Edycja kategorii  
-* **Cel**:  
-  Administrator może edytować istniejącą kategorię.  
-* **Główny Aktor**:  
-  Administrator  
-* **Główny Scenariusz**:  
+* **Cel**:  Administrator może edytować istniejącą kategorię.  
+* **Główny Aktor**:  Administrator  
+* **Główny Scenariusz**:
+  
   ```
   - Krok 1: Administrator otwiera listę kategorii.  
   - Krok 2: Wybiera kategorię do edycji.  
   - Krok 3: Modyfikuje dane kategorii.  
   - Krok 4: Zatwierdza zmiany.  
   - Krok 5: Kategoria zostaje zaktualizowana.  
-  ```  
-* **Rozszerzenia**:  
+  ```
+* **Rozszerzenia**:
+   
   ```
   - Krok 3.1: Zmiana nazwy na istniejącą – operacja odrzucona.  
   ```
@@ -754,18 +754,18 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 
 ### Usuwanie kategorii  
-* **Cel**:  
-  Administrator może usunąć kategorię z systemu.  
-* **Główny Aktor**:  
-  Administrator  
-* **Główny Scenariusz**:  
+* **Cel**:  Administrator może usunąć kategorię z systemu.  
+* **Główny Aktor**:  Administrator  
+* **Główny Scenariusz**:
+  
   ```
   - Krok 1: Administrator otwiera listę kategorii.  
   - Krok 2: Wybiera kategorię do usunięcia.  
   - Krok 3: Potwierdza usunięcie.  
   - Krok 4: Kategoria zostaje usunięta z systemu.  
   ```  
-* **Rozszerzenia**:  
+* **Rozszerzenia**:
+  
   ```
   - Krok 2.1: Kategoria jest powiązana z aktywnymi danymi – operacja odrzucona.  
   ```
@@ -773,11 +773,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 
 ### Dodanie lokalizacji  
-* **Cel**:  
-  Administrator może dodać nową lokalizację do systemu.  
-* **Główny Aktor**:  
-  Administrator  
-* **Główny Scenariusz**:  
+* **Cel**:  Administrator może dodać nową lokalizację do systemu.  
+* **Główny Aktor**:  Administrator  
+* **Główny Scenariusz**:
+  
   ```
   - Krok 1: Administrator otwiera panel zarządzania lokalizacjami.  
   - Krok 2: Wybiera opcję "Dodaj lokalizację".  
@@ -785,7 +784,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 4: Zatwierdza dodanie.  
   - Krok 5: Lokalizacja zostaje dodana.  
   ```  
-* **Rozszerzenia**:  
+* **Rozszerzenia**:
+  
   ```
   - Krok 3.1: Niepełne dane – wyświetlany jest komunikat o błędzie.  
   - Krok 4.1: Lokalizacja już istnieje – operacja odrzucona.  
@@ -794,11 +794,10 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 
 ### Edycja lokalizacji  
-* **Cel**:  
-  Administrator może edytować dane istniejącej lokalizacji.  
-* **Główny Aktor**:  
-  Administrator  
-* **Główny Scenariusz**:  
+* **Cel**:  Administrator może edytować dane istniejącej lokalizacji.  
+* **Główny Aktor**:  Administrator  
+* **Główny Scenariusz**:
+  
   ```
   - Krok 1: Administrator otwiera listę lokalizacji.  
   - Krok 2: Wybiera lokalizację do edycji.  
@@ -806,7 +805,8 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
   - Krok 4: Zatwierdza zmiany.  
   - Krok 5: Dane lokalizacji zostają zaktualizowane.  
   ```  
-* **Rozszerzenia**:  
+* **Rozszerzenia**:
+  
   ```
   - Krok 3.1: Błędny format danych – operacja odrzucona.  
   ```
@@ -814,18 +814,18 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 ---
 
 ### Usuwanie lokalizacji  
-* **Cel**:  
-  Administrator może usunąć lokalizację z systemu.  
-* **Główny Aktor**:  
-  Administrator  
-* **Główny Scenariusz**:  
+* **Cel**:  Administrator może usunąć lokalizację z systemu.  
+* **Główny Aktor**:  Administrator  
+* **Główny Scenariusz**:
+  
   ```
   - Krok 1: Administrator otwiera listę lokalizacji.  
   - Krok 2: Wybiera lokalizację do usunięcia.  
   - Krok 3: Potwierdza usunięcie.  
   - Krok 4: Lokalizacja zostaje usunięta.  
   ```  
-* **Rozszerzenia**:  
+* **Rozszerzenia**:
+  
   ```
   - Krok 2.1: Lokalizacja jest przypisana do aktywnych zasobów – operacja odrzucona.  
   ```
