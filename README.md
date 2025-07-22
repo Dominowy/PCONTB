@@ -197,12 +197,18 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 |Blokada konta | + | + | + |
 |Wyświetlanie użytkownika | + | + | + |
 |Zarządzanie sesjami | + | + | + |
+|Zarządzanie transakcjami | - | + | + |
+|Wyświetlanie transakcji | + | - | + |
+|Wyświetlanie wspieranych projektów | + | - | + |
+|Zarządzanie wspieranymi projektami | + | - | - |
 |Wyświetlanie projektu | + | + | + |
 |Utworzenie projektu | + | - | - |
 |Edycja projektu | + | - | - |
+|Uruchomienie kampani | + | - | - |
 |Wsparcie projektu | + | - | - |
-|Wypłata środków z kampanii | + | - | - |
-|Przegląd portfela z kampanii | + | - | - |
+|Wyświetlenie wspierających | + | - | - |
+|Przegląd środków kampanii | + | - | - |
+|Wypłata środków kampanii | + | - | - |
 |Dodawanie użytkownika | - | - | + |
 |Blokada użytkownika | - | + | + |
 |Odblokowanie użytkownika | - | + | + |
