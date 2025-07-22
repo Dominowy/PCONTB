@@ -179,7 +179,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
-- Backend - ASP.NET - napisane zostanie w nim WEB.API mechanika strony, połączenie z bazą danych oraz połączenie z blockchainem. Backend zostanie podzielony na warstwy zgodnie z czystą architekturą.
+- Backend - ASP.NET - napisane zostanie w nim WEB.API mechanika strony, połączenie z bazą danych oraz blockchainem. Backend zostanie podzielony na warstwy zgodnie z czystą architekturą.
 - Frontend - VUE.JS - zostanie w nim stworzony interfejs użytkownika w komunikacji z backendem będzie pośredniczył VITE.JS w którym zostanie skonfigurowane proxy.
 - Baza danych - PostgreSQL - odpowiedzialny z przechowywanie danych o projektach, użytkownikach transakcjach oraz danych pomocniczych
 
