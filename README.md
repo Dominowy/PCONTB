@@ -179,15 +179,11 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 
-1. Panel - jest to część z którą to użytkownik będzie wchodził w interakcję podzielona jest na backend oraz frontend.
-- Backend - ASP.NET - napisane zostanie w nim WEB.API mechanika strony, połączenie z bazą danych oraz połączenie z Ledgerem. Backend zostanie podzielony na warstwy zgodnie z czystą architekturą.
+- Backend - ASP.NET - napisane zostanie w nim WEB.API mechanika strony, połączenie z bazą danych oraz blockchainem. Backend zostanie podzielony na warstwy zgodnie z czystą architekturą.
 - Frontend - VUE.JS - zostanie w nim stworzony interfejs użytkownika w komunikacji z backendem będzie pośredniczył VITE.JS w którym zostanie skonfigurowane proxy.
-- Baza danych - PostgreSQL - odpowiedzialny z przechowywanie danych o projektach oraz użytkownikach
-2. Ledger - w nim znajdą się informację o płatnościach oraz transakcjach backend będzie wymieniał z nim dane na temat transakcji.
+- Baza danych - PostgreSQL - odpowiedzialny z przechowywanie danych o projektach, użytkownikach transakcjach oraz danych pomocniczych
 
-<img width="588" height="461" alt="image" src="https://github.com/user-attachments/assets/dd95be82-c127-41c0-a52f-e08e1c3ca4d7" />
-
-<img width="1353" height="949" alt="image" src="https://github.com/user-attachments/assets/44995d1a-865f-4f82-b507-1c9e03739707" />
+<img width="1167" height="1145" alt="image" src="https://github.com/user-attachments/assets/61d5e898-0535-44ae-a7e3-3ce2c9c56e5e" />
 
 ### 5. Lista przypdków użycia
 
@@ -201,12 +197,18 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 |Blokada konta | + | + | + |
 |Wyświetlanie użytkownika | + | + | + |
 |Zarządzanie sesjami | + | + | + |
+|Zarządzanie transakcjami | - | + | + |
+|Wyświetlanie transakcji | + | - | + |
+|Wyświetlanie wspieranych projektów | + | - | + |
+|Zarządzanie wspieranymi projektami | + | - | - |
 |Wyświetlanie projektu | + | + | + |
 |Utworzenie projektu | + | - | - |
 |Edycja projektu | + | - | - |
+|Uruchomienie kampani | + | - | - |
 |Wsparcie projektu | + | - | - |
-|Wypłata środków z kampanii | + | - | - |
-|Przegląd portfela z kampanii | + | - | - |
+|Wyświetlenie wspierających | + | - | - |
+|Przegląd środków kampanii | + | - | - |
+|Wypłata środków kampanii | + | - | - |
 |Dodawanie użytkownika | - | - | + |
 |Blokada użytkownika | - | + | + |
 |Odblokowanie użytkownika | - | + | + |
