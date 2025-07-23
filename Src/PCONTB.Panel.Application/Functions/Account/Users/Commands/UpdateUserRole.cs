@@ -3,6 +3,7 @@ using MediatR;
 using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Domain.Repositories;
 using System.Data;
 
@@ -30,15 +31,15 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
                 entity.SetEnabled(true);
             }
 
-            var rolesToRemove = entity.UserRoles.Where(m => !request.Roles.Contains(m.Role)).ToList();
+            var rolesToRemove = entity.Roles.Where(m => !request.Roles.Contains(m.Role)).ToList();
 
-            entity.UserRoles.RemoveAll(m => !request.Roles.Contains(m.Role));
+            entity.Roles.RemoveAll(m => !request.Roles.Contains(m.Role));
 
-            var rolesToAdd = request.Roles.Where(m => !entity.UserRoles.Any(x => x.Role == m))
+            var rolesToAdd = request.Roles.Where(m => !entity.Roles.Any(x => x.Role == m))
                               .Select(m => new UserRole(m, entity.Id))
                               .ToList();
 
-            entity.UserRoles.AddRange(rolesToAdd);
+            entity.Roles.AddRange(rolesToAdd);
 
             await unitOfWork.Save(cancellationToken);
 

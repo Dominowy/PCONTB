@@ -3,7 +3,7 @@ using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Services.Auth.Encryption;
-using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
@@ -27,7 +27,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
             var entity = await unitOfWork.UserRepository.GetBy(u => u.Email == request.Login || u.Username == request.Login, cancellationToken) 
                 ?? throw new BadRequestException(ErrorCodes.Users.User.LoginWrongCredential.Message);
 
-            if (entity.UserRoles.Any(r => r.Role == Role.Block)) 
+            if (entity.Roles.Any(r => r.Role == Role.Block)) 
                 throw new BadRequestException(ErrorCodes.Users.User.AccountLock.Message);
 
             if (!passwordHasherService.Verify(request.Password, entity.Password))

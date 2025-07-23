@@ -1,4 +1,6 @@
 ﻿using PCONTB.Panel.Domain.Account.Sessions;
+using PCONTB.Panel.Domain.Account.Users.Roles;
+using PCONTB.Panel.Domain.Account.Users.Wallets;
 using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Projects;
 using PCONTB.Panel.Domain.Projects.Collaborators;
@@ -12,10 +14,11 @@ namespace PCONTB.Panel.Domain.Account.Users
         public string Email { get; private set; }
         public string Password { get; private set; }
 
-        public virtual List<Project> Projects { get; private set; } = new List<Project>();
-        public virtual List<ProjectCollaborator> Collaborators { get; private set; } = new List<ProjectCollaborator>();
-        public virtual List<Session> Sessions { get; private set; } = new List<Session>();
-        public virtual List<UserRole> UserRoles { get; private set; } = new List<UserRole>();
+        public virtual List<Project> Projects { get; private set; } = [];
+        public virtual List<ProjectCollaborator> Collaborators { get; private set; } = [];
+        public virtual List<Session> Sessions { get; private set; } = [];
+        public virtual List<UserRole> Roles { get; private set; } = [];
+        public virtual List<UserWallet> Wallets { get; private set; } = [];
 
         protected User() : base()
         {

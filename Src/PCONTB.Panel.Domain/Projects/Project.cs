@@ -19,7 +19,7 @@ namespace PCONTB.Panel.Domain.Projects
         public Guid CategoryId { get; private set; }
         public virtual Category Category { get; private set; }
 
-        public virtual List<ProjectCollaborator> Collaborators { get; private set; } = new List<ProjectCollaborator>();
+        public virtual List<ProjectCollaborator> Collaborators { get; private set; } = [];
         public string? Description { get; private set; }
 
         public Guid? ImageId { get; private set; }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
-using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 
-namespace PCONTB.Panel.Infrastructure.Security.Filters
+namespace PCONTB.Panel.Server.Filters
 {
     [AttributeUsage(AttributeTargets.All)]
     public class AuthorizeToken(params Role[] roles) : Attribute, IAuthorizationFilter
@@ -36,7 +36,7 @@ namespace PCONTB.Panel.Infrastructure.Security.Filters
 
             if (session != null)
             {
-                var userRoles = session.User.UserRoles.Select(r => r.Role);
+                var userRoles = session.User.Roles.Select(r => r.Role);
 
                 if (!userRoles.Any(r => roles.Contains(r)))
                 {

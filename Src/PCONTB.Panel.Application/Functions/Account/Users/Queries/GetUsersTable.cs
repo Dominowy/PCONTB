@@ -35,7 +35,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
                 Email = user.Email,
                 Username = user.Username,
                 Enabled = user.Enabled,
-                UserRoles = [.. user.UserRoles.Select(m =>  new UserRoleTableDto
+                UserRoles = [.. user.Roles.Select(m =>  new UserRoleTableDto
                 {
                     Name = m.Role.ToString()
                 })]

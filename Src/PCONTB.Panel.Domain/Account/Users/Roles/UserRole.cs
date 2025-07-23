@@ -1,6 +1,6 @@
 ﻿using PCONTB.Panel.Domain.Common;
 
-namespace PCONTB.Panel.Domain.Account.Users
+namespace PCONTB.Panel.Domain.Account.Users.Roles
 {
     public class UserRole : BaseEntity
     {

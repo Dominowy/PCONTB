@@ -4,7 +4,7 @@ using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Common.Extensions.Helpers.Enums;
 using PCONTB.Panel.Application.Common.Functions;
 using PCONTB.Panel.Application.Functions.Account.Users.Commands;
-using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
@@ -28,7 +28,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
                 {
                     Id = entity.Id,
                     Username = entity.Username,
-                    Roles = [.. entity.UserRoles.Select(m => m.Role)],
+                    Roles = [.. entity.Roles.Select(m => m.Role)],
                 },
                 Roles = EnumHelper.EnumToList<Role>()
             };

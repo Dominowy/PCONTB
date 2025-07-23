@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Categories\" />
+    <Folder Include="Controllers\Categories\" />
   </ItemGroup>
 
 </Project>

@@ -3,6 +3,7 @@ using MediatR;
 using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Contracts.Services.Auth.Encryption;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Domain.Repositories;
 using System.Text.RegularExpressions;
 
@@ -27,7 +28,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             var roles = request.Roles.Select(m => new UserRole(m, entity.Id)).ToList();
 
-            entity.UserRoles.AddRange(roles);
+            entity.Roles.AddRange(roles);
 
             await unitOfWork.UserRepository.Add(entity, cancellationToken);
 

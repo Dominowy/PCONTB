@@ -12,13 +12,13 @@ namespace PCONTB.Panel.Infrastructure.Repositories
     {
         public override IQueryable<User> GetQuery()
         {
-            return dbSet.Include(m => m.UserRoles).AsNoTracking();
+            return dbSet.Include(m => m.Roles).AsNoTracking();
         }
 
         public override async Task<IEnumerable<User>> GetAll(CancellationToken cancellationToken)
         {
             return await dbSet
-                .Include(m => m.UserRoles)
+                .Include(m => m.Roles)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
@@ -27,7 +27,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
         {
             return await dbSet
                 .Where(predicate)
-                .Include(m => m.UserRoles)
+                .Include(m => m.Roles)
                 .Include(m => m.Projects).ThenInclude(m => m.Category)
                 .Include(m => m.Projects).ThenInclude(m => m.Country)
                 .Include(m => m.Collaborators).ThenInclude(m => m.Project).ThenInclude(m => m.Category)
@@ -40,7 +40,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
         {
             return await dbSet
                 .Where(predicate)
-                .Include(m => m.UserRoles)
+                .Include(m => m.Roles)
                 .FirstOrDefaultAsync(cancellationToken);
         }
     }

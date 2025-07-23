@@ -2,7 +2,7 @@
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Domain.Account.Sessions;
-using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 
 namespace PCONTB.Panel.Application.Services.Auth
 {
@@ -28,7 +28,7 @@ namespace PCONTB.Panel.Application.Services.Auth
 
         public void VerifyWithRoles(Guid id, List<Role> roles)
         {
-            if (Session.User.UserRoles.Any(r => roles.Contains(r.Role))) return;
+            if (Session.User.Roles.Any(r => roles.Contains(r.Role))) return;
 
             if (Session.User.Id != id)
                 throw new UnauthorizedException(ErrorCodes.Users.User.AccesDenied.Message);

@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PCONTB.Panel.Domain.Account.Sessions;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
+using PCONTB.Panel.Domain.Account.Users.Wallets;
 using PCONTB.Panel.Domain.Categories;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects;
@@ -19,6 +21,7 @@ namespace PCONTB.Panel.Infrastructure.Context
         }
 
         public DbSet<Session> Session { get; set; }
+        public DbSet<UserWallet> UserWallet { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Country> Country { get; set; }
@@ -40,12 +43,21 @@ namespace PCONTB.Panel.Infrastructure.Context
 
             builder.Entity<UserRole>()
                 .HasOne(m => m.User)
-                .WithMany(m => m.UserRoles)
+                .WithMany(m => m.Roles)
                 .HasForeignKey(m => m.UserId);
 
             builder.Entity<UserRole>()
                 .Property(m => m.Id)
                 .ValueGeneratedOnAdd();
+
+            builder.Entity<UserWallet>()
+                .HasOne(m => m.User)
+                .WithMany(m => m.Wallets)
+                .HasForeignKey(m => m.UserId);
+
+            builder.Entity<UserWallet>()
+               .Property(m => m.Id)
+               .ValueGeneratedOnAdd();
 
             builder.Entity<ProjectCollaborator>()
                 .HasOne(m => m.User)

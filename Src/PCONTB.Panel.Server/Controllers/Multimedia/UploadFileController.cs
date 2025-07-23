@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Server.Controllers.Common;
+using PCONTB.Panel.Server.Filters;
 
 namespace PCONTB.Panel.Server.Controllers.Multimedia
 {
@@ -9,6 +11,7 @@ namespace PCONTB.Panel.Server.Controllers.Multimedia
     public class UploadFileController(IMediator mediator, ISessionAccesor sessionAccesor) : BaseController(mediator)
     {
         [HttpPost("upload-file")]
+        [AuthorizeToken(Role.User, Role.Moderator, Role.Admin)]
         public async Task<IActionResult> UploadFile()
         {
             var userId = sessionAccesor.Session.User.Id;

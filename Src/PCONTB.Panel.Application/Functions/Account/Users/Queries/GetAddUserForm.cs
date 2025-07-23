@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common.Extensions.Helpers.Enums;
 using PCONTB.Panel.Application.Functions.Account.Users.Commands;
-using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Queries
 {

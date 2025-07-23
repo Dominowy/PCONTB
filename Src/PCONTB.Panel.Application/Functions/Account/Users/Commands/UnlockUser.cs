@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Common.Exceptions;
-using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Domain.Repositories;
 
 namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
@@ -19,10 +19,10 @@ namespace PCONTB.Panel.Application.Functions.Account.Users.Commands
 
             entity.SetEnabled(true);
 
-            var roleBlock = entity.UserRoles.FirstOrDefault(m => m.Role == Role.Block) 
+            var roleBlock = entity.Roles.FirstOrDefault(m => m.Role == Role.Block) 
                 ?? throw new NotFoundException(ErrorCodes.Users.User.UserIsNotBlock.Message);
 
-            entity.UserRoles.Remove(roleBlock);
+            entity.Roles.Remove(roleBlock);
 
             await unitOfWork.Save(cancellationToken);
 

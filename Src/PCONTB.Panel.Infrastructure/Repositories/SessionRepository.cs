@@ -13,7 +13,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
         {
             return await dbSet
                 .Include(m => m.User)
-                .ThenInclude(m => m.UserRoles)
+                .ThenInclude(m => m.Roles)
                 .Where(predicate)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);

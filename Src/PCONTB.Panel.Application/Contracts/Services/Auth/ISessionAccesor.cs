@@ -1,5 +1,5 @@
 ﻿using PCONTB.Panel.Domain.Account.Sessions;
-using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 
 namespace PCONTB.Panel.Application.Contracts.Services.Auth
 {

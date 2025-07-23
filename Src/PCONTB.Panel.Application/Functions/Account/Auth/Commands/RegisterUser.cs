@@ -4,6 +4,7 @@ using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Services.Auth.Encryption;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Domain.Repositories;
 using System.Text.RegularExpressions;
 
@@ -32,7 +33,7 @@ namespace PCONTB.Panel.Application.Functions.Account.Auth.Commands
 
             var role = new UserRole(Role.User, entity.Id);
 
-            entity.UserRoles.Add(role);
+            entity.Roles.Add(role);
 
             await unitOfWork.UserRepository.Add(entity, cancellationToken);
 

@@ -8,9 +8,10 @@ using PCONTB.Panel.Application.Functions.Account.Users.Queries;
 using PCONTB.Panel.Application.Functions.Location.Countries.Commands;
 using PCONTB.Panel.Application.Functions.Location.Countries.Queries;
 using PCONTB.Panel.Application.Models.Locations.Countries;
-using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
+using PCONTB.Panel.Server.Filters;
 
 namespace PCONTB.Panel.Server.Controllers.Locations.Countries
 {

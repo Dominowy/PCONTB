@@ -1,5 +1,4 @@
 ﻿using PCONTB.Panel.Domain.Common;
-using PCONTB.Panel.Domain.Projects.Collaborators;
 
 namespace PCONTB.Panel.Domain.Projects.Campaigns
 {

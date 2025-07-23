@@ -8,11 +8,12 @@ using PCONTB.Panel.Application.Functions.Account.Users.Queries;
 using PCONTB.Panel.Application.Functions.Categories.Commands;
 using PCONTB.Panel.Application.Functions.Categories.Queries;
 using PCONTB.Panel.Application.Models.Categories;
-using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
+using PCONTB.Panel.Server.Filters;
 
-namespace PCONTB.Panel.Server.Categories
+namespace PCONTB.Panel.Server.Controllers.Categories
 {
     [Route("api/categories")]
     public class CategoriesController(IMediator mediator) : BaseController(mediator)

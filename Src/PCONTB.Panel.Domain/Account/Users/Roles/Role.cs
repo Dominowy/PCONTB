@@ -1,4 +1,4 @@
-﻿namespace PCONTB.Panel.Domain.Account.Users
+﻿namespace PCONTB.Panel.Domain.Account.Users.Roles
 {
     public enum Role
     {

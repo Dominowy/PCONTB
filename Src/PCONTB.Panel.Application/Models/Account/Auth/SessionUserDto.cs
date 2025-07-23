@@ -1,5 +1,6 @@
 ﻿using PCONTB.Panel.Application.Common.Models;
 using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Roles;
 
 namespace PCONTB.Panel.Application.Models.Account.Auth
 {
@@ -14,7 +15,7 @@ namespace PCONTB.Panel.Application.Models.Account.Auth
             {
                 Id = user.Id,
                 Username = user.Username,
-                Roles = [.. user.UserRoles.Select(m => m.Role)],
+                Roles = [.. user.Roles.Select(m => m.Role)],
             };
         }
     }
