@@ -49,6 +49,11 @@ namespace PCONTB.Panel.Application.Services.Projects
         {
             var contents = new List<ProjectCampaignContent>();
 
+            if (campaign == null)
+            {
+                return;
+            }
+
             foreach (var content in campaign.Contents)
             {
                 var result = await HandleContent(project, content, content.Type, token);

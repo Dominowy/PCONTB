@@ -2,7 +2,7 @@ import { AnchorProvider, Program, web3 } from "@project-serum/anchor";
 import idl from "./idl.json";
 import { Connection, PublicKey } from "@solana/web3.js";
 
-const PROGRAM_ID = new PublicKey("FK5CCrit47WFvBxkrLPUxcKGUd2Mr7x3wZysT3mRFJ1A");
+const PROGRAM_ID = new PublicKey("H2aZEZVnVT4PhcJ1WQKaBT5vqXYWQoizT2uwqVY9XxBC");
 
 const connection = new Connection("https://api.devnet.solana.com", "confirmed");
 

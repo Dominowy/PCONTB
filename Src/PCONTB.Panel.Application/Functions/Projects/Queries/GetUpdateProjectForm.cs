@@ -7,7 +7,6 @@ using PCONTB.Panel.Application.Contracts.Services.Auth;
 using PCONTB.Panel.Application.Contracts.Services.Projects;
 using PCONTB.Panel.Application.Functions.Projects.Commands;
 using PCONTB.Panel.Application.Models.Projects;
-using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Domain.Projects.Campaigns;
 using PCONTB.Panel.Domain.Repositories;
 
@@ -21,7 +20,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
     public class GetUpdateProjectFormHandler(
         IUnitOfWork unitOfWork, 
         IProjectCollaboratorPermissionService permissionService,
-        IProjectCampaignService projectCampaignService) 
+        IProjectCampaignService projectCampaignService,
+        ISessionAccesor sessionAccesor) 
         : IRequestHandler<GetUpdateProjectFormRequest, GetUpdateProjectFormResponse>
     {
         public async Task<GetUpdateProjectFormResponse> Handle(GetUpdateProjectFormRequest request, CancellationToken cancellationToken)
@@ -30,6 +30,22 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                 ?? throw new NotFoundException("Project not found");
 
             var currentCollaborator = await permissionService.GetCurrentCollaborator(aggregate, cancellationToken);
+
+            var currentUser = new ProjectUserPermissionDto();
+
+            if (currentCollaborator == null)
+            {
+                if (sessionAccesor.Session.User.Id == aggregate.User.Id)
+                {
+                    currentUser.ManageProjectPermission = true;
+                    currentUser.ManageCommunityPermission = true;
+                    currentUser.ManageFulfillmentPermission = true;
+                }
+            } 
+            else
+            {
+                currentUser = ProjectUserPermissionDto.Map(currentCollaborator);
+            }
 
             FormFile image = null;
 
@@ -70,7 +86,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                     Collaborators = [.. aggregate.Collaborators.Select(UpdateProjectCollaboratorDto.Map)],
                     Campaign = contents
                 },
-                CurrentCollaborator = currentCollaborator != null ? ProjectCollaboratorPermissionDto.Map(currentCollaborator) : null,
+                CurrentUser = currentUser,
                 ProjectCampaignContentType = EnumHelper.EnumToList<ProjectCampaignContentType>()
             };
         }
@@ -79,7 +95,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
     public class GetUpdateProjectFormResponse
     {
         public UpdateProjectRequest Form{ get; set; }
-        public ProjectCollaboratorPermissionDto? CurrentCollaborator { get; set; }
+        public ProjectUserPermissionDto? CurrentUser{ get; set; }
         public List<EnumItem> ProjectCampaignContentType { get; set; }  = [];
 
     }

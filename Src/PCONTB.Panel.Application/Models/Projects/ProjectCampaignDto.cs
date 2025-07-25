@@ -4,7 +4,7 @@ namespace PCONTB.Panel.Application.Models.Projects
 {
     public class ProjectCampaignDto
     {
-        public List<ProjectCampaignContentDto> Contents { get; set; } = [];
+        public List<ProjectCampaignContentDto> Contents { get; set; } = new List<ProjectCampaignContentDto>();
 
         public static ProjectCampaignDto Map(ProjectCampaign campaing)
         {

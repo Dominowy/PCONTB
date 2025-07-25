@@ -34,7 +34,9 @@
     <template #footer>
       <div class="text-danger">{{ errorMessage }}</div>
       <button type="button" class="btn btn-secondary" @click="handleCloseModal">Close</button>
-      <b-button variant="primary" @click="handleAddUpdate">Add</b-button>
+      <b-button variant="primary" @click="handleAddUpdate">{{
+        form.id ? "Update" : "Add"
+      }}</b-button>
     </template>
   </base-modal>
 </template>

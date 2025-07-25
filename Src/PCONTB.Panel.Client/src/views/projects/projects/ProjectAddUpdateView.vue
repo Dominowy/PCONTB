@@ -12,6 +12,7 @@
             placeholder="Enter name"
             :errors="errors"
             :isAllTouched="isAllTouched"
+            :disabled="!currentUser.manageProjectPermission"
           />
           <base-form-select
             id="category"
@@ -23,6 +24,7 @@
             :errors="errors"
             :isAllTouched="isAllTouched"
             api-url="/categories/select-categories"
+            :disabled="!currentUser.manageProjectPermission"
           />
           <base-form-select
             id="country"
@@ -34,48 +36,67 @@
             :errors="errors"
             :isAllTouched="isAllTouched"
             api-url="/locations/countries/select-countries"
+            :disabled="!currentUser.manageProjectPermission"
           />
         </b-card>
-        <b-card no-body class="mt-2">
+        <b-card
+          no-body
+          class="mt-2"
+          v-if="
+            currentUser.manageProjectPermission ||
+            currentUser.manageFulfillmentPermission ||
+            currentUser.manageCommunityPermission
+          "
+        >
           <b-tabs card>
-            <b-tab title="Collaborators">
-              <collaborators-table
-                :items="form.collaborators"
-                :errors="errors"
-                :isAllTouched="isAllTouched"
-                @addUpdate="addUpdateCollaborator"
-                @delete="deleteCollaborator"
-              />
-            </b-tab>
-            <b-tab title="Images">
-              <base-form-file
-                id="file-image"
-                class="mt-2"
-                property="Image"
-                v-model="form.image"
-                uploadUrl="/api/multimedia/upload-file"
-                placeholder="Select image"
-                :errors="errors"
-                :src="form.imageData"
-                :isAllTouched="isAllTouched"
-              />
-            </b-tab>
-            <b-tab title="Video">
-              <base-form-file
-                id="file-video"
-                class="mt-2"
-                property="Video"
-                v-model="form.video"
-                uploadUrl="/api/multimedia/upload-file"
-                placeholder="Select video"
-                :errors="errors"
-                :src="form.videoData"
-                :isAllTouched="isAllTouched"
-              />
-            </b-tab>
-            <b-tab title="Campaign">
-              <project-campaign-editor v-model="form.campaign" :types="types" />
-            </b-tab>
+            <template v-if="currentUser.manageProjectPermission">
+              <b-tab title="Collaborators">
+                <collaborators-table
+                  :items="form.collaborators"
+                  :errors="errors"
+                  :isAllTouched="isAllTouched"
+                  @addUpdate="addUpdateCollaborator"
+                  @delete="deleteCollaborator"
+                />
+              </b-tab>
+              <b-tab title="Images">
+                <base-form-file
+                  id="file-image"
+                  class="mt-2"
+                  property="Image"
+                  v-model="form.image"
+                  uploadUrl="/api/multimedia/upload-file"
+                  placeholder="Select image"
+                  :errors="errors"
+                  :src="form.imageData"
+                  :isAllTouched="isAllTouched"
+                />
+              </b-tab>
+              <b-tab title="Video">
+                <base-form-file
+                  id="file-video"
+                  class="mt-2"
+                  property="Video"
+                  v-model="form.video"
+                  uploadUrl="/api/multimedia/upload-file"
+                  placeholder="Select video"
+                  :errors="errors"
+                  :src="form.videoData"
+                  :isAllTouched="isAllTouched"
+                />
+              </b-tab>
+              <b-tab title="Campaign">
+                <project-campaign-editor v-model="form.campaign" :types="types" />
+              </b-tab>
+            </template>
+            <template v-if="currentUser.manageFulfillmentPermission && route.params.id">
+              <b-tab title="Wallet">
+                <project-wallet :projectId="route.params.id" :types="types" />
+              </b-tab>
+            </template>
+            <template v-if="currentUser.manageCommunityPermission && route.params.id">
+              <b-tab title="Community"> </b-tab>
+            </template>
           </b-tabs>
         </b-card>
         <base-form-submit-panel :isLoading="isLoading">
@@ -91,6 +112,7 @@
 <script setup>
 import CollaboratorsTable from "./components/CollaboratorsTable.vue";
 import ProjectCampaignEditor from "./components/ProjectCampaignEditor.vue";
+import ProjectWallet from "./components/ProjectWallet.vue";
 import { useAddUpdate } from "@/composables/useAddUpdate";
 import { reactive, onMounted, ref } from "vue";
 import ApiClient from "@/services/ApiClient";
@@ -101,6 +123,7 @@ const title = ref("Add project");
 const router = useRouter();
 const route = useRoute();
 
+const currentUser = ref({});
 const form = reactive({});
 
 const types = ref(null);
@@ -113,6 +136,7 @@ onMounted(async () => {
   const response = await getForm();
   Object.assign(form, response.form);
 
+  currentUser.value = response.currentUser;
   types.value = response.projectCampaignContentType;
 
   if (route.params.id) {
