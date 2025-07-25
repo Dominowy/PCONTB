@@ -11,6 +11,7 @@
       <b-navbar-nav class="ms-auto mb-2 mb-lg-0">
         <b-nav-item v-if="!store.isAuthenticated" to="/auth/login">Login</b-nav-item>
         <b-nav-item-dropdown v-if="store.isAuthenticated" right>
+          <select-wallett-button />
           <template #button-content>
             <em>{{ store.user.username }}</em>
           </template>

@@ -12,6 +12,7 @@ import Components from "unplugin-vue-components/vite";
 import { BootstrapVueNextResolver } from "bootstrap-vue-next";
 import Icons from "unplugin-icons/vite";
 import IconsResolve from "unplugin-icons/resolver";
+import inject from "@rollup/plugin-inject";
 
 const baseFolder =
   env.APPDATA !== undefined && env.APPDATA !== ""
@@ -55,10 +56,14 @@ export default defineConfig({
     Icons({
       autoInstall: true,
     }),
+    inject({
+      Buffer: ["buffer", "Buffer"],
+    }),
   ],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      buffer: "buffer",
     },
   },
   server: {
