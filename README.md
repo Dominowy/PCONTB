@@ -183,7 +183,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 - Frontend - VUE.JS - zostanie w nim stworzony interfejs użytkownika w komunikacji z backendem będzie pośredniczył VITE.JS w którym zostanie skonfigurowane proxy.
 - Baza danych - PostgreSQL - odpowiedzialny z przechowywanie danych o projektach, użytkownikach transakcjach oraz danych pomocniczych
 
-<img width="1290" height="1043" alt="image" src="https://github.com/user-attachments/assets/f88f4740-21cf-4162-8ec7-026d1cd1f6a1" />
+<img width="1169" height="1055" alt="image" src="https://github.com/user-attachments/assets/fabc017e-7b5b-4908-9a27-5205da83cdfa" />
 
 ### 5. Lista przypdków użycia
 
