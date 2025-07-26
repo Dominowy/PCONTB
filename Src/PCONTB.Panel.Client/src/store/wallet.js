@@ -102,30 +102,26 @@ export const useWalletStore = defineStore("wallet", {
 
         let tx;
 
-        try {
-          if (donationAccount === null) {
-            await program.methods
-              .donateCampaign(amount, new BN(timestamp))
-              .accounts({
-                donor: new PublicKey(this.address),
-                campaign: campaignPda,
-                donation: donationPda,
-                transaction: transactionPda,
-              })
-              .rpc();
-          } else {
-            await program.methods
-              .existDonateCampaign(amount, new BN(timestamp))
-              .accounts({
-                donor: new PublicKey(this.address),
-                campaign: campaignPda,
-                donation: donationPda,
-                transaction: transactionPda,
-              })
-              .rpc();
-          }
-        } catch (error) {
-          console.log(error);
+        if (donationAccount === null) {
+          tx = await program.methods
+            .donateCampaign(amount, new BN(timestamp))
+            .accounts({
+              donor: new PublicKey(this.address),
+              campaign: campaignPda,
+              donation: donationPda,
+              transaction: transactionPda,
+            })
+            .rpc();
+        } else {
+          tx = await program.methods
+            .existDonateCampaign(amount, new BN(timestamp))
+            .accounts({
+              donor: new PublicKey(this.address),
+              campaign: campaignPda,
+              donation: donationPda,
+              transaction: transactionPda,
+            })
+            .rpc();
         }
 
         const confirmed = await solanaClient.connection.confirmTransaction(tx, "confirmed");

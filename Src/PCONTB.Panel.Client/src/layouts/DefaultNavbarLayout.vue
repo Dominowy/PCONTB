@@ -8,7 +8,6 @@
           Discover
         </router-link>
       </b-navbar-nav>
-
       <b-navbar-nav class="ms-auto mb-2 mb-lg-0">
         <b-navbar-nav>
           <navbar-wallet />

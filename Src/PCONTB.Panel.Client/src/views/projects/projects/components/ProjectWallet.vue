@@ -79,6 +79,9 @@ import { ref } from "vue";
 import { useWalletStore } from "@/store/wallet";
 import { BN } from "@project-serum/anchor";
 import { onMounted, computed } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 onMounted(async () => {
   await getCampaignInfo();
@@ -126,6 +129,8 @@ async function initCampaign() {
     console.log("Campaign created");
   } catch (e) {
     console.error("Error creating campaign", e);
+  } finally {
+    router.go(0);
   }
 }
 
@@ -136,6 +141,9 @@ async function withdrawCampaign() {
     console.log("Campaign withdrawed");
   } catch (e) {
     console.error("Error withdraw campaign", e);
+  } finally {
+    getCampaignInfo();
+    getCampaignTransactions();
   }
 }
 

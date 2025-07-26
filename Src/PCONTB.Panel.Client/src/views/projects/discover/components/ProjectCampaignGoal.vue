@@ -42,6 +42,9 @@ import { ref } from "vue";
 import { useWalletStore } from "@/store/wallet";
 import { onMounted, computed } from "vue";
 import { BN } from "@project-serum/anchor";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 onMounted(async () => {
   await getCampaignInfo();
@@ -74,6 +77,8 @@ async function donateCampaign() {
     console.log("Campaign donate");
   } catch (e) {
     console.error("Error donate campaign:", e);
+  } finally {
+    router.go(0);
   }
 }
 
