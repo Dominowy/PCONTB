@@ -164,6 +164,9 @@ export const useWalletStore = defineStore("wallet", {
           })
           .rpc();
 
+        const confirmed = await solanaClient.connection.confirmTransaction(tx, "confirmed");
+        console.log("Potwierdzono:", confirmed);
+
         console.log(`💰 Withdrawal successful! TX: ${tx}`);
       } catch (e) {
         console.error("withdrawCampaign failed:", e);
@@ -224,13 +227,85 @@ export const useWalletStore = defineStore("wallet", {
         console.error(error);
       }
     },
+    async getCampaignDonator(projectId) {
+      const program = solanaClient.getProgram();
+
+      const cleanId = projectId.replace(/-/g, "");
+
+      const [campaignPda] = await PublicKey.findProgramAddress(
+        [Buffer.from("campaign"), Buffer.from(cleanId)],
+        solanaClient.PROGRAM_ID
+      );
+
+      const [donationPda] = await PublicKey.findProgramAddress(
+        [Buffer.from("donation"), campaignPda.toBuffer(), new PublicKey(this.address).toBuffer()],
+        solanaClient.PROGRAM_ID
+      );
+
+      try {
+        let isExist = await solanaClient.connection.getAccountInfo(donationPda);
+
+        if (!isExist) {
+          return null;
+        }
+
+        const donator = await program.account.donation.fetch(donationPda);
+
+        return donator;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getCampaignDonatorTransactions(projectId) {
+      const program = solanaClient.getProgram();
+
+      const cleanId = projectId.replace(/-/g, "");
+
+      const [campaignPda] = await PublicKey.findProgramAddress(
+        [Buffer.from("campaign"), Buffer.from(cleanId)],
+        solanaClient.PROGRAM_ID
+      );
+
+      const [donationPda] = await PublicKey.findProgramAddress(
+        [Buffer.from("donation"), campaignPda.toBuffer(), new PublicKey(this.address).toBuffer()],
+        solanaClient.PROGRAM_ID
+      );
+
+      try {
+        let isExist = await solanaClient.connection.getAccountInfo(donationPda);
+
+        if (!isExist) {
+          return null;
+        }
+
+        const transactions = await program.account.transaction.all([
+          {
+            memcmp: {
+              offset: 8,
+              bytes: new PublicKey(this.address),
+            },
+          },
+          {
+            memcmp: {
+              offset: 56,
+              bytes: campaignPda.toBase58(),
+            },
+          },
+        ]);
+
+        return transactions;
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async refundCampaign(projectId) {
       const program = solanaClient.getProgram();
 
+      const cleanId = projectId.replace(/-/g, "");
       const timestamp = Math.floor(Date.now() / 1000);
 
       const [campaignPda] = await PublicKey.findProgramAddress(
-        [Buffer.from("campaign"), Buffer.from(projectId)],
+        [Buffer.from("campaign"), Buffer.from(cleanId)],
         solanaClient.PROGRAM_ID
       );
 
@@ -260,6 +335,8 @@ export const useWalletStore = defineStore("wallet", {
           })
           .rpc();
 
+        const confirmed = await solanaClient.connection.confirmTransaction(tx, "confirmed");
+        console.log("Potwierdzono:", confirmed);
         console.log(`Refunded donation ${donationPda.publicKey.toBase58()} TX: ${tx}`);
       } catch (e) {
         console.error(e);
@@ -268,8 +345,10 @@ export const useWalletStore = defineStore("wallet", {
     async checkCampaign(projectId) {
       const program = solanaClient.getProgram();
 
+      const cleanId = projectId.replace(/-/g, "");
+
       const [campaignPda] = await PublicKey.findProgramAddress(
-        [Buffer.from("campaign"), Buffer.from(projectId)],
+        [Buffer.from("campaign"), Buffer.from(cleanId)],
         solanaClient.PROGRAM_ID
       );
 

@@ -94,6 +94,8 @@
 					{ "name": "target", "type": "u64" },
 					{ "name": "deadline", "type": "i64" },
 					{ "name": "amountCollected", "type": "u64" },
+					{ "name": "amountWithdrawable", "type": "u64" },
+					{ "name": "withdrawable", "type": "bool" },
 					{ "name": "status", "type": "u8" }
 				]
 			}

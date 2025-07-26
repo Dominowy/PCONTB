@@ -3,7 +3,7 @@
     <base-header :title="content.project.name" />
     <b-card>
       <div class="d-flex flex-row">
-        <div class="d-flex w-75 position-relative">
+        <div class="d-flex w-75 position-relative me-3">
           <div
             v-if="showThumbnail && content.project.image"
             class="position-relative w-100"
@@ -56,13 +56,15 @@
             </div>
           </div>
         </b-tab>
-        <b-tab title="Creator" style="height: 100vh">
+        <b-tab title="Creator">
           <project-creator-display
             :user="content.project.user"
             :collaborators="content.project.collaborators"
           />
         </b-tab>
-        <b-tab title="Transactions" style="height: 50vh"> </b-tab>
+        <b-tab title="Transactions" style="height: 50vh">
+          <project-campaing-transactions :projectId="route.params.id" />
+        </b-tab>
       </b-tabs>
     </b-card>
   </div>
@@ -70,6 +72,7 @@
 
 <script setup>
 import ProjectCreatorDisplay from "./components/ProjectCreatorDisplay.vue";
+import ProjectCampaingTransactions from "./components/ProjectCampaingTransactions.vue";
 import ProjectCampaignGoal from "./components/ProjectCampaignGoal.vue";
 import { useDisplay } from "@/composables/useDisplay";
 import ApiClient from "@/services/ApiClient";

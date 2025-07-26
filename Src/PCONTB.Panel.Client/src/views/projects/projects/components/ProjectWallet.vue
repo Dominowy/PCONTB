@@ -17,7 +17,9 @@
         />
       </div>
 
-      <button type="button" class="btn btn-primary" @click="initCampaign">Start</button>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" @click="initCampaign">Start</button>
+      </div>
     </template>
     <template v-else>
       <p class="card-text"><strong>Owner:</strong> {{ campaignInfo.owner.toBase58() }}</p>
@@ -25,6 +27,7 @@
       <p class="card-text">
         <strong>Deadline:</strong> {{ formatDate(campaignInfo.deadline.toNumber()) }}
       </p>
+      <p class="card-text"><strong>Status:</strong> {{ getCampaingStatus(campaignInfo.status) }}</p>
       <div class="mt-3">
         <label class="form-label">Progress:</label>
         <div class="progress">
@@ -43,8 +46,15 @@
           {{ formatSol(campaignInfo.amountCollected) }} / {{ formatSol(campaignInfo.target) }} SOL
         </div>
       </div>
-      <div v-if="campaignInfo.amountCollected.gte(campaignInfo.target) && campaignInfo.status != 2">
-        <button type="button" class="btn btn-primary" @click="withdrawCampaign">Withdraw</button>
+      <div class="mt-2" v-if="campaignInfo.withdrawable && campaignInfo.status != 2">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>To withdraw: {{ formatSol(campaignInfo.amountWithdrawable) }} SOL</div>
+          <div>
+            <button type="button" class="btn btn-primary" @click="withdrawCampaign">
+              Withdraw
+            </button>
+          </div>
+        </div>
       </div>
       <div>
         <h5 class="mb-3">Transactions</h5>
@@ -54,6 +64,7 @@
               <th>Wallet</th>
               <th>Date</th>
               <th>Amount</th>
+              <th>Type</th>
             </tr>
           </thead>
           <tbody v-if="campaignTransactions && campaignTransactions.length > 0">
@@ -61,11 +72,12 @@
               <td>{{ shortenAddress(tx.account.donor.toBase58()) }}</td>
               <td>{{ formatDate(tx.account.timestamp) }}</td>
               <td>{{ formatLamports(tx.account.amount) }}</td>
+              <td>{{ getTransactionTypeLabel(tx.account.transactionType) }}</td>
             </tr>
           </tbody>
           <tbody v-else>
             <tr>
-              <td colspan="3">There is no transactions to display</td>
+              <td colspan="4">There is no transactions to display</td>
             </tr>
           </tbody>
         </table>
@@ -170,4 +182,30 @@ const progress = computed(() => {
   const target = Number(campaignInfo.value.target.toString());
   return target > 0 ? (collected / target) * 100 : 0;
 });
+
+function getTransactionTypeLabel(type) {
+  switch (type) {
+    case 0:
+      return "Donate";
+    case 1:
+      return "Refund";
+    case 2:
+      return "Withdraw";
+    default:
+      return "Unknown";
+  }
+}
+
+function getCampaingStatus(status) {
+  switch (status) {
+    case 0:
+      return "Active";
+    case 1:
+      return "Ended - campaign not reach the goal";
+    case 2:
+      return "Withdrawn - campaign ended succesfully";
+    default:
+      return "Unknown";
+  }
+}
 </script>
