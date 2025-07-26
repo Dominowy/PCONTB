@@ -1,6 +1,6 @@
 from seahorse.prelude import *
 
-declare_id('H2aZEZVnVT4PhcJ1WQKaBT5vqXYWQoizT2uwqVY9XxBC')
+declare_id('7LDHuor4Srmu9KG92PomLuDy8nXebNF545nQ5qXURrgz')
 
 # Campaign
 class Campaign(Account):
@@ -9,6 +9,8 @@ class Campaign(Account):
   target: u64
   deadline: i64 
   amount_collected: u64
+  amount_withdrawable: u64
+  withdrawable: bool
   status: u8
 
 # enum CampaignStatus:
@@ -61,6 +63,8 @@ def init_campaign(
   campaign.target = target
   campaign.deadline = deadline
   campaign.amount_collected = 0
+  campaign.amount_withdrawable = 0
+  campaign.withdrawable = False
   campaign.status = 0
 
 
@@ -99,6 +103,10 @@ def donate_campaign(
   transaction.transaction_type = 0
 
   campaign.amount_collected += amount
+  campaign.amount_withdrawable += amount
+
+  if campaign.amount_collected => campaign.target
+    campaign.withdrawable = True
 
   donor.transfer_lamports(to = campaign, amount = amount)
 
@@ -131,7 +139,12 @@ def exist_donate_campaign(
   donor.transfer_lamports(to = campaign, amount = amount)
 
   donation.amount_collected += amount
+
   campaign.amount_collected += amount
+  campaign.amount_withdrawable += amount
+
+  if campaign.amount_collected => campaign.target
+    campaign.withdrawable = True
 
 
 @instruction
@@ -161,8 +174,11 @@ def refund_campaign(
 
   campaign.transfer_lamports(to = donor, amount = donation.amount_collected)
 
+  campaign.amount_withdrawable -= donation.amount_collected
+
   donation.status = 1
   donation.amount_collected = 0
+  
 
 
 @instruction
@@ -173,7 +189,7 @@ def withdraw_campaign(
   timestamp: i64,
   clock: Clock
 ):
-  assert campaign.amount_collected > 0, "Nothing to withdraw"
+  assert campaign.withdrawnable > 0, "Nothing to withdraw"
   assert campaign.owner == owner.key(), "Only the owner can withdraw"
   assert campaign.amount_collected >= campaign.target, "Target not reached yet"
   assert campaign.status != 2, "Already withdrawn"
@@ -195,7 +211,7 @@ def withdraw_campaign(
   )
 
   campaign.status = 2
-  campaign.amount_collected = 0
+  campaign.amount_withdrawable = 0
 
 
 @instruction
