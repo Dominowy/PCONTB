@@ -44,6 +44,10 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                 result.VideoData = aggregate.Video.Data;
             }
 
+            aggregate.UpdateViews();
+
+            await unitOfWork.Save(cancellationToken);
+
             result.Campaign = await projectCampaignService.GetCampaign(aggregate, cancellationToken);
 
             return new GetProjectResponse()

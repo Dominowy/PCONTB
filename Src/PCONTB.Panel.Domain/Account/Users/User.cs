@@ -1,9 +1,11 @@
 ﻿using PCONTB.Panel.Domain.Account.Sessions;
+using PCONTB.Panel.Domain.Account.Users.Favorites;
 using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Domain.Account.Users.Wallets;
 using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Projects;
 using PCONTB.Panel.Domain.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.Communites;
 
 namespace PCONTB.Panel.Domain.Account.Users
 {
@@ -19,6 +21,8 @@ namespace PCONTB.Panel.Domain.Account.Users
         public virtual List<Session> Sessions { get; private set; } = [];
         public virtual List<UserRole> Roles { get; private set; } = [];
         public virtual List<UserWallet> Wallets { get; private set; } = [];
+        public virtual List<ProjectCommunityMessage> Messages { get; private set; } = [];
+        public virtual List<UserProjectFavorite> Favorites { get; private set; } = [];
 
         protected User() : base()
         {

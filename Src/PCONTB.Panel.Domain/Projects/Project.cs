@@ -1,9 +1,11 @@
 ﻿using PCONTB.Panel.Domain.Account.Users;
+using PCONTB.Panel.Domain.Account.Users.Favorites;
 using PCONTB.Panel.Domain.Categories;
 using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects.Campaigns;
 using PCONTB.Panel.Domain.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.Communites;
 using PCONTB.Panel.Domain.Projects.Files;
 
 namespace PCONTB.Panel.Domain.Projects
@@ -31,6 +33,16 @@ namespace PCONTB.Panel.Domain.Projects
         public Guid? CampaingId { get; private set; }
         public virtual ProjectCampaign? Campaing { get; private set; }
 
+        public Guid? CommunityId { get; private set; }
+        public virtual ProjectCommunity? Community { get; private set; }
+
+        public virtual List<UserProjectFavorite> Favorites { get; private set; } = [];
+
+        public int Views { get; private set; } = 0;
+
+        public DateTime Created { get; private set; }
+        public DateTime Modified { get; private set; }
+
         protected Project() : base()
         {
         }
@@ -40,6 +52,7 @@ namespace PCONTB.Panel.Domain.Projects
             SetName(name);
             SetEnabled(true);
             UserId = userId;
+            Created = DateTime.UtcNow;
         }
 
         public Project(Guid id, string name, Guid userId, Guid countryId, Guid categoryId) : base(id)
@@ -49,6 +62,7 @@ namespace PCONTB.Panel.Domain.Projects
             UserId = userId;
             CountryId = countryId;
             CategoryId = categoryId;
+            Created = DateTime.UtcNow;
         }
 
         public void SetUser(Guid userId)
@@ -65,6 +79,7 @@ namespace PCONTB.Panel.Domain.Projects
             if (!anyChange) return;
 
             CountryId = countryId;
+            Modified = DateTime.UtcNow;
         }
 
         public void SetCategory(Guid categoryId)
@@ -73,6 +88,7 @@ namespace PCONTB.Panel.Domain.Projects
             if (!anyChange) return;
 
             CategoryId = categoryId;
+            Modified = DateTime.UtcNow;
         }
 
         public void SetImage(ProjectImage image)
@@ -81,6 +97,7 @@ namespace PCONTB.Panel.Domain.Projects
             if (!anyChange) return;
 
             Image = image;
+            Modified = DateTime.UtcNow;
         }
 
         public void SetVideo(ProjectVideo video)
@@ -89,6 +106,7 @@ namespace PCONTB.Panel.Domain.Projects
             if (!anyChange) return;
 
             Video = video;
+            Modified = DateTime.UtcNow;
         }
 
         public void AddCollaborator(ProjectCollaborator entity)
@@ -96,6 +114,7 @@ namespace PCONTB.Panel.Domain.Projects
             if (entity == null) return;
 
             Collaborators.Add(entity);
+            Modified = DateTime.UtcNow;
         }
 
         public void RemoveCollaborator(ProjectCollaborator entity)
@@ -103,6 +122,7 @@ namespace PCONTB.Panel.Domain.Projects
             if (entity == null) return;
 
             Collaborators.Remove(entity);
+            Modified = DateTime.UtcNow;
         }
 
         public void SetProjectCampaing(ProjectCampaign campaign)
@@ -111,6 +131,12 @@ namespace PCONTB.Panel.Domain.Projects
             if (!anyChange) return;
 
             Campaing = campaign;
+            Modified = DateTime.UtcNow;
+        }
+
+        public void UpdateViews()
+        {
+            Views++;
         }
     }
 }

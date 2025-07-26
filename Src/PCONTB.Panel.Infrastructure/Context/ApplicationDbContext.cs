@@ -8,6 +8,7 @@ using PCONTB.Panel.Domain.Location.Countries;
 using PCONTB.Panel.Domain.Projects;
 using PCONTB.Panel.Domain.Projects.Campaigns;
 using PCONTB.Panel.Domain.Projects.Collaborators;
+using PCONTB.Panel.Domain.Projects.Communites;
 using PCONTB.Panel.Domain.Projects.Files;
 using System.Reflection.Emit;
 
@@ -95,6 +96,18 @@ namespace PCONTB.Panel.Infrastructure.Context
                 .WithOne(m => m.Project)
                 .HasForeignKey<Project>(m => m.ImageId)
                 .HasPrincipalKey<ProjectImage>(m => m.Id)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Project>()
+                .HasOne(m => m.Community)
+                .WithOne(m => m.Project)
+                .HasForeignKey<Project>(m => m.CommunityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ProjectCommunityMessage>()
+                .HasOne(m => m.User)
+                .WithMany(m => m.Messages)
+                .HasForeignKey(m => m.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ProjectImage>()
