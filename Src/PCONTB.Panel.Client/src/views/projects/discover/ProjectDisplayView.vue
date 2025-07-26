@@ -65,6 +65,9 @@
         <b-tab title="Transactions" style="height: 50vh">
           <project-campaing-transactions :projectId="route.params.id" />
         </b-tab>
+        <b-tab title="Community" style="height: 50vh">
+          <discover-community />
+        </b-tab>
       </b-tabs>
     </b-card>
   </div>
@@ -74,6 +77,7 @@
 import ProjectCreatorDisplay from "./components/ProjectCreatorDisplay.vue";
 import ProjectCampaingTransactions from "./components/ProjectCampaingTransactions.vue";
 import ProjectCampaignGoal from "./components/ProjectCampaignGoal.vue";
+import DiscoverCommunity from "./components/DiscoverCommunity.vue";
 import { useDisplay } from "@/composables/useDisplay";
 import ApiClient from "@/services/ApiClient";
 import { onMounted, ref } from "vue";

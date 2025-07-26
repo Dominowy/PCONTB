@@ -342,26 +342,5 @@ export const useWalletStore = defineStore("wallet", {
         console.error(e);
       }
     },
-    async checkCampaign(projectId) {
-      const program = solanaClient.getProgram();
-
-      const cleanId = projectId.replace(/-/g, "");
-
-      const [campaignPda] = await PublicKey.findProgramAddress(
-        [Buffer.from("campaign"), Buffer.from(cleanId)],
-        solanaClient.PROGRAM_ID
-      );
-
-      try {
-        await program.methods
-          .checkCampaign()
-          .accounts({
-            campaign: campaignPda,
-          })
-          .rpc();
-      } catch (error) {
-        console.error(error);
-      }
-    },
   },
 });

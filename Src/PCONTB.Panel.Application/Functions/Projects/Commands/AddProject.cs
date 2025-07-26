@@ -22,6 +22,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
         public List<AddProjectCollaboratorDto> Collaborators { get; set; } = [];
         public ProjectCampaignDto Campaign { get; set; }
 
+        public string Description { get; set; }
+
     }
 
     public class AddProjectHandler(
@@ -37,6 +39,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
             var userId = sessionAccesor.Session.UserId;
 
             var aggregate = new Project(Guid.NewGuid(), request.Name, userId, (Guid)request.CountryId, (Guid)request.CategoryId);
+
+            aggregate.SetDescription(request.Description);
 
             await projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
 

@@ -39,6 +39,21 @@ namespace PCONTB.Panel.Server.Controllers.Projects
 
         #endregion Get all
 
+        #region Statistic
+
+        [AllowAnonymousToken]
+        [HttpPost("get-most-viewed")]
+        [ProducesResponseType(typeof(GetAllProjectsResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetMostViewedProjects([FromBody] GetMostViewedProjectsRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+        [AllowAnonymousToken]
+        [HttpPost("get-last-created")]
+        [ProducesResponseType(typeof(GetAllProjectsResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetLastCreatedProjects([FromBody] GetLastCreatedProjectsRequest request, CancellationToken cancellation) => await Send(request, cancellation);
+
+
+        #endregion Statistic
+
         #region Add
 
         [AuthorizeToken(Role.User)]

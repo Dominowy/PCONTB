@@ -15,7 +15,12 @@
         <div class="d-flex justify-content-between align-items-center">
           <div><strong>Donated: </strong>{{ formatSol(donatorInfo.amountCollected) }}</div>
           <button
-            v-if="campaignInfo.status == 1"
+            v-if="
+              donatorInfo?.amountCollected > 0 &&
+              (campaignInfo?.status === 1 ||
+                (Math.floor(Date.now() / 1000) > campaignInfo?.deadline &&
+                  campaignInfo?.amountCollected?.toNumber?.() < campaignInfo?.target?.toNumber?.()))
+            "
             type="button"
             class="btn btn-primary"
             @click="refundCampaign"
@@ -54,6 +59,9 @@
 import { ref } from "vue";
 import { useWalletStore } from "@/store/wallet";
 import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 onMounted(async () => {
   await getCampaignInfo();
@@ -105,6 +113,8 @@ async function refundCampaign() {
     await wallet.refundCampaign(props.projectId);
   } catch (error) {
     console.log(error);
+  } finally {
+    router.go(0);
   }
 }
 

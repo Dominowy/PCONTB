@@ -46,6 +46,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
 
             aggregate.UpdateViews();
 
+            await unitOfWork.ProjectRepository.Update(aggregate, cancellationToken);
+
             await unitOfWork.Save(cancellationToken);
 
             result.Campaign = await projectCampaignService.GetCampaign(aggregate, cancellationToken);

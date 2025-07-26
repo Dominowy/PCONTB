@@ -84,7 +84,9 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
                     Video = video,
                     VideoData = aggregate.Video?.Data,
                     Collaborators = [.. aggregate.Collaborators.Select(UpdateProjectCollaboratorDto.Map)],
-                    Campaign = contents
+                    Campaign = contents,
+                    Description = aggregate.Description,
+                    Views = aggregate.Views,
                 },
                 CurrentUser = currentUser,
                 ProjectCampaignContentType = EnumHelper.EnumToList<ProjectCampaignContentType>()

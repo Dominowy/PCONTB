@@ -16,6 +16,8 @@ namespace PCONTB.Panel.Application.Models.Projects
         public byte[] VideoData { get; set; }
         public List<ProjectCollaboratorDto> Collaborators { get; set; }
         public ProjectCampaignDto Campaign { get; set; }
+        public string Description { get; set; }
+        public int Views { get; set; }
 
         public static ProjectDto Map(Project entity)
         {
@@ -26,7 +28,9 @@ namespace PCONTB.Panel.Application.Models.Projects
                 User = ProjectUserDto.Map(entity.User),
                 Country = NameRelatedDto.Map(entity.Country),
                 Category = NameRelatedDto.Map(entity.Category),
-                Collaborators = [.. entity.Collaborators.Select(ProjectCollaboratorDto.Map)]
+                Collaborators = [.. entity.Collaborators.Select(ProjectCollaboratorDto.Map)],
+                Description = entity.Description ?? string.Empty,
+                Views = entity.Views,
             };
         }
     }

@@ -47,7 +47,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Session");
+                    b.ToTable("Session", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.Favorites.UserProjectFavorite", b =>
@@ -68,7 +68,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserProjectFavorite");
+                    b.ToTable("UserProjectFavorite", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.Roles.UserRole", b =>
@@ -87,7 +87,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRole");
+                    b.ToTable("UserRole", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.User", b =>
@@ -113,7 +113,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Users.Wallets.UserWallet", b =>
@@ -136,7 +136,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserWallet");
+                    b.ToTable("UserWallet", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Categories.Category", b =>
@@ -154,7 +154,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Community.CommunityMessage", b =>
@@ -195,7 +195,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CommunityMessage");
+                    b.ToTable("CommunityMessage", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Location.Countries.Country", b =>
@@ -213,7 +213,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Country");
+                    b.ToTable("Country", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Campaigns.ProjectCampaign", b =>
@@ -227,7 +227,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProjectCampaign");
+                    b.ToTable("ProjectCampaign", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Campaigns.ProjectCampaignContent", b =>
@@ -252,7 +252,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("CampaignId");
 
-                    b.ToTable("ProjectCampaignContent");
+                    b.ToTable("ProjectCampaignContent", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Collaborators.ProjectCollaborator", b =>
@@ -282,7 +282,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProjectCollaborator");
+                    b.ToTable("ProjectCollaborator", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Communites.ProjectCommunity", b =>
@@ -296,7 +296,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProjectCommunity");
+                    b.ToTable("ProjectCommunity", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Files.ProjectImage", b =>
@@ -319,7 +319,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProjectImage");
+                    b.ToTable("ProjectImage", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Files.ProjectVideo", b =>
@@ -342,7 +342,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProjectVideo");
+                    b.ToTable("ProjectVideo", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Projects.Project", b =>
@@ -411,7 +411,7 @@ namespace PCONTB.Panel.Infrastructure.Migrations
                     b.HasIndex("VideoId")
                         .IsUnique();
 
-                    b.ToTable("Project");
+                    b.ToTable("Project", (string)null);
                 });
 
             modelBuilder.Entity("PCONTB.Panel.Domain.Account.Sessions.Session", b =>

@@ -63,7 +63,7 @@ namespace PCONTB.Panel.Application.Services.Projects
 
             if (project.Campaing == null)
             {
-                var newCampaing = new ProjectCampaign(project.Id);
+                var newCampaing = new ProjectCampaign();
 
                 foreach (var item in contents)
                 {

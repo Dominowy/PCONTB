@@ -19,7 +19,8 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
         public byte[] VideoData { get; set; }
         public List<UpdateProjectCollaboratorDto> Collaborators { get; set; } = [];
         public ProjectCampaignDto Campaign { get; set; }
-
+        public string Description { get; set; }
+        public int Views { get; set; } = 0;
     }
 
     public class UpdateProjectHandler(
@@ -42,6 +43,7 @@ namespace PCONTB.Panel.Application.Functions.Projects.Commands
             aggregate.SetName(request.Name);
             aggregate.SetCountry(request.CountryId);
             aggregate.SetCategory(request.CategoryId);
+            aggregate.SetDescription(request.Description);
 
             await projectFileService.UploadImage(aggregate, request.Image, cancellationToken);
 

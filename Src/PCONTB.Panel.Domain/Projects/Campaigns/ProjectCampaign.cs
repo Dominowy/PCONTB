@@ -7,7 +7,7 @@ namespace PCONTB.Panel.Domain.Projects.Campaigns
 
         public List<ProjectCampaignContent> CampaignContents { get; set; } = [];
 
-        protected ProjectCampaign() : base()
+        public ProjectCampaign() : base()
         {
 
         }
@@ -16,6 +16,7 @@ namespace PCONTB.Panel.Domain.Projects.Campaigns
         {
 
         }
+
 
         public void AddContent(ProjectCampaignContent entity)
         {

@@ -65,6 +65,13 @@ namespace PCONTB.Panel.Domain.Projects
             Created = DateTime.UtcNow;
         }
 
+        public void SetDescription(string description)
+        {
+            var anyChange = Description != description;
+            if (!anyChange) return;
+
+            Description = description;
+        }
         public void SetUser(Guid userId)
         {
             var anyChange = UserId != userId;

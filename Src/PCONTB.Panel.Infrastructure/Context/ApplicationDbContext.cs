@@ -146,6 +146,10 @@ namespace PCONTB.Panel.Infrastructure.Context
                 .HasPrincipalKey<ProjectCampaign>(m => m.Id)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<ProjectCampaign>()
+                .Property(m => m.Id)
+                .ValueGeneratedOnAdd();
+
             builder.Entity<ProjectCampaignContent>()
                 .HasOne(m => m.Campaign)
                 .WithMany(m => m.CampaignContents)

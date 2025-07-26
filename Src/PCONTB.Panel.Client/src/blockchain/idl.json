@@ -3,14 +3,6 @@
 	"name": "fizzbuzz",
 	"instructions": [
 		{
-			"name": "checkCampaign",
-			"accounts": [
-				{ "name": "campaign", "isMut": true, "isSigner": false },
-				{ "name": "clock", "isMut": false, "isSigner": false }
-			],
-			"args": []
-		},
-		{
 			"name": "donateCampaign",
 			"accounts": [
 				{ "name": "donor", "isMut": true, "isSigner": true },

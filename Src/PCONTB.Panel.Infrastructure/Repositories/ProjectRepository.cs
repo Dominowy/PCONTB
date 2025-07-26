@@ -9,6 +9,17 @@ namespace PCONTB.Panel.Infrastructure.Repositories
     public class ProjectRepository(ApplicationDbContext context) 
         : Repository<Project>(context), IProjectRepository
     {
+        public virtual IQueryable<Project> GetQuery()
+        {
+            return dbSet
+                .Include(p => p.User)
+                .Include(p => p.Country)
+                .Include(p => p.Category)
+                .Include(p => p.Image)
+                .Include(p => p.Video)
+                .AsNoTracking();
+        }
+
         public override async Task<IEnumerable<Project>> GetAll(CancellationToken cancellationToken)
         {
             return await dbSet

@@ -38,6 +38,17 @@
             api-url="/locations/countries/select-countries"
             :disabled="!currentUser.manageProjectPermission"
           />
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              id="description"
+              class="form-control"
+              v-model="form.description"
+              rows="5"
+              placeholder="Enter description..."
+            ></textarea>
+          </div>
+          <div class="mb-3">Views: {{ form.views }}</div>
         </b-card>
         <b-card
           no-body

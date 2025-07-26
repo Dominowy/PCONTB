@@ -46,7 +46,6 @@ const router = useRouter();
 
 onMounted(async () => {
   await getCampaignInfo();
-  await checkCampaing();
 });
 
 const wallet = useWalletStore();
@@ -62,14 +61,6 @@ async function getCampaignInfo() {
     let info = await wallet.getCampaignDetails(props.projectId);
 
     campaignInfo.value = info;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function checkCampaing() {
-  try {
-    await wallet.checkCampaign(props.projectId);
   } catch (error) {
     console.log(error);
   }
