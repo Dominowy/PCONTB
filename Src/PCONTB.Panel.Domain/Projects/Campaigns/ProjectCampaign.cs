@@ -2,21 +2,19 @@
 
 namespace PCONTB.Panel.Domain.Projects.Campaigns
 {
-    public class ProjectCampaign : BaseEntity
+    public class ProjectCampaign : BaseEntityEnabled
     {
-        public Guid ProjectId { get; private set; }
-        public virtual Project Project { get; private set; }
 
         public List<ProjectCampaignContent> CampaignContents { get; set; } = [];
 
         protected ProjectCampaign() : base()
         {
-            
+
         }
 
-        public ProjectCampaign(Guid projectId) : base()
+        public ProjectCampaign(Guid id) : base(id)
         {
-            ProjectId = projectId;
+
         }
 
         public void AddContent(ProjectCampaignContent entity)

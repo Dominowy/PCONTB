@@ -2,8 +2,6 @@
 {
     public class ProjectImage : ProjectFile
     {
-        public Project Project { get; private set; }
-
         public ProjectImage() : base()
         {
 

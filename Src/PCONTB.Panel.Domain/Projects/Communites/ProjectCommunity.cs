@@ -1,12 +1,10 @@
 ﻿using PCONTB.Panel.Domain.Common;
+using PCONTB.Panel.Domain.Community;
 
 namespace PCONTB.Panel.Domain.Projects.Communites
 {
-    public class ProjectCommunity : BaseAggregateEnabled
+    public class ProjectCommunity : BaseEntityEnabled
     {
-        public Guid ProjectId { get; private set; }
-        public Project Project { get; private set; }
-
-        public virtual List<ProjectCommunityMessage> Messages { get; private set; } = [];
+        public virtual List<CommunityMessage> Messages { get; private set; } = [];
     }
 }
