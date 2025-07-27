@@ -26,7 +26,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 | Nazwa:| Home <img width=1000/>|         
 |:------|:----------------------------------------------------------------------|
-| Opis: | mStrona główna miejsce, w którym użytkownik może przeglądać najnowsze projekty oraz najczęściej odwiedzane. |
+| Opis: | Strona główna miejsce, w którym użytkownik może przeglądać najnowsze projekty oraz najczęściej odwiedzane. |
 
 | Nazwa:| Discover <img width=1000/>|         
 |:------|:----------------------------------------------------------------------|
@@ -179,7 +179,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 ### 5. Lista przypdków użycia
 
-|Funkcjonalność | Użytkownik Niezalogowany | Użytkownik | Moderator | Administrator|
+|Funkcjonalność | Użytkownik niezalogowany | Użytkownik | Moderator | Administrator|
 |:-------------:|:------------------------:|:----------:|:------------:|:------------:|
 |Rejestracja | + | - | - | - |
 |Logowanie | + | - | - | - |
@@ -219,18 +219,18 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Rejestracja
 
 * **Cel**: 
-        Celem tej funkcjonalności jest rejestracja konta dla nowego użytkownika w celu możliwości zalogowania.
+        Celem tej funkcjonalności jest rejestracja konta w celu możliwości zalogowania.
         
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik niezalogowany
                         
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Użytkownik/Moderator/Administrator przechodzi do logowanie.
-- Krok 2: Klika przycisk link Rejestruj
-- Krok 3: Użytkownik/Moderator/Administrator wypełnia wymagane dane w formularzu.
-- Krok 4: Użytkownik/Moderator/Administrator klika przycisk "Rejestruj".
+- Krok 1: Aktor przechodzi do strony logowanie.
+- Krok 2: Klika przycisk/link Rejestruj
+- Krok 3: Wypełnia wymagane dane w formularzu.
+- Krok 4: Klika przycisk "Rejestruj".
 - Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
 - Krok 6: Otrzymuje informację o pozytywnym wykreowaniu konta.
 ```
@@ -245,44 +245,46 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Rejestracja drawio" src="https://github.com/user-attachments/assets/8e43c2b4-7de4-427e-8434-194f9ea4588e" />
+        <img width="711" height="309" alt="Rejestracja drawio" src="https://github.com/user-attachments/assets/a4b38336-a453-4ff2-ae1c-d0c2c99e7d42" />
 </p>
         
 ---
 ### Logowanie
 
 * **Cel**:
-        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi uzyskania dostępu.
+        Celem tej funkcjonalności jest umożliwienie aktorowi uzyskania dostępu.
         
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik niezalogowany
                 
 * **Główny Scenariusz**:
 ```
       
-- Krok 1: Użytkownik/Moderator/Administrator wyświetla się ekran z możliwością zalogowania.
-- Krok 2: Użytkownik/Moderator/Administrator wypełnia dane w formularzu logowania.
-- Krok 3: Sprawdzana jest poprawność wprowadzonych danych.
-- Krok 4: Użytkownik/Moderator/Administrator zostaje pomyślnie zalogowany.
+- Krok 1: Aktor przechodzi do strony logowanie.
+- Krok 2: Wypełnia dane w formularzu logowania.
+- Krok 3: Klika przycisk "Zaloguj".
+- Krok 4: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 5: Aktor zostaje pomyślnie zalogowany.
 ```
 
 * **Rozszerzenia**:
 ```
-- Krok 3.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzającyh się.
-- Krok 3.2: System prosi o ponowne wprowadzenie danych.
+- Krok 4.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzającyh się.
+- Krok 4.2: System prosi o ponowne wprowadzenie danych.
+
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Logowanie drawio" src="https://github.com/user-attachments/assets/2c766f44-9b49-47f6-bb0b-3d22c53978eb" />
+        <img width="711" height="309" alt="Logowanie drawio" src="https://github.com/user-attachments/assets/1c3f80ee-0ccf-4aa3-a6c0-1d116df2a0cb" />
 </p>
 
 ---
 ### Wylogowanie
 
 * **Cel**:
-        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi wylogowanie się z systemu tym samym zakończenie sesji i zabezpieczenie swojego konta.
+        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi wylogowanie się z systemu tym samym zakończenie sesji i zabezpieczenie swojego konta.
      
 * **Główny Aktor**:
         Użytkownik/Moderator/Administrator
@@ -290,22 +292,22 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik/Moderator/Administrator klika przycisk wyloguj.
-- Krok 2: Zamykana jest sesja określonego Użytkownik/Moderator/Administrator.
+- Krok 1: Aktor klika przycisk "Wyloguj".
+- Krok 2: Zamykana jest sesja określonego aktora.
 - Krok 3: Komunikat o poprawynm wylogowaniu.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Wylogowanie drawio" src="https://github.com/user-attachments/assets/040e1cae-4db3-4f81-9060-94eda56efd16" />
+        <img width="711" height="309" alt="Wylogowanie drawio" src="https://github.com/user-attachments/assets/e381445a-725c-4f74-91d2-8175f839f168" />
 </p>
 
 ---
 ### Aktualizacja danych konta
 
 * **Cel**:
-        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi zmiany danych(e-mail, nazwa) użytkownika.
+        Celem tej funkcjonalności jest umożliwienie aktorowi zmiany danych(e-mail, nazwa) konta.
      
 * **Główny Aktor**:
         Użytkownik/Moderator/Administrator
@@ -313,9 +315,9 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
+- Krok 1: Aktor przechodzi do ustawień konta.
 - Krok 2: Wprowadza nowe dane.
-- Krok 3: Użytkownik/Moderator/Administrator zapisuje.
+- Krok 3: Klika przycisk "Zapisz".
 - Krok 4: Sprawdzana jest poprawność wprowadzonych danych.     
 - Krok 5: Komunikat o poprawnej operacji.
 ```
@@ -323,21 +325,21 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Rozszerzenia**:
   
 ```
-- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzających się.
-- Krok 5.2: System prosi o ponowne wprowadzenie danych.
+- Krok 4.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzających się.
+- Krok 4.2: System prosi o ponowne wprowadzenie danych.
 ```
        
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Aktualizacja danych konta drawio" src="https://github.com/user-attachments/assets/6dce3c6a-616d-4ff8-ba0d-7d60d9297c51" />
+        <img width="711" height="309" alt="Aktualizacja danych konta drawio" src="https://github.com/user-attachments/assets/7daea74d-0d7f-4046-b21e-7cb1d47b645d" />
 </p>
 
 ---
 ### Zmiana hasła konta
 
 * **Cel**:
-        Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
+        Celem tej funkcjonalności jest umożliwienie aktorowi zmiany hasła konta.
 
 * **Główny Aktor**:
         Użytkownik/Moderator/Administrator
@@ -345,9 +347,9 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień.
+- Krok 1: Aktor przechodzi do ustawień konta.
 - Krok 2: Wprowadza stare i nowe hasło.
-- Krok 3: Zapisuje.
+- Krok 3: Klika przycisk "Zapisz".
 - Krok 4: Sprawdzana jest poprawność starego hasła i siła nowego.
 - Krok 5: Komunikat o poprawnej operacji.
 ```
@@ -355,20 +357,21 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Rozszerzenia**:
   
 ```
-- Krok 4.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych. 
+- Krok 4.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 4.2: System prosi o ponowne wprowadzenie danych.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Zmiana hasła konta drawio" src="https://github.com/user-attachments/assets/510a85e4-1533-43a8-952e-7467180fd042" />
+        <img width="711" height="309" alt="Zmiana hasła konta drawio" src="https://github.com/user-attachments/assets/b464bcf6-09b2-44b7-b18a-74bd2600611e" />
 </p>
   
 ---
 ### Blokada konta
 
 * **Cel**:
-        Umożliwienie Użytkownik/Moderator/Administrator blokady swojego konta.
+        Umożliwienie aktorowi blokady swojego konta.
 
 * **Główny Aktor**:
         Użytkownik/Moderator/Administrator
@@ -376,9 +379,9 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień konta.
+- Krok 1: Aktor przechodzi do ustawień konta.
 - Krok 2: Wybiera opcję blokady konta.
-- Krok 3: Potwierdza decyzję.
+- Krok 3: Klika przycisk "Blokuj".
 - Krok 4: System dezaktywuje konto.
 - Krok 5: Komunikat o poprawnej operacji.
 - Krok 6: Wylogowanie wszystkich aktywnych sesji.
@@ -393,22 +396,22 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Blokda konta drawio" src="https://github.com/user-attachments/assets/f784954f-3461-49f8-a639-ded70cf03797" />
+        <img width="711" height="309" alt="Blokada konta drawio" src="https://github.com/user-attachments/assets/229da1ba-aa6a-491b-9fb7-749de8023940" />
 </p>
   
 ---
 ### Wyświetlanie użytkownika
 
 * **Cel**:
-        Umożliwienie przeglądania publicznego profilu innego użytkownika.
+        Umożliwienie przeglądania publicznego profilu użytkownika.
 
 * **Główny Aktor**:
-        Użytkownik
+        Użytkownik/Moderator/Administrator
 
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik otwiera strone projektu.
+- Krok 1: Aktor otwiera strone projektu.
 - Krok 2: Kliknięcie na nazwę użytkownika przekierowuje do jego profilu.
 - Krok 3: System wyświetla dane publiczne profilu.
 ```
@@ -422,7 +425,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Wyświetlanie użytkownika drawio" src="https://github.com/user-attachments/assets/5fe65956-51fc-4da0-808b-66690230008f" />
+        <img width="711" height="309" alt="Wyświetlanie użytkownika drawio" src="https://github.com/user-attachments/assets/51fb0d4d-a7e1-49d8-8f91-6100d62dff19" />
 </p>
   
 ---
@@ -437,31 +440,24 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik przechodzi do ustawień konta.
+- Krok 1: Aktor przechodzi do ustawień konta.
 - Krok 2: Przegląda listę aktywnych sesji.
 - Krok 3: Wybiera zakończenie jednej lub wszystkich sesji.
 - Krok 4: System wylogowuje wskazane sesje.
 - Krok 5: Komunikat o poprawnej operacji.
 ```
 
-* **Rozszerzenia**:
-
-```
-- Krok 3.1: Błąd połączenia z serwerem – informacja o błędzie.
-- Krok 4.1: Część sesji już wygasła – system informuje użytkownika.
-```
-
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Zarządzanie sesjami drawio" src="https://github.com/user-attachments/assets/d1b843d0-d86f-4e76-90ca-f7329e7d6f1e" />
+        <img width="711" height="309" alt="Zarządzanie sesjami drawio" src="https://github.com/user-attachments/assets/e8758efc-3338-4c42-8323-9a2786e89a88" />
 </p>
   
 ---
 ### Wyświetlanie projektu
 
 * **Cel**:
-        Umożliwienie Użytkownikowi/Moderatorowi/Administratorowi przeglądanie projektu.
+        Umożliwienie aktorowi przeglądania projektu.
 
 * **Główny Aktor**:
         Użytkownik/Moderator/Administrator
@@ -471,28 +467,27 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ```
 - Krok 1: Wprowadza frazę lub ustawia filtry.
 - Krok 2: System wyświetla wyniki wyszukiwania.
-- Krok 3: Użytkownik wybiera projekt z listy.
-- Krok 4: Użytkownik przegląda szczegóły projektó.u
-- Krok 5: Może przejść do wsparcia lub kontaktu z twórcą.
+- Krok 3: Aktor wybiera projekt z listy.
+- Krok 4: Aktor przegląda szczegóły projektu.
 ```
 
 * **Rozszerzenia**:
   
 ```
-- Krok 3.1: Brak wyników – wyświetlany komunikat.
+- Krok 3.1: Projekt nie znaleziony – wyświetlany komunikat.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Wyświetlanie projektu drawio" src="https://github.com/user-attachments/assets/702a2a5e-09af-434b-b4df-79ac056d0f5d" />
+        <img width="711" height="309" alt="Wyświetlanie projektu drawio" src="https://github.com/user-attachments/assets/3df295a1-8cb5-4b3f-a24b-558e87de9ffb" />
 </p>
 
 ---
 ### Utworzenie projektu
 
 * **Cel**:
-        Umożliwienie użytkownikowi utworzenia nowego projektu.
+        Umożliwienie aktorowi utworzenie nowego projektu.
 
 * **Główny Aktor**:
         Użytkownik
@@ -500,31 +495,33 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Użytkownik przechodzi do strony swoich projektów".
-- Krok 2: Wybiera opcję „Dodaj”.
+- Krok 1: Aktor przechodzi do strony swoich projektów".
+- Krok 2: Wybiera opcję "Dodaj".
 - Krok 3: Wprowadza wymagane dane (nazwa, opis, kategorie, itp.).
-- Krok 4: Zapisuje projekt.
-- Krok 5: Projekt jest widoczny w systemie.
+- Krok 4: Klika przycisk "Zapisz".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Projekt jest widoczny w systemie.
 ```
 
 * **Rozszerzenia**:
 
 ```
-- Krok 3.1: Niepełne dane – komunikat o błędzie.
-- Krok 4.1: Błąd serwera – projekt nie został zapisany.
+- Krok 3.1: Niepoprawne dane – system zgłasza błąd.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Utworzenie projektu drawio" src="https://github.com/user-attachments/assets/018bc402-aac7-409f-bd7a-750b30b9691b" />
+        <img width="711" height="309" alt="Utworzenie projektu drawio" src="https://github.com/user-attachments/assets/e1b58992-5b2e-4e1c-ab9f-f4ca29f2ed02" />
 </p>
 
 ---
 ### Edycja projektu
 
 * **Cel**:
-  Umożliwienie użytkownikowi aktualizacji danych istniejącego projektu.
+  Umożliwienie aktorowi aktualizacji danych istniejącego projektu.
 
 * **Główny Aktor**:
         Użytkownik
@@ -532,18 +529,21 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik otwiera swój projekt.
-- Krok 2: Wybiera opcję „Edytuj”.
+- Krok 1: Aktor przechodzi do strony swoich projektów.
+- Krok 2: Aktor otwiera strone edycji projektu.
 - Krok 3: Wprowadza zmiany w danych.
-- Krok 4: Zapisuje zmiany.
-- Krok 5: Projekt zostaje zaktualizowany.
+- Krok 4: Kilka przycisk "Zapisz".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Projekt zostaje zaktualizowany.
 ```
 
 * **Rozszerzenia**:
   
 ```
- - Krok 3.1: Niepoprawne dane – system zgłasza błąd.
-- Krok 4.1: Brak połączenia z serwerem – zmiany niezapisane.
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
+- Krok 3.1: Niepoprawne dane – system zgłasza błąd.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
 ```
 
 * **Przykład**:
@@ -557,7 +557,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Uruchomienie kampanii
 
 * **Cel**:
-  Umożliwienie użytkownikowi rozpoczęcie kampanii.
+  Umożliwienie aktorowi rozpoczęcie kampanii.
 
 * **Główny Aktor**:
         Użytkownik
@@ -565,24 +565,25 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik łączy się ze swoim portfelem.
-- Krok 2: Uruchamian strone edycji projektu.
-- Krok 3: Wprowadza cel oraz czas trwania.
-- Krok 4: Potwierdza operacje.
-- Krok 5: Kampanie zostaje uruchomion.
+- Krok 1: Aktor przechodzi do strony swoich projektów.
+- Krok 2: Uruchamia strone edycji projektu.
+- Krok 3: Użytkownik łączy się ze swoim portfelem.
+- Krok 4: Wprowadza cel oraz czas trwania.
+- Krok 5: Potwierdza operacje.
+- Krok 6: Kampania zostaje uruchomiona.
 ```
 
 * **Rozszerzenia**:
   
 ```
-- Krok 4.1: Niepoprawne dane – system zgłasza błąd.
-
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
+- Krok 5.1: Niepoprawne dane – kontrakt zgłasza błąd.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="371" alt="Uruchomienie kampanii drawio" src="https://github.com/user-attachments/assets/2c94b4ea-b93d-4477-9915-bde9b71f00f0" />
+        <img width="711" height="341" alt="Uruchomienie kampanii drawio" src="https://github.com/user-attachments/assets/04138fc4-ae97-4012-ae9d-45592b4fc0a5" />
 </p>
 
 ---
@@ -590,7 +591,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Wsparcie kampanii
 
 * **Cel**:
-        Umożliwienie użytkownikowi wsparcia finansowego dla wybranego projektu.
+        Umożliwienie aktorowi wsparcia finansowego wybranego projektu.
 
 * **Główny Aktor**:
         Użytkownik
@@ -598,23 +599,25 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik łączy się ze swoim portfelem.
-- Krok 2: Użytkownik wybiera projekt.
-- Krok 3: Wybiera kwotę wsparcia.
-- Krok 4: Potwierdza operację.
-- Krok 5: System przetwarza transakcję i informuje o sukcesie.
+- Krok 1: Aktor przechodzi do strony projektów.
+- Krok 2: Aktor wybiera projekt.
+- Krok 3: Aktor łączy się ze swoim portfelem.
+- Krok 4: Wybiera kwotę wsparcia.
+- Krok 5: Potwierdza operację.
+- Krok 6: Kontrakt przetwarza transakcję i informuje o sukcesie.
 ```
 
 * **Rozszerzenia**:
 
 ```
-  - Krok 5.1: Brak środków – transakcja anulowana.
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
+- Krok 5.1: Niepoprawne dane – kontrakt zgłasza błąd.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="371" alt="Wsparcie kampanii drawio" src="https://github.com/user-attachments/assets/1ff03ab9-ce95-4326-a145-758ab2e51edf" />
+        <img width="711" height="341" alt="Wsparcie kampanii drawio" src="https://github.com/user-attachments/assets/519477c2-b68f-478d-b818-f4d095ce73e3" />
 </p>
 
 ---
@@ -629,23 +632,24 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Użytkownik łączy się ze swoim portfelem.
-- Krok 2: Użytkownik otwiera strone edycji projektu.
-- Krok 3: Wybiera opcję „Wypłać środki”.
-- Krok 4: Kontrakt realizuje wypłate.
+- Krok 1: Aktor przechodzi do strony swoich projektów.
+- Krok 2: Uruchamia strone edycji projektu.
+- Krok 3: Aktor łączy się ze swoim portfelem.
+- Krok 4: Potwierdza operację.
+- Krok 5: Kontrakt realizuje wypłate.
 ```
 
 * **Rozszerzenia**:
   
 ```
-- Krok 4.1: Kampania jeszcze trwa – brak możliwości wypłaty.
-
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
+- Krok 4.1: Niepoprawne dane – kontrakt zgłasza błąd.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="371" alt="Wypłata środków z kampanii drawio" src="https://github.com/user-attachments/assets/873f086f-3ab1-4429-a0d7-154677fd4c91" />
+        <img width="711" height="341" alt="Wypłata środków z kampanii drawio" src="https://github.com/user-attachments/assets/fba2b7cc-4e5f-4d7f-9b66-2863e0ef6edc" />
 </p>
 
 ---
@@ -653,7 +657,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Zwrot środków z kampanii
 
 * **Cel**:
-        Umożliwienie użytkownikowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
+        Umożliwienie aktorowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
 
 * **Główny Aktor**:
         Użytkownik
@@ -661,25 +665,29 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik przechodzi sekcję „Portfel”.
-- Krok 2: System wyświetla saldo oraz listę transakcji.
+- Krok 1: Aktor przechodzi do strony projektów.
+- Krok 2: Aktor wybiera projekt.
+- Krok 3: Aktor łączy się ze swoim portfelem.
+- Krok 4: Potwierdza operację.
+- Krok 5: Kontrakt realizuje zwrot.
 ```
 * **Rozszerzenia**:
 
 ```
-- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
+- Krok 4.1: Niepoprawne dane – kontrakt zgłasza błąd.
 ```
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="371" alt="Zwrot środków z kampanii drawio" src="https://github.com/user-attachments/assets/7944542e-040c-41d8-887d-77c3e5c88b87" />
+        <img width="711" height="341" alt="Zwrot środków z kampanii drawio" src="https://github.com/user-attachments/assets/4457f74c-8c44-44e9-88bd-61da88719ad7" />
 </p>
 
 ---
 ### Wyświetlanie transakcji
 
 * **Cel**:
-        Umożliwienie użytkownikowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
+        Umożliwienie aktorowi sprawdzenie wykonanych transakcji.
 
 * **Główny Aktor**:
         Użytkownik
@@ -687,18 +695,33 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik przechodzi sekcję „Portfel”.
-- Krok 2: System wyświetla saldo oraz listę transakcji.
+- Krok 1: Aktor przechodzi do strony projektów.
+- Krok 2: Aktor wybiera projekt.
+- Krok 3: Aktor łączy się ze swoim portfelem.
 ```
+* **Wspierający**:
+
+```
+- Krok 3.1: Wyświetlane są transakcje wykonane przez aktora.
+        -Krok 3.1.1: Brak transakcji - aktor nie wspiera projektu
+```
+
+* **Twórca**:
+
+```
+- Krok 3.1: Wyświetlane są wszystkie transakcje.
+```
+
 * **Rozszerzenia**:
 
 ```
-- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
 ```
+
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="371" alt="Wyświetlanie transakcji drawio" src="https://github.com/user-attachments/assets/45c577f8-917b-4755-ab69-e39ed0bc19fd" />
+        <img width="711" height="341" alt="Wyświetlanie transakcji drawio" src="https://github.com/user-attachments/assets/abab6c04-e609-4243-b111-73826af6d903" />
 </p>
 
 ---
@@ -706,7 +729,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Dodawanie komentarzy
 
 * **Cel**:
-        Umożliwienie użytkownikowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
+        Umożliwienie aktorowi dodawanie komentarzy pod projektem.
 
 * **Główny Aktor**:
         Użytkownik
@@ -714,18 +737,32 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik przechodzi sekcję „Portfel”.
-- Krok 2: System wyświetla saldo oraz listę transakcji.
+- Krok 1: Aktor przechodzi do strony projektów.
+- Krok 2: Aktor wybiera projekt.
+- Krok 3: Wprowadza dane do komentarza.
+- Krok 4: Kilka przycisk "Dodaj".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
 ```
+
+* **Odpowiedź**:
+
+```
+- Krok 3.1: Klika przycisk "Odpowiedz"
+- Krok 3.2: Wprowadza dane do komentarza
+```
+
 * **Rozszerzenia**:
 
 ```
-- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
+- Krok 3.1: Brak sekcji komentarzy jeżeli aktor nie wspiera projektu.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
 ```
+
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Dodawanie komentarzy drawio" src="https://github.com/user-attachments/assets/0f5c85a7-7b3a-4c8c-a82b-29d64cc8900e" />
+      <img width="711" height="341" alt="Dodawanie komentarzy drawio" src="https://github.com/user-attachments/assets/6e2729bb-9e41-42c0-bac1-57548aac0497" />
 </p>
 
 ---
@@ -733,7 +770,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Wyświetlanie komentarzy
 
 * **Cel**:
-        Umożliwienie użytkownikowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
+        Umożliwienie aktorowi przeglądanie sekcji komentarzy.
 
 * **Główny Aktor**:
         Użytkownik
@@ -741,18 +778,21 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik przechodzi sekcję „Portfel”.
-- Krok 2: System wyświetla saldo oraz listę transakcji.
+- Krok 1: Aktor przechodzi do strony projektów.
+- Krok 2: Aktor wybiera projekt.
+- Krok 3: Wyświetlana jest sekcja komentarzy.
 ```
+
 * **Rozszerzenia**:
 
 ```
-- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
+- Krok 3.1: Brak sekcji komentarzy jeżeli aktor nie wspiera projektu.
 ```
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Wyświetlanie komentarzy drawio" src="https://github.com/user-attachments/assets/08e9fdca-c96f-4e02-9f40-02d1d58a519e" />
+        <img width="711" height="341" alt="Wyświetlanie komentarzy drawio" src="https://github.com/user-attachments/assets/da02b4ab-e141-44f3-aa55-0fe8691983f1" />
 </p>
 
 ---
