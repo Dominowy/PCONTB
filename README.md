@@ -24,6 +24,10 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 #### 2.1 Obiekty Binesowe
 
+| Nazwa:| Home <img width=1000/>|         
+|:------|:----------------------------------------------------------------------|
+| Opis: | mStrona główna miejsce, w którym użytkownik może przeglądać najnowsze projekty oraz najczęściej odwiedzane. |
+
 | Nazwa:| Discover <img width=1000/>|         
 |:------|:----------------------------------------------------------------------|
 | Opis: | Miejsce, w którym użytkownik może przeglądać dostępne projekty oraz ich kampanie, sprawdzać cele, postępy oraz użytkowników odpowiedzialnych za projekt. |
@@ -175,37 +179,39 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 ### 5. Lista przypdków użycia
 
-|Funkcjonalność | Użytkownik | Moderator | Administrator|
-|:-------------:|:----------:|:------------:|:------------:|
-|Rejestracja | + | - | - |
-|Logowanie | + | + | + |
-|Wylogowanie | + | + | + |
-|Aktualizacja danych konta | + | + | + |
-|Zmiana hasła konta | + | + | + |
-|Blokada konta | + | + | + |
-|Wyświetlanie użytkownika | + | + | + |
-|Zarządzanie sesjami | + | + | + |
-|Wyświetlanie projektu | + | + | + |
-|Utworzenie projektu | + | - | - |
-|Edycja projektu | + | - | - |
-|Uruchomienie kampanii | + | - | - |
-|Wsparcie kampanii | + | - | - |
-|Wypłata środków kampanii | + | - | - |
-|Zwrot środków kampanii | + | - | - |
-|Wyświetlenie transakcji | + | - | - |
-|Dodawanie komentarzy | + | - | - |
-|Wyświetlenie komentarzy | + | - | - |
-|Blokowanie komentarzy | - | + | + |
-|Dodawanie użytkownika | - | - | + |
-|Blokada użytkownika | - | + | + |
-|Odblokowanie użytkownika | - | + | + |
-|Zmiana uprawnień użytkownika | - | - | + |
-|Dodawanie kategorii | - | - | + |
-|Edycja kategorii | - | - | + |
-|Usuwanie kategorii | - | - | + |
-|Dodanie lokalizacji | - | - | + |
-|Edycja lokalizacji | - | - | + |
-|Usuwanie lokalizacji | - | - | + |
+|Funkcjonalność | Użytkownik Niezalogowany | Użytkownik | Moderator | Administrator|
+|:-------------:|:------------------------:|:----------:|:------------:|:------------:|
+|Rejestracja | + | + | - | - |
+|Logowanie | + | + | + | + |
+|Wylogowanie | - | + | + | + |
+|Aktualizacja danych konta | - | + | + | + |
+|Zmiana hasła konta | - | + | + | + |
+|Blokada konta | - | + | + | + |
+|Wyświetlanie użytkownika | + | + | + | + |
+|Zarządzanie sesjami | - | + | + | + |
+|Wyświetlanie projektu | + | + | + | + |
+|Utworzenie projektu | - | + | - | - |
+|Edycja projektu | - | + | - | - |
+|Uruchomienie kampanii | - | + | - | - |
+|Wsparcie kampanii | - | + | - | - |
+|Wypłata środków kampanii | - | + | - | - |
+|Zwrot środków kampanii | - | + | - | - |
+|Wyświetlenie transakcji | + | + | - | - |
+|Dodawanie komentarzy | + | + | - | - |
+|Wyświetlenie komentarzy | + | + | - | - |
+|Dodawanie obserwacji projektu | - | + | - | - |
+|Usuwanie obserwacji projektu | - | + | - | - |
+|Blokowanie komentarzy | - | - | + | + |
+|Dodawanie użytkownika | - | - | - | + |
+|Blokada użytkownika | - | - | + | + |
+|Odblokowanie użytkownika | - | - | + | + |
+|Zmiana uprawnień użytkownika | - | - | - | + |
+|Dodawanie kategorii | - | - | - | + |
+|Edycja kategorii | - | - | - | + |
+|Usuwanie kategorii | - | - | - | + |
+|Dodanie lokalizacji | - | - | - | + |
+|Edycja lokalizacji | - | - | - | + |
+|Usuwanie lokalizacji | - | - | - | + |
 
 
 ### 6. Przypadki użycia
@@ -749,6 +755,74 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         <img width="721" height="309" alt="Wyświetlanie komentarzy drawio" src="https://github.com/user-attachments/assets/08e9fdca-c96f-4e02-9f40-02d1d58a519e" />
 </p>
 
+---
+
+### Dodanie obserwacji projektu
+
+* **Cel**: 
+        Celem tej funkcjonalności jest rejestracja konta dla nowego użytkownika w celu możliwości zalogowania.
+        
+* **Główny Aktor**:
+        Użytkownik/Moderator/Administrator
+                        
+* **Główny Scenariusz**:
+  
+```
+- Krok 1: Użytkownik/Moderator/Administrator przechodzi do logowanie.
+- Krok 2: Klika przycisk link Rejestruj
+- Krok 3: Użytkownik/Moderator/Administrator wypełnia wymagane dane w formularzu.
+- Krok 4: Użytkownik/Moderator/Administrator klika przycisk "Rejestruj".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Otrzymuje informację o pozytywnym wykreowaniu konta.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzających się.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
+```
+        
+* **Przykład**:
+
+<p align="center">
+        <img width="721" height="309" alt="Dodanie obserwacji projektu drawio" src="https://github.com/user-attachments/assets/aa37f2c6-d87e-4c09-92e9-d14f11c49e93" />
+</p>
+        
+---
+
+### Usuwanie obserwacji projektu
+
+* **Cel**: 
+        Celem tej funkcjonalności jest rejestracja konta dla nowego użytkownika w celu możliwości zalogowania.
+        
+* **Główny Aktor**:
+        Użytkownik/Moderator/Administrator
+                        
+* **Główny Scenariusz**:
+  
+```
+- Krok 1: Użytkownik/Moderator/Administrator przechodzi do logowanie.
+- Krok 2: Klika przycisk link Rejestruj
+- Krok 3: Użytkownik/Moderator/Administrator wypełnia wymagane dane w formularzu.
+- Krok 4: Użytkownik/Moderator/Administrator klika przycisk "Rejestruj".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Otrzymuje informację o pozytywnym wykreowaniu konta.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzających się.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
+```
+        
+* **Przykład**:
+
+<p align="center">
+        <img width="721" height="309" alt="Usuwanie obserwacji projektu drawio" src="https://github.com/user-attachments/assets/68594851-159a-42ec-b401-d5c0fecb49e7" />
+</p>
+        
 ---
 
 ### Blokowanie komentarzy
