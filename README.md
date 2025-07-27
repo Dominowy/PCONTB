@@ -762,7 +762,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
-      <img width="711" height="341" alt="Dodawanie komentarzy drawio" src="https://github.com/user-attachments/assets/6e2729bb-9e41-42c0-bac1-57548aac0497" />
+        <img width="711" height="309" alt="Dodawanie komentarzy drawio" src="https://github.com/user-attachments/assets/0c7a2451-3997-4e58-9fd7-a06d5dca5d02" />
 </p>
 
 ---
@@ -792,7 +792,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
-        <img width="711" height="341" alt="Wyświetlanie komentarzy drawio" src="https://github.com/user-attachments/assets/da02b4ab-e141-44f3-aa55-0fe8691983f1" />
+        <img width="711" height="309" alt="Wyświetlanie komentarzy drawio" src="https://github.com/user-attachments/assets/39594864-86f8-494b-8f7f-4a7e38fdd8f6" />
 </p>
 
 ---
