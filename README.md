@@ -323,7 +323,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Aktualizacja danych konta drawio" src="https://github.com/user-attachments/assets/e285752d-3c7f-44e0-bbd2-6decd1e44218" />
+        <img width="721" height="309" alt="Aktualizacja danych konta drawio" src="https://github.com/user-attachments/assets/6dce3c6a-616d-4ff8-ba0d-7d60d9297c51" />
 </p>
 
 ---
