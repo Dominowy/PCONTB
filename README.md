@@ -181,8 +181,8 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 |Funkcjonalność | Użytkownik Niezalogowany | Użytkownik | Moderator | Administrator|
 |:-------------:|:------------------------:|:----------:|:------------:|:------------:|
-|Rejestracja | + | + | - | - |
-|Logowanie | + | + | + | + |
+|Rejestracja | + | - | - | - |
+|Logowanie | + | - | - | - |
 |Wylogowanie | - | + | + | + |
 |Aktualizacja danych konta | - | + | + | + |
 |Zmiana hasła konta | - | + | + | + |
@@ -193,9 +193,9 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |Utworzenie projektu | - | + | - | - |
 |Edycja projektu | - | + | - | - |
 |Uruchomienie kampanii | - | + | - | - |
-|Wsparcie kampanii | - | + | - | - |
+|Wsparcie kampanii | + | + | - | - |
 |Wypłata środków kampanii | - | + | - | - |
-|Zwrot środków kampanii | - | + | - | - |
+|Zwrot środków kampanii | + | + | - | - |
 |Wyświetlenie transakcji | + | + | - | - |
 |Dodawanie komentarzy | + | + | - | - |
 |Wyświetlenie komentarzy | + | + | - | - |
