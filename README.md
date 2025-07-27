@@ -40,23 +40,19 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |:------|:----------------------------------------------------------------------|
 | Opis: | Panel administracyjny dla moderatorów i administratorów, umożliwiający zarządzanie użytkownikami i zgłoszeniami. |
 
-| Nazwa:| Ledger <img width=1000/>|         
-|:------|:----------------------------------------------------------------------|
-| Opis: | Moduł odpowiedzialny za zarządzanie finansami: przegląd salda, historia transakcji, wpłaty, wypłaty oraz integrację z systemem płatności. |
-
 #### 2.2 Aktorzy Biznesowi
 
 | Nazwa:| Użytkownik Niezalogowany <img width=1000/>                            |
 |:------|:----------------------------------------------------------------------|
-| Opis: |Użytkownik który nie zalogował sie lub nie wykreował swojego konta, <br> może przeglądać dostępne projekty. |
+| Opis: |Użytkownik który nie zalogował sie lub nie wykreował swojego konta, <br> może przeglądać dostępne projekty a także po połączeniu z swoim portfelem może wesprzeć projekt anonimowo. |
 
 | Nazwa:| Użytkownik Zalogowany <img width=1000/>                               |
 |:------|:----------------------------------------------------------------------|
-| Opis: |Użytkownik który wykreował swoje konto ale także się zalogował ma pełny dostęp do oferowanej treśći. |
+| Opis: |Użytkownik który wykreował swoje konto ale także się zalogował ma pełny dostęp do oferowanej treśći |
 
 | Nazwa:| Moderator          <img width=1000/>                                  |
 |:------|:----------------------------------------------------------------------|
-| Opis: | Użytkownik z uprawnieniami administracyjnymi w ograniczonym zakresie. Może wspierać użytkowników, moderować treści i zgłoszenia, ale nie zarządza całym systemem. |
+| Opis: | Użytkownik z uprawnieniami administracyjnymi w ograniczonym zakresie. Może wspierać użytkowników, ale nie zarządza całym systemem. |
 
 | Nazwa:| Administrator          <img width=1000/>                    |
 |:------|:----------------------------------------------------------------------|
@@ -129,13 +125,6 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 | Rola:      |Administrator                                                                                                |
 | Opis:      |Administrator zarządza użytkownikami oraz konfiguracją systemu.                                              |
 
-| ID:        | 10             <img width=1000/>                                                                            | 
-|:-----------|:------------------------------------------------------------------------------------------------------------|
-| Nazwa:     |Przegląd portfela (Ledger)                                                                                   |
-| Priorytet: |Wysoki                                                                                                       |
-| Rola:      |Użytkownik                                                                                                   |
-| Opis:      |Użytkownik może przeglądać saldo, historię transakcji i dokonywać operacji finansowych.                      |
-
 #### 3.2 Wymagania Niefunkcjonalne
 
 | ID:        | 1                       <img width=1000/>                                  |
@@ -177,11 +166,10 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 
 #### 4.2. Opis Architektury
 
-System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
-
 - Backend - ASP.NET - napisane zostanie w nim WEB.API mechanika strony, połączenie z bazą danych oraz blockchainem. Backend zostanie podzielony na warstwy zgodnie z czystą architekturą.
 - Frontend - VUE.JS - zostanie w nim stworzony interfejs użytkownika w komunikacji z backendem będzie pośredniczył VITE.JS w którym zostanie skonfigurowane proxy.
-- Baza danych - PostgreSQL - odpowiedzialny z przechowywanie danych o projektach, użytkownikach transakcjach oraz danych pomocniczych
+- Baza danych - PostgreSQL - odpowiedzialny z przechowywanie danych o projektach, użytkownikach oraz danych pomocniczych
+- Blockchain - Solana - poprzez smart contract użytkownik dokonuje wpłat na cel projektu a także przetrzymywane są w nim dane na temat transakcji oraz wspierających
 
 <img width="1169" height="1055" alt="image" src="https://github.com/user-attachments/assets/fabc017e-7b5b-4908-9a27-5205da83cdfa" />
 
@@ -197,18 +185,16 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 |Blokada konta | + | + | + |
 |Wyświetlanie użytkownika | + | + | + |
 |Zarządzanie sesjami | + | + | + |
-|Zarządzanie transakcjami | - | + | + |
-|Wyświetlanie transakcji | + | - | + |
-|Wyświetlanie wspieranych projektów | + | - | + |
-|Zarządzanie wspieranymi projektami | + | - | - |
 |Wyświetlanie projektu | + | + | + |
 |Utworzenie projektu | + | - | - |
 |Edycja projektu | + | - | - |
 |Uruchomienie kampani | + | - | - |
 |Wsparcie projektu | + | - | - |
-|Wyświetlenie wspierających | + | - | - |
-|Przegląd środków kampanii | + | - | - |
 |Wypłata środków kampanii | + | - | - |
+|Zwrot środków kampanii | + | - | - |
+|Wyświetlenie transakcji | + | - | - |
+|Dodawanie komentarzy | + | - | - |
+|Wyświetlenie komentarzy | + | - | - |
 |Dodawanie użytkownika | - | - | + |
 |Blokada użytkownika | - | + | + |
 |Odblokowanie użytkownika | - | + | + |
@@ -252,7 +238,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/56208135/165714270-a657857e-57c7-4bc1-9fb2-f04f71dafa3b.png" />
+        <img width="721" height="309" alt="Rejestracja drawio" src="https://github.com/user-attachments/assets/8e43c2b4-7de4-427e-8434-194f9ea4588e" />
 </p>
         
 ---
@@ -282,7 +268,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/56208135/165717473-0ae1b1a6-0fd9-4f63-aae7-2277e8e0637c.png" />
+        <img width="721" height="309" alt="Logowanie drawio" src="https://github.com/user-attachments/assets/2c766f44-9b49-47f6-bb0b-3d22c53978eb" />
 </p>
 
 ---
@@ -305,7 +291,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/56208135/165771164-1de77e13-8ec6-43b5-8e27-7a90679790b2.png" />
+        <img width="721" height="309" alt="Wylogowanie drawio" src="https://github.com/user-attachments/assets/040e1cae-4db3-4f81-9060-94eda56efd16" />
 </p>
 
 ---
@@ -337,6 +323,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="309" alt="Aktualizacja danych konta drawio" src="https://github.com/user-attachments/assets/e285752d-3c7f-44e0-bbd2-6decd1e44218" />
 </p>
 
 ---
@@ -367,10 +354,11 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="309" alt="Zmiana hasła konta drawio" src="https://github.com/user-attachments/assets/dd9a1fc5-08fa-45b2-8729-5045f4393364" />
 </p>
   
 ---
-### Zamknięcie konta
+### Blokada konta
 
 * **Cel**:
         Umożliwienie użytkownikowi blokady swojego konta.
@@ -399,6 +387,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="309" alt="Blokada konta drawio" src="https://github.com/user-attachments/assets/00d5f053-425c-4351-a326-24e7114fe6e6" />
 </p>
   
 ---
@@ -413,7 +402,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik otwiera kampanię lub projekt.
+- Krok 1: Użytkownik otwiera strone projektu.
 - Krok 2: Kliknięcie na nazwę użytkownika przekierowuje do jego profilu.
 - Krok 3: System wyświetla dane publiczne profilu.
 ```
@@ -427,6 +416,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="309" alt="Wyświetlanie użytkownika drawio" src="https://github.com/user-attachments/assets/5fe65956-51fc-4da0-808b-66690230008f" />
 </p>
   
 ---
@@ -441,7 +431,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik przechodzi do ustawień bezpieczeństwa.
+- Krok 1: Użytkownik przechodzi do ustawień konta.
 - Krok 2: Przegląda listę aktywnych sesji.
 - Krok 3: Wybiera zakończenie jednej lub wszystkich sesji.
 - Krok 4: System wylogowuje wskazane sesje.
@@ -458,6 +448,7 @@ System zostanie podzielony na dwie oddzielne aplikacje Panel oraz Ledger.
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="309" alt="Zarządzanie sesjami drawio" src="https://github.com/user-attachments/assets/d1b843d0-d86f-4e76-90ca-f7329e7d6f1e" />
 </p>
   
 ---
