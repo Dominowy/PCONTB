@@ -354,7 +354,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Zmiana hasła konta drawio" src="https://github.com/user-attachments/assets/dd9a1fc5-08fa-45b2-8729-5045f4393364" />
+        <img width="721" height="309" alt="Zmiana hasła konta drawio" src="https://github.com/user-attachments/assets/510a85e4-1533-43a8-952e-7467180fd042" />
 </p>
   
 ---
@@ -387,7 +387,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Blokada konta drawio" src="https://github.com/user-attachments/assets/00d5f053-425c-4351-a326-24e7114fe6e6" />
+        <img width="721" height="309" alt="Blokda konta drawio" src="https://github.com/user-attachments/assets/f784954f-3461-49f8-a639-ded70cf03797" />
 </p>
   
 ---
