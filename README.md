@@ -198,7 +198,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |Zwrot środków kampanii | + | + | - | - |
 |Wyświetlenie transakcji | + | + | - | - |
 |Dodawanie komentarzy | + | + | - | - |
-|Wyświetlenie komentarzy | + | + | - | - |
+|Wyświetlenie komentarzy | + | + | + | + |
 |Dodawanie obserwacji projektu | - | + | - | - |
 |Usuwanie obserwacji projektu | - | + | - | - |
 |Blokowanie komentarzy | - | - | + | + |
@@ -549,7 +549,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Edycja projektu drawio" src="https://github.com/user-attachments/assets/0db2a881-aaa4-4840-9502-98cd983a7427" />
+        <img width="711" height="309" alt="Edycja projektu drawio" src="https://github.com/user-attachments/assets/0a35c26a-52b0-449e-9463-f4798a135430" />
 </p>
 
 ---
@@ -800,33 +800,29 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Dodanie obserwacji projektu
 
 * **Cel**: 
-        Celem tej funkcjonalności jest rejestracja konta dla nowego użytkownika w celu możliwości zalogowania.
+        Celem tej funkcjonalności jest dodanie projektu do obserwowanych.
         
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik
                         
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Użytkownik/Moderator/Administrator przechodzi do logowanie.
-- Krok 2: Klika przycisk link Rejestruj
-- Krok 3: Użytkownik/Moderator/Administrator wypełnia wymagane dane w formularzu.
-- Krok 4: Użytkownik/Moderator/Administrator klika przycisk "Rejestruj".
-- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
-- Krok 6: Otrzymuje informację o pozytywnym wykreowaniu konta.
+- Krok 1: Aktor przechodzi do strony projektów.
+- Krok 2: Aktor wybiera projekt.
+- Krok 3: Kilka przycisk "Obserwuj".
 ```
 
 * **Rozszerzenia**:
   
 ```
-- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzających się.
-- Krok 5.2: System prosi o ponowne wprowadzenie danych.
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
 ```
         
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Dodanie obserwacji projektu drawio" src="https://github.com/user-attachments/assets/aa37f2c6-d87e-4c09-92e9-d14f11c49e93" />
+        <img width="711" height="309" alt="Dodanie obserwacji projektu drawio" src="https://github.com/user-attachments/assets/635258a0-c887-48bf-a92d-e94c19700777" />
 </p>
         
 ---
@@ -834,33 +830,29 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Usuwanie obserwacji projektu
 
 * **Cel**: 
-        Celem tej funkcjonalności jest rejestracja konta dla nowego użytkownika w celu możliwości zalogowania.
+        Celem tej funkcjonalności jest usunięcie projektu z obserwowanych.
         
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik
                         
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Użytkownik/Moderator/Administrator przechodzi do logowanie.
-- Krok 2: Klika przycisk link Rejestruj
-- Krok 3: Użytkownik/Moderator/Administrator wypełnia wymagane dane w formularzu.
-- Krok 4: Użytkownik/Moderator/Administrator klika przycisk "Rejestruj".
-- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
-- Krok 6: Otrzymuje informację o pozytywnym wykreowaniu konta.
+- Krok 1: Aktor przechodzi do strony projektów.
+- Krok 2: Aktor wybiera projekt.
+- Krok 3: Kilka przycisk "Przestań obserwować".
 ```
 
 * **Rozszerzenia**:
   
 ```
-- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych lub powtarzających się.
-- Krok 5.2: System prosi o ponowne wprowadzenie danych.
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
 ```
         
 * **Przykład**:
 
 <p align="center">
-        <img width="721" height="309" alt="Usuwanie obserwacji projektu drawio" src="https://github.com/user-attachments/assets/68594851-159a-42ec-b401-d5c0fecb49e7" />
+        <img width="711" height="309" alt="Usuwanie obserwacji projektu drawio" src="https://github.com/user-attachments/assets/83833b98-f4b5-481f-9130-51b758ea6f40" />
 </p>
         
 ---
@@ -868,26 +860,28 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Blokowanie komentarzy
 
 * **Cel**:
-        Umożliwienie użytkownikowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
+        Umożliwienie aktorowi blokade komentarzy łamiących zasady.
 
 * **Główny Aktor**:
-        Użytkownik
+        Moderator/Administrator
 
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik przechodzi sekcję „Portfel”.
-- Krok 2: System wyświetla saldo oraz listę transakcji.
+- Krok 1: Aktor przechodzi do strony projektów.
+- Krok 2: Aktor wybiera projekt.
+- Krok 3: Aktor przegląda komentarze.
+- Krok 4: Blokuje komentarze łamiące zasady.
 ```
 * **Rozszerzenia**:
 
 ```
-- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+- Krok 2.1: Projekt nie znaleziony – wyświetlany komunikat.
 ```
 * **Przykład**:
 
 <p align="center">
-        <img width="726" height="309" alt="Blokowanie komentarzy drawio" src="https://github.com/user-attachments/assets/9c564d07-ae1c-47ef-b299-c4ef7ef3319a" />
+        <img width="711" height="309" alt="Blokowanie komentarzy drawio" src="https://github.com/user-attachments/assets/41e32d50-6c86-4816-9913-6451a489e99c" />
 </p>
 
 ---
@@ -895,7 +889,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Dodawanie użytkownika
 
 * **Cel**:
-        Administrator może ręcznie dodać nowego użytkownika do systemu.
+        Aktor może ręcznie dodać nowego użytkownika do systemu.
 
 * **Główny Aktor**:
         Administrator
@@ -903,20 +897,24 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Administrator otwiera panel zarządzania użytkownikami.
-- Krok 2: Wprowadza dane nowego użytkownika.
-- Krok 3: Zatwierdza dodanie.
-- Krok 4: Użytkownik pojawia się w systemie.
+- Krok 1: Aktor otwiera panel administratorski.
+- Krok 2: W sekcji "Użytkownicy" klika "Dodaj".
+- Krok 3: Wprowadza dane nowego użytkownika.
+- Krok 4: Zatwierdza dodanie.
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Komunikat o poprawnym utworzeniu użytkownika.
 ```
 
 * **Rozszerzenia**:
 ```
-- Krok 2.1: Użytkownik o tym adresie e-mail już istnieje.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
 ```
+
 * **Przykład**:
 
 <p align="center">
-        <img width="726" height="309" alt="Dodawanie użytkownika drawio" src="https://github.com/user-attachments/assets/ae7e746f-37d7-41a7-860c-6bf28f4aaef6" />
+        <img width="711" height="309" alt="Dodawanie użytkownika drawio" src="https://github.com/user-attachments/assets/a1c0d4fd-3cd0-4d66-849e-4a6c069a1bfb" />
 </p>
 
 ---
@@ -931,22 +929,23 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Otwiera profil użytkownika.
-- Krok 2: Wybiera opcję „Zablokuj konto”.
-- Krok 3: Potwierdza decyzję.
-- Krok 4: Użytkownik traci dostęp do konta.
+- Krok 1: Aktor otwiera panel administratorski.
+- Krok 2: W sekcji "Użytkownicy" wybiera użytkownika.
+- Krok 3: Klika przycisk "Blokuj".
+- Krok 4: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 5: Komunikat o poprawnej blokadzie.
 ```
 
 * **Rozszerzenia**:
   
 ```
-- Krok 3.1: Próba zablokowania administratora – operacja niedozwolona.
+- Krok 4.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="755" height="309" alt="Blokada użytkownika drawio" src="https://github.com/user-attachments/assets/91a1f153-2323-4dca-b99c-bc3c3adf27fe" />
+        <img width="711" height="309" alt="Blokada użytkownika drawio" src="https://github.com/user-attachments/assets/b5f0856b-e9b5-492d-9ded-30fa963a2ab8" />
 </p>
 
 ---
@@ -963,19 +962,19 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ```
   - Krok 1: Otwiera profil zablokowanego użytkownika.
   - Krok 2: Wybiera opcję „Odblokuj”.
-  - Krok 3: Potwierdza.
-  - Krok 4: Konto zostaje aktywowane.
+  - Krok 3: Sprawdzana jest poprawność wprowadzonych danych.
+  - Krok 5: Komunikat o poprawnyn odblokowaniu.
 ```
 
 * **Rozszerzenia**:
 ```
-- Krok 2.1: Konto nie jest zablokowane – operacja niepotrzebna.
+- Krok 4.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="726" height="309" alt="Odblokowanie użytkownika drawio" src="https://github.com/user-attachments/assets/753980b7-75ce-4510-a116-a875bebb2673" />
+        <img width="711" height="309" alt="Odblokowanie użytkownika drawio" src="https://github.com/user-attachments/assets/d59fb729-acac-42d3-b163-d5bc8205f4a2" />
 </p>
   
 ---
