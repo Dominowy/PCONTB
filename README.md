@@ -188,13 +188,14 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 |Wyświetlanie projektu | + | + | + |
 |Utworzenie projektu | + | - | - |
 |Edycja projektu | + | - | - |
-|Uruchomienie kampani | + | - | - |
-|Wsparcie projektu | + | - | - |
+|Uruchomienie kampanii | + | - | - |
+|Wsparcie kampanii | + | - | - |
 |Wypłata środków kampanii | + | - | - |
 |Zwrot środków kampanii | + | - | - |
 |Wyświetlenie transakcji | + | - | - |
 |Dodawanie komentarzy | + | - | - |
 |Wyświetlenie komentarzy | + | - | - |
+|Blokowanie komentarzy | - | + | + |
 |Dodawanie użytkownika | - | - | + |
 |Blokada użytkownika | - | + | + |
 |Odblokowanie użytkownika | - | + | + |
@@ -301,7 +302,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowt/administratorowi zmiany danych(e-mail, nazwa) użytkownika.
      
 * **Główny Aktor**:
-        Administrator
+        Użytkownik/Moderator/Administrator
                 
 * **Główny Scenariusz**:
   
@@ -333,7 +334,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi zmiany hasła konta.
 
 * **Główny Aktor**:
-        Użytkownik
+        Użytkownik/Moderator/Administrator
 
 * **Główny Scenariusz**:
   
@@ -361,15 +362,15 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Blokada konta
 
 * **Cel**:
-        Umożliwienie użytkownikowi blokady swojego konta.
+        Umożliwienie Użytkownik/Moderator/Administrator blokady swojego konta.
 
 * **Główny Aktor**:
-        Użytkownik
+        Użytkownik/Moderator/Administrator
 
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik przechodzi do ustawień konta.
+- Krok 1: Użytkownik/Moderator/Administrator przechodzi do ustawień konta.
 - Krok 2: Wybiera opcję blokady konta.
 - Krok 3: Potwierdza decyzję.
 - Krok 4: System dezaktywuje konto.
@@ -380,8 +381,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Rozszerzenia**:
 
 ```
-- Krok 3.1: Użytkownik anuluje proces – konto pozostaje aktywne.
-- Krok 4.1: Informacja o powiązanyiach z aktywnymi kampaniami - brak możliwości zamknięcia konta.
+- Krok 5.1: Informacja o powiązanyiach z aktywnymi kampaniami - brak możliwości zamknięcia konta.
 ```
 
 * **Przykład**:
@@ -426,7 +426,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Umożliwienie zarządzania aktywnymi sesjami logowania.
 
 * **Główny Aktor**:
-        Użytkownik
+        Użytkownik/Moderator/Administrator
 
 * **Główny Scenariusz**:
 
@@ -455,10 +455,10 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Wyświetlanie projektu
 
 * **Cel**:
-        Umożliwienie użytkownikowi przeglądanie projektu.
+        Umożliwienie Użytkownikowi/Moderatorowi/Administratorowi przeglądanie projektu.
 
 * **Główny Aktor**:
-        Użytkownik
+        Użytkownik/Moderator/Administrator
 
 * **Główny Scenariusz**:
 
@@ -479,6 +479,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="309" alt="Wyświetlanie projektu drawio" src="https://github.com/user-attachments/assets/702a2a5e-09af-434b-b4df-79ac056d0f5d" />
 </p>
 
 ---
@@ -510,6 +511,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="309" alt="Utworzenie projektu drawio" src="https://github.com/user-attachments/assets/018bc402-aac7-409f-bd7a-750b30b9691b" />
 </p>
 
 ---
@@ -541,11 +543,45 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="309" alt="Edycja projektu drawio" src="https://github.com/user-attachments/assets/0db2a881-aaa4-4840-9502-98cd983a7427" />
 </p>
 
 ---
 
-### Wsparcie projektu
+### Uruchomienie kampanii
+
+* **Cel**:
+  Umożliwienie użytkownikowi rozpoczęcie kampanii.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik łączy się ze swoim portfelem.
+- Krok 2: Uruchamian strone edycji projektu.
+- Krok 3: Wprowadza cel oraz czas trwania.
+- Krok 4: Potwierdza operacje.
+- Krok 5: Kampanie zostaje uruchomion.
+```
+
+* **Rozszerzenia**:
+  
+```
+- Krok 4.1: Niepoprawne dane – system zgłasza błąd.
+
+```
+
+* **Przykład**:
+
+<p align="center">
+        <img width="721" height="371" alt="Uruchomienie kampanii drawio" src="https://github.com/user-attachments/assets/2c94b4ea-b93d-4477-9915-bde9b71f00f0" />
+</p>
+
+---
+
+### Wsparcie kampanii
 
 * **Cel**:
         Umożliwienie użytkownikowi wsparcia finansowego dla wybranego projektu.
@@ -556,9 +592,9 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik wybiera projekt.
-- Krok 2: Wybiera kwotę wsparcia.
-- Krok 3: Wybiera metodę płatności.
+- Krok 1: Użytkownik łączy się ze swoim portfelem.
+- Krok 2: Użytkownik wybiera projekt.
+- Krok 3: Wybiera kwotę wsparcia.
 - Krok 4: Potwierdza operację.
 - Krok 5: System przetwarza transakcję i informuje o sukcesie.
 ```
@@ -566,20 +602,20 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Rozszerzenia**:
 
 ```
-  - Krok 3.1: Niepoprawna metoda płatności – komunikat o błędzie.
   - Krok 5.1: Brak środków – transakcja anulowana.
 ```
 
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="371" alt="Wsparcie kampanii drawio" src="https://github.com/user-attachments/assets/1ff03ab9-ce95-4326-a145-758ab2e51edf" />
 </p>
 
 ---
 ### Wypłata środków z kampanii
 
 * **Cel**:
-        Pozwala twórcy projektu wypłacić zgromadzone środki z kampanii.
+        Pozwala twórcy projektu wypłacić zgromadzone środki z kampanii po osiągnięciu celu.
 
 * **Główny Aktor**:
         Użytkownik
@@ -587,30 +623,31 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Użytkownik przechodzi do sekcji finansów projektu.
-- Krok 2: Wybiera opcję „Wypłać środki”.
-- Krok 3: Wprowadza dane konta.
-- Krok 4: Potwierdza wypłatę.
-- Krok 5: System realizuje przelew i wyświetla potwierdzenie.
+- Krok 1: Użytkownik łączy się ze swoim portfelem.
+- Krok 2: Użytkownik otwiera strone edycji projektu.
+- Krok 3: Wybiera opcję „Wypłać środki”.
+- Krok 4: Kontrakt realizuje wypłate.
 ```
 
 * **Rozszerzenia**:
   
 ```
-- Krok 3.1: Nieprawidłowe dane bankowe – wypłata zablokowana.
 - Krok 4.1: Kampania jeszcze trwa – brak możliwości wypłaty.
+
 ```
 
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="371" alt="Wypłata środków z kampanii drawio" src="https://github.com/user-attachments/assets/873f086f-3ab1-4429-a0d7-154677fd4c91" />
 </p>
 
 ---
-### Przegląd portfela z kampanii
+
+### Zwrot środków z kampanii
 
 * **Cel**:
-        Umożliwienie użytkownikowi wglądu w aktualne saldo oraz historię transakcji projektowych.
+        Umożliwienie użytkownikowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
 
 * **Główny Aktor**:
         Użytkownik
@@ -618,7 +655,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
 
 ```
-- Krok 1: Użytkownik otwiera sekcję „Portfel”.
+- Krok 1: Użytkownik przechodzi sekcję „Portfel”.
 - Krok 2: System wyświetla saldo oraz listę transakcji.
 ```
 * **Rozszerzenia**:
@@ -629,10 +666,119 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="721" height="371" alt="Zwrot środków z kampanii drawio" src="https://github.com/user-attachments/assets/7944542e-040c-41d8-887d-77c3e5c88b87" />
 </p>
 
 ---
-### Dodawanie użytkowników
+### Wyświetlanie transakcji
+
+* **Cel**:
+        Umożliwienie użytkownikowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik przechodzi sekcję „Portfel”.
+- Krok 2: System wyświetla saldo oraz listę transakcji.
+```
+* **Rozszerzenia**:
+
+```
+- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+```
+* **Przykład**:
+
+<p align="center">
+        <img width="721" height="371" alt="Wyświetlanie transakcji drawio" src="https://github.com/user-attachments/assets/45c577f8-917b-4755-ab69-e39ed0bc19fd" />
+</p>
+
+---
+
+### Dodawanie komentarzy
+
+* **Cel**:
+        Umożliwienie użytkownikowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik przechodzi sekcję „Portfel”.
+- Krok 2: System wyświetla saldo oraz listę transakcji.
+```
+* **Rozszerzenia**:
+
+```
+- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+```
+* **Przykład**:
+
+<p align="center">
+        <img width="721" height="309" alt="Dodawanie komentarzy drawio" src="https://github.com/user-attachments/assets/0f5c85a7-7b3a-4c8c-a82b-29d64cc8900e" />
+</p>
+
+---
+
+### Wyświetlanie komentarzy
+
+* **Cel**:
+        Umożliwienie użytkownikowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik przechodzi sekcję „Portfel”.
+- Krok 2: System wyświetla saldo oraz listę transakcji.
+```
+* **Rozszerzenia**:
+
+```
+- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+```
+* **Przykład**:
+
+<p align="center">
+        <img width="721" height="309" alt="Wyświetlanie komentarzy drawio" src="https://github.com/user-attachments/assets/08e9fdca-c96f-4e02-9f40-02d1d58a519e" />
+</p>
+
+---
+
+### Blokowanie komentarzy
+
+* **Cel**:
+        Umożliwienie użytkownikowi wypłaty środków z kampanii po nie spełnieniu celu oraz przekroczeniu czasy.
+
+* **Główny Aktor**:
+        Użytkownik
+
+* **Główny Scenariusz**:
+
+```
+- Krok 1: Użytkownik przechodzi sekcję „Portfel”.
+- Krok 2: System wyświetla saldo oraz listę transakcji.
+```
+* **Rozszerzenia**:
+
+```
+- Krok 2.1: Błąd API – brak dostępu do danych portfela.
+```
+* **Przykład**:
+
+<p align="center">
+        <img width="726" height="309" alt="Blokowanie komentarzy drawio" src="https://github.com/user-attachments/assets/9c564d07-ae1c-47ef-b299-c4ef7ef3319a" />
+</p>
+
+---
+
+### Dodawanie użytkownika
 
 * **Cel**:
         Administrator może ręcznie dodać nowego użytkownika do systemu.
@@ -656,6 +802,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="726" height="309" alt="Dodawanie użytkownika drawio" src="https://github.com/user-attachments/assets/ae7e746f-37d7-41a7-860c-6bf28f4aaef6" />
 </p>
 
 ---
@@ -685,10 +832,11 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="755" height="309" alt="Blokada użytkownika drawio" src="https://github.com/user-attachments/assets/91a1f153-2323-4dca-b99c-bc3c3adf27fe" />
 </p>
 
 ---
-### Odblokowanie użytkowników
+### Odblokowanie użytkownika
 
 * **Cel**:
         Przywrócenie dostępu do zablokowanego konta.
@@ -713,6 +861,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="726" height="309" alt="Odblokowanie użytkownika drawio" src="https://github.com/user-attachments/assets/753980b7-75ce-4510-a116-a875bebb2673" />
 </p>
   
 ---
@@ -742,6 +891,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="726" height="309" alt="Zmiana uprawnień użytkownika drawio" src="https://github.com/user-attachments/assets/b7a70872-f2c8-4c4f-b09a-84ca32125933" />
 </p>
 
 ---
@@ -768,6 +918,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="726" height="309" alt="Dodawanie kategorii drawio" src="https://github.com/user-attachments/assets/bf057b2e-e076-42ab-998e-c68368dacc0a" />
 </p>
 
 ---
@@ -793,6 +944,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="726" height="309" alt="Edycja kategorii drawio" src="https://github.com/user-attachments/assets/c1254879-881d-4278-a650-71937dc5c567" />
 </p>
 
 ---
@@ -817,6 +969,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
  * **Przykład**:
 
 <p align="center">
+        <img width="726" height="309" alt="Usuwanie kategorii drawio" src="https://github.com/user-attachments/assets/85fa2916-61c0-4b0e-be4f-79fb734c0228" />
 </p>
 
 ---
@@ -843,6 +996,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="726" height="309" alt="Dodanie lokalizacji drawio" src="https://github.com/user-attachments/assets/97ef6f95-9740-4ae4-8e51-869acc5d3c9c" />
 </p>
 
 ---
@@ -868,6 +1022,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="726" height="309" alt="Edycja lokalizacji drawio" src="https://github.com/user-attachments/assets/55aa9c4d-36c0-439f-a124-5759ca7a2cda" />
 </p>
 
 ---
@@ -892,5 +1047,6 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Przykład**:
 
 <p align="center">
+        <img width="726" height="309" alt="Usuwanie lokalizacji drawio" src="https://github.com/user-attachments/assets/c47a1120-486c-473a-b6d0-b6a6890b0768" />
 </p>
 
