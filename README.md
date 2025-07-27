@@ -287,7 +287,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Celem tej funkcjonalności jest umożliwienie użytkownikowi/moderatorowi/administratorowi wylogowanie się z systemu tym samym zakończenie sesji i zabezpieczenie swojego konta.
      
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik, Moderator, Administrator
                 
 * **Główny Scenariusz**:
 
@@ -310,7 +310,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Celem tej funkcjonalności jest umożliwienie aktorowi zmiany danych(e-mail, nazwa) konta.
      
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik, Moderator, Administrator
                 
 * **Główny Scenariusz**:
   
@@ -342,7 +342,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Celem tej funkcjonalności jest umożliwienie aktorowi zmiany hasła konta.
 
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik, Moderator, Administrator
 
 * **Główny Scenariusz**:
   
@@ -374,7 +374,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Umożliwienie aktorowi blokady swojego konta.
 
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik, Moderator, Administrator
 
 * **Główny Scenariusz**:
 
@@ -406,7 +406,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Umożliwienie przeglądania publicznego profilu użytkownika.
 
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik, Moderator, Administrator
 
 * **Główny Scenariusz**:
 
@@ -435,7 +435,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Umożliwienie zarządzania aktywnymi sesjami logowania.
 
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik, Moderator, Administrator
 
 * **Główny Scenariusz**:
 
@@ -460,7 +460,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Umożliwienie aktorowi przeglądania projektu.
 
 * **Główny Aktor**:
-        Użytkownik/Moderator/Administrator
+        Użytkownik, Moderator, Administrator
 
 * **Główny Scenariusz**:
 
@@ -742,6 +742,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 - Krok 3: Wprowadza dane do komentarza.
 - Krok 4: Kilka przycisk "Dodaj".
 - Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Komunikat o poprawnej operacji.
 ```
 
 * **Odpowiedź**:
@@ -811,6 +812,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 - Krok 1: Aktor przechodzi do strony projektów.
 - Krok 2: Aktor wybiera projekt.
 - Krok 3: Kilka przycisk "Obserwuj".
+- Krok 4: Komunikat o poprawnej operacji.
 ```
 
 * **Rozszerzenia**:
@@ -841,6 +843,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 - Krok 1: Aktor przechodzi do strony projektów.
 - Krok 2: Aktor wybiera projekt.
 - Krok 3: Kilka przycisk "Przestań obserwować".
+- Krok 4: Komunikat o poprawnej operacji.
 ```
 
 * **Rozszerzenia**:
@@ -863,7 +866,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
         Umożliwienie aktorowi blokade komentarzy łamiących zasady.
 
 * **Główny Aktor**:
-        Moderator/Administrator
+        Moderator, Administrator
 
 * **Główny Scenariusz**:
 
@@ -952,7 +955,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Odblokowanie użytkownika
 
 * **Cel**:
-        Przywrócenie dostępu do zablokowanego konta.
+        Odblokowanie konta użytkownika.
 
 * **Główny Aktor**:
         Moderator, Administrator
@@ -960,15 +963,15 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
   
 ```
-  - Krok 1: Otwiera profil zablokowanego użytkownika.
-  - Krok 2: Wybiera opcję „Odblokuj”.
+  - Krok 1: Aktor otwiera panel administratorski.
+  - Krok 2: W sekcji "Użytkownicy" wybiera opcję „Odblokuj”.
   - Krok 3: Sprawdzana jest poprawność wprowadzonych danych.
-  - Krok 5: Komunikat o poprawnyn odblokowaniu.
+  - Krok 4: Komunikat o poprawnyn odblokowaniu.
 ```
 
 * **Rozszerzenia**:
 ```
-- Krok 4.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 3.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
 ```
 
 * **Przykład**:
@@ -982,7 +985,7 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 ### Zmiana uprawnień użytkownika
 
 * **Cel**:
-        Administrator może zmienić poziom dostępu danego użytkownika (np. nadać rolę moderatora).
+        Aktor może zmienić poziom dostępu danego użytkownika.
 
 * **Główny Aktor**:
         Administrator
@@ -990,176 +993,220 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 * **Główny Scenariusz**:
   
  ```
- - Krok 1: Administrator otwiera profil użytkownika.
- - Krok 2: Wybiera nowy poziom uprawnień.
- - Krok 3: Zatwierdza zmianę.
- - Krok 4: Uprawnienia zostają zaktualizowane.
+ - Krok 1: Aktor otwiera panel administratorski.
+ - Krok 2: W sekcji "Użytkownicy" wybiera opcję „Edytuj”.
+ - Krok 3: Zmienia role użytkownika
+ - Krok 4: Klika "Zapisz".
+ - Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+ - Krok 6: Komunikat o poprawnej zmianie.
+
 ```
 * **Rozszerzenia**:
   
 ```
-- Krok 2.1: Próba nadania wyższych uprawnień niż własne – operacja odrzucona.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="726" height="309" alt="Zmiana uprawnień użytkownika drawio" src="https://github.com/user-attachments/assets/b7a70872-f2c8-4c4f-b09a-84ca32125933" />
+        <img width="711" height="309" alt="Zmiana uprawnień użytkownika drawio" src="https://github.com/user-attachments/assets/cb159e00-848c-4fb3-a516-388c3a130c4b" />
 </p>
 
 ---
 
 ### Dodawanie kategorii  
-* **Cel**:  Administrator może dodać nową kategorię do systemu.  
-* **Główny Aktor**:  Administrator  
+
+* **Cel**:
+         Aktor może dodać nową kategorię do systemu.
+  
+* **Główny Aktor**:
+          Administrator
+  
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Administrator otwiera panel zarządzania kategoriami.  
-- Krok 2: Wybiera opcję "Dodaj kategorię".  
+- Krok 1: Aktor otwiera panel administratorski.
+- Krok 2: W sekcji "Kategoria" wybiera opcję „Dodaj”.
 - Krok 3: Wprowadza nazwę i ewentualny opis kategorii.  
-- Krok 4: Zatwierdza dodanie.  
-- Krok 5: Kategoria zostaje dodana do systemu.  
-  ```  
+- Krok 4: Klika przycisk "Zapisz".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Komunikat o poprawnym dodaniu.  
+  ```
+
 * **Rozszerzenia**:
-  
 ```
-- Krok 3.1: Wprowadzono pustą nazwę – wyświetlany jest komunikat o błędzie.  
-- Krok 4.1: Kategoria o podanej nazwie już istnieje – operacja odrzucona.  
+- Krok 3.1: Niepoprawne dane – system zgłasza błąd.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="726" height="309" alt="Dodawanie kategorii drawio" src="https://github.com/user-attachments/assets/bf057b2e-e076-42ab-998e-c68368dacc0a" />
+        <img width="711" height="309" alt="Dodawanie kategorii drawio" src="https://github.com/user-attachments/assets/b7774ec8-e6e8-486a-a0b5-60de10d2d590" />
 </p>
 
 ---
 
 ### Edycja kategorii  
-* **Cel**:  Administrator może edytować istniejącą kategorię.  
-* **Główny Aktor**:  Administrator  
+
+* **Cel**:
+          Administrator może edytować istniejącą kategorię.  
+* **Główny Aktor**:
+          Administrator
+  
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Administrator otwiera listę kategorii.  
-- Krok 2: Wybiera kategorię do edycji.  
-- Krok 3: Modyfikuje dane kategorii.  
-- Krok 4: Zatwierdza zmiany.  
-- Krok 5: Kategoria zostaje zaktualizowana.  
-```
+- Krok 1: Aktor otwiera panel administratorski.
+- Krok 2: W sekcji "Kategoria" wybiera opcję „Edytuj”.
+- Krok 3: Wprowadza nazwę i ewentualny opis kategorii.  
+- Krok 4: Klika przycisk "Zapisz".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Komunikat o poprawnym dodaniu.  
+  ```
+
 * **Rozszerzenia**:
-   
 ```
-- Krok 3.1: Zmiana nazwy na istniejącą – operacja odrzucona.  
+- Krok 3.1: Niepoprawne dane – system zgłasza błąd.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="726" height="309" alt="Edycja kategorii drawio" src="https://github.com/user-attachments/assets/c1254879-881d-4278-a650-71937dc5c567" />
+        <img width="711" height="309" alt="Edycja kategorii drawio" src="https://github.com/user-attachments/assets/2ae2865c-6362-4408-af2a-6ed7488df6bf" />
 </p>
 
 ---
 
 ### Usuwanie kategorii  
-* **Cel**:  Administrator może usunąć kategorię z systemu.  
-* **Główny Aktor**:  Administrator  
+
+* **Cel**:
+          Aktor może usunąć kategorię z systemu.  
+* **Główny Aktor**:
+          Administrator
+
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Administrator otwiera listę kategorii.  
-- Krok 2: Wybiera kategorię do usunięcia.  
-- Krok 3: Potwierdza usunięcie.  
-- Krok 4: Kategoria zostaje usunięta z systemu.  
-```  
-* **Rozszerzenia**:
-  
+- Krok 1: Aktor otwiera panel administratorski.
+- Krok 2: W sekcji "Kategoria" wybiera opcję „Usuń”. 
+- Krok 3: Klika przycisk "Usuń".
+- Krok 4: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 5: Komunikat o poprawnym usunięciu.  
 ```
-- Krok 2.1: Kategoria jest powiązana z aktywnymi danymi – operacja odrzucona.  
+
+* **Rozszerzenia**:
+```
+- Krok 4.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 4.2: System prosi o ponowne wprowadzenie danych.
 ```
 
  * **Przykład**:
 
 <p align="center">
-        <img width="726" height="309" alt="Usuwanie kategorii drawio" src="https://github.com/user-attachments/assets/85fa2916-61c0-4b0e-be4f-79fb734c0228" />
+        <img width="711" height="309" alt="Usuwanie kategorii  drawio" src="https://github.com/user-attachments/assets/d8cab3e6-1cd3-4e23-be44-8a116e711c03" />
 </p>
 
 ---
 
 ### Dodanie lokalizacji  
-* **Cel**:  Administrator może dodać nową lokalizację do systemu.  
-* **Główny Aktor**:  Administrator  
+
+* **Cel**:
+          Aktor może dodać nową lokalizację do systemu.
+  
+* **Główny Aktor**:
+          Administrator
+  
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Administrator otwiera panel zarządzania lokalizacjami.  
-- Krok 2: Wybiera opcję "Dodaj lokalizację".  
-- Krok 3: Wprowadza dane lokalizacji.  
-- Krok 4: Zatwierdza dodanie.  
-- Krok 5: Lokalizacja zostaje dodana.  
-```  
+- Krok 1: Aktor otwiera panel administratorski.
+- Krok 2: W sekcji "Lokalizacja" wybiera opcję „Dodaj”.
+- Krok 3: Wprowadza nazwę i ewentualny opis kategorii.  
+- Krok 4: Klika przycisk "Zapisz".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Komunikat o poprawnym dodaniu.  
+  ```
+
 * **Rozszerzenia**:
-  
 ```
-- Krok 3.1: Niepełne dane – wyświetlany jest komunikat o błędzie.  
-- Krok 4.1: Lokalizacja już istnieje – operacja odrzucona.  
+- Krok 3.1: Niepoprawne dane – system zgłasza błąd.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="726" height="309" alt="Dodanie lokalizacji drawio" src="https://github.com/user-attachments/assets/97ef6f95-9740-4ae4-8e51-869acc5d3c9c" />
+        <img width="711" height="309" alt="Dodanie lokalizacji drawio" src="https://github.com/user-attachments/assets/e1bf1c71-9201-4117-bcc9-55fbfe37ce3b" />
 </p>
 
 ---
 
 ### Edycja lokalizacji  
-* **Cel**:  Administrator może edytować dane istniejącej lokalizacji.  
-* **Główny Aktor**:  Administrator  
+* **Cel**:
+          Aktor może edytować dane istniejącej lokalizacji.
+  
+* **Główny Aktor**:
+          Administrator
+  
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Administrator otwiera listę lokalizacji.  
-- Krok 2: Wybiera lokalizację do edycji.  
-- Krok 3: Modyfikuje dane lokalizacji.  
-- Krok 4: Zatwierdza zmiany.  
-- Krok 5: Dane lokalizacji zostają zaktualizowane.  
-```  
+- Krok 1: Aktor otwiera panel administratorski.
+- Krok 2: W sekcji "Lokalizacja" wybiera opcję „Edytuj”.
+- Krok 3: Wprowadza nazwę i ewentualny opis kategorii.  
+- Krok 4: Klika przycisk "Zapisz".
+- Krok 5: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 6: Komunikat o poprawnej edycji.  
+  ```
+
 * **Rozszerzenia**:
-  
 ```
-- Krok 3.1: Błędny format danych – operacja odrzucona.  
+- Krok 3.1: Niepoprawne dane – system zgłasza błąd.
+- Krok 5.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 5.2: System prosi o ponowne wprowadzenie danych.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="726" height="309" alt="Edycja lokalizacji drawio" src="https://github.com/user-attachments/assets/55aa9c4d-36c0-439f-a124-5759ca7a2cda" />
+        <img width="711" height="309" alt="Edycja lokalizacji drawio" src="https://github.com/user-attachments/assets/cbcfd891-778f-48a2-815d-8eadc4c049b1" />
 </p>
 
 ---
 
 ### Usuwanie lokalizacji  
-* **Cel**:  Administrator może usunąć lokalizację z systemu.  
-* **Główny Aktor**:  Administrator  
+
+* **Cel**:
+          Administrator może usunąć lokalizację z systemu.
+  
+* **Główny Aktor**:
+          Administrator
+  
 * **Główny Scenariusz**:
   
 ```
-- Krok 1: Administrator otwiera listę lokalizacji.  
-- Krok 2: Wybiera lokalizację do usunięcia.  
-- Krok 3: Potwierdza usunięcie.  
-- Krok 4: Lokalizacja zostaje usunięta.  
-```  
-* **Rozszerzenia**:
-  
+- Krok 1: Aktor otwiera panel administratorski.
+- Krok 2: W sekcji "Lokalizacja" wybiera opcję „Usuń”. 
+- Krok 3: Klika przycisk "Usuń".
+- Krok 4: Sprawdzana jest poprawność wprowadzonych danych.
+- Krok 5: Komunikat o poprawnym usunięciu.  
 ```
-- Krok 2.1: Lokalizacja jest przypisana do aktywnych zasobów – operacja odrzucona.  
+
+* **Rozszerzenia**:
+```
+- Krok 4.1: Otrzymuje informację o wprowadzeniu niepoprawnych danych.
+- Krok 4.2: System prosi o ponowne wprowadzenie danych.
 ```
 
 * **Przykład**:
 
 <p align="center">
-        <img width="726" height="309" alt="Usuwanie lokalizacji drawio" src="https://github.com/user-attachments/assets/c47a1120-486c-473a-b6d0-b6a6890b0768" />
+        <img width="711" height="309" alt="Usuwanie lokalizacji drawio" src="https://github.com/user-attachments/assets/3c85e47e-3e3f-4176-8d4d-f57b51145b45" />
 </p>
 
