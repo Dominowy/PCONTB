@@ -175,7 +175,8 @@ Celem jest utworzenie aplikacji pozwalającej użytkownikowi wspieranie ciekawyc
 - Baza danych - PostgreSQL - odpowiedzialny z przechowywanie danych o projektach, użytkownikach oraz danych pomocniczych
 - Blockchain - Solana - poprzez smart contract użytkownik dokonuje wpłat na cel projektu a także przetrzymywane są w nim dane na temat transakcji oraz wspierających
 
-<img width="1169" height="1055" alt="image" src="https://github.com/user-attachments/assets/fabc017e-7b5b-4908-9a27-5205da83cdfa" />
+<img width="1289" height="911" alt="image" src="https://github.com/user-attachments/assets/49eda959-093c-4c1c-a8dc-f8c8707624b7" />
+
 
 ### 5. Lista przypdków użycia
 
