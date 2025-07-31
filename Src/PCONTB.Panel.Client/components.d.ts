@@ -61,6 +61,7 @@ declare module 'vue' {
     IMaterialSymbolsPlayArrowRounded: typeof import('~icons/material-symbols/play-arrow-rounded')['default']
     IMaterialSymbolsSettingsRounded: typeof import('~icons/material-symbols/settings-rounded')['default']
     NavbarWallet: typeof import('./src/components/wallet/NavbarWallet.vue')['default']
+    ProjectCardDisplay: typeof import('./src/components/projects/ProjectCardDisplay.vue')['default']
     ProjectContent: typeof import('./src/components/content/ProjectContent.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

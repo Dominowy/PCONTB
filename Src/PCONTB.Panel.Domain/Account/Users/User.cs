@@ -21,7 +21,7 @@ namespace PCONTB.Panel.Domain.Account.Users
         public virtual List<Session> Sessions { get; private set; } = [];
         public virtual List<UserRole> Roles { get; private set; } = [];
         public virtual List<UserWallet> Wallets { get; private set; } = [];
-        public virtual List<CommunityMessage> Messages { get; private set; } = [];
+        public virtual List<Message> Messages { get; private set; } = [];
         public virtual List<UserProjectFavorite> Favorites { get; private set; } = [];
 
         protected User() : base()

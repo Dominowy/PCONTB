@@ -1,5 +1,6 @@
 ﻿using PCONTB.Panel.Application.Common.Functions.Files;
 using PCONTB.Panel.Application.Common.Models;
+using PCONTB.Panel.Domain.Common;
 using PCONTB.Panel.Domain.Projects;
 
 namespace PCONTB.Panel.Application.Models.Projects
@@ -21,7 +22,7 @@ namespace PCONTB.Panel.Application.Models.Projects
 
         public static ProjectDto Map(Project entity)
         {
-            return new ProjectDto
+            var result = new ProjectDto
             {
                 Id = entity.Id,
                 Name = entity.Name,
@@ -32,6 +33,18 @@ namespace PCONTB.Panel.Application.Models.Projects
                 Description = entity.Description ?? string.Empty,
                 Views = entity.Views,
             };
+
+            if (entity.Image != null)
+            {
+                result.Image = new FormFile
+                {
+                    ContentType = entity.Image.ContentType,
+                    FileName = entity.Image.FileName,
+                };
+                result.ImageData = entity.Image.Data;
+            }
+
+            return result;
         }
     }
 }

@@ -49,6 +49,7 @@ onMounted(async () => {
 });
 
 const wallet = useWalletStore();
+
 const props = defineProps({
   projectId: String,
 });

@@ -4,10 +4,10 @@ using PCONTB.Panel.Domain.Projects.Communites;
 
 namespace PCONTB.Panel.Domain.Community
 {
-    public class CommunityMessage : BaseAggregateEnabled
+    public class Message : BaseAggregateEnabled
     {
         public string Title { get; private set; }
-        public string Message { get; private set; }
+        public string Content { get; private set; }
         public string WalletAddress { get; private set; }
 
         public Guid? ProjectCommunityId { get; private set; }
@@ -17,7 +17,7 @@ namespace PCONTB.Panel.Domain.Community
         public virtual User? User { get; private set; }
 
         public Guid? ParentId { get; private set; }
-        public virtual CommunityMessage? Parent { get; private set; }
-        public virtual List<CommunityMessage> Replies { get; private set; } = [];
+        public virtual Message? Parent { get; private set; }
+        public virtual List<Message> Replies { get; private set; } = [];
     }
 }

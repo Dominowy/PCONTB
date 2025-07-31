@@ -3,17 +3,17 @@
     <template v-if="!campaignInfo">
       <div class="mb-3">
         <label for="amount" class="form-label">Target</label>
-        <input v-model="amount" type="number" class="form-control" id="amount" required />
+        <input v-model="amount" type="number" class="form-control" id="amount" />
       </div>
 
       <div class="mb-3">
         <label for="deadline" class="form-label">Deadline</label>
         <input
+          name="deadline"
           v-model="deadline"
           type="datetime-local"
           class="form-control"
           id="deadline"
-          required
         />
       </div>
 

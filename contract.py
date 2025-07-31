@@ -1,6 +1,6 @@
 from seahorse.prelude import *
 
-declare_id('7LDHuor4Srmu9KG92PomLuDy8nXebNF545nQ5qXURrgz')
+declare_id('9i9upTEy57inL4ZptrYmcyAnCpo3WwghAJosFhmSZWJB')
 
 # Campaign
 class Campaign(Account):
@@ -105,7 +105,7 @@ def donate_campaign(
   campaign.amount_collected += amount
   campaign.amount_withdrawable += amount
 
-  if campaign.amount_collected => campaign.target
+  if campaign.amount_collected >= campaign.target:
     campaign.withdrawable = True
 
   donor.transfer_lamports(to = campaign, amount = amount)
@@ -143,7 +143,7 @@ def exist_donate_campaign(
   campaign.amount_collected += amount
   campaign.amount_withdrawable += amount
 
-  if campaign.amount_collected => campaign.target
+  if campaign.amount_collected >= campaign.target:
     campaign.withdrawable = True
 
 
@@ -159,7 +159,7 @@ def refund_campaign(
   assert donation.amount_collected > 0, "Nothing to refund"
   assert donation.donor == donor.key(), "Only the original donor can withdraw"
   assert clock.unix_timestamp() > campaign.deadline, "Cannot refund - campaign not ended"
-  assert campaign.status == 1, "Cannot refund - status does not allow this"
+  assert campaign.amount_collected < campaign.target, "Cannot refund - campaing reach goal before campaing end"
 
   transaction = transaction.init(
     payer = donor,
@@ -176,6 +176,9 @@ def refund_campaign(
 
   campaign.amount_withdrawable -= donation.amount_collected
 
+  if campaign.status != 1:
+    campaign.status = 1
+
   donation.status = 1
   donation.amount_collected = 0
   
@@ -189,7 +192,7 @@ def withdraw_campaign(
   timestamp: i64,
   clock: Clock
 ):
-  assert campaign.withdrawnable > 0, "Nothing to withdraw"
+  assert campaign.amount_withdrawable > 0, "Nothing to withdraw"
   assert campaign.owner == owner.key(), "Only the owner can withdraw"
   assert campaign.amount_collected >= campaign.target, "Target not reached yet"
   assert campaign.status != 2, "Already withdrawn"
@@ -212,13 +215,3 @@ def withdraw_campaign(
 
   campaign.status = 2
   campaign.amount_withdrawable = 0
-
-
-@instruction
-def check_campaign(campaign: Campaign, clock: Clock):
-  if (
-    clock.unix_timestamp() > campaign.deadline
-    and campaign.amount_collected < campaign.target
-    and campaign.status == 0
-  ):
-    campaign.status = 1

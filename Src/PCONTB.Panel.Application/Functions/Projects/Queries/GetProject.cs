@@ -24,16 +24,6 @@ namespace PCONTB.Panel.Application.Functions.Projects.Queries
 
             var result = ProjectDto.Map(aggregate);
 
-            if (aggregate.Image != null)
-            {
-                result.Image = new FormFile
-                {
-                    ContentType = aggregate.Image.ContentType,
-                    FileName = aggregate.Image.FileName,
-                };
-                result.ImageData = aggregate.Image.Data;
-            }
-
             if (aggregate.Video != null)
             {
                 result.Video = new FormFile

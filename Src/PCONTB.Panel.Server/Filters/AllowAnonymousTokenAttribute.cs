@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace PCONTB.Panel.Infrastructure.Security.Filters
+namespace PCONTB.Panel.Server.Filters
 {
     [AttributeUsage(AttributeTargets.All)]
     public class AllowAnonymousTokenAttribute : Attribute, IAuthorizationFilter

@@ -11,6 +11,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
         private ICountryRepository _country;
         private ICategoryRepository _category;
         private IProjectRepository _project;
+        private IMessageRepository _messageRepository;
 
         public ISessionRepository SessionRepository => _session ??= new SessionRepository(dbContext);
 
@@ -22,6 +23,7 @@ namespace PCONTB.Panel.Infrastructure.Repositories
 
         public IProjectRepository ProjectRepository => _project ??= new ProjectRepository(dbContext);
 
+        public IMessageRepository MessageRepository => _messageRepository ??= new MessageRepository(dbContext);
 
         public async Task Save(CancellationToken cancellationToken)
         {

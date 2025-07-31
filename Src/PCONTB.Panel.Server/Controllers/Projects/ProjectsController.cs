@@ -5,14 +5,13 @@ using PCONTB.Panel.Application.Common.Functions;
 using PCONTB.Panel.Application.Functions.Projects.Commands;
 using PCONTB.Panel.Application.Functions.Projects.Queries;
 using PCONTB.Panel.Domain.Account.Users.Roles;
-using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
 using PCONTB.Panel.Server.Filters;
 
 namespace PCONTB.Panel.Server.Controllers.Projects
 {
     [Route("api/projects/projects")]
-    public class ProjectController(IMediator mediator) : BaseController(mediator)
+    public class ProjectsController(IMediator mediator) : BaseController(mediator)
     {
         #region Get by id
 

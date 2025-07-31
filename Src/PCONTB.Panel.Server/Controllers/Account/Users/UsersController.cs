@@ -7,7 +7,6 @@ using PCONTB.Panel.Application.Functions.Account.Users.Commands;
 using PCONTB.Panel.Application.Functions.Account.Users.Queries;
 using PCONTB.Panel.Application.Models.Account.Users;
 using PCONTB.Panel.Domain.Account.Users.Roles;
-using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
 using PCONTB.Panel.Server.Filters;
 

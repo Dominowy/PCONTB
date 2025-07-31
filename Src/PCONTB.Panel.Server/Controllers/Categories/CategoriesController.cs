@@ -9,7 +9,6 @@ using PCONTB.Panel.Application.Functions.Categories.Commands;
 using PCONTB.Panel.Application.Functions.Categories.Queries;
 using PCONTB.Panel.Application.Models.Categories;
 using PCONTB.Panel.Domain.Account.Users.Roles;
-using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
 using PCONTB.Panel.Server.Filters;
 

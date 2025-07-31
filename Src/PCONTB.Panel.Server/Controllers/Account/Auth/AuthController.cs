@@ -5,7 +5,6 @@ using PCONTB.Panel.Application.Common.Functions;
 using PCONTB.Panel.Application.Functions.Account.Auth.Commands;
 using PCONTB.Panel.Application.Functions.Account.Auth.Queries;
 using PCONTB.Panel.Domain.Account.Users.Roles;
-using PCONTB.Panel.Infrastructure.Security.Filters;
 using PCONTB.Panel.Server.Controllers.Common;
 using PCONTB.Panel.Server.Filters;
 

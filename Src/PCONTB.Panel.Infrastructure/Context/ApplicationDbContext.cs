@@ -30,7 +30,7 @@ namespace PCONTB.Panel.Infrastructure.Context
         public DbSet<UserProjectFavorite> UserProjectFavorite { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<Category> Category { get; set; }
-        public DbSet<CommunityMessage> CommunityMessage { get; set; }
+        public DbSet<Message> CommunityMessage { get; set; }
         public DbSet<ProjectCommunity> ProjectCommunity { get; set; }
         public DbSet<ProjectCollaborator> ProjectCollaborator { get; set; }
         public DbSet<ProjectImage> ProjectImage { get; set; }
@@ -160,19 +160,19 @@ namespace PCONTB.Panel.Infrastructure.Context
                 .Property(m => m.Id)
                 .ValueGeneratedOnAdd();
 
-            builder.Entity<CommunityMessage>()
+            builder.Entity<Message>()
                .HasOne(m => m.User)
                .WithMany(m => m.Messages)
                .HasForeignKey(m => m.UserId)
                .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<CommunityMessage>()
+            builder.Entity<Message>()
                 .HasOne(m => m.ProjectCommunity)
                 .WithMany(m => m.Messages)
                 .HasForeignKey(m => m.ProjectCommunityId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<CommunityMessage>()
+            builder.Entity<Message>()
                 .HasOne(m => m.Parent)
                 .WithMany(m => m.Replies)
                 .HasForeignKey(m => m.ParentId)
