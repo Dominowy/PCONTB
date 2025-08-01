@@ -63,7 +63,7 @@ export const useWalletStore = defineStore("wallet", {
           .rpc();
 
         const confirmed = await solanaClient.connection.confirmTransaction(tx, "confirmed");
-        console.log("Potwierdzono:", confirmed);
+        console.log("Confirmed:", confirmed);
 
         console.log("Transaction hash:", tx);
       } catch (e) {
