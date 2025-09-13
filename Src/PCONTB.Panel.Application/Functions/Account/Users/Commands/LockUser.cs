@@ -2,7 +2,6 @@
 using PCONTB.Panel.Application.Common;
 using PCONTB.Panel.Application.Common.Exceptions;
 using PCONTB.Panel.Application.Contracts.Services.Auth;
-using PCONTB.Panel.Domain.Account.Users;
 using PCONTB.Panel.Domain.Account.Users.Roles;
 using PCONTB.Panel.Domain.Repositories;
 
